@@ -1,0 +1,1245 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="referrer" content="no-referrer">
+<title>休食爆款趋势周榜单 | 2026.05.11 - 05.17</title>
+<style>
+:root {
+    --primary: #FF2442; --primary-light: #FF6B6B;
+    --gold: #FFB800; --silver: #8A8A8A; --bronze: #CD7F32;
+    --bg: #F5F5F7; --card: #FFFFFF; --text: #1A1A1A;
+    --text-sec: #666; --border: #E8E8E8;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+        background: var(--bg); color: var(--text); line-height: 1.6; }
+.top-banner { background: linear-gradient(135deg,#ff6b35,#f7931e); color: #fff;
+                text-align: center; padding: 12px; font-size: 14px; font-weight: 600;
+                letter-spacing: 1px; }
+.page-header { background: linear-gradient(135deg,#FF2442,#FF6B6B); color: #fff;
+                  padding: 28px 20px; text-align: center; }
+.page-header h1 { font-size: 24px; font-weight: 800; margin-bottom: 6px; }
+.page-header p { font-size: 13px; opacity: 0.9; }
+
+.week-summary { background: #fff; border-bottom: 1px solid var(--border); padding: 28px 20px; }
+.week-summary-inner { max-width: 1200px; margin: 0 auto; }
+.week-summary-header { display: flex; align-items: center; justify-content: space-between;
+                          margin-bottom: 18px; flex-wrap: wrap; gap: 8px; }
+.week-summary-header h2 { color: var(--text); font-size: 18px; font-weight: 700; }
+.week-summary-period { color: #999; font-size: 13px; background: var(--bg);
+                          padding: 4px 12px; border-radius: 20px; }
+.summary-cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+@media (max-width: 700px) { .summary-cards { grid-template-columns: 1fr; } }
+.summary-card { display: flex; gap: 12px;
+                  background: linear-gradient(135deg, #fff8f0, #fff1e6);
+                  border: 1px solid #FFD8B0; border-radius: 12px; padding: 16px;
+                  transition: box-shadow 0.2s, border-color 0.2s; }
+.summary-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.07); border-color: var(--primary); }
+.summary-card:nth-child(2) { background: linear-gradient(135deg,#f0f7ff,#e6f0ff); border-color:#B0CEFF; }
+.summary-card:nth-child(3) { background: linear-gradient(135deg,#f0fff4,#e6ffe6); border-color:#B0FFB0; }
+.summary-card:nth-child(4) { background: linear-gradient(135deg,#fff0f5,#ffe6f0); border-color:#FFB0CE; }
+.summary-icon { font-size: 26px; flex-shrink: 0; line-height: 1; }
+.summary-body { flex: 1; }
+.summary-title { color: var(--text); font-size: 14px; font-weight: 700; margin-bottom: 5px; line-height: 1.5; }
+.summary-desc { color: #666; font-size: 12px; line-height: 1.75; }
+
+.category { max-width: 1200px; margin: 24px auto; padding: 0 20px; }
+.cat-title { display: flex; align-items: center; gap: 10px; font-size: 20px; font-weight: 700;
+                margin-bottom: 14px; padding-bottom: 10px; border-bottom: 2px solid var(--text); }
+.cat-icon { font-size: 24px; }
+.cat-count { margin-left: auto; font-size: 13px; color: var(--text-sec); font-weight: 500;
+                background: var(--bg); padding: 4px 12px; border-radius: 20px; }
+.cat-tags-row { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:14px; }
+.cat-tag-chip { background:#FFF3E0; color:#E65100; font-size:11px; font-weight:600;
+                   padding:3px 10px; border-radius:20px; border:1px solid #FFCC80; }
+
+.products-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
+@media (max-width: 1000px) { .products-grid { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 600px) { .products-grid { grid-template-columns: repeat(2, 1fr); } }
+
+.product-card { position: relative; background: var(--card); border-radius: 12px;
+                  overflow: hidden; text-decoration: none; color: inherit;
+                  border: 1px solid var(--border); transition: transform 0.15s, box-shadow 0.15s; }
+.product-card:hover { transform: translateY(-2px); box-shadow: 0 4px 16px rgba(0,0,0,0.08); border-color: var(--primary); }
+
+.card-rank { position: absolute; top: 8px; left: 8px; width: 28px; height: 28px;
+               border-radius: 50%; display: flex; align-items: center; justify-content: center;
+               font-weight: 800; font-size: 13px; color: #fff; z-index: 2;
+               box-shadow: 0 2px 6px rgba(0,0,0,0.18); }
+.rank-gold { background: linear-gradient(135deg, #FFD700, #FFB800); }
+.rank-silver { background: linear-gradient(135deg, #C0C0C0, #909090); }
+.rank-bronze { background: linear-gradient(135deg, #CD7F32, #B5651D); }
+.rank-normal { background: linear-gradient(135deg, #FF6B6B, #FF2442); }
+
+.new-badge { position: absolute; top: 8px; right: 8px; z-index: 11;
+               background: linear-gradient(135deg, #FF2442, #FF6B6B); color: #fff;
+               font-size: 10px; font-weight: 800; padding: 2px 8px;
+               border-radius: 10px; letter-spacing: 1px;
+               box-shadow: 0 2px 6px rgba(255,36,66,0.45); }
+
+.card-img { width: 100%; aspect-ratio: 1; overflow: hidden; background: #F5F5F7; position: relative; }
+.card-img img { width: 100%; height: 100%; object-fit: cover; }
+
+.card-body { padding: 10px; }
+.card-title { font-size: 12px; font-weight: 600; line-height: 1.45; color: var(--text);
+                 display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+                 overflow: hidden; min-height: 35px; margin-bottom: 4px; }
+.card-store { font-size: 11px; color: var(--text-sec); margin-bottom: 8px;
+                 white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.card-footer { display: flex; align-items: center; gap: 6px; margin-bottom: 6px;
+                 font-size: 11px; min-height: 18px; }
+.card-footer .dgmv { color: var(--primary); font-weight: 700; }
+.card-footer .carriers { color: #666; margin-left: auto; font-size: 10px; }
+
+.card-factors { display: flex; flex-wrap: wrap; gap: 4px; }
+.factor-pill { font-size: 10px; padding: 2px 8px; border-radius: 6px;
+                  background: color-mix(in srgb, var(--fc, #999) 12%, white);
+                  color: var(--fc, #444);
+                  border: 1px solid color-mix(in srgb, var(--fc, #999) 35%, white);
+                  font-weight: 600; line-height: 1.6; white-space: nowrap; }
+.factor-kw { background: #f3f4f6 !important; color: #4b5563 !important;
+               border-color: #d1d5db !important; }
+.carrier-badge { display: inline-flex; align-items: center; font-size: 10px; font-weight: 700;
+                    padding: 2px 7px; border-radius: 8px; border: 1px solid;
+                    letter-spacing: 0.3px; line-height: 1.6; white-space: nowrap; flex-shrink: 0; }
+
+.cat-insight { background: #fff; border: 1px solid var(--border); border-radius: 12px;
+                  padding: 18px 20px; margin-top: 14px; }
+.insight-title { color: var(--text); font-size: 14px; font-weight: 700; margin-bottom: 10px; }
+.insight-rules { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+.insight-rules li { font-size: 13px; color: #444; line-height: 1.65; padding-left: 18px; position: relative; }
+.insight-rules li::before { content: '▶'; position: absolute; left: 0; color: var(--primary); font-size: 10px; top: 4px; }
+.insight-rules li strong { color: #CC5500; font-weight: 700; }
+
+.footer { text-align: center; padding: 30px 20px; color: var(--text-sec); font-size: 12px; }
+.footer .meta { margin-bottom: 6px; }
+.page-stats { margin-top: 8px; font-size: 12px; color: #aaa; }
+.page-stats span { color: #888; }
+#busuanzi_value_page_pv, #busuanzi_value_page_uv { color: var(--primary); font-weight: 700; }
+</style>
+</head>
+<body>
+<div class="top-banner">📊 休食爆款趋势周榜单 · 2026.05.11 - 05.17 · 小红书休食行业趋势</div>
+<header class="page-header">
+    <h1>休食爆款趋势周榜单</h1>
+    <p>· 2026.05.11 - 05.17 · 各类目 TOP 商品</p>
+</header>
+<section class="week-summary">
+    <div class="week-summary-inner">
+        <div class="week-summary-header">
+            <h2>📊 本周洞察总结</h2>
+            <span class="week-summary-period">2026.05.11 - 05.17</span>
+        </div>
+        <div class="summary-cards"><div class="summary-card">
+        <div class="summary-icon">🌿</div>
+        <div class="summary-body">
+            <div class="summary-title">传统滋补 · 高客单 K播驱动，野山参/燕窝礼盒霸榜</div>
+            <div class="summary-desc">人森慢慢野山参领跑全场，目谷家燕窝礼盒、小仙炖鲜炖燕窝紧随其后；K播达人背书 + 高端礼赠场景是滋补类目核心增长引擎。</div>
+        </div>
+    </div><div class="summary-card">
+        <div class="summary-icon">🍿</div>
+        <div class="summary-body">
+            <div class="summary-title">零食糕点 · 笔记种草主导，糕点烘焙赛道集中爆发</div>
+            <div class="summary-desc">Patchi 进口黑巧/水果夹心、米惦牛轧饼组合、袋鼠先生即食牛肉等多款笔记主导单品集体上榜；内蒙老赵牛胸口脆店播稳定贡献，「笔记长尾种草 + 店播日常出货」双线并行。</div>
+        </div>
+    </div><div class="summary-card">
+        <div class="summary-icon">☕</div>
+        <div class="summary-body">
+            <div class="summary-title">乳饮冲饮 · 沃集鲜纯牛奶霸盘，咖啡订阅卡 K播突围</div>
+            <div class="summary-desc">沃集鲜 4.0 纯牛奶系列屠榜，悦鲜活紧随其后；查宇宙咖啡豆订阅卡 K播突围，订阅制 + 达人种草是冲饮新增长点。</div>
+        </div>
+    </div><div class="summary-card">
+        <div class="summary-icon">🍷</div>
+        <div class="summary-body">
+            <div class="summary-title">酒类 · 低度果酒+精品葡萄酒崛起，笔记驱动占比突出</div>
+            <div class="summary-desc">TABB 鹿角兔无花果金酒（笔记）领跑，格芙美霞多丽/夏布利/勃艮第等精品葡萄酒集体上榜；微醺场景 + 进口故事 + 颜值包装是酒类年轻化的核心组合。</div>
+        </div>
+    </div></div>
+    </div>
+</section>
+    <section class="category" id="零食/坚果/特产">
+        <h2 class="cat-title">
+            <span class="cat-icon">🍿</span>
+            零食糕点
+            <span class="cat-count">TOP15</span>
+        </h2>
+        <div class="cat-tags-row"><span class="cat-tag-chip">进口巧克力礼盒爆发</span><span class="cat-tag-chip">米惦糕点矩阵屠榜</span><span class="cat-tag-chip">内蒙老赵店播稳定出货</span><span class="cat-tag-chip">健康零食笔记长尾覆盖</span></div>
+        <div class="products-grid">
+        <a href="https://www.xiaohongshu.com/goods-detail/69f6d56aa978450001619c71" target="_blank" class="product-card">
+            <div class="card-rank rank-gold">1</div>
+            <div class="new-badge">NEW</div>
+            <div class="card-img"><img src="https://mall-i1.xhscdn.com/arkgoods/1040g0o031vmnhm0i1m005ohgcb6od0u6rjam9so?imageView2/2/w/400/q/80/format/webp" alt="" referrerpolicy="no-referrer" onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#FF6B6B,#FF2442)';this.parentElement.innerHTML='<span style=color:#fff;font-size:32px>🛒</span>';"></div>
+            <div class="card-body">
+                <div class="card-title">Patchi [限时买一送一]芭驰爆款黑巧克力&lt;薄荷夹心&gt;进口巧克力礼盒送女友 [拍1得2]芭驰薄荷</div>
+                <div class="card-store">Patchi旗舰店</div>
+                
+                <div class="card-factors" style="display:flex;align-items:center;gap:6px;"><span class="factor-pill" style="--fc:#AD1457">礼赠场景</span><span class="factor-pill factor-kw">巧克力礼盒</span><span class="carrier-badge" style="background:#2E7D3215;color:#2E7D32;border-color:#2E7D3240;margin-left:auto;">✍️ 笔记</span></div>
+            </div>
+        </a>
+        <a href="https://www.xiaohongshu.com/goods-detail/6960600b9d8afd0001900a0e" target="_blank" class="product-card">
+            <div class="card-rank rank-silver">2</div>
+            
+            <div class="card-img"><img src="https://mall-i1.xhscdn.com/arkgoods/1040g3no31r428udd70104a0iq50v0s99s251cug?imageView2/2/w/400/q/80/format/webp" alt="" referrerpolicy="no-referrer" onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#FF6B6B,#FF2442)';this.parentElement.innerHTML='<span style=color:#fff;font-size:32px>🛒</span>';"></div>
+            <div class="card-body">
+                <div class="card-title">米惦 爆款尝鲜组合手撕牛轧饼&amp;奶奶小馒头&amp;吐司 点心营养早餐面包牛轧 3袋</div>
+                <div class="card-store">米惦商店旗舰店</div>
+                
+                <div class="card-factors" style="display:flex;align-items:center;gap:6px;"><span class="factor-pill" style="--fc:#5D4037">组合促销</span><span class="factor-pill factor-kw">牛轧饼</span><span class="carrier-badge" style="background:#2E7D3215;color:#2E7D32;border-color:#2E7D3240;margin-left:auto;">✍️ 笔记</span></div>
+            </div>
+        </a>
+        <a href="https://www.xiaohongshu.com/goods-detail/668e371c42add60001c5ccbd" target="_blank" class="product-card">
+            <div class="card-rank rank-bronze">3</div>
+            
+            <div class="card-img"><img src="https://mall-i1.xhscdn.com/arkgoods/1040g0o031v74ocmahm004atrhrc9ncd1i857kp0?imageView2/2/w/400/q/80/format/webp" alt="" referrerpolicy="no-referrer" onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#FF6B6B,#FF2442)';this.parentElement.innerHTML='<span style=color:#fff;font-size:32px>🛒</span>';"></div>
+            <div class="card-body">
+                <div class="card-title">袋鼠先生 即食牛肉健身代餐轻卤牛腱子肉饱腹高蛋白质主轻熟速食健康零食 原味轻卤牛腱肉55g*8袋</div>
+                <div class="card-store">袋鼠先生旗舰店</div>
+                
+                <div class="card-factors" style="display:flex;align-items:center;gap:6px;"><span class="factor-pill" style="--fc:#2E7D32">健康养生</span><span class="factor-pill factor-kw">卤牛腱</span><span class="carrier-badge" style="background:#2E7D3215;color:#2E7D32;border-color:#2E7D3240;margin-left:auto;">✍️ 笔记</span></div>
+            </div>
+        </a>
+        <a href="https://www.xiaohongshu.com/goods-detail/693c3a827159580001c2a5e5" target="_blank" class="product-card">
+            <div class="card-rank rank-normal">4</div>
+            
+            <div class="card-img"><img src="https://mall-i1.xhscdn.com/arkgoods/104100ao31vvisi2e2g06ei0ond70000000000092cn9og?imageView2/2/w/400/q/80/format/webp" alt="" referrerpolicy="no-referrer" onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#FF6B6B,#FF2442)';this.parentElement.innerHTML='<span style=color:#fff;font-size:32px>🛒</span>';"></div>
+            <div class="card-body">
+                <div class="card-title">【肉肉大全家桶】店庆！选6件立减60元！ 1番茄牛胸口脆</div>
+                <div class="card-store">内蒙老赵的店</div>
+                
+                <div class="card-factors" style="display:flex;align-items:center;gap:6px;"><span class="factor-pill" style="--fc:#37474F">品类爆款</span><span class="factor-pill factor-kw">牛胸口脆</span><span class="carrier-badge" style="background:#1565C015;color:#1565C0;border-color:#1565C040;margin-left:auto;">🏪 店播</span></div>
+            </div>
+        </a>
+        <a href="https://www.xiaohongshu.com/goods-detail/69e0562a26065b0001a6859f" target="_blank" class="product-card">
+            <div class="card-rank rank-normal">5</div>
+            <div class="new-badge">NEW</div>
+            <div class="card-img"><img src="https://mall-i1.xhscdn.com/arkgoods/1040g3no31v3ml8bd3m0g4a0iq50v0s99oqan120?imageView2/2/w/400/q/80/format/webp" alt="" referrerpolicy="no-referrer" onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#FF6B6B,#FF2442)';this.parentElement.innerHTML='<span style=color:#fff;font-size:32px>🛒</span>';"></div>
+            <div class="card-body">
+                <div class="card-title">米惦 马师傅的牛舌饼 软韧嚼劲微甜不腻传统手作闽式糕点休闲零食 180g 马师傅的牛舌饼 180g*</div>
+                <div class="card-store">米惦商店旗舰店</div>
+                
+                <div class="card-factors" style="display:flex;align-items:center;gap:6px;"><span class="factor-pill" style="--fc:#827717">工艺叙事</span><span class="factor-pill factor-kw">马师傅</span><span class="carrier-badge" style="background:#2E7D3215;color:#2E7D32;border-color:#2E7D3240;margin-left:auto;">✍️ 笔记</span></div>
+            </div>
+        </a>
+        <a href="https://www.xiaohongshu.com/goods-detail/69df34ff5258fb00015fb952" target="_blank" class="product-card">
+            <div class="card-rank rank-normal">6</div>
+            
+            <div class="card-img"><img src="https://mall-i1.xhscdn.com/arkgoods/1040g3no31ucggqqi1s0g5oiefv040n0d26nvf9o?imageView2/2/w/400/q/80/format/webp" alt="" referrerpolicy="no-referrer" onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#FF6B6B,#FF2442)';this.parentElement.innerHTML='<span style=color:#fff;font-size:32px>🛒</span>';"></div>
+            <div class="card-body">
+                <div class="card-title">OH MyFood 哦唛福 种子循环周期组合天然营养坚果南瓜籽亚麻籽葵花籽芝麻T 【4盒周期 28天</div>
+                <div class="card-store">OH MyFood 哦唛福旗舰店</div>
+                
+                <div class="card-factors" style="display:flex;align-items:center;gap:6px;"><span class="factor-pill" style="--fc:#5D4037">组合促销</span><span class="factor-pill factor-kw">坚果</span><span class="carrier-badge" style="background:#2E7D3215;color:#2E7D32;border-color:#2E7D3240;margin-left:auto;">✍️ 笔记</span></div>
+            </div>
+        </a>
+        <a href="https://www.xiaohongshu.com/goods-detail/6765290b5677c9000130f2d1" target="_blank" class="product-card">
+            <div class="card-rank rank-normal">7</div>
+            
+            <div class="card-img"><img src="https://mall-i1.xhscdn.com/arkgoods/104100ao31fg7t35g6e269p40btqg0000000001el6vbfs?imageView2/2/w/400/q/80/format/webp" alt="" referrerpolicy="no-referrer" onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#FF6B6B,#FF2442)';this.parentElement.innerHTML='<span style=color:#fff;font-size:32px>🛒</span>';"></div>
+            <div class="card-body">
+                <div class="card-title">【无花果干】无硫熏｜无腌糖｜开口 1000g黄粉心（第一次吃，拍这个）</div>
+                <div class="card-store">新疆尼勒克黑蜂蜂蜜的店</div>
+                
+                <div class="card-factors" style="display:flex;align-items:center;gap:6px;"><span class="factor-pill" style="--fc:#37474F">品类爆款</span><span class="factor-pill factor-kw">无花果干</span><span class="carrier-badge" style="background:#2E7D3215;color:#2E7D32;border-color:#2E7D3240;margin-left:auto;">✍️ 笔记</span></div>
+            </div>
+        </a>
+        <a href="https://www.xiaohongshu.com/goods-detail/69b37fc59b4aae000112d497" target="_blank" class="product-card">
+            <div class="card-rank rank-normal">8</div>
+            <div class="new-badge">NEW</div>
+            <div class="card-img"><img src="https://mall-i1.xhscdn.com/arkgoods/1040g3no31vs4p24f540g5naiplr5kjm75ur84vg?imageView2/2/w/400/q/80/format/webp" alt="" referrerpolicy="no-referrer" onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#FF6B6B,#FF2442)';this.parentElement.innerHTML='<span style=color:#fff;font-size:32px>🛒</span>';"></div>
+            <div class="card-body">
+                <div class="card-title">臻味Delicious 富硒鲍鱼果仁  280g（20g*14袋）  坚果零食 独立小袋 1盒</div>
+                <div class="card-store">臻味ZENWELL旗舰店</div>
+                
+                <div class="card-factors" style="display:flex;align-items:center;gap:6px;"><span class="factor-pill" style="--fc:#2E7D32">健康养生</span><span class="factor-pill factor-kw">坚果</span><span class="carrier-badge" style="background:#2E7D3215;color:#2E7D32;border-color:#2E7D3240;margin-left:auto;">✍️ 笔记</span></div>
+            </div>
+        </a>
+        <a href="https://www.xiaohongshu.com/goods-detail/68209f2138a9a60001b51bfe" target="_blank" class="product-card">
+            <div class="card-rank rank-normal">9</div>
+            
+            <div class="card-img"><img src="https://mall-i1.xhscdn.com/arkgoods/1040g0o031hbhqk9r3a005oon9h43oioldu6t18o?imageView2/2/w/400/q/80/format/webp" alt="" referrerpolicy="no-referrer" onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#FF6B6B,#FF2442)';this.parentElement.innerHTML='<span style=color:#fff;font-size:32px>🛒</span>';"></div>
+            <div class="card-body">
+                <div class="card-title">【70g*12枚装】英式麦芬 全麦种子 0蔗糖  极简配方 松软不发酸</div>
+                <div class="card-store">静静的包的店</div>
+                
+                <div class="card-factors" style="display:flex;align-items:center;gap:6px;"><span class="factor-pill" style="--fc:#2E7D32">健康养生</span><span class="factor-pill factor-kw">枚装</span><span class="carrier-badge" style="background:#2E7D3215;color:#2E7D32;border-color:#2E7D3240;margin-left:auto;">✍️ 笔记</span></div>
+            </div>
+        </a>
+        <a href="https://www.xiaohongshu.com/goods-detail/6587f66fff7b510001b29133" target="_blank" class="product-card">
+            <div class="card-rank rank-normal">10</div>
+            
+            <div class="card-img" style="background:linear-gradient(135deg,#FF6B6B,#FF2442);display:flex;align-items:center;justify-content:center;color:#fff;font-size:32px;">🛒</div>
+            <div class="card-body">
+                <div class="card-title">传统手工中式糕点麻酥糖非遗糕点黑芝麻千层酥糖 黑芝麻无蔗糖口味300克</div>
+                <div class="card-store">妙味食光的店</div>
+                
+                <div class="card-factors" style="display:flex;align-items:center;gap:6px;"><span class="factor-pill" style="--fc:#827717">工艺叙事</span><span class="factor-pill factor-kw">糕点</span><span class="carrier-badge" style="background:#2E7D3215;color:#2E7D32;border-color:#2E7D3240;margin-left:auto;">✍️ 笔记</span></div>
+            </div>
+        </a>
+        <a href="https://www.xiaohongshu.com/goods-detail/693175c7b577840001075d40" target="_blank" class="product-card">
+            <div class="card-rank rank-normal">11</div>
+            
+            <div class="card-img"><img src="https://mall-i1.xhscdn.com/arkgoods/104100ao31tbvbis9ls16ei0ond700000000000d2lbik2?imageView2/2/w/400/q/80/format/webp" alt="" referrerpolicy="no-referrer" onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#FF6B6B,#FF2442)';this.parentElement.innerHTML='<span style=color:#fff;font-size:32px>🛒</span>';"></div>
+            <div class="card-body">
+                <div class="card-title">【顺丰】牛胸口脆！酥脆爆香！累计已售15万桶！全部升级新包装 1盒番茄味</div>
+                <div class="card-store">内蒙老赵的店</div>
+                
+                <div class="card-factors" style="display:flex;align-items:center;gap:6px;"><span class="factor-pill" style="--fc:#37474F">品类爆款</span><span class="factor-pill factor-kw">牛胸口脆</span><span class="carrier-badge" style="background:#1565C015;color:#1565C0;border-color:#1565C040;margin-left:auto;">🏪 店播</span></div>
+            </div>
+        </a>
+        <a href="https://www.xiaohongshu.com/goods-detail/699d70cd6b5a83000128b316" target="_blank" class="product-card">
+            <div class="card-rank rank-normal">12</div>
+            <div class="new-badge">NEW</div>
+            <div class="card-img"><img src="https://mall-i1.xhscdn.com/arkgoods/1040g0o031ibe22fdnq005o34d71gboiaqs0ah70?imageView2/2/w/400/q/80/format/webp" alt="" referrerpolicy="no-referrer" onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#FF6B6B,#FF2442)';this.parentElement.innerHTML='<span style=color:#fff;font-size:32px>🛒</span>';"></div>
+            <div class="card-body">
+                <div class="card-title">碧翠园 【官方旗舰店】MCT巧克力泥巴派脏脏可可0蔗糖巧克力下午茶泥巴派 【第二袋半价】抹茶泥巴派5</div>
+                <div class="card-store">碧翠园BCPARK旗舰店</div>
+                
+                <div class="card-factors" style="display:flex;align-items:center;gap:6px;"><span class="factor-pill" style="--fc:#2E7D32">健康养生</span><span class="factor-pill factor-kw">巧克力</span><span class="carrier-badge" style="background:#1565C015;color:#1565C0;border-color:#1565C040;margin-left:auto;">🏪 店播</span></div>
+            </div>
+        </a>
+        <a href="https://www.xiaohongshu.com/goods-detail/6889b6fd22713e00017d6d67" target="_blank" class="product-card">
+            <div class="card-rank rank-normal">13</div>
+            
+            <div class="card-img"><img src="https://mall-i1.xhscdn.com/arkgoods/1040g3no31mip9tfa4s0g5q433upnao6cm09ugig?imageView2/2/w/400/q/80/format/webp" alt="" referrerpolicy="no-referrer" onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#FF6B6B,#FF2442)';this.parentElement.innerHTML='<span style=color:#fff;font-size:32px>🛒</span>';"></div>
+            <div class="card-body">
+                <div class="card-title">仓鼠行动 五香烤花生咸香酥脆脱油下酒菜解馋办公室休闲零食追剧解馋小包装 【买20包送10包】到手15</div>
+                <div class="card-store">仓鼠行动专卖店</div>
+                
+                <div class="card-factors" style="display:flex;align-items:center;gap:6px;"><span class="factor-pill" style="--fc:#37474F">品类爆款</span><span class="factor-pill factor-kw">花生</span><span class="carrier-badge" style="background:#2E7D3215;color:#2E7D32;border-color:#2E7D3240;margin-left:auto;">✍️ 笔记</span></div>
+            </div>
+        </a>
+        <a href="https://www.xiaohongshu.com/goods-detail/68538496e321340001624c28" target="_blank" class="product-card">
+            <div class="card-rank rank-normal">14</div>
+            <div class="new-badge">NEW</div>
+            <div class="card-img"><img src="https://mall-i1.xhscdn.com/arkgoods/1040g0o031qe8j0hqn0005ohgcb6od0u6cvolfc0?imageView2/2/w/400/q/80/format/webp" alt="" referrerpolicy="no-referrer" onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#FF6B6B,#FF2442)';this.parentElement.innerHTML='<span style=color:#fff;font-size:32px>🛒</span>';"></div>
+            <div class="card-body">
+                <div class="card-title">Patchi [限时买一送一]芭驰爆款巧克力&lt;水果夹心&gt;薄片礼盒高端进口送女友 [拍1得2]芭驰果味</div>
+                <div class="card-store">Patchi旗舰店</div>
+                
+                <div class="card-factors" style="display:flex;align-items:center;gap:6px;"><span class="factor-pill" style="--fc:#AD1457">礼赠场景</span><span class="factor-pill factor-kw">巧克力礼盒</span><span class="carrier-badge" style="background:#2E7D3215;color:#2E7D32;border-color:#2E7D3240;margin-left:auto;">✍️ 笔记</span></div>
+            </div>
+        </a>
+        <a href="https://www.xiaohongshu.com/goods-detail/69fab05ea5715f0001e3eda8" target="_blank" class="product-card">
+            <div class="card-rank rank-normal">15</div>
+            <div class="new-badge">NEW</div>
+            <div class="card-img" style="background:linear-gradient(135deg,#FF6B6B,#FF2442);display:flex;align-items:center;justify-content:center;color:#fff;font-size:32px;">🛒</div>
+            <div class="card-body">
+                <div class="card-title">岁食录谷饼集 超软煎饼！软糯香甜！无麸质！不是一般的煎饼！ 混合装（口味均分，暂不支持备注哦） 12</div>
+                <div class="card-store">谷饼集GUBINGJI的店</div>
+                
+                <div class="card-factors" style="display:flex;align-items:center;gap:6px;"><span class="factor-pill" style="--fc:#37474F">品类爆款</span><span class="factor-pill factor-kw">煎饼</span><span class="carrier-badge" style="background:#2E7D3215;color:#2E7D32;border-color:#2E7D3240;margin-left:auto;">✍️ 笔记</span></div>
+            </div>
+        </a>
+        </div>
+        <div class="cat-insight">
+            <h3 class="insight-title">🔍 零食糕点 · 当周洞察</h3>
+            <ul class="insight-rules"><li><strong>进口巧克力礼盒爆发</strong>：Patchi 黑巧（薄荷夹心）+ 水果夹心薄片连续上榜——高端进口 + 限时买一送一组合，笔记种草精准切中礼赠/自享场景</li><li><strong>米惦糕点矩阵屠榜</strong>：米惦牛轧饼&amp;奶奶小馒头组合、马师傅牛舌饼、爆款尝鲜组合多个 SKU 上榜——单品牌矩阵化运营 + 笔记种草 + 复购属性强</li><li><strong>内蒙老赵店播稳定出货</strong>：牛胸口脆全家桶 + 番茄味单品上榜——肉类零食 + 店播日常输出 + 复购属性显著</li><li><strong>健康零食笔记长尾覆盖</strong>：袋鼠先生即食牛肉、OH MyFood 种子棒、岁食录无麸质煎饼、谷饼集——低脂/无糖/代餐叙事 + 笔记内容种草，是健康零食破圈核心路径</li></ul>
+        </div>
+    </section>
+    <section class="category" id="咖啡/麦片/冲饮">
+        <h2 class="cat-title">
+            <span class="cat-icon">☕</span>
+            乳饮冲饮
+            <span class="cat-count">TOP15</span>
+        </h2>
+        <div class="cat-tags-row"><span class="cat-tag-chip">沃集鲜纯牛奶霸盘</span><span class="cat-tag-chip">咖啡订阅卡 K播突围</span><span class="cat-tag-chip">悦鲜活店播日常出货</span><span class="cat-tag-chip">功能饮品 K播 + 笔记双线发力</span></div>
+        <div class="products-grid">
+        <a href="https://www.xiaohongshu.com/goods-detail/69a923c5970f0000017e626d" target="_blank" class="product-card">
+            <div class="card-rank rank-gold">1</div>
+            
+            <div class="card-img"><img src="https://mall-i1.xhscdn.com/arkgoods/1040g0o031tampalkla005o0s4rngbn4pqcnd7og?imageView2/2/w/400/q/80/format/webp" alt="" referrerpolicy="no-referrer" onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#FF6B6B,#FF2442)';this.parentElement.innerHTML='<span style=color:#fff;font-size:32px>🛒</span>';"></div>
+            <div class="card-body">
+                <div class="card-title">沃集鲜 4.0纯牛奶 1L 4.0g乳蛋白/100mL 小绿瓶</div>
+                <div class="card-store">沃尔玛旗舰店</div>
+                
+                <div class="card-factors" style="display:flex;align-items:center;gap:6px;"><span class="factor-pill" style="--fc:#2E7D32">健康养生</span><span class="factor-pill factor-kw">纯牛奶</span><span class="carrier-badge" style="background:#2E7D3215;color:#2E7D32;border-color:#2E7D3240;margin-left:auto;">✍️ 笔记</span></div>
+            </div>
+        </a>
+        <a href="https://www.xiaohongshu.com/goods-detail/69fd6e80a823a600016d7b18" target="_blank" class="product-card">
+            <div class="card-rank rank-silver">2</div>
+            
+            <div class="card-img"><img src="https://mall-i1.xhscdn.com/arkgoods/1040g3no3205a8qfml40g5oerona40suraa7gli8?imageView2/2/w/400/q/80/format/webp" alt="" referrerpolicy="no-referrer" onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#FF6B6B,#FF2442)';this.parentElement.innerHTML='<span style=color:#fff;font-size:32px>🛒</span>';"></div>
+            <div class="card-body">
+                <div class="card-title">农夫山泉 饮用水天然水 实物兑换卡 5L*4桶多箱装 【两张卡共20箱】 买赠露营车</div>
+                <div class="card-store">农夫山泉生活馆旗舰店</div>
+                
+                <div class="card-factors" style="display:flex;align-items:center;gap:6px;"><span class="factor-pill" style="--fc:#37474F">品类爆款</span><span class="factor-pill factor-kw">两张卡共箱</span><span class="carrier-badge" style="background:#1565C015;color:#1565C0;border-color:#1565C040;margin-left:auto;">🏪 店播</span></div>
+            </div>
+        </a>
+        <a href="https://www.xiaohongshu.com/goods-detail/69455960f489e40001d9db7a" target="_blank" class="product-card">
+            <div class="card-rank rank-bronze">3</div>
+            
+            <div class="card-img"><img src="https://mall-i1.xhscdn.com/arkgoods/1040g0o031q513bron4005o0s4rngbn4pnk1dovo?imageView2/2/w/400/q/80/format/webp" alt="" referrerpolicy="no-referrer" onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#FF6B6B,#FF2442)';this.parentElement.innerHTML='<span style=color:#fff;font-size:32px>🛒</span>';"></div>
+            <div class="card-body">
+                <div class="card-title">沃集鲜 迷你装4.0纯牛奶 250mL*10 小绿瓶迷你装</div>
+                <div class="card-store">沃尔玛旗舰店</div>
+                
+                <div class="card-factors" style="display:flex;align-items:center;gap:6px;"><span class="factor-pill" style="--fc:#2E7D32">健康养生</span><span class="factor-pill factor-kw">纯牛奶</span><span class="carrier-badge" style="background:#2E7D3215;color:#2E7D32;border-color:#2E7D3240;margin-left:auto;">✍️ 笔记</span></div>
+            </div>
+        </a>
+        <a href="https://www.xiaohongshu.com/goods-detail/69faf743c61d3a00012e5bc8" target="_blank" class="product-card">
+            <div class="card-rank rank-normal">4</div>
+            <div class="new-badge">NEW</div>
+            <div class="card-img"><img src="https://mall-i1.xhscdn.com/arkgoods/1040g0o03207i57u6lk005ognc4ik1goejo7gk28?imageView2/2/w/400/q/80/format/webp" alt="" referrerpolicy="no-referrer" onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#FF6B6B,#FF2442)';this.parentElement.innerHTML='<span style=color:#fff;font-size:32px>🛒</span>';"></div>
+            <div class="card-body">
+                <div class="card-title">查宇宙 618 查老师咖啡豆订阅卡 每月一包 省心省力 4种套餐可选 超值手冲</div>
+                <div class="card-store">查宇宙旗舰店</div>
+                
+                <div class="card-factors" style="display:flex;align-items:center;gap:6px;"><span class="factor-pill" style="--fc:#E65100">新品/节令</span><span class="factor-pill factor-kw">咖啡豆订阅</span><span class="carrier-badge" style="background:#E6510015;color:#E65100;border-color:#E6510040;margin-left:auto;">📡 K播</span></div>
+            </div>
+        </a>
+        <a href="https://www.xiaohongshu.com/goods-detail/69faf743c61d3a00012e5bcb" target="_blank" class="product-card">
+            <div class="card-rank rank-normal">5</div>
+            <div class="new-badge">NEW</div>
+            <div class="card-img"><img src="https://mall-i1.xhscdn.com/arkgoods/1040g0o03207i57u6lk005ognc4ik1goejo7gk28?imageView2/2/w/400/q/80/format/webp" alt="" referrerpolicy="no-referrer" onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#FF6B6B,#FF2442)';this.parentElement.innerHTML='<span style=color:#fff;font-size:32px>🛒</span>';"></div>
+            <div class="card-body">
+                <div class="card-title">查宇宙 618 查老师咖啡豆订阅卡 每月一包 省心省力 4种套餐可选 惊喜手冲</div>
+                <div class="card-store">查宇宙旗舰店</div>
+                
+                <div class="card-factors" style="display:flex;align-items:center;gap:6px;"><span class="factor-pill" style="--fc:#E65100">新品/节令</span><span class="factor-pill factor-kw">咖啡豆订阅</span><span class="carrier-badge" style="background:#E6510015;color:#E65100;border-color:#E6510040;margin-left:auto;">📡 K播</span></div>
+            </div>
+        </a>
+        <a href="https://www.xiaohongshu.com/goods-detail/6970623cb1cba40001360045" target="_blank" class="product-card">
+            <div class="card-rank rank-normal">6</div>
+            
+            <div class="card-img"><img src="https://mall-i1.xhscdn.com/arkgoods/1040g0o031tju3p54no005o6tef2086tu82u8md0?imageView2/2/w/400/q/80/format/webp" alt="" referrerpolicy="no-referrer" onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#FF6B6B,#FF2442)';this.parentElement.innerHTML='<span style=color:#fff;font-size:32px>🛒</span>';"></div>
+            <div class="card-body">
+                <div class="card-title">SLAB TOWN 富民长乐冻干咖啡粉深度烘焙即溶黑咖啡2.8g*30颗 富民长乐冻干咖啡粉30颗</div>
+                <div class="card-store">SlabTownCoffee的店</div>
+                
+                <div class="card-factors" style="display:flex;align-items:center;gap:6px;"><span class="factor-pill" style="--fc:#37474F">品类爆款</span><span class="factor-pill factor-kw">冻干咖啡</span><span class="carrier-badge" style="background:#66615;color:#666;border-color:#66640;margin-left:auto;">📦 综合</span></div>
+            </div>
+        </a>
+        <a href="https://www.xiaohongshu.com/goods-detail/69d709bf613bea0001c86a52" target="_blank" class="product-card">
+            <div class="card-rank rank-normal">7</div>
+            
+            <div class="card-img"><img src="https://mall-i1.xhscdn.com/arkgoods/1040g3no31unlok2t1m0g5o0s4rngbn4p62fa8tg?imageView2/2/w/400/q/80/format/webp" alt="" referrerpolicy="no-referrer" onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#FF6B6B,#FF2442)';this.parentElement.innerHTML='<span style=color:#fff;font-size:32px>🛒</span>';"></div>
+            <div class="card-body">
+                <div class="card-title">沃集鲜 水牛纯牛奶 200mL*10盒（新旧包装随机发货）</div>
+                <div class="card-store">沃尔玛旗舰店</div>
+                
+                <div class="card-factors" style="display:flex;align-items:center;gap:6px;"><span class="factor-pill" style="--fc:#2E7D32">健康养生</span><span class="factor-pill factor-kw">纯牛奶</span><span class="carrier-badge" style="background:#2E7D3215;color:#2E7D32;border-color:#2E7D3240;margin-left:auto;">✍️ 笔记</span></div>
+            </div>
+        </a>
+        <a href="https://www.xiaohongshu.com/goods-detail/643ce86d95fc7c000121719a" target="_blank" class="product-card">
+            <div class="card-rank rank-normal">8</div>
+            
+            <div class="card-img"><img src="https://mall-i1.xhscdn.com/arkgoods/1040g0o0320515qrd1m004av5301gvjva762nchg?imageView2/2/w/400/q/80/format/webp" alt="" referrerpolicy="no-referrer" onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#FF6B6B,#FF2442)';this.parentElement.innerHTML='<span style=color:#fff;font-size:32px>🛒</span>';"></div>
+            <div class="card-body">
+                <div class="card-title">植物燃料 VC充电 冷压柠檬汁 夏日柠檬水 大餐解腻0水0糖 全家安心喝 1组</div>
+                <div class="card-store">植物燃料旗舰店</div>
+                
+                <div class="card-factors" style="display:flex;align-items:center;gap:6px;"><span class="factor-pill" style="--fc:#37474F">品类爆款</span><span class="factor-pill factor-kw">柠檬汁</span><span class="carrier-badge" style="background:#2E7D3215;color:#2E7D32;border-color:#2E7D3240;margin-left:auto;">✍️ 笔记</span></div>
+            </div>
+        </a>
+        <a href="https://www.xiaohongshu.com/goods-detail/6a01708222eb6500015739e4" target="_blank" class="product-card">
+            <div class="card-rank rank-normal">9</div>
+            <div class="new-badge">NEW</div>
+            <div class="card-img"><img src="https://mall-i1.xhscdn.com/arkgoods/1040g3no320135d1uhm0g5qaktoado13eknai8vo?imageView2/2/w/400/q/80/format/webp" alt="" referrerpolicy="no-referrer" onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#FF6B6B,#FF2442)';this.parentElement.innerHTML='<span style=color:#fff;font-size:32px>🛒</span>';"></div>
+            <div class="card-body">
+                <div class="card-title">百泽异美园 【嗲姐专属】鲜榨猕猴桃汁100%HPP纯果汁非浓缩还原春季VC果汁 HPP鲜榨猕猴桃汁2</div>
+                <div class="card-store">百泽异美园八秦的店</div>
+                
+                <div class="card-factors" style="display:flex;align-items:center;gap:6px;"><span class="factor-pill" style="--fc:#2E7D32">健康养生</span><span class="factor-pill factor-kw">果汁</span><span class="carrier-badge" style="background:#E6510015;color:#E65100;border-color:#E6510040;margin-left:auto;">📡 K播</span></div>
+            </div>
+        </a>
+        <a href="https://www.xiaohongshu.com/goods-detail/69f5ef9164eb41000181175d" target="_blank" class="product-card">
+            <div class="card-rank rank-normal">10</div>
+            
+            <div class="card-img"><img src="https://mall-i1.xhscdn.com/arkgoods/1040g3no31u20qei3hg0g5oiefv040n0d57hgalo?imageView2/2/w/400/q/80/format/webp" alt="" referrerpolicy="no-referrer" onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#FF6B6B,#FF2442)';this.parentElement.innerHTML='<span style=color:#fff;font-size:32px>🛒</span>';"></div>
+            <div class="card-body">
+                <div class="card-title">OH MyFood 哦唛福 【芭比独家新品油甘小绿妖】绿咖啡液EGCG香柚NFC原浆高绿原酸 【14</div>
+                <div class="card-store">OH MyFood 哦唛福旗舰店</div>
+                
+                <div class="card-factors" style="display:flex;align-items:center;gap:6px;"><span class="factor-pill" style="--fc:#2E7D32">健康养生</span><span class="factor-pill factor-kw">OHMyF</span><span class="carrier-badge" style="background:#E6510015;color:#E65100;border-color:#E6510040;margin-left:auto;">📡 K播</span></div>
+            </div>
+        </a>
+        <a href="https://www.xiaohongshu.com/goods-detail/69a11b6536a3d80001bfcf0e" target="_blank" class="product-card">
+            <div class="card-rank rank-normal">11</div>
+            
+            <div class="card-img"><img src="https://mall-i1.xhscdn.com/arkgoods/1040g3no3201bd1reis0g5pm0bgm7e86oftldvh0?imageView2/2/w/400/q/80/format/webp" alt="" referrerpolicy="no-referrer" onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#FF6B6B,#FF2442)';this.parentElement.innerHTML='<span style=color:#fff;font-size:32px>🛒</span>';"></div>
+            <div class="card-body">
+                <div class="card-title">悦鲜活 赠双盖牛奶随行杯（非涂鸦款）-0乳糖260ml*6瓶+A2型450ml*3瓶 赠双盖随行奶杯</div>
+                <div class="card-store">悦鲜活鲜奶旗舰店</div>
+                
+                <div class="card-factors" style="display:flex;align-items:center;gap:6px;"><span class="factor-pill" style="--fc:#2E7D32">健康养生</span><span class="factor-pill factor-kw">悦鲜活赠双</span><span class="carrier-badge" style="background:#1565C015;color:#1565C0;border-color:#1565C040;margin-left:auto;">🏪 店播</span></div>
+            </div>
+        </a>
+        <a href="https://www.xiaohongshu.com/goods-detail/69f8b0b8e0e86e00019b2293" target="_blank" class="product-card">
+            <div class="card-rank rank-normal">12</div>
+            <div class="new-badge">NEW</div>
+            <div class="card-img"><img src="https://mall-i1.xhscdn.com/arkgoods/1040g3no32045j1661m0g5nmmunhg8rmv2ptp4g0?imageView2/2/w/400/q/80/format/webp" alt="" referrerpolicy="no-referrer" onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#FF6B6B,#FF2442)';this.parentElement.innerHTML='<span style=color:#fff;font-size:32px>🛒</span>';"></div>
+            <div class="card-body">
+                <div class="card-title">一鸣 【嗲姐专属】低温泰国茉莉香米米乳牛奶200ml/瓶 米香浓郁 一鸣茉莉香米乳200ml*10</div>
+                <div class="card-store">一鸣食品旗舰店</div>
+                
+                <div class="card-factors" style="display:flex;align-items:center;gap:6px;"><span class="factor-pill" style="--fc:#0D47A1">进口溯源</span><span class="factor-pill factor-kw">嗲姐专属</span><span class="carrier-badge" style="background:#E6510015;color:#E65100;border-color:#E6510040;margin-left:auto;">📡 K播</span></div>
+            </div>
+        </a>
+        <a href="https://www.xiaohongshu.com/goods-detail/69eefeadd4c11100015ec708" target="_blank" class="product-card">
+            <div class="card-rank rank-normal">13</div>
+            <div class="new-badge">NEW</div>
+            <div class="card-img"><img src="https://mall-i1.xhscdn.com/arkgoods/1040g0o031vubevj0k8005pm0bgm7e86oupk1fcg?imageView2/2/w/400/q/80/format/webp" alt="" referrerpolicy="no-referrer" onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#FF6B6B,#FF2442)';this.parentElement.innerHTML='<span style=color:#fff;font-size:32px>🛒</span>';"></div>
+            <div class="card-body">
+                <div class="card-title">悦鲜活 【赠手摇沙冰机】0乳糖牛奶260ml*6瓶+A2型鲜牛奶450ml*3瓶</div>
+                <div class="card-store">悦鲜活鲜奶旗舰店</div>
+                
+                <div class="card-factors" style="display:flex;align-items:center;gap:6px;"><span class="factor-pill" style="--fc:#2E7D32">健康养生</span><span class="factor-pill factor-kw">赠手摇沙冰机</span><span class="carrier-badge" style="background:#1565C015;color:#1565C0;border-color:#1565C040;margin-left:auto;">🏪 店播</span></div>
+            </div>
+        </a>
+        <a href="https://www.xiaohongshu.com/goods-detail/69fd797b273c7d00010809b8" target="_blank" class="product-card">
+            <div class="card-rank rank-normal">14</div>
+            <div class="new-badge">NEW</div>
+            <div class="card-img"><img src="https://mall-i1.xhscdn.com/arkgoods/1040g0o031vru6kh8is005p78apkg9v387i6c2uo?imageView2/2/w/400/q/80/format/webp" alt="" referrerpolicy="no-referrer" onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#FF6B6B,#FF2442)';this.parentElement.innerHTML='<span style=color:#fff;font-size:32px>🛒</span>';"></div>
+            <div class="card-body">
+                <div class="card-title">真零 【嗲姐专属】0乳糖牛奶200ml*15盒 营养早餐牛奶 真零0乳糖牛奶200ml*15盒*3箱</div>
+                <div class="card-store">真零乳品旗舰店</div>
+                
+                <div class="card-factors" style="display:flex;align-items:center;gap:6px;"><span class="factor-pill" style="--fc:#2E7D32">健康养生</span><span class="factor-pill factor-kw">嗲姐专属</span><span class="carrier-badge" style="background:#E6510015;color:#E65100;border-color:#E6510040;margin-left:auto;">📡 K播</span></div>
+            </div>
+        </a>
+        <a href="https://www.xiaohongshu.com/goods-detail/681f62279653670001f16812" target="_blank" class="product-card">
+            <div class="card-rank rank-normal">15</div>
+            
+            <div class="card-img"><img src="https://mall-i1.xhscdn.com/arkgoods/104103ng31jhqe2mv340m5ngob2v6sno005e7mci3vm034?imageView2/2/w/400/q/80/format/webp" alt="" referrerpolicy="no-referrer" onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#FF6B6B,#FF2442)';this.parentElement.innerHTML='<span style=color:#fff;font-size:32px>🛒</span>';"></div>
+            <div class="card-body">
+                <div class="card-title">20种奶酪·新手试吃装-全球精选奶酪随机掉落20 全球精选20款奶酪试吃</div>
+                <div class="card-store">奶酪猴子Cheese Monkey的店</div>
+                
+                <div class="card-factors" style="display:flex;align-items:center;gap:6px;"><span class="factor-pill" style="--fc:#5D4037">组合促销</span><span class="factor-pill factor-kw">奶酪</span><span class="carrier-badge" style="background:#2E7D3215;color:#2E7D32;border-color:#2E7D3240;margin-left:auto;">✍️ 笔记</span></div>
+            </div>
+        </a>
+        </div>
+        <div class="cat-insight">
+            <h3 class="insight-title">🔍 乳饮冲饮 · 当周洞察</h3>
+            <ul class="insight-rules"><li><strong>沃集鲜纯牛奶霸盘</strong>：4.0 纯牛奶 + 迷你装 + 水牛奶多个 SKU 屠榜——大牌品质 + 多规格覆盖 + 笔记种草成完整组合拳</li><li><strong>咖啡订阅卡 K播突围</strong>：查宇宙咖啡豆订阅卡上榜（K播主导）——订阅制 + 达人背书是咖啡品类规模化的新模式</li><li><strong>悦鲜活店播日常出货</strong>：悦鲜活 0乳糖/A2型套装多个 SKU 上榜（店播主导）——大牌乳品靠店播建立稳定复购节奏</li><li><strong>功能饮品 K播 + 笔记双线发力</strong>：百泽异美园猕猴桃汁、OH MyFood 油甘小绿妖、SLAB TOWN 冻干咖啡——细分场景（清肠/醒神/便捷）+ 内容种草，是健康饮品破圈核心</li></ul>
+        </div>
+    </section>
+    <section class="category" id="粮油调味/速食/干货/烘焙">
+        <h2 class="cat-title">
+            <span class="cat-icon">🍜</span>
+            速食调味
+            <span class="cat-count">TOP15</span>
+        </h2>
+        <div class="cat-tags-row"><span class="cat-tag-chip">村驴东北速食矩阵爆发</span><span class="cat-tag-chip">橄榄油高端 K播突围</span><span class="cat-tag-chip">松茸米线品类规模化</span><span class="cat-tag-chip">健康养生速食笔记驱动</span></div>
+        <div class="products-grid">
+        <a href="https://www.xiaohongshu.com/goods-detail/67dbbafdc259f30001e6367b" target="_blank" class="product-card">
+            <div class="card-rank rank-gold">1</div>
+            
+            <div class="card-img"><img src="https://mall-i1.xhscdn.com/arkgoods/104103ng31f88ntri6e765422ou6hmlo004b53nffgp2ts?imageView2/2/w/400/q/80/format/webp" alt="" referrerpolicy="no-referrer" onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#FF6B6B,#FF2442)';this.parentElement.innerHTML='<span style=color:#fff;font-size:32px>🛒</span>';"></div>
+            <div class="card-body">
+                <div class="card-title">村驴家东北粘糊麻辣烫 3袋</div>
+                <div class="card-store">村驴的店</div>
+                
+                <div class="card-factors" style="display:flex;align-items:center;gap:6px;"><span class="factor-pill" style="--fc:#1565C0">地域特色</span><span class="factor-pill factor-kw">粘糊麻辣烫</span><span class="carrier-badge" style="background:#2E7D3215;color:#2E7D32;border-color:#2E7D3240;margin-left:auto;">✍️ 笔记</span></div>
+            </div>
+        </a>
+        <a href="https://www.xiaohongshu.com/goods-detail/68edfd67d3eed200015d9e75" target="_blank" class="product-card">
+            <div class="card-rank rank-silver">2</div>
+            <div class="new-badge">NEW</div>
+            <div class="card-img"><img src="https://mall-i1.xhscdn.com/arkgoods/1040g0o031vj2rgrfis005ocdsr5odd0fskme2o0?imageView2/2/w/400/q/80/format/webp" alt="" referrerpolicy="no-referrer" onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#FF6B6B,#FF2442)';this.parentElement.innerHTML='<span style=color:#fff;font-size:32px>🛒</span>';"></div>
+            <div class="card-body">
+                <div class="card-title">奥莱奥原生 季卡-单一果种PDO特级初榨橄榄油750ml*2+白叶2.5L 白叶750ml*2+白叶</div>
+                <div class="card-store">奥莱奥原生旗舰店</div>
+                
+                <div class="card-factors" style="display:flex;align-items:center;gap:6px;"><span class="factor-pill" style="--fc:#37474F">品类爆款</span><span class="factor-pill factor-kw">橄榄油</span><span class="carrier-badge" style="background:#E6510015;color:#E65100;border-color:#E6510040;margin-left:auto;">📡 K播</span></div>
+            </div>
+        </a>
+        <a href="https://www.xiaohongshu.com/goods-detail/69fed05754fc7500018a602a" target="_blank" class="product-card">
+            <div class="card-rank rank-bronze">3</div>
+            <div class="new-badge">NEW</div>
+            <div class="card-img"><img src="https://mall-i1.xhscdn.com/arkgoods/1040g0o031vgoeuek2s005qdnnr1comb463d4g40?imageView2/2/w/400/q/80/format/webp" alt="" referrerpolicy="no-referrer" onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#FF6B6B,#FF2442)';this.parentElement.innerHTML='<span style=color:#fff;font-size:32px>🛒</span>';"></div>
+            <div class="card-body">
+                <div class="card-title">品七彩 【超越专属】云南松茸鸡汤过桥米线保鲜方便小锅米线一分钟速煮 松茸鸡汤3➕香辣菌子3➕松茸黄精</div>
+                <div class="card-store">十选云物专营店</div>
+                
+                <div class="card-factors" style="display:flex;align-items:center;gap:6px;"><span class="factor-pill" style="--fc:#1565C0">地域特色</span><span class="factor-pill factor-kw">米线</span><span class="carrier-badge" style="background:#E6510015;color:#E65100;border-color:#E6510040;margin-left:auto;">📡 K播</span></div>
+            </div>
+        </a>
+        <a href="https://www.xiaohongshu.com/goods-detail/69c39fde15bd740001fbdd2a" target="_blank" class="product-card">
+            <div class="card-rank rank-normal">4</div>
+            
+            <div class="card-img"><img src="https://mall-i1.xhscdn.com/arkgoods/1040g0o031umaefoh3m005pgbjd92pgea2hdkgno?imageView2/2/w/400/q/80/format/webp" alt="" referrerpolicy="no-referrer" onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#FF6B6B,#FF2442)';this.parentElement.innerHTML='<span style=color:#fff;font-size:32px>🛒</span>';"></div>
+            <div class="card-body">
+                <div class="card-title">paldo 【直播专属】【请回答1988】明星韩剧同款泡面韩国方便面速食 牛肉味*3+泡菜味*3</div>
+                <div class="card-store">paldo食品旗舰店</div>
+                
+                <div class="card-factors" style="display:flex;align-items:center;gap:6px;"><span class="factor-pill" style="--fc:#0D47A1">进口溯源</span><span class="factor-pill factor-kw">泡面</span><span class="carrier-badge" style="background:#1565C015;color:#1565C0;border-color:#1565C040;margin-left:auto;">🏪 店播</span></div>
+            </div>
+        </a>
+        <a href="https://www.xiaohongshu.com/goods-detail/69e84f48bd8c350001989d3c" target="_blank" class="product-card">
+            <div class="card-rank rank-normal">5</div>
+            
+            <div class="card-img"><img src="https://mall-i1.xhscdn.com/arkgoods/1040g0o031tjjg66u7o0049cfv8sslsf776bir5o?imageView2/2/w/400/q/80/format/webp" alt="" referrerpolicy="no-referrer" onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#FF6B6B,#FF2442)';this.parentElement.innerHTML='<span style=color:#fff;font-size:32px>🛒</span>';"></div>
+            <div class="card-body">
+                <div class="card-title">米曰MIYUE 风味满贯紫菜卷紫菜包饭寿司加热即食方便速食早餐宵夜顺丰包邮 （共24片）【齐享4口味</div>
+                <div class="card-store">米曰MIYUE旗舰店</div>
+                
+                <div class="card-factors" style="display:flex;align-items:center;gap:6px;"><span class="factor-pill" style="--fc:#37474F">品类爆款</span><span class="factor-pill factor-kw">齐享口味</span><span class="carrier-badge" style="background:#2E7D3215;color:#2E7D32;border-color:#2E7D3240;margin-left:auto;">✍️ 笔记</span></div>
+            </div>
+        </a>
+        <a href="https://www.xiaohongshu.com/goods-detail/6666ee9ef7984c0001fe04ba" target="_blank" class="product-card">
+            <div class="card-rank rank-normal">6</div>
+            
+            <div class="card-img"><img src="https://mall-i1.xhscdn.com/arkgoods/1040g0ao313s6mcvu1o6g47ckpeieunlt2nq5st8?imageView2/2/w/400/q/80/format/webp" alt="" referrerpolicy="no-referrer" onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#FF6B6B,#FF2442)';this.parentElement.innerHTML='<span style=color:#fff;font-size:32px>🛒</span>';"></div>
+            <div class="card-body">
+                <div class="card-title">村驴家 超好吃的蜂蜜大冷面 四袋</div>
+                <div class="card-store">村驴的店</div>
+                
+                <div class="card-factors" style="display:flex;align-items:center;gap:6px;"><span class="factor-pill" style="--fc:#37474F">品类爆款</span><span class="factor-pill factor-kw">蜂蜜大冷面</span><span class="carrier-badge" style="background:#2E7D3215;color:#2E7D32;border-color:#2E7D3240;margin-left:auto;">✍️ 笔记</span></div>
+            </div>
+        </a>
+        <a href="https://www.xiaohongshu.com/goods-detail/67cabc9375422f0001ecbf2f" target="_blank" class="product-card">
+            <div class="card-rank rank-normal">7</div>
+            
+            <div class="card-img"><img src="https://mall-i1.xhscdn.com/arkgoods/1040g3no31enllft7lo0g5pu5kpninvkd1gcevig?imageView2/2/w/400/q/80/format/webp" alt="" referrerpolicy="no-referrer" onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#FF6B6B,#FF2442)';this.parentElement.innerHTML='<span style=color:#fff;font-size:32px>🛒</span>';"></div>
+            <div class="card-body">
+                <div class="card-title">屋上 【低脂0蔗糖】酸辣凉拌汁调味料麻辣凉拌一汁成菜调味汁家用 【买2送1】酸辣凉拌汁2瓶，再送椒麻</div>
+                <div class="card-store">屋上食品旗舰店</div>
+                
+                <div class="card-factors" style="display:flex;align-items:center;gap:6px;"><span class="factor-pill" style="--fc:#2E7D32">健康养生</span><span class="factor-pill factor-kw">酸辣凉拌汁</span><span class="carrier-badge" style="background:#2E7D3215;color:#2E7D32;border-color:#2E7D3240;margin-left:auto;">✍️ 笔记</span></div>
+            </div>
+        </a>
+        <a href="https://www.xiaohongshu.com/goods-detail/69c39fde15bd740001fbdd4d" target="_blank" class="product-card">
+            <div class="card-rank rank-normal">8</div>
+            
+            <div class="card-img"><img src="https://mall-i1.xhscdn.com/arkgoods/1040g0o031umaefoh3m005pgbjd92pgea2hdkgno?imageView2/2/w/400/q/80/format/webp" alt="" referrerpolicy="no-referrer" onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#FF6B6B,#FF2442)';this.parentElement.innerHTML='<span style=color:#fff;font-size:32px>🛒</span>';"></div>
+            <div class="card-body">
+                <div class="card-title">paldo 【直播专属】【请回答1988】明星韩剧同款泡面韩国方便面速食 牛肉味2盒/泡菜味2盒/芝</div>
+                <div class="card-store">paldo食品旗舰店</div>
+                
+                <div class="card-factors" style="display:flex;align-items:center;gap:6px;"><span class="factor-pill" style="--fc:#0D47A1">进口溯源</span><span class="factor-pill factor-kw">泡面</span><span class="carrier-badge" style="background:#1565C015;color:#1565C0;border-color:#1565C040;margin-left:auto;">🏪 店播</span></div>
+            </div>
+        </a>
+        <a href="https://www.xiaohongshu.com/goods-detail/65fc1c5ae21a000001d2ca2c" target="_blank" class="product-card">
+            <div class="card-rank rank-normal">9</div>
+            
+            <div class="card-img"><img src="https://mall-i1.xhscdn.com/arkgoods/1040g3no31k2ums2e360g5o9i7mg0k6jakqmcbs8?imageView2/2/w/400/q/80/format/webp" alt="" referrerpolicy="no-referrer" onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#FF6B6B,#FF2442)';this.parentElement.innerHTML='<span style=color:#fff;font-size:32px>🛒</span>';"></div>
+            <div class="card-body">
+                <div class="card-title">遂香记 【超多红豆】手工豆沙粽子清水红豆粽纯素赤豆粽端午节减糖低甜粽 红豆豆沙粽4只（减糖版低甜）</div>
+                <div class="card-store">遂香记的店</div>
+                
+                <div class="card-factors" style="display:flex;align-items:center;gap:6px;"><span class="factor-pill" style="--fc:#2E7D32">健康养生</span><span class="factor-pill factor-kw">豆沙粽</span><span class="carrier-badge" style="background:#2E7D3215;color:#2E7D32;border-color:#2E7D3240;margin-left:auto;">✍️ 笔记</span></div>
+            </div>
+        </a>
+        <a href="https://www.xiaohongshu.com/goods-detail/692bacd8350109000121a7d1" target="_blank" class="product-card">
+            <div class="card-rank rank-normal">10</div>
+            
+            <div class="card-img"><img src="https://mall-i1.xhscdn.com/arkgoods/1040g3no31p9so95p260g47ckpeieunltvc1g6ug?imageView2/2/w/400/q/80/format/webp" alt="" referrerpolicy="no-referrer" onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#FF6B6B,#FF2442)';this.parentElement.innerHTML='<span style=color:#fff;font-size:32px>🛒</span>';"></div>
+            <div class="card-body">
+                <div class="card-title">村驴家 东北烧烤料原味香辣 原味250g*1＋香辣250g*1</div>
+                <div class="card-store">村驴的店</div>
+                
+                <div class="card-factors" style="display:flex;align-items:center;gap:6px;"><span class="factor-pill" style="--fc:#1565C0">地域特色</span><span class="factor-pill factor-kw">村驴家东北</span><span class="carrier-badge" style="background:#2E7D3215;color:#2E7D32;border-color:#2E7D3240;margin-left:auto;">✍️ 笔记</span></div>
+            </div>
+        </a>
+        <a href="https://www.xiaohongshu.com/goods-detail/66f65a47eb6ef200010b402e" target="_blank" class="product-card">
+            <div class="card-rank rank-normal">11</div>
+            
+            <div class="card-img"><img src="https://mall-i1.xhscdn.com/arkgoods/1040g0o031fq2u9g4ni005p8175m18efhoo9q51g?imageView2/2/w/400/q/80/format/webp" alt="" referrerpolicy="no-referrer" onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#FF6B6B,#FF2442)';this.parentElement.innerHTML='<span style=color:#fff;font-size:32px>🛒</span>';"></div>
+            <div class="card-body">
+                <div class="card-title">糙能农场 【铁棍山药】九谷猴菇山药面60g/袋 营养均衡好吸收 非油炸早餐面 【爆款热卖】九谷猴菇山</div>
+                <div class="card-store">糙能农场旗舰店</div>
+                
+                <div class="card-factors" style="display:flex;align-items:center;gap:6px;"><span class="factor-pill" style="--fc:#37474F">品类爆款</span><span class="factor-pill factor-kw">铁棍山药</span><span class="carrier-badge" style="background:#2E7D3215;color:#2E7D32;border-color:#2E7D3240;margin-left:auto;">✍️ 笔记</span></div>
+            </div>
+        </a>
+        <a href="https://www.xiaohongshu.com/goods-detail/69fabd07213e270001e1e466" target="_blank" class="product-card">
+            <div class="card-rank rank-normal">12</div>
+            <div class="new-badge">NEW</div>
+            <div class="card-img"><img src="https://mall-i1.xhscdn.com/arkgoods/1040g0o031vuj54ftk8005ot18ora38afj7r2vko?imageView2/2/w/400/q/80/format/webp" alt="" referrerpolicy="no-referrer" onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#FF6B6B,#FF2442)';this.parentElement.innerHTML='<span style=color:#fff;font-size:32px>🛒</span>';"></div>
+            <div class="card-body">
+                <div class="card-title">西班牙原瓶原装进口特级初榨橄榄油500ml瓶装jaén庄园油2瓶装 500ml*2瓶装</div>
+                <div class="card-store">Oro Bailen的店</div>
+                
+                <div class="card-factors" style="display:flex;align-items:center;gap:6px;"><span class="factor-pill" style="--fc:#0D47A1">进口溯源</span><span class="factor-pill factor-kw">橄榄油</span><span class="carrier-badge" style="background:#E6510015;color:#E65100;border-color:#E6510040;margin-left:auto;">📡 K播</span></div>
+            </div>
+        </a>
+        <a href="https://www.xiaohongshu.com/goods-detail/6806893a6626af0001750097" target="_blank" class="product-card">
+            <div class="card-rank rank-normal">13</div>
+            <div class="new-badge">NEW</div>
+            <div class="card-img"><img src="https://mall-i1.xhscdn.com/arkgoods/104100ao31pnd2btel2366cosdpc2ugo007qkh3rl4rvum?imageView2/2/w/400/q/80/format/webp" alt="" referrerpolicy="no-referrer" onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#FF6B6B,#FF2442)';this.parentElement.innerHTML='<span style=color:#fff;font-size:32px>🛒</span>';"></div>
+            <div class="card-body">
+                <div class="card-title">润肺六物饮 | 补津液 火气内热  | 玉竹 沙参 无花果 杏仁70g/包 六物润肺饮70克 * 5</div>
+                <div class="card-store">北北养生茶汤坊的店</div>
+                
+                <div class="card-factors" style="display:flex;align-items:center;gap:6px;"><span class="factor-pill" style="--fc:#2E7D32">健康养生</span><span class="factor-pill factor-kw">润肺饮</span><span class="carrier-badge" style="background:#2E7D3215;color:#2E7D32;border-color:#2E7D3240;margin-left:auto;">✍️ 笔记</span></div>
+            </div>
+        </a>
+        <a href="https://www.xiaohongshu.com/goods-detail/65b23bdcdd621c0001764e2f" target="_blank" class="product-card">
+            <div class="card-rank rank-normal">14</div>
+            <div class="new-badge">NEW</div>
+            <div class="card-img"><img src="https://mall-i1.xhscdn.com/arkgoods/1000g0ao29ccqn2og20005o90tptgapeh3o1r7d8?imageView2/2/w/400/q/80/format/webp" alt="" referrerpolicy="no-referrer" onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#FF6B6B,#FF2442)';this.parentElement.innerHTML='<span style=color:#fff;font-size:32px>🛒</span>';"></div>
+            <div class="card-body">
+                <div class="card-title">现选现称/柴火烟熏腊肉【家乡味】99发两斤</div>
+                <div class="card-store">山里的桃子的店</div>
+                
+                <div class="card-factors" style="display:flex;align-items:center;gap:6px;"><span class="factor-pill" style="--fc:#37474F">品类爆款</span><span class="factor-pill factor-kw">家乡味</span><span class="carrier-badge" style="background:#1565C015;color:#1565C0;border-color:#1565C040;margin-left:auto;">🏪 店播</span></div>
+            </div>
+        </a>
+        <a href="https://www.xiaohongshu.com/goods-detail/67dbbafdc259f30001e6367e" target="_blank" class="product-card">
+            <div class="card-rank rank-normal">15</div>
+            <div class="new-badge">NEW</div>
+            <div class="card-img"><img src="https://mall-i1.xhscdn.com/arkgoods/104103ng31f88ntri6e765422ou6hmlo004b53nffgp2ts?imageView2/2/w/400/q/80/format/webp" alt="" referrerpolicy="no-referrer" onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#FF6B6B,#FF2442)';this.parentElement.innerHTML='<span style=color:#fff;font-size:32px>🛒</span>';"></div>
+            <div class="card-body">
+                <div class="card-title">村驴家东北粘糊麻辣烫 5袋</div>
+                <div class="card-store">村驴的店</div>
+                
+                <div class="card-factors" style="display:flex;align-items:center;gap:6px;"><span class="factor-pill" style="--fc:#1565C0">地域特色</span><span class="factor-pill factor-kw">粘糊麻辣烫</span><span class="carrier-badge" style="background:#2E7D3215;color:#2E7D32;border-color:#2E7D3240;margin-left:auto;">✍️ 笔记</span></div>
+            </div>
+        </a>
+        </div>
+        <div class="cat-insight">
+            <h3 class="insight-title">🔍 速食调味 · 当周洞察</h3>
+            <ul class="insight-rules"><li><strong>村驴东北速食矩阵爆发</strong>：粘糊麻辣烫、蜂蜜大冷面、烧烤料等多个 SKU 上榜——单品牌矩阵 + 笔记内容种草 + 地域风味叙事</li><li><strong>橄榄油高端 K播突围</strong>：奥莱奥原生 PDO 特级初榨 + Oro Bailen 西班牙 jaén 庄园双进榜——高端进口橄榄油 + K播达人 + 季卡订阅制</li><li><strong>松茸米线品类规模化</strong>：品七彩松茸鸡汤过桥米线（K播主导）——产地故事 + 滋补叙事 + 1 分钟速煮场景，K播达人撬动单品快速放量</li><li><strong>健康养生速食笔记驱动</strong>：九谷猴菇山药面、屋上酸辣凉拌汁、润肺六物饮、紫菜寿司——养生概念 + 简单食用场景，笔记长尾种草持续转化</li></ul>
+        </div>
+    </section>
+    <section class="category" id="传统滋补营养品">
+        <h2 class="cat-title">
+            <span class="cat-icon">🌿</span>
+            传统滋补
+            <span class="cat-count">TOP15</span>
+        </h2>
+        <div class="cat-tags-row"><span class="cat-tag-chip">野山参 K播大单引爆</span><span class="cat-tag-chip">燕窝礼盒持续刚需</span><span class="cat-tag-chip">膳禾一方茯苓薏仁膏屠榜</span><span class="cat-tag-chip">姜枣茶/黄精类节令爆发</span></div>
+        <div class="products-grid">
+        <a href="https://www.xiaohongshu.com/goods-detail/690b43c5dcedc70001503770" target="_blank" class="product-card">
+            <div class="card-rank rank-gold">1</div>
+            <div class="new-badge">NEW</div>
+            <div class="card-img"><img src="https://mall-i1.xhscdn.com/arkgoods/1040g0o031oirbi02l2005pmheas7gemgo1nd9do?imageView2/2/w/400/q/80/format/webp" alt="" referrerpolicy="no-referrer" onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#FF6B6B,#FF2442)';this.parentElement.innerHTML='<span style=color:#fff;font-size:32px>🛒</span>';"></div>
+            <div class="card-body">
+                <div class="card-title">人森慢慢 X 左佳霓 联名20年+野山参粉42g 源自野山参之乡 超微参粉 易吸收 【礼盒装】42g</div>
+                <div class="card-store">人森慢慢旗舰店</div>
+                
+                <div class="card-factors" style="display:flex;align-items:center;gap:6px;"><span class="factor-pill" style="--fc:#BF360C">IP联名</span><span class="factor-pill factor-kw">野山参粉</span><span class="carrier-badge" style="background:#E6510015;color:#E65100;border-color:#E6510040;margin-left:auto;">📡 K播</span></div>
+            </div>
+        </a>
+        <a href="https://www.xiaohongshu.com/goods-detail/66ee7f7fcddd6a0001c21180" target="_blank" class="product-card">
+            <div class="card-rank rank-silver">2</div>
+            
+            <div class="card-img"><img src="https://mall-i1.xhscdn.com/arkgoods/1040g0o030pd9ueuijs005o782irg9c67ckllaqo?imageView2/2/w/400/q/80/format/webp" alt="" referrerpolicy="no-referrer" onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#FF6B6B,#FF2442)';this.parentElement.innerHTML='<span style=color:#fff;font-size:32px>🛒</span>';"></div>
+            <div class="card-body">
+                <div class="card-title">燕窝礼盒燕窝送礼礼盒/目谷家 6</div>
+                <div class="card-store">目谷家 养生好食材的店</div>
+                
+                <div class="card-factors" style="display:flex;align-items:center;gap:6px;"><span class="factor-pill" style="--fc:#AD1457">礼赠场景</span><span class="factor-pill factor-kw">燕窝礼盒</span><span class="carrier-badge" style="background:#E6510015;color:#E65100;border-color:#E6510040;margin-left:auto;">📡 K播</span></div>
+            </div>
+        </a>
+        <a href="https://www.xiaohongshu.com/goods-detail/690d6c396874be00017b791b" target="_blank" class="product-card">
+            <div class="card-rank rank-bronze">3</div>
+            
+            <div class="card-img"><img src="https://mall-i1.xhscdn.com/arkgoods/1040g0o0320510lgt1m005q49nk6a6bnlctbth8g?imageView2/2/w/400/q/80/format/webp" alt="" referrerpolicy="no-referrer" onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#FF6B6B,#FF2442)';this.parentElement.innerHTML='<span style=color:#fff;font-size:32px>🛒</span>';"></div>
+            <div class="card-body">
+                <div class="card-title">膳禾一方 【官方正品】茯苓薏仁膏善禾薏仁膏禾方传统熬制轻松伏湿 三盒装【98%人选择 有效巩固】</div>
+                <div class="card-store">膳禾一方专卖店</div>
+                
+                <div class="card-factors" style="display:flex;align-items:center;gap:6px;"><span class="factor-pill" style="--fc:#2E7D32">健康养生</span><span class="factor-pill factor-kw">茯苓薏仁膏</span><span class="carrier-badge" style="background:#2E7D3215;color:#2E7D32;border-color:#2E7D3240;margin-left:auto;">✍️ 笔记</span></div>
+            </div>
+        </a>
+        <a href="https://www.xiaohongshu.com/goods-detail/69b38434e175160001150170" target="_blank" class="product-card">
+            <div class="card-rank rank-normal">4</div>
+            <div class="new-badge">NEW</div>
+            <div class="card-img"><img src="https://mall-i1.xhscdn.com/arkgoods/1040g3no31trmr1kkmi0g48s9588je5lr6c6q6i8?imageView2/2/w/400/q/80/format/webp" alt="" referrerpolicy="no-referrer" onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#FF6B6B,#FF2442)';this.parentElement.innerHTML='<span style=color:#fff;font-size:32px>🛒</span>';"></div>
+            <div class="card-body">
+                <div class="card-title">小仙炖 「上昕了！」鲜炖燕窝小鲜瓶45g 周/月/季套餐 &amp;下单鲜炖 45g*84瓶（季套餐） 按周</div>
+                <div class="card-store">小仙炖旗舰店</div>
+                
+                <div class="card-factors" style="display:flex;align-items:center;gap:6px;"><span class="factor-pill" style="--fc:#33691E">滋补原料</span><span class="factor-pill factor-kw">鲜炖燕窝</span><span class="carrier-badge" style="background:#E6510015;color:#E65100;border-color:#E6510040;margin-left:auto;">📡 K播</span></div>
+            </div>
+        </a>
+        <a href="https://www.xiaohongshu.com/goods-detail/69f4953d0283e20001805ea1" target="_blank" class="product-card">
+            <div class="card-rank rank-normal">5</div>
+            
+            <div class="card-img"><img src="https://mall-i1.xhscdn.com/arkgoods/1040g0o03203lkkj7k8005o8v0980amn5pcs0bo0?imageView2/2/w/400/q/80/format/webp" alt="" referrerpolicy="no-referrer" onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#FF6B6B,#FF2442)';this.parentElement.innerHTML='<span style=color:#fff;font-size:32px>🛒</span>';"></div>
+            <div class="card-body">
+                <div class="card-title">合为养 【姜姜好】2026姜枣茶 夏天三伏 【4包自动送】新款650毫升吨吨杯 【预售，5月15日前</div>
+                <div class="card-store">合为养旗舰店</div>
+                
+                <div class="card-factors" style="display:flex;align-items:center;gap:6px;"><span class="factor-pill" style="--fc:#E65100">新品/节令</span><span class="factor-pill factor-kw">姜枣茶</span><span class="carrier-badge" style="background:#1565C015;color:#1565C0;border-color:#1565C040;margin-left:auto;">🏪 店播</span></div>
+            </div>
+        </a>
+        <a href="https://www.xiaohongshu.com/goods-detail/694807fb6109ef0001a3f298" target="_blank" class="product-card">
+            <div class="card-rank rank-normal">6</div>
+            <div class="new-badge">NEW</div>
+            <div class="card-img"><img src="https://mall-i1.xhscdn.com/arkgoods/1040g0o031tmhggo2mo005pmheas7gemgj0b8m50?imageView2/2/w/400/q/80/format/webp" alt="" referrerpolicy="no-referrer" onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#FF6B6B,#FF2442)';this.parentElement.innerHTML='<span style=color:#fff;font-size:32px>🛒</span>';"></div>
+            <div class="card-body">
+                <div class="card-title">人森慢慢 【左佳霓专属】野山参粉14g 20年+长白山野山参之乡 超微粉易吸收 【礼盒装】14g--</div>
+                <div class="card-store">人森慢慢旗舰店</div>
+                
+                <div class="card-factors" style="display:flex;align-items:center;gap:6px;"><span class="factor-pill" style="--fc:#AD1457">礼赠场景</span><span class="factor-pill factor-kw">野山参粉</span><span class="carrier-badge" style="background:#E6510015;color:#E65100;border-color:#E6510040;margin-left:auto;">📡 K播</span></div>
+            </div>
+        </a>
+        <a href="https://www.xiaohongshu.com/goods-detail/69b38434e175160001150173" target="_blank" class="product-card">
+            <div class="card-rank rank-normal">7</div>
+            <div class="new-badge">NEW</div>
+            <div class="card-img"><img src="https://mall-i1.xhscdn.com/arkgoods/1040g3no31trmr1kkmi0g48s9588je5lr6c6q6i8?imageView2/2/w/400/q/80/format/webp" alt="" referrerpolicy="no-referrer" onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#FF6B6B,#FF2442)';this.parentElement.innerHTML='<span style=color:#fff;font-size:32px>🛒</span>';"></div>
+            <div class="card-body">
+                <div class="card-title">小仙炖 「上昕了！」鲜炖燕窝小鲜瓶45g 周/月/季套餐 &amp;下单鲜炖 45g*84瓶（季套餐） 按周</div>
+                <div class="card-store">小仙炖旗舰店</div>
+                
+                <div class="card-factors" style="display:flex;align-items:center;gap:6px;"><span class="factor-pill" style="--fc:#33691E">滋补原料</span><span class="factor-pill factor-kw">鲜炖燕窝</span><span class="carrier-badge" style="background:#E6510015;color:#E65100;border-color:#E6510040;margin-left:auto;">📡 K播</span></div>
+            </div>
+        </a>
+        <a href="https://www.xiaohongshu.com/goods-detail/6896cabb4daa7100018a39a5" target="_blank" class="product-card">
+            <div class="card-rank rank-normal">8</div>
+            
+            <div class="card-img"><img src="https://mall-i1.xhscdn.com/arkgoods/1040g3no320510lvjhm0g5q49nk6a6bnlu101tqg?imageView2/2/w/400/q/80/format/webp" alt="" referrerpolicy="no-referrer" onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#FF6B6B,#FF2442)';this.parentElement.innerHTML='<span style=color:#fff;font-size:32px>🛒</span>';"></div>
+            <div class="card-body">
+                <div class="card-title">膳禾一方 茯苓薏仁膏善禾薏仁膏禾方传统熬制轻松伏湿【官方正品】 三盒装【98%人选择 有效巩固 】</div>
+                <div class="card-store">膳禾一方专卖店</div>
+                
+                <div class="card-factors" style="display:flex;align-items:center;gap:6px;"><span class="factor-pill" style="--fc:#2E7D32">健康养生</span><span class="factor-pill factor-kw">茯苓薏仁膏</span><span class="carrier-badge" style="background:#2E7D3215;color:#2E7D32;border-color:#2E7D3240;margin-left:auto;">✍️ 笔记</span></div>
+            </div>
+        </a>
+        <a href="https://www.xiaohongshu.com/goods-detail/69fd722030d0860001d09db6" target="_blank" class="product-card">
+            <div class="card-rank rank-normal">9</div>
+            <div class="new-badge">NEW</div>
+            <div class="card-img"><img src="https://mall-i1.xhscdn.com/arkgoods/1040g0o032014d5sb48005o8v0980amn5sctg33o?imageView2/2/w/400/q/80/format/webp" alt="" referrerpolicy="no-referrer" onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#FF6B6B,#FF2442)';this.parentElement.innerHTML='<span style=color:#fff;font-size:32px>🛒</span>';"></div>
+            <div class="card-body">
+                <div class="card-title">合为养 【发糕麻麻溯源专属】九制黄精家庭囤货装5袋玉灵膏组合 5个月量 黄精囤货装5袋+玉灵膏5罐</div>
+                <div class="card-store">合为养旗舰店</div>
+                
+                <div class="card-factors" style="display:flex;align-items:center;gap:6px;"><span class="factor-pill" style="--fc:#5D4037">组合促销</span><span class="factor-pill factor-kw">发糕麻麻溯源</span><span class="carrier-badge" style="background:#E6510015;color:#E65100;border-color:#E6510040;margin-left:auto;">📡 K播</span></div>
+            </div>
+        </a>
+        <a href="https://www.xiaohongshu.com/goods-detail/69f682a015602900018f68f7" target="_blank" class="product-card">
+            <div class="card-rank rank-normal">10</div>
+            
+            <div class="card-img"><img src="https://mall-i1.xhscdn.com/arkgoods/1040g0ao31voebi8akc0g5ova9gt9gui6mfg01c8?imageView2/2/w/400/q/80/format/webp" alt="" referrerpolicy="no-referrer" onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#FF6B6B,#FF2442)';this.parentElement.innerHTML='<span style=color:#fff;font-size:32px>🛒</span>';"></div>
+            <div class="card-body">
+                <div class="card-title">黄精黑芝麻丸（真材实料太香了）</div>
+                <div class="card-store">阿莹麦茶的店</div>
+                
+                <div class="card-factors" style="display:flex;align-items:center;gap:6px;"><span class="factor-pill" style="--fc:#33691E">滋补原料</span><span class="factor-pill factor-kw">黄精黑芝麻丸</span><span class="carrier-badge" style="background:#1565C015;color:#1565C0;border-color:#1565C040;margin-left:auto;">🏪 店播</span></div>
+            </div>
+        </a>
+        <a href="https://www.xiaohongshu.com/goods-detail/662e566689ba5900017d07fc" target="_blank" class="product-card">
+            <div class="card-rank rank-normal">11</div>
+            
+            <div class="card-img"><img src="https://mall-i1.xhscdn.com/arkgoods/1040g0ao31l9l2e8lku0g5ova9gt9gui6ol76qao?imageView2/2/w/400/q/80/format/webp" alt="" referrerpolicy="no-referrer" onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#FF6B6B,#FF2442)';this.parentElement.innerHTML='<span style=color:#fff;font-size:32px>🛒</span>';"></div>
+            <div class="card-body">
+                <div class="card-title">姜枣茶（因为人人都需要）</div>
+                <div class="card-store">阿莹麦茶的店</div>
+                
+                <div class="card-factors" style="display:flex;align-items:center;gap:6px;"><span class="factor-pill" style="--fc:#33691E">滋补原料</span><span class="factor-pill factor-kw">姜枣茶</span><span class="carrier-badge" style="background:#2E7D3215;color:#2E7D32;border-color:#2E7D3240;margin-left:auto;">✍️ 笔记</span></div>
+            </div>
+        </a>
+        <a href="https://www.xiaohongshu.com/goods-detail/66ee7f80cddd6a0001c21188" target="_blank" class="product-card">
+            <div class="card-rank rank-normal">12</div>
+            <div class="new-badge">NEW</div>
+            <div class="card-img"><img src="https://mall-i1.xhscdn.com/arkgoods/1040g0o030pd9ueuijs005o782irg9c67ckllaqo?imageView2/2/w/400/q/80/format/webp" alt="" referrerpolicy="no-referrer" onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#FF6B6B,#FF2442)';this.parentElement.innerHTML='<span style=color:#fff;font-size:32px>🛒</span>';"></div>
+            <div class="card-body">
+                <div class="card-title">燕窝礼盒燕窝送礼礼盒/目谷家 4</div>
+                <div class="card-store">目谷家 养生好食材的店</div>
+                
+                <div class="card-factors" style="display:flex;align-items:center;gap:6px;"><span class="factor-pill" style="--fc:#AD1457">礼赠场景</span><span class="factor-pill factor-kw">燕窝礼盒</span><span class="carrier-badge" style="background:#E6510015;color:#E65100;border-color:#E6510040;margin-left:auto;">📡 K播</span></div>
+            </div>
+        </a>
+        <a href="https://www.xiaohongshu.com/goods-detail/690d6c396874be00017b7918" target="_blank" class="product-card">
+            <div class="card-rank rank-normal">13</div>
+            <div class="new-badge">NEW</div>
+            <div class="card-img"><img src="https://mall-i1.xhscdn.com/arkgoods/1040g0o0320510lgt1m005q49nk6a6bnlctbth8g?imageView2/2/w/400/q/80/format/webp" alt="" referrerpolicy="no-referrer" onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#FF6B6B,#FF2442)';this.parentElement.innerHTML='<span style=color:#fff;font-size:32px>🛒</span>';"></div>
+            <div class="card-body">
+                <div class="card-title">膳禾一方 【官方正品】茯苓薏仁膏善禾薏仁膏禾方传统熬制轻松伏湿 一盒装【体验装 】</div>
+                <div class="card-store">膳禾一方专卖店</div>
+                
+                <div class="card-factors" style="display:flex;align-items:center;gap:6px;"><span class="factor-pill" style="--fc:#2E7D32">健康养生</span><span class="factor-pill factor-kw">茯苓薏仁膏</span><span class="carrier-badge" style="background:#2E7D3215;color:#2E7D32;border-color:#2E7D3240;margin-left:auto;">✍️ 笔记</span></div>
+            </div>
+        </a>
+        <a href="https://www.xiaohongshu.com/goods-detail/686b35207ec78a00019b08c7" target="_blank" class="product-card">
+            <div class="card-rank rank-normal">14</div>
+            <div class="new-badge">NEW</div>
+            <div class="card-img"><img src="https://mall-i1.xhscdn.com/arkgoods/1040g0o031v8ecq0fk0005ptalfflvig1ps895h8?imageView2/2/w/400/q/80/format/webp" alt="" referrerpolicy="no-referrer" onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#FF6B6B,#FF2442)';this.parentElement.innerHTML='<span style=color:#fff;font-size:32px>🛒</span>';"></div>
+            <div class="card-body">
+                <div class="card-title">【有机刺梨汁】贵州头茬野生高维 C 焕亮气色熬夜党素颜救星500ml 【8盒超值】50ml*10袋/</div>
+                <div class="card-store">柑路的店</div>
+                
+                <div class="card-factors" style="display:flex;align-items:center;gap:6px;"><span class="factor-pill" style="--fc:#2E7D32">健康养生</span><span class="factor-pill factor-kw">刺梨汁</span><span class="carrier-badge" style="background:#2E7D3215;color:#2E7D32;border-color:#2E7D3240;margin-left:auto;">✍️ 笔记</span></div>
+            </div>
+        </a>
+        <a href="https://www.xiaohongshu.com/goods-detail/68fcf2cec67e4700016f1740" target="_blank" class="product-card">
+            <div class="card-rank rank-normal">15</div>
+            <div class="new-badge">NEW</div>
+            <div class="card-img"><img src="https://mall-i1.xhscdn.com/arkgoods/1040g3no31pcgo02a280g5o8v0980amn50sm0hf8?imageView2/2/w/400/q/80/format/webp" alt="" referrerpolicy="no-referrer" onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#FF6B6B,#FF2442)';this.parentElement.innerHTML='<span style=color:#fff;font-size:32px>🛒</span>';"></div>
+            <div class="card-body">
+                <div class="card-title">合为养 紫皮石斛原浆囤货装 不加一滴水 四季润养 1袋/30ml*30条</div>
+                <div class="card-store">合为养旗舰店</div>
+                
+                <div class="card-factors" style="display:flex;align-items:center;gap:6px;"><span class="factor-pill" style="--fc:#2E7D32">健康养生</span><span class="factor-pill factor-kw">合为养紫皮</span><span class="carrier-badge" style="background:#1565C015;color:#1565C0;border-color:#1565C040;margin-left:auto;">🏪 店播</span></div>
+            </div>
+        </a>
+        </div>
+        <div class="cat-insight">
+            <h3 class="insight-title">🔍 传统滋补 · 当周洞察</h3>
+            <ul class="insight-rules"><li><strong>野山参 K播大单引爆</strong>：人森慢慢野山参粉 + 长白山版上榜（K播主导）——20年+稀缺原料 + 达人深度种草 + 高客单礼盒，是滋补类目最大爆款</li><li><strong>燕窝礼盒持续刚需</strong>：目谷家燕窝礼盒 + 小仙炖鲜炖燕窝周/月套餐上榜——高端礼赠场景天然适合 K播达人背书</li><li><strong>膳禾一方茯苓薏仁膏屠榜</strong>：三盒装/一盒装等多个 SKU 上榜——「养生膏方 + 三盒巩固周期」笔记叙事 + 多 SKU 矩阵</li><li><strong>姜枣茶/黄精类节令爆发</strong>：合为养姜枣茶（店播主导）+ 阿莹姜枣茶 / 黄精黑芝麻丸——夏日三伏 + 黄精养生节令叙事，店播 + 笔记双载体共振</li></ul>
+        </div>
+    </section>
+    <section class="category" id="茶">
+        <h2 class="cat-title">
+            <span class="cat-icon">🍵</span>
+            茶
+            <span class="cat-count">TOP15</span>
+        </h2>
+        <div class="cat-tags-row"><span class="cat-tag-chip">普洱熟茶老茶爆发</span><span class="cat-tag-chip">熬夜养生茶笔记驱动</span><span class="cat-tag-chip">花茶 K播达人带货</span><span class="cat-tag-chip">春茶/特色茶单品突围</span></div>
+        <div class="products-grid">
+        <a href="https://www.xiaohongshu.com/goods-detail/69cce5ed2fb629000107a0e6" target="_blank" class="product-card">
+            <div class="card-rank rank-gold">1</div>
+            
+            <div class="card-img"><img src="https://mall-i1.xhscdn.com/arkgoods/1040g3no31t33i6np580g5q7m1v2ttel3mupu2f8?imageView2/2/w/400/q/80/format/webp" alt="" referrerpolicy="no-referrer" onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#FF6B6B,#FF2442)';this.parentElement.innerHTML='<span style=color:#fff;font-size:32px>🛒</span>';"></div>
+            <div class="card-body">
+                <div class="card-title">【鹏哥甄选】力荐梅伯珍2019年一级果香寿眉1500g 梅伯珍2019年一级果香寿眉1500g</div>
+                <div class="card-store">鹏哥甄选茶界的店</div>
+                
+                <div class="card-factors" style="display:flex;align-items:center;gap:6px;"><span class="factor-pill" style="--fc:#827717">工艺叙事</span><span class="factor-pill factor-kw">寿眉</span><span class="carrier-badge" style="background:#2E7D3215;color:#2E7D32;border-color:#2E7D3240;margin-left:auto;">✍️ 笔记</span></div>
+            </div>
+        </a>
+        <a href="https://www.xiaohongshu.com/goods-detail/6a09cf78e9183f00015beafd" target="_blank" class="product-card">
+            <div class="card-rank rank-silver">2</div>
+            <div class="new-badge">NEW</div>
+            <div class="card-img"><img src="https://mall-i1.xhscdn.com/arkgoods/1040g0o032098op3hlg005q581m7mce5usa1c8pg?imageView2/2/w/400/q/80/format/webp" alt="" referrerpolicy="no-referrer" onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#FF6B6B,#FF2442)';this.parentElement.innerHTML='<span style=color:#fff;font-size:32px>🛒</span>';"></div>
+            <div class="card-body">
+                <div class="card-title">2007年 云南布朗古树圆茶普洱熟茶饼 600g</div>
+                <div class="card-store">壹窑茶业的店</div>
+                
+                <div class="card-factors" style="display:flex;align-items:center;gap:6px;"><span class="factor-pill" style="--fc:#1565C0">地域特色</span><span class="factor-pill factor-kw">普洱熟茶</span><span class="carrier-badge" style="background:#1565C015;color:#1565C0;border-color:#1565C040;margin-left:auto;">🏪 店播</span></div>
+            </div>
+        </a>
+        <a href="https://www.xiaohongshu.com/goods-detail/69d4c1f7450d060001c2f9c5" target="_blank" class="product-card">
+            <div class="card-rank rank-bronze">3</div>
+            <div class="new-badge">NEW</div>
+            <div class="card-img"><img src="https://mall-i1.xhscdn.com/arkgoods/1040g0o031uvqnauh34105ohulic8c9mtma0gl3g?imageView2/2/w/400/q/80/format/webp" alt="" referrerpolicy="no-referrer" onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#FF6B6B,#FF2442)';this.parentElement.innerHTML='<span style=color:#fff;font-size:32px>🛒</span>';"></div>
+            <div class="card-body">
+                <div class="card-title">【超越专属】糯香十足的糯香普洱熟茶小方糖！温和暖胃 48小时发货</div>
+                <div class="card-store">皮皮滴的宝藏茶的店</div>
+                
+                <div class="card-factors" style="display:flex;align-items:center;gap:6px;"><span class="factor-pill" style="--fc:#7B1FA2">达人专属</span><span class="factor-pill factor-kw">普洱熟茶</span><span class="carrier-badge" style="background:#E6510015;color:#E65100;border-color:#E6510040;margin-left:auto;">📡 K播</span></div>
+            </div>
+        </a>
+        <a href="https://www.xiaohongshu.com/goods-detail/68c04ae57675b400013893b3" target="_blank" class="product-card">
+            <div class="card-rank rank-normal">4</div>
+            
+            <div class="card-img"><img src="https://mall-i1.xhscdn.com/arkgoods/1040g3no31m8f6gteku0g5ncdigv0bal2lq13lng?imageView2/2/w/400/q/80/format/webp" alt="" referrerpolicy="no-referrer" onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#FF6B6B,#FF2442)';this.parentElement.innerHTML='<span style=color:#fff;font-size:32px>🛒</span>';"></div>
+            <div class="card-body">
+                <div class="card-title">苹果黄芪麦冬桂圆水升级版2.0春夏熬夜茶包日常温润便携养生茶 （前1000）专属活动链接10包（1包</div>
+                <div class="card-store">茶小白丨食养记的店</div>
+                
+                <div class="card-factors" style="display:flex;align-items:center;gap:6px;"><span class="factor-pill" style="--fc:#2E7D32">健康养生</span><span class="factor-pill factor-kw">熬夜茶</span><span class="carrier-badge" style="background:#2E7D3215;color:#2E7D32;border-color:#2E7D3240;margin-left:auto;">✍️ 笔记</span></div>
+            </div>
+        </a>
+        <a href="https://www.xiaohongshu.com/goods-detail/689f2e405251bf000128a249" target="_blank" class="product-card">
+            <div class="card-rank rank-normal">5</div>
+            <div class="new-badge">NEW</div>
+            <div class="card-img"><img src="https://mall-i1.xhscdn.com/arkgoods/1040g3no3206oqlamlc0g4a4r3pifngu73ujtn8g?imageView2/2/w/400/q/80/format/webp" alt="" referrerpolicy="no-referrer" onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#FF6B6B,#FF2442)';this.parentElement.innerHTML='<span style=color:#fff;font-size:32px>🛒</span>';"></div>
+            <div class="card-body">
+                <div class="card-title">大马士革玫瑰发酵茶30g·纯花瓣＆红茶工艺·云南保山产·醒醒来喝茶 30g/罐</div>
+                <div class="card-store">醒醒来喝茶的店</div>
+                
+                <div class="card-factors" style="display:flex;align-items:center;gap:6px;"><span class="factor-pill" style="--fc:#2E7D32">健康养生</span><span class="factor-pill factor-kw">大马士革玫</span><span class="carrier-badge" style="background:#E6510015;color:#E65100;border-color:#E6510040;margin-left:auto;">📡 K播</span></div>
+            </div>
+        </a>
+        <a href="https://www.xiaohongshu.com/goods-detail/670d7c68e529c10001e1bfda" target="_blank" class="product-card">
+            <div class="card-rank rank-normal">6</div>
+            <div class="new-badge">NEW</div>
+            <div class="card-img"><img src="https://mall-i1.xhscdn.com/arkgoods/1040g3no3204r16622s0g5og0edok10mou93b6vg?imageView2/2/w/400/q/80/format/webp" alt="" referrerpolicy="no-referrer" onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#FF6B6B,#FF2442)';this.parentElement.innerHTML='<span style=color:#fff;font-size:32px>🛒</span>';"></div>
+            <div class="card-body">
+                <div class="card-title">【618首场/样样好超级盲盒/10中4】 下单不可退 介意勿拍！ 4款盲盒</div>
+                <div class="card-store">南旗的店</div>
+                
+                <div class="card-factors" style="display:flex;align-items:center;gap:6px;"><span class="factor-pill" style="--fc:#BF360C">IP联名</span><span class="factor-pill factor-kw">首场/样样</span><span class="carrier-badge" style="background:#1565C015;color:#1565C0;border-color:#1565C040;margin-left:auto;">🏪 店播</span></div>
+            </div>
+        </a>
+        <a href="https://www.xiaohongshu.com/goods-detail/696cab8efe4ff500156f9d3a" target="_blank" class="product-card">
+            <div class="card-rank rank-normal">7</div>
+            
+            <div class="card-img"><img src="https://mall-i1.xhscdn.com/arkgoods/1040g0o031rv7nrigjk005q7m1v2ttel3t96u6gg?imageView2/2/w/400/q/80/format/webp" alt="" referrerpolicy="no-referrer" onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#FF6B6B,#FF2442)';this.parentElement.innerHTML='<span style=color:#fff;font-size:32px>🛒</span>';"></div>
+            <div class="card-body">
+                <div class="card-title">广芳斋 【鹏哥甄选】力荐高货2019年正宗新会陈皮传统晾晒果香柑香天马陈 50g*2罐 两款包装随机</div>
+                <div class="card-store">鹏哥甄选茶界的店</div>
+                
+                <div class="card-factors" style="display:flex;align-items:center;gap:6px;"><span class="factor-pill" style="--fc:#827717">工艺叙事</span><span class="factor-pill factor-kw">陈皮</span><span class="carrier-badge" style="background:#2E7D3215;color:#2E7D32;border-color:#2E7D3240;margin-left:auto;">✍️ 笔记</span></div>
+            </div>
+        </a>
+        <a href="https://www.xiaohongshu.com/goods-detail/6a00524d0283e200016af81e" target="_blank" class="product-card">
+            <div class="card-rank rank-normal">8</div>
+            <div class="new-badge">NEW</div>
+            <div class="card-img"><img src="https://mall-i1.xhscdn.com/arkgoods/1040g0o031uuar3oj1u005qdstldt43kgg4fn3s8?imageView2/2/w/400/q/80/format/webp" alt="" referrerpolicy="no-referrer" onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#FF6B6B,#FF2442)';this.parentElement.innerHTML='<span style=color:#fff;font-size:32px>🛒</span>';"></div>
+            <div class="card-body">
+                <div class="card-title">【超越专属】重瓣红玫瑰花花冠茶 60g*1罐（送压花勺） 48小时发货</div>
+                <div class="card-store">小红村拾翠山谷合集的店</div>
+                
+                <div class="card-factors" style="display:flex;align-items:center;gap:6px;"><span class="factor-pill" style="--fc:#7B1FA2">达人专属</span><span class="factor-pill factor-kw">花冠茶</span><span class="carrier-badge" style="background:#E6510015;color:#E65100;border-color:#E6510040;margin-left:auto;">📡 K播</span></div>
+            </div>
+        </a>
+        <a href="https://www.xiaohongshu.com/goods-detail/65e33c4a735ada000188fd2e" target="_blank" class="product-card">
+            <div class="card-rank rank-normal">9</div>
+            
+            <div class="card-img"><img src="https://mall-i1.xhscdn.com/arkgoods/104100ao31ut9o3chiqc6ijtup0d900000000008oebjn2?imageView2/2/w/400/q/80/format/webp" alt="" referrerpolicy="no-referrer" onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#FF6B6B,#FF2442)';this.parentElement.innerHTML='<span style=color:#fff;font-size:32px>🛒</span>';"></div>
+            <div class="card-body">
+                <div class="card-title">2026云南野生紫芽普洱茶茶树花苞野生小奶球100克 铁罐装</div>
+                <div class="card-store">皮皮滴的宝藏茶的店</div>
+                
+                <div class="card-factors" style="display:flex;align-items:center;gap:6px;"><span class="factor-pill" style="--fc:#1565C0">地域特色</span><span class="factor-pill factor-kw">紫芽普洱</span><span class="carrier-badge" style="background:#2E7D3215;color:#2E7D32;border-color:#2E7D3240;margin-left:auto;">✍️ 笔记</span></div>
+            </div>
+        </a>
+        <a href="https://www.xiaohongshu.com/goods-detail/69f590640283e2000191a4ad" target="_blank" class="product-card">
+            <div class="card-rank rank-normal">10</div>
+            <div class="new-badge">NEW</div>
+            <div class="card-img"><img src="https://mall-i1.xhscdn.com/arkgoods/1040g0o031vlg2ti81m005pc2m7hn59g28m9l3oo?imageView2/2/w/400/q/80/format/webp" alt="" referrerpolicy="no-referrer" onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#FF6B6B,#FF2442)';this.parentElement.innerHTML='<span style=color:#fff;font-size:32px>🛒</span>';"></div>
+            <div class="card-body">
+                <div class="card-title">2026春茶雀舌独芽头蒙顶高山 110克X1袋</div>
+                <div class="card-store">树叶纪元茶叶的店</div>
+                
+                <div class="card-factors" style="display:flex;align-items:center;gap:6px;"><span class="factor-pill" style="--fc:#1565C0">地域特色</span><span class="factor-pill factor-kw">雀舌</span><span class="carrier-badge" style="background:#E6510015;color:#E65100;border-color:#E6510040;margin-left:auto;">📡 K播</span></div>
+            </div>
+        </a>
+        <a href="https://www.xiaohongshu.com/goods-detail/6a09c9c267d5950001e13eef" target="_blank" class="product-card">
+            <div class="card-rank rank-normal">11</div>
+            <div class="new-badge">NEW</div>
+            <div class="card-img"><img src="https://mall-i1.xhscdn.com/arkgoods/1040g0o0320982i5slk005q581m7mce5u3ecjsb8?imageView2/2/w/400/q/80/format/webp" alt="" referrerpolicy="no-referrer" onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#FF6B6B,#FF2442)';this.parentElement.innerHTML='<span style=color:#fff;font-size:32px>🛒</span>';"></div>
+            <div class="card-body">
+                <div class="card-title">2003年 云南普洱茶砖熟茶 250g*4</div>
+                <div class="card-store">壹窑茶业的店</div>
+                
+                <div class="card-factors" style="display:flex;align-items:center;gap:6px;"><span class="factor-pill" style="--fc:#1565C0">地域特色</span><span class="factor-pill factor-kw">普洱茶砖</span><span class="carrier-badge" style="background:#1565C015;color:#1565C0;border-color:#1565C040;margin-left:auto;">🏪 店播</span></div>
+            </div>
+        </a>
+        <a href="https://www.xiaohongshu.com/goods-detail/69c3b082d95b5a00014a47d6" target="_blank" class="product-card">
+            <div class="card-rank rank-normal">12</div>
+            <div class="new-badge">NEW</div>
+            <div class="card-img"><img src="https://mall-i1.xhscdn.com/arkgoods/1040g0o031u607lr61m005nv2t39g8g77g9a6q6g?imageView2/2/w/400/q/80/format/webp" alt="" referrerpolicy="no-referrer" onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#FF6B6B,#FF2442)';this.parentElement.innerHTML='<span style=color:#fff;font-size:32px>🛒</span>';"></div>
+            <div class="card-body">
+                <div class="card-title">乌龙茶｜《传统乌龙茶》甜滑干净带奶香异常柔和绵软像一朵淡云 24年145克*1袋</div>
+                <div class="card-store">华予茶道Huayu Tea House的店</div>
+                
+                <div class="card-factors" style="display:flex;align-items:center;gap:6px;"><span class="factor-pill" style="--fc:#827717">工艺叙事</span><span class="factor-pill factor-kw">乌龙茶</span><span class="carrier-badge" style="background:#1565C015;color:#1565C0;border-color:#1565C040;margin-left:auto;">🏪 店播</span></div>
+            </div>
+        </a>
+        <a href="https://www.xiaohongshu.com/goods-detail/66df3c61d0a0ac00016b4dba" target="_blank" class="product-card">
+            <div class="card-rank rank-normal">13</div>
+            <div class="new-badge">NEW</div>
+            <div class="card-img"><img src="https://mall-i1.xhscdn.com/arkgoods/1040g3no3207utiel5g0g5og0edok10movcg2r28?imageView2/2/w/400/q/80/format/webp" alt="" referrerpolicy="no-referrer" onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#FF6B6B,#FF2442)';this.parentElement.innerHTML='<span style=color:#fff;font-size:32px>🛒</span>';"></div>
+            <div class="card-body">
+                <div class="card-title">【玫瑰荔枝香 咆哮推荐】荔枝玫 玫瑰窨制红茶 果甜奶香 清甜细腻 100克（荔枝玫50克/胭脂美人5</div>
+                <div class="card-store">南旗的店</div>
+                
+                <div class="card-factors" style="display:flex;align-items:center;gap:6px;"><span class="factor-pill" style="--fc:#37474F">品类爆款</span><span class="factor-pill factor-kw">玫瑰荔枝香</span><span class="carrier-badge" style="background:#1565C015;color:#1565C0;border-color:#1565C040;margin-left:auto;">🏪 店播</span></div>
+            </div>
+        </a>
+        <a href="https://www.xiaohongshu.com/goods-detail/6817741d08e3700001bcc5c1" target="_blank" class="product-card">
+            <div class="card-rank rank-normal">14</div>
+            <div class="new-badge">NEW</div>
+            <div class="card-img"><img src="https://mall-i1.xhscdn.com/arkgoods/1040g3no31vlhijeb1m004a4r3pifngu737jh570?imageView2/2/w/400/q/80/format/webp" alt="" referrerpolicy="no-referrer" onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#FF6B6B,#FF2442)';this.parentElement.innerHTML='<span style=color:#fff;font-size:32px>🛒</span>';"></div>
+            <div class="card-body">
+                <div class="card-title">春日茶集【26年】·春趣·7款茶样合集·醒醒来喝茶 茶样合集</div>
+                <div class="card-store">醒醒来喝茶的店</div>
+                
+                <div class="card-factors" style="display:flex;align-items:center;gap:6px;"><span class="factor-pill" style="--fc:#827717">工艺叙事</span><span class="factor-pill factor-kw">春日茶集年</span><span class="carrier-badge" style="background:#E6510015;color:#E65100;border-color:#E6510040;margin-left:auto;">📡 K播</span></div>
+            </div>
+        </a>
+        <a href="https://www.xiaohongshu.com/goods-detail/6a07e48b6bbe1b0001992ac1" target="_blank" class="product-card">
+            <div class="card-rank rank-normal">15</div>
+            <div class="new-badge">NEW</div>
+            <div class="card-img"><img src="https://mall-i1.xhscdn.com/arkgoods/1040g0o03207co3uo5i004a4r3pifngu7h1ob1i8?imageView2/2/w/400/q/80/format/webp" alt="" referrerpolicy="no-referrer" onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#FF6B6B,#FF2442)';this.parentElement.innerHTML='<span style=color:#fff;font-size:32px>🛒</span>';"></div>
+            <div class="card-body">
+                <div class="card-title">六安瓜片＆太平猴魁非遗特级茶双拼组合·共25g·醒醒来喝茶</div>
+                <div class="card-store">醒醒来喝茶的店</div>
+                
+                <div class="card-factors" style="display:flex;align-items:center;gap:6px;"><span class="factor-pill" style="--fc:#5D4037">组合促销</span><span class="factor-pill factor-kw">六安瓜片＆</span><span class="carrier-badge" style="background:#E6510015;color:#E65100;border-color:#E6510040;margin-left:auto;">📡 K播</span></div>
+            </div>
+        </a>
+        </div>
+        <div class="cat-insight">
+            <h3 class="insight-title">🔍 茶 · 当周洞察</h3>
+            <ul class="insight-rules"><li><strong>普洱熟茶老茶爆发</strong>：壹窑云南普洱熟茶饼/砖、皮皮滴糯香普洱小方糖、鹏哥甄选寿眉——「老茶年份 + 产地稀缺」叙事，店播 + 笔记双载体共振</li><li><strong>熬夜养生茶笔记驱动</strong>：茶小白苹果黄芪麦冬桂圆水——熬夜党 + 养生场景 + 便携茶包，笔记长内容种草精准击中</li><li><strong>花茶 K播达人带货</strong>：醒醒来喝茶玫瑰发酵茶、小红村重瓣红玫瑰花冠茶——观感美 + 故事性强的花茶天然适合 K播达人视觉带货</li><li><strong>春茶/特色茶单品突围</strong>：树叶纪元蒙顶雀舌、皮皮滴云南野生紫芽普洱、华予乌龙茶——「产地故事 + 稀缺性 + 工艺叙事」是小众茶在红书出圈的核心路径</li></ul>
+        </div>
+    </section>
+    <section class="category" id="酒类">
+        <h2 class="cat-title">
+            <span class="cat-icon">🍷</span>
+            酒类
+            <span class="cat-count">TOP15</span>
+        </h2>
+        <div class="cat-tags-row"><span class="cat-tag-chip">低度果酒 + 女性消费驱动</span><span class="cat-tag-chip">精品葡萄酒笔记 + 店播双线</span><span class="cat-tag-chip">日韩进口酒 K播突围</span><span class="cat-tag-chip">酒梦富明道达人专属爆款</span></div>
+        <div class="products-grid">
+        <a href="https://www.xiaohongshu.com/goods-detail/68cd2aea30aed40001ce7623" target="_blank" class="product-card">
+            <div class="card-rank rank-gold">1</div>
+            
+            <div class="card-img"><img src="https://mall-i1.xhscdn.com/arkgoods/1040g3no31on0837d4q0g5ojrqqdocutbh8tum30?imageView2/2/w/400/q/80/format/webp" alt="" referrerpolicy="no-referrer" onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#FF6B6B,#FF2442)';this.parentElement.innerHTML='<span style=color:#fff;font-size:32px>🛒</span>';"></div>
+            <div class="card-body">
+                <div class="card-title">TABB 【爱尔兰鹿角兔金酒】鹿角兔 无花果限定款！蜜桃成精！可选礼盒 【限量款】无花果金酒</div>
+                <div class="card-store">一斤半酒铺的店</div>
+                
+                <div class="card-factors" style="display:flex;align-items:center;gap:6px;"><span class="factor-pill" style="--fc:#BF360C">IP联名</span><span class="factor-pill factor-kw">无花果金酒</span><span class="carrier-badge" style="background:#2E7D3215;color:#2E7D32;border-color:#2E7D3240;margin-left:auto;">✍️ 笔记</span></div>
+            </div>
+        </a>
+        <a href="https://www.xiaohongshu.com/goods-detail/69341251c84a16000148f7d6" target="_blank" class="product-card">
+            <div class="card-rank rank-silver">2</div>
+            <div class="new-badge">NEW</div>
+            <div class="card-img"><img src="https://mall-i1.xhscdn.com/arkgoods/1040g3no31pofl9dfl00g5n6qr6qkniivktp1l9g?imageView2/2/w/400/q/80/format/webp" alt="" referrerpolicy="no-referrer" onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#FF6B6B,#FF2442)';this.parentElement.innerHTML='<span style=color:#fff;font-size:32px>🛒</span>';"></div>
+            <div class="card-body">
+                <div class="card-title">others 菠萝冰淇淋格芙美Grovemill霞多丽/灰皮诺/长相思干白 推荐【双支套装】霞多丽*</div>
+                <div class="card-store">杯中兽小酒铺的店</div>
+                
+                <div class="card-factors" style="display:flex;align-items:center;gap:6px;"><span class="factor-pill" style="--fc:#5D4037">组合促销</span><span class="factor-pill factor-kw">霞多丽</span><span class="carrier-badge" style="background:#2E7D3215;color:#2E7D32;border-color:#2E7D3240;margin-left:auto;">✍️ 笔记</span></div>
+            </div>
+        </a>
+        <a href="https://www.xiaohongshu.com/goods-detail/6a0467d98e60b700013e2c93" target="_blank" class="product-card">
+            <div class="card-rank rank-bronze">3</div>
+            <div class="new-badge">NEW</div>
+            <div class="card-img"><img src="https://mall-i1.xhscdn.com/arkgoods/1040g0o031vbd18c52s005pse12th5kj6gipg0og?imageView2/2/w/400/q/80/format/webp" alt="" referrerpolicy="no-referrer" onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#FF6B6B,#FF2442)';this.parentElement.innerHTML='<span style=color:#fff;font-size:32px>🛒</span>';"></div>
+            <div class="card-body">
+                <div class="card-title">酒梦富 【明道专属】啵啵茉莉花 茉斯卡托 单支 750ml*1 48小时发货</div>
+                <div class="card-store">酒梦富的店</div>
+                
+                <div class="card-factors" style="display:flex;align-items:center;gap:6px;"><span class="factor-pill" style="--fc:#7B1FA2">达人专属</span><span class="factor-pill factor-kw">茉莉花</span><span class="carrier-badge" style="background:#E6510015;color:#E65100;border-color:#E6510040;margin-left:auto;">📡 K播</span></div>
+            </div>
+        </a>
+        <a href="https://www.xiaohongshu.com/goods-detail/69d5fc6e01e193000153cc41" target="_blank" class="product-card">
+            <div class="card-rank rank-normal">4</div>
+            
+            <div class="card-img"><img src="https://mall-i1.xhscdn.com/arkgoods/1040g3no31on0837d4q0g5ojrqqdocutbh8tum30?imageView2/2/w/400/q/80/format/webp" alt="" referrerpolicy="no-referrer" onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#FF6B6B,#FF2442)';this.parentElement.innerHTML='<span style=color:#fff;font-size:32px>🛒</span>';"></div>
+            <div class="card-body">
+                <div class="card-title">TABB 【爱尔兰鹿角兔金酒】鹿角兔 无花果限定款！蜜桃成精！可选礼盒 【礼盒款】无花果金酒（加赠同</div>
+                <div class="card-store">一斤半酒铺的店</div>
+                
+                <div class="card-factors" style="display:flex;align-items:center;gap:6px;"><span class="factor-pill" style="--fc:#BF360C">IP联名</span><span class="factor-pill factor-kw">无花果金酒</span><span class="carrier-badge" style="background:#2E7D3215;color:#2E7D32;border-color:#2E7D3240;margin-left:auto;">✍️ 笔记</span></div>
+            </div>
+        </a>
+        <a href="https://www.xiaohongshu.com/goods-detail/6985bdf71b2000000163d0c4" target="_blank" class="product-card">
+            <div class="card-rank rank-normal">5</div>
+            
+            <div class="card-img"><img src="https://mall-i1.xhscdn.com/arkgoods/1040g3no31t0rahs7la0g5o0gsq9g80bbjrlkrrg?imageView2/2/w/400/q/80/format/webp" alt="" referrerpolicy="no-referrer" onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#FF6B6B,#FF2442)';this.parentElement.innerHTML='<span style=color:#fff;font-size:32px>🛒</span>';"></div>
+            <div class="card-body">
+                <div class="card-title">小酌里 「巨峰冰茶」上新！9度冰茶手工鸡尾酒清爽耐喝！一罐当作两杯喝 【新品上线】巨峰冰茶*3+茉莉</div>
+                <div class="card-store">漩涡嘴里的店</div>
+                
+                <div class="card-factors" style="display:flex;align-items:center;gap:6px;"><span class="factor-pill" style="--fc:#E65100">新品/节令</span><span class="factor-pill factor-kw">巨峰冰茶</span><span class="carrier-badge" style="background:#2E7D3215;color:#2E7D32;border-color:#2E7D3240;margin-left:auto;">✍️ 笔记</span></div>
+            </div>
+        </a>
+        <a href="https://www.xiaohongshu.com/goods-detail/6a0436e47b710e000118054b" target="_blank" class="product-card">
+            <div class="card-rank rank-normal">6</div>
+            <div class="new-badge">NEW</div>
+            <div class="card-img"><img src="https://mall-i1.xhscdn.com/arkgoods/1040g3no3203prfab547g5o9s23pgk9ekmnlkos8?imageView2/2/w/400/q/80/format/webp" alt="" referrerpolicy="no-referrer" onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#FF6B6B,#FF2442)';this.parentElement.innerHTML='<span style=color:#fff;font-size:32px>🛒</span>';"></div>
+            <div class="card-body">
+                <div class="card-title">侍酒猫 【组合】格索酒庄勃艮第上夜丘干白+干红套装 【组合】勃艮第上夜丘干白+干红24年份套装</div>
+                <div class="card-store">侍酒猫SommCat的店</div>
+                
+                <div class="card-factors" style="display:flex;align-items:center;gap:6px;"><span class="factor-pill" style="--fc:#0D47A1">进口溯源</span><span class="factor-pill factor-kw">勃艮第</span><span class="carrier-badge" style="background:#1565C015;color:#1565C0;border-color:#1565C040;margin-left:auto;">🏪 店播</span></div>
+            </div>
+        </a>
+        <a href="https://www.xiaohongshu.com/goods-detail/69d49cce8a7da80001e428d5" target="_blank" class="product-card">
+            <div class="card-rank rank-normal">7</div>
+            <div class="new-badge">NEW</div>
+            <div class="card-img"><img src="https://mall-i1.xhscdn.com/arkgoods/1040g0o031ulbaqb03m005n980pblgpnsunbmt28?imageView2/2/w/400/q/80/format/webp" alt="" referrerpolicy="no-referrer" onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#FF6B6B,#FF2442)';this.parentElement.innerHTML='<span style=color:#fff;font-size:32px>🛒</span>';"></div>
+            <div class="card-body">
+                <div class="card-title">初荐 法国勃艮第2020年拉梦内酒庄夏山蒙哈榭卡叶独占一级园干白葡萄酒 1瓶+顺丰包邮</div>
+                <div class="card-store">酒零后根据地的店</div>
+                
+                <div class="card-factors" style="display:flex;align-items:center;gap:6px;"><span class="factor-pill" style="--fc:#0D47A1">进口溯源</span><span class="factor-pill factor-kw">勃艮第</span><span class="carrier-badge" style="background:#66615;color:#666;border-color:#66640;margin-left:auto;">📦 综合</span></div>
+            </div>
+        </a>
+        <a href="https://www.xiaohongshu.com/goods-detail/69e21ae0cfc3750001b278ae" target="_blank" class="product-card">
+            <div class="card-rank rank-normal">8</div>
+            <div class="new-badge">NEW</div>
+            <div class="card-img"><img src="https://mall-i1.xhscdn.com/arkgoods/1040g0o031v2d83hvis005o0gsq9g80bb6h5tpcg?imageView2/2/w/400/q/80/format/webp" alt="" referrerpolicy="no-referrer" onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#FF6B6B,#FF2442)';this.parentElement.innerHTML='<span style=color:#fff;font-size:32px>🛒</span>';"></div>
+            <div class="card-body">
+                <div class="card-title">Dashwood 青青木！Vivino 4.0超高分！巨新鲜巨清爽的马尔堡长相思干白！ 「单支尝鲜」</div>
+                <div class="card-store">漩涡嘴里的店</div>
+                
+                <div class="card-factors" style="display:flex;align-items:center;gap:6px;"><span class="factor-pill" style="--fc:#0D47A1">进口溯源</span><span class="factor-pill factor-kw">Dashw</span><span class="carrier-badge" style="background:#2E7D3215;color:#2E7D32;border-color:#2E7D3240;margin-left:auto;">✍️ 笔记</span></div>
+            </div>
+        </a>
+        <a href="https://www.xiaohongshu.com/goods-detail/6a04674f273c7d000136c21d" target="_blank" class="product-card">
+            <div class="card-rank rank-normal">9</div>
+            <div class="new-badge">NEW</div>
+            <div class="card-img"><img src="https://mall-i1.xhscdn.com/arkgoods/1040g0o03203vnvr6l4005pse12th5kj6g6sc1l8?imageView2/2/w/400/q/80/format/webp" alt="" referrerpolicy="no-referrer" onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#FF6B6B,#FF2442)';this.parentElement.innerHTML='<span style=color:#fff;font-size:32px>🛒</span>';"></div>
+            <div class="card-body">
+                <div class="card-title">酒梦富 【明道专属】微醺妈咪套组酒款</div>
+                <div class="card-store">酒梦富的店</div>
+                
+                <div class="card-factors" style="display:flex;align-items:center;gap:6px;"><span class="factor-pill" style="--fc:#7B1FA2">达人专属</span><span class="factor-pill factor-kw">明道专属</span><span class="carrier-badge" style="background:#E6510015;color:#E65100;border-color:#E6510040;margin-left:auto;">📡 K播</span></div>
+            </div>
+        </a>
+        <a href="https://www.xiaohongshu.com/goods-detail/69ce13cd7c7d12000130731f" target="_blank" class="product-card">
+            <div class="card-rank rank-normal">10</div>
+            <div class="new-badge">NEW</div>
+            <div class="card-img"><img src="https://mall-i1.xhscdn.com/arkgoods/1040g0o031t9jq1bs58005ok3n17oc145gq6oc48?imageView2/2/w/400/q/80/format/webp" alt="" referrerpolicy="no-referrer" onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#FF6B6B,#FF2442)';this.parentElement.innerHTML='<span style=color:#fff;font-size:32px>🛒</span>';"></div>
+            <div class="card-body">
+                <div class="card-title">DASSAI 獭祭 【春季限定】纯米大吟酿 三割九分 花冷 720ml 720ml</div>
+                <div class="card-store">豌豆公主酒水海外旗舰店</div>
+                
+                <div class="card-factors" style="display:flex;align-items:center;gap:6px;"><span class="factor-pill" style="--fc:#BF360C">IP联名</span><span class="factor-pill factor-kw">纯米大吟酿</span><span class="carrier-badge" style="background:#E6510015;color:#E65100;border-color:#E6510040;margin-left:auto;">📡 K播</span></div>
+            </div>
+        </a>
+        <a href="https://www.xiaohongshu.com/goods-detail/688c814a8fe3470001f2be9e" target="_blank" class="product-card">
+            <div class="card-rank rank-normal">11</div>
+            
+            <div class="card-img"><img src="https://mall-i1.xhscdn.com/arkgoods/1040g3no31t0rahs7la0g5o0gsq9g80bbjrlkrrg?imageView2/2/w/400/q/80/format/webp" alt="" referrerpolicy="no-referrer" onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#FF6B6B,#FF2442)';this.parentElement.innerHTML='<span style=color:#fff;font-size:32px>🛒</span>';"></div>
+            <div class="card-body">
+                <div class="card-title">小酌里 「巨峰冰茶」上新！9度冰茶手工鸡尾酒清爽耐喝！一罐当作两杯喝 【爆款套组】糯香+茉莉+洛神花</div>
+                <div class="card-store">漩涡嘴里的店</div>
+                
+                <div class="card-factors" style="display:flex;align-items:center;gap:6px;"><span class="factor-pill" style="--fc:#E65100">新品/节令</span><span class="factor-pill factor-kw">巨峰冰茶</span><span class="carrier-badge" style="background:#2E7D3215;color:#2E7D32;border-color:#2E7D3240;margin-left:auto;">✍️ 笔记</span></div>
+            </div>
+        </a>
+        <a href="https://www.xiaohongshu.com/goods-detail/6a094e3c04b18d00015ce259" target="_blank" class="product-card">
+            <div class="card-rank rank-normal">12</div>
+            <div class="new-badge">NEW</div>
+            <div class="card-img"><img src="https://mall-i1.xhscdn.com/arkgoods/1040g0o03208ukfh5le005ocbipgk0jcco3dg1m8?imageView2/2/w/400/q/80/format/webp" alt="" referrerpolicy="no-referrer" onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#FF6B6B,#FF2442)';this.parentElement.innerHTML='<span style=color:#fff;font-size:32px>🛒</span>';"></div>
+            <div class="card-body">
+                <div class="card-title">others 仓库大促！！！超值干白组合 星辉干白＋卷云长相思干白＋图高干白</div>
+                <div class="card-store">酒類美術館Wine Gallery的店</div>
+                
+                <div class="card-factors" style="display:flex;align-items:center;gap:6px;"><span class="factor-pill" style="--fc:#5D4037">组合促销</span><span class="factor-pill factor-kw">other</span><span class="carrier-badge" style="background:#1565C015;color:#1565C0;border-color:#1565C040;margin-left:auto;">🏪 店播</span></div>
+            </div>
+        </a>
+        <a href="https://www.xiaohongshu.com/goods-detail/67296ebb181935000111c1fd" target="_blank" class="product-card">
+            <div class="card-rank rank-normal">13</div>
+            <div class="new-badge">NEW</div>
+            <div class="card-img"><img src="https://mall-i1.xhscdn.com/arkgoods/1040g3no31pofl9dfl00g5n6qr6qkniivktp1l9g?imageView2/2/w/400/q/80/format/webp" alt="" referrerpolicy="no-referrer" onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#FF6B6B,#FF2442)';this.parentElement.innerHTML='<span style=color:#fff;font-size:32px>🛒</span>';"></div>
+            <div class="card-body">
+                <div class="card-title">others 菠萝冰淇淋格芙美Grovemill霞多丽/灰皮诺/长相思干白 霞多丽</div>
+                <div class="card-store">杯中兽小酒铺的店</div>
+                
+                <div class="card-factors" style="display:flex;align-items:center;gap:6px;"><span class="factor-pill" style="--fc:#37474F">品类爆款</span><span class="factor-pill factor-kw">霞多丽</span><span class="carrier-badge" style="background:#2E7D3215;color:#2E7D32;border-color:#2E7D3240;margin-left:auto;">✍️ 笔记</span></div>
+            </div>
+        </a>
+        <a href="https://www.xiaohongshu.com/goods-detail/684a96bd0ec1ca00015c40d5" target="_blank" class="product-card">
+            <div class="card-rank rank-normal">14</div>
+            <div class="new-badge">NEW</div>
+            <div class="card-img"><img src="https://mall-i1.xhscdn.com/arkgoods/1040g0o03203lj5kt1m105o9s23pgk9ektaujn9o?imageView2/2/w/400/q/80/format/webp" alt="" referrerpolicy="no-referrer" onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#FF6B6B,#FF2442)';this.parentElement.innerHTML='<span style=color:#fff;font-size:32px>🛒</span>';"></div>
+            <div class="card-body">
+                <div class="card-title">侍酒猫 格索酒庄里奇堡特级园干红葡萄酒2024 格索酒庄里奇堡特级园干红葡萄酒</div>
+                <div class="card-store">侍酒猫SommCat的店</div>
+                
+                <div class="card-factors" style="display:flex;align-items:center;gap:6px;"><span class="factor-pill" style="--fc:#37474F">品类爆款</span><span class="factor-pill factor-kw">葡萄酒</span><span class="carrier-badge" style="background:#1565C015;color:#1565C0;border-color:#1565C040;margin-left:auto;">🏪 店播</span></div>
+            </div>
+        </a>
+        <a href="https://www.xiaohongshu.com/goods-detail/6a0952a1e80a7b0001fc3699" target="_blank" class="product-card">
+            <div class="card-rank rank-normal">15</div>
+            <div class="new-badge">NEW</div>
+            <div class="card-img"><img src="https://mall-i1.xhscdn.com/arkgoods/1040g3no3208phh5hle005ocbipgk0jcc5sq0bj8?imageView2/2/w/400/q/80/format/webp" alt="" referrerpolicy="no-referrer" onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#FF6B6B,#FF2442)';this.parentElement.innerHTML='<span style=color:#fff;font-size:32px>🛒</span>';"></div>
+            <div class="card-body">
+                <div class="card-title">others 仓库大促！！黑车~超值甜酒组合！ 超值甜酒组合</div>
+                <div class="card-store">酒類美術館Wine Gallery的店</div>
+                
+                <div class="card-factors" style="display:flex;align-items:center;gap:6px;"><span class="factor-pill" style="--fc:#5D4037">组合促销</span><span class="factor-pill factor-kw">other</span><span class="carrier-badge" style="background:#1565C015;color:#1565C0;border-color:#1565C040;margin-left:auto;">🏪 店播</span></div>
+            </div>
+        </a>
+        </div>
+        <div class="cat-insight">
+            <h3 class="insight-title">🔍 酒类 · 当周洞察</h3>
+            <ul class="insight-rules"><li><strong>低度果酒 + 女性消费驱动</strong>：TABB 鹿角兔无花果金酒 + 小酌里巨峰冰茶上榜——「微醺 + 颜值 + 故事感」精准收割年轻女性消费者</li><li><strong>精品葡萄酒笔记 + 店播双线</strong>：Grovemill 霞多丽、Dashwood 马尔堡、勃艮第卡叶/勃艮第夜丘干白多个 SKU 上榜——「产区故事 + 品鉴场景」内容打法，笔记种草 + 店播稳定出货</li><li><strong>日韩进口酒 K播突围</strong>：獭祭纯米大吟酿春季限定、TABB 鹿角兔礼盒——高端进口 + 限定款 + K播达人背书，是酒类高客单的核心打法</li><li><strong>酒梦富明道达人专属爆款</strong>：啵啵茉莉花茉斯卡托 + 微醺妈咪套组上榜（K播主导）——KOL 专属定制 SKU 是酒类 K播规模化新模式</li></ul>
+        </div>
+    </section>
+<footer class="footer">
+    <div class="meta">📦 数据周期：2026.05.11 - 05.17 · 数据源：RedBI 商品类目DGMV统计 · 数据已经过质量校验</div>
+    <div class="page-stats">
+        👁️ 本期浏览：<span id="busuanzi_value_page_pv">--</span> 次　
+        👤 访客：<span id="busuanzi_value_page_uv">--</span> 人
+    </div>
+</footer>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</body>
+</html>
