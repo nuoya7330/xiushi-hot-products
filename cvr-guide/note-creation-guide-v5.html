@@ -1,0 +1,612 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="referrer" content="no-referrer">
+<title>🥨 休闲零食 · 高转化笔记 8 大方法</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    background: linear-gradient(180deg, #fff5ee 0%, #fffaf5 100%);
+    color: #2d2d2d;
+    line-height: 1.6;
+  }
+
+  /* ============ 左侧固定侧边栏 ============ */
+  .sidenav {
+    position: fixed;
+    top: 0; left: 0;
+    width: 240px;
+    height: 100vh;
+    background: linear-gradient(180deg, #2a1d3a 0%, #1a1230 100%);
+    color: #fff;
+    overflow-y: auto;
+    padding: 22px 0;
+    z-index: 100;
+    box-shadow: 2px 0 12px rgba(0,0,0,.08);
+  }
+  .sn-brand {
+    padding: 0 20px 20px;
+    border-bottom: 1px solid rgba(255,255,255,.08);
+    margin-bottom: 14px;
+  }
+  .sn-brand h2 {
+    margin: 0 0 4px;
+    font-size: 16px;
+    font-weight: 700;
+    color: #fff;
+  }
+  .sn-brand .sn-meta {
+    font-size: 11px;
+    color: rgba(255,255,255,.5);
+  }
+  .sn-label {
+    padding: 0 20px;
+    font-size: 11px;
+    color: rgba(255,255,255,.4);
+    margin-bottom: 8px;
+    letter-spacing: 1px;
+  }
+  .sn-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 10px 20px 10px 18px;
+    color: rgba(255,255,255,.75);
+    text-decoration: none;
+    font-size: 13px;
+    line-height: 1.4;
+    border-left: 3px solid transparent;
+    transition: all .15s;
+  }
+  .sn-item:hover {
+    background: rgba(255,255,255,.04);
+    color: #fff;
+  }
+  .sn-item.active {
+    background: linear-gradient(90deg, rgba(255,36,66,.18) 0%, rgba(255,36,66,0) 100%);
+    color: #fff;
+    border-left-color: #FF2442;
+  }
+  .sn-num {
+    flex-shrink: 0;
+    width: 22px; height: 22px;
+    background: rgba(255,255,255,.1);
+    border-radius: 50%;
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: 11px; font-weight: 700;
+    color: #fff;
+    margin-top: 1px;
+  }
+  .sn-item.active .sn-num {
+    background: #FF2442;
+  }
+  .sn-text { flex: 1; }
+
+  /* ============ 主内容区（右移 240px）============ */
+  .main {
+    margin-left: 240px;
+    padding: 24px 28px 60px;
+    max-width: 920px;
+  }
+
+  /* hero */
+  .hero {
+    background: linear-gradient(135deg, #FF2442 0%, #FF6B6B 100%);
+    color: #fff;
+    border-radius: 16px;
+    padding: 24px 22px;
+    margin-bottom: 20px;
+    box-shadow: 0 6px 20px rgba(255,36,66,.18);
+  }
+  .hero h1 {
+    margin: 0 0 6px;
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+  }
+  .hero .sub { font-size: 14px; opacity: .92; line-height: 1.5; }
+  .hero .meta { font-size: 12px; opacity: .8; margin-top: 8px; }
+
+  /* 底层逻辑卡 */
+  .logic-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 18px 20px;
+    margin-bottom: 24px;
+    box-shadow: 0 2px 8px rgba(0,0,0,.04);
+    border-left: 4px solid #FF2442;
+  }
+  .logic-card h3 { margin: 0 0 10px; font-size: 16px; color: #FF2442; }
+  .logic-card ul { margin: 0; padding-left: 18px; font-size: 14px; }
+  .logic-card li { margin-bottom: 4px; }
+
+  /* advice 块 */
+  .advice {
+    background: #fff;
+    border-radius: 14px;
+    padding: 22px 22px 18px;
+    margin-bottom: 18px;
+    box-shadow: 0 2px 10px rgba(0,0,0,.05);
+    scroll-margin-top: 16px;
+  }
+  .advice-head { display: flex; gap: 14px; align-items: flex-start; margin-bottom: 12px; }
+  .num-circle {
+    flex-shrink: 0;
+    width: 38px; height: 38px;
+    background: linear-gradient(135deg, #FF2442 0%, #FF6B6B 100%);
+    color: #fff;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 17px;
+    box-shadow: 0 2px 6px rgba(255,36,66,.3);
+  }
+  .advice-titles { flex: 1; min-width: 0; }
+  .advice-title { margin: 4px 0 2px; font-size: 17px; line-height: 1.3; color: #1a1a1a; }
+  .advice-sub { font-size: 13px; color: #888; }
+  .advice-logic {
+    font-size: 14px; color: #444;
+    background: #fafafa;
+    padding: 12px 14px;
+    border-radius: 8px;
+    margin-bottom: 14px;
+    line-height: 1.7;
+  }
+  .advice-logic b { color: #FF2442; }
+
+  /* 案例卡 */
+  .cases { display: grid; gap: 12px; }
+  .cases.one-col { grid-template-columns: 1fr; }
+  .cases.two-col { grid-template-columns: 1fr 1fr; }
+  .case-card {
+    display: flex; gap: 12px;
+    padding: 12px;
+    background: #fffaf7;
+    border-radius: 10px;
+    border: 1px solid #ffe5d8;
+    text-decoration: none;
+    color: inherit;
+    transition: all .15s;
+    align-items: flex-start;
+  }
+  .case-card:hover {
+    box-shadow: 0 4px 12px rgba(255,36,66,.15);
+    border-color: #FF2442;
+    transform: translateY(-1px);
+  }
+  .case-cover {
+    flex-shrink: 0;
+    width: 110px; height: 146px;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #f0f0f0;
+  }
+  .case-cover img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .case-body { flex: 1; min-width: 0; }
+  .case-merchant {
+    display: inline-block;
+    font-size: 11px;
+    color: #FF2442;
+    background: #ffe9e9;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+  .case-title {
+    font-size: 14px; font-weight: 600;
+    color: #1a1a1a;
+    line-height: 1.4;
+    margin-bottom: 6px;
+  }
+  .case-highlight { font-size: 12.5px; color: #555; line-height: 1.6; }
+  .case-highlight b { color: #FF2442; }
+  .case-link {
+    margin-top: 8px;
+    font-size: 11px;
+    color: #FF2442;
+    font-weight: 600;
+  }
+
+  /* 评论截图专用卡 + lightbox 触发 */
+  .case-card-screens { flex-direction: column; cursor: default; }
+  .case-card-screens:hover {
+    transform: none;
+    box-shadow: 0 2px 8px rgba(0,0,0,.05);
+    border-color: #ffe5d8;
+  }
+  .screens-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 8px;
+    margin-top: 8px;
+  }
+  .screen-mini {
+    margin: 0;
+    border-radius: 6px;
+    overflow: hidden;
+    border: 1px solid #eee;
+    background: #fafafa;
+    cursor: zoom-in;
+    transition: transform .15s;
+  }
+  .screen-mini:hover { transform: scale(1.01); border-color: #FF2442; }
+  .screen-mini img {
+    width: 100%;
+    max-height: 280px;
+    object-fit: contain;
+    display: block;
+    background: #fff;
+  }
+  .screen-mini figcaption {
+    font-size: 11px;
+    color: #888;
+    padding: 4px 8px;
+    background: #fafafa;
+    text-align: center;
+  }
+
+  /* tip */
+  .tip-box {
+    margin-top: 14px;
+    background: linear-gradient(135deg, #fffbe6 0%, #fff8d9 100%);
+    border: 1px solid #ffe88a;
+    border-radius: 8px;
+    padding: 12px 14px;
+  }
+  .tip-label { font-size: 13px; font-weight: 700; color: #b8860b; margin-bottom: 6px; }
+  .tip-body { font-size: 13px; color: #5d4a00; line-height: 1.7; }
+  .tip-body b { color: #b8860b; }
+
+  .footer {
+    text-align: center;
+    margin-top: 30px;
+    padding: 16px;
+    font-size: 12px;
+    color: #aaa;
+  }
+
+  /* ============ Lightbox ============ */
+  .lightbox {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.85);
+    z-index: 9999;
+    justify-content: center;
+    align-items: center;
+    cursor: zoom-out;
+    padding: 20px;
+  }
+  .lightbox.show { display: flex; }
+  .lightbox img {
+    max-width: 95%;
+    max-height: 95vh;
+    object-fit: contain;
+    border-radius: 4px;
+    box-shadow: 0 10px 40px rgba(0,0,0,.6);
+  }
+  .lightbox::after {
+    content: '✕ 点击任意位置关闭';
+    position: absolute;
+    top: 16px;
+    right: 20px;
+    color: #fff;
+    font-size: 13px;
+    opacity: .7;
+  }
+
+  /* ============ 移动端响应式 ============ */
+  @media (max-width: 768px) {
+    .sidenav {
+      position: relative;
+      width: 100%;
+      height: auto;
+      padding: 12px 0;
+      max-height: 200px;
+    }
+    .sn-brand { padding: 0 16px 12px; margin-bottom: 8px; }
+    .sn-brand h2 { font-size: 14px; }
+    .sn-label { padding: 0 16px; font-size: 10px; margin-bottom: 6px; }
+    .sn-item { padding: 6px 16px; font-size: 12px; }
+    .main {
+      margin-left: 0;
+      padding: 16px 14px 40px;
+      max-width: 100%;
+    }
+    .cases.two-col { grid-template-columns: 1fr; }
+    .hero h1 { font-size: 18px; }
+    .case-cover { width: 86px; height: 115px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- 左侧固定导航 -->
+<nav class="sidenav">
+  <div class="sn-brand">
+    <h2>🥨 笔记创作 SOP</h2>
+    <div class="sn-meta">高转化 8 大方法 · 2026.06</div>
+  </div>
+  <div class="sn-label">📑 章节导航</div>
+  <a class="sn-item" href="#advice-1" data-target="advice-1"><span class="sn-num">1</span><span class="sn-text">把「配料表/原料品牌」前置</span></a><a class="sn-item" href="#advice-2" data-target="advice-2"><span class="sn-num">2</span><span class="sn-text">控制篇幅，2 屏内出商品链接</span></a><a class="sn-item" href="#advice-3" data-target="advice-3"><span class="sn-num">3</span><span class="sn-text">评论区：首条挂链 + 高位「购后评价」</span></a><a class="sn-item" href="#advice-4" data-target="advice-4"><span class="sn-num">4</span><span class="sn-text">标题封面有「人群 × 场景」指向</span></a><a class="sn-item" href="#advice-5" data-target="advice-5"><span class="sn-num">5</span><span class="sn-text">价格锚点 + 紧迫感组合拳</span></a><a class="sn-item" href="#advice-6" data-target="advice-6"><span class="sn-num">6</span><span class="sn-text">「先抑后扬」反向钩子</span></a><a class="sn-item" href="#advice-7" data-target="advice-7"><span class="sn-num">7</span><span class="sn-text">给「具体使用场景」</span></a><a class="sn-item" href="#advice-8" data-target="advice-8"><span class="sn-num">8</span><span class="sn-text">视频走「短直播切片」，图文走「连环图叙事」</span></a>
+</nav>
+
+<!-- 主内容 -->
+<main class="main">
+
+  <div class="hero">
+    <h1>🥨 高转化笔记 8 大方法</h1>
+    <div class="sub">从赛道头部优质笔记里提炼的可执行打法，每条都配真实笔记示例，照着学就能用</div>
+    <div class="meta">📅 案例素材：2026 年 3-5 月 · 休食赛道高表现笔记</div>
+  </div>
+
+  <div class="logic-card">
+    <h3>💡 底层逻辑：让用户在 1 屏内做完 3 个决策</h3>
+    <ul>
+      <li><b>这是什么？适合我吗？</b>（人群×场景指向）</li>
+      <li><b>为什么是它不是替代品？</b>（配料/工艺/原料背书）</li>
+      <li><b>现在为什么要买？</b>（价格锚点+紧迫感）</li>
+    </ul>
+  </div>
+
+  <section class="advice" id="advice-1">
+  <div class="advice-head">
+    <span class="num-circle">1</span>
+    <div class="advice-titles">
+      <h2 class="advice-title">把「配料表/原料品牌」前置</h2>
+      <div class="advice-sub">做信任锚点</div>
+    </div>
+  </div>
+  <div class="advice-logic">具体到原料产地/品牌（新疆阿勒泰、内蒙古牧场）能瞬间建立专业可信度，比"无添加""健康"等空泛口号有效得多。配料明细让用户感觉商家"敢晒"="敢负责"。</div>
+  <div class="cases two-col"><a class="case-card" href="https://www.xiaohongshu.com/explore/67ade083000000001800d1e0" target="_blank" rel="noopener">
+  <div class="case-cover"><img src="imgs/67ade083000000001800d1e0.jpg" alt="" loading="lazy"></div>
+  <div class="case-body">
+    <div class="case-merchant">新疆深夜食堂</div>
+    <div class="case-title">🔥来自新疆阿勒泰的神仙豆干，一口就上头！</div>
+    <div class="case-highlight">标题直接亮出「新疆阿勒泰」原产地标签——比说"好吃豆干"强 10 倍。正文继续展示当地工艺细节，让用户感受到"地道+真材实料"的双重信任。</div>
+    <div class="case-link">点击查看完整笔记 →</div>
+  </div>
+</a><a class="case-card" href="https://www.xiaohongshu.com/explore/6749a08b00000000070330ac" target="_blank" rel="noopener">
+  <div class="case-cover"><img src="imgs/6749a08b00000000070330ac.jpg" alt="" loading="lazy"></div>
+  <div class="case-body">
+    <div class="case-merchant">内蒙老赵</div>
+    <div class="case-title">狗头保命🌝顾客说的！哈哈哈哈超绝牛肉薯片</div>
+    <div class="case-highlight">标题<b>引用顾客原话「狗头保命」</b>+ 正文把"牛脆脆"产品名和产地"内蒙老赵"反复强化——配料源头(内蒙古优质牛肉)+地域品牌一体绑定，用户记得住「内蒙老赵 = 牛脆片」。</div>
+    <div class="case-link">点击查看完整笔记 →</div>
+  </div>
+</a></div>
+  
+</section><section class="advice" id="advice-2">
+  <div class="advice-head">
+    <span class="num-circle">2</span>
+    <div class="advice-titles">
+      <h2 class="advice-title">控制篇幅，2 屏内出商品链接</h2>
+      <div class="advice-sub">下单按钮抢在用户失去耐心之前</div>
+    </div>
+  </div>
+  <div class="advice-logic">正文不是越长越好——<b>用户在前 2 屏没找到商品链接，转化窗口就关上了</b>。优质笔记普遍做到：开头 1-2 句钩子 + 1 段产品价值 + 商品挂载在第 2 屏可见区域，让用户无需翻第 2 屏即可下单。</div>
+  <div class="cases two-col"><a class="case-card" href="https://www.xiaohongshu.com/explore/66e851b7000000002503274c" target="_blank" rel="noopener">
+  <div class="case-cover"><img src="imgs/66e851b7000000002503274c.jpg" alt="" loading="lazy"></div>
+  <div class="case-body">
+    <div class="case-merchant">麦初 Bakery</div>
+    <div class="case-title">29元任选五个口味贝果包邮！</div>
+    <div class="case-highlight">标题极致简洁——「价格 + SKU 数量 + 包邮」一行说清楚卖什么、多少钱、为什么划算。正文极短，商品挂载直接出现在第 1 屏，<b>用户连"展开全文"都不需要点</b>。</div>
+    <div class="case-link">点击查看完整笔记 →</div>
+  </div>
+</a><a class="case-card" href="https://www.xiaohongshu.com/explore/68a270da000000001c03fd2a" target="_blank" rel="noopener">
+  <div class="case-cover"><img src="imgs/68a270da000000001c03fd2a.jpg" alt="" loading="lazy"></div>
+  <div class="case-body">
+    <div class="case-merchant">疯狂大榴莲</div>
+    <div class="case-title">热巴和IU同款泡面‼️无油包狠狠get到了</div>
+    <div class="case-highlight">标题极简钩子<b>「热巴和IU同款」+ 产品差异化（无油包）</b>——一行内说清"谁推荐+卖什么+为什么和别的不一样"。商品挂载直接放在第 1 屏，<b>不靠长文铺垫</b>。</div>
+    <div class="case-link">点击查看完整笔记 →</div>
+  </div>
+</a></div>
+  <div class="tip-box"><div class="tip-label">💡 实操要点</div><div class="tip-body">① 首屏：高信噪比封面（产品+核心卖点，避免大段文字堆砌） ② 第 2 屏：客户证言 + 商品挂载卡片（带价格/折扣） ③ 商品挂载位置高于"展开全文"按钮，<b>用户无需点开正文也能下单</b>。</div></div>
+</section><section class="advice" id="advice-3">
+  <div class="advice-head">
+    <span class="num-circle">3</span>
+    <div class="advice-titles">
+      <h2 class="advice-title">评论区：首条挂链 + 高位「购后评价」</h2>
+      <div class="advice-sub">把评论区当"第二落地页"运营</div>
+    </div>
+  </div>
+  <div class="advice-logic"><b>"看评论区找别人怎么说"</b>是下单前的临门一脚。① 首条置顶商家评论挂商品链接 ② 在前几楼安排带"购后评价"标签的真实买家好评，形成"商家说→买家说→你也试试"的完整决策闭环。</div>
+  <div class="cases two-col"><div class="case-card case-card-screens">
+  <div class="case-body">
+    <div class="case-merchant">知食大爆炸</div>
+    <div class="case-title">海盐香葱苏打饼干（首条挂链 + 购后评价）</div>
+    <div class="case-highlight">商家在置顶评论里直接挂"海盐香葱苏打饼干网红款"商品链接，第二楼是带"购后评价"标签的真实买家晒图好评，评论区直接形成完整决策闭环。</div>
+  </div>
+  <div class="screens-grid"><figure class="screen-mini" onclick="openLightbox('imgs/comment_3.png')"><img src="imgs/comment_3.png" alt="" loading="lazy"><figcaption>💬 知食大爆炸 评论区示例 · 🔍 点击放大</figcaption></figure></div>
+</div><div class="case-card case-card-screens">
+  <div class="case-body">
+    <div class="case-merchant">米惦商店</div>
+    <div class="case-title">牛舌饼酥点（首条带"购买同款"挂链）</div>
+    <div class="case-highlight">商家首条评论"微微甜，奶香浓，嚼着好满足~"末尾带「购买同款 >」商品挂载，第三楼是真实买家带 3 张实物图的「购后评价」晒单。<b>评论区 = 第二轮种草 + 第二个购买入口</b>。</div>
+  </div>
+  <div class="screens-grid"><figure class="screen-mini" onclick="openLightbox('imgs/comment_4.png')"><img src="imgs/comment_4.png" alt="" loading="lazy"><figcaption>💬 米惦商店 评论区示例 · 🔍 点击放大</figcaption></figure></div>
+</div></div>
+  <div class="tip-box"><div class="tip-label">💡 实操要点</div><div class="tip-body">① 笔记发布后 1 小时内商家用主账号发首条评论并挂链，确保置顶 ② 提前邀请 2-3 个真实老客户在评论区晒"购后评价"（带"购后评价"标签更可信） ③ 避免评论区出现"求链接""哪里买"等暴露"找不到入口"的体验问题。</div></div>
+</section><section class="advice" id="advice-4">
+  <div class="advice-head">
+    <span class="num-circle">4</span>
+    <div class="advice-titles">
+      <h2 class="advice-title">标题封面有「人群 × 场景」指向</h2>
+      <div class="advice-sub">让目标人群"对号入座"</div>
+    </div>
+  </div>
+  <div class="advice-logic">用户刷信息流的决策时间 < 1 秒——<b>能否在封面/标题里立刻让目标人群"对号入座"，决定了点进笔记的是不是"对的人"</b>。点的人对了，转化自然就上去。</div>
+  <div class="cases two-col"><a class="case-card" href="https://www.xiaohongshu.com/explore/67ab5c61000000002900a5c9" target="_blank" rel="noopener">
+  <div class="case-cover"><img src="imgs/67ab5c61000000002900a5c9.jpg" alt="" loading="lazy"></div>
+  <div class="case-body">
+    <div class="case-merchant">辣椒西施（贵州特产）</div>
+    <div class="case-title">都快去试‼️贵州蘸水➕水煮菜🔥🔥巨香巨好吃</div>
+    <div class="case-highlight">标题三件套全到位：① <b>「贵州蘸水」</b>明确产品定位 ② <b>「+水煮菜」</b>给出具体使用场景 ③ <b>「巨香巨好吃」</b>口语化情绪表达。<b>看到封面瞬间，"会做水煮菜的家庭主妇/做饭族"就知道"这是给我的"</b>。</div>
+    <div class="case-link">点击查看完整笔记 →</div>
+  </div>
+</a><a class="case-card" href="https://www.xiaohongshu.com/explore/67b6ef4b000000000602a3a4" target="_blank" rel="noopener">
+  <div class="case-cover"><img src="imgs/67b6ef4b000000000602a3a4.jpg" alt="" loading="lazy"></div>
+  <div class="case-body">
+    <div class="case-merchant">萨日朗内蒙古特产</div>
+    <div class="case-title">奶香奶香的花香纯奶皮</div>
+    <div class="case-highlight">标题用「<b>奶香奶香</b>」叠词锁定"喜欢厚奶味的姐妹"人群，正文讲<b>「春夏 vs 冬天奶皮厚度不同」的季节场景</b>——让用户知道"现在买能尝到什么风味"，季节感场景到位。</div>
+    <div class="case-link">点击查看完整笔记 →</div>
+  </div>
+</a></div>
+  <div class="tip-box"><div class="tip-label">💡 实操要点</div><div class="tip-body">标题/封面需要回答 3 个问题：① <b>给谁吃</b>（学生党/打工人/做饭族/送礼） ② <b>什么场景</b>（早八/下午茶/追剧/做饭/带娃） ③ <b>解决什么问题</b>（解馋/方便/性价比/送礼有面）。3 个问题里至少回答 2 个，转化才能跑出来。</div></div>
+</section><section class="advice" id="advice-5">
+  <div class="advice-head">
+    <span class="num-circle">5</span>
+    <div class="advice-titles">
+      <h2 class="advice-title">价格锚点 + 紧迫感组合拳</h2>
+      <div class="advice-sub">临门一脚拉单</div>
+    </div>
+  </div>
+  <div class="advice-logic">「具体价格 + 时间限制 + 库存压力」三件套大幅压缩用户决策时间。让用户感受到"现在不买就没了"，把"再想想"按死。</div>
+  <div class="cases two-col"><a class="case-card" href="https://www.xiaohongshu.com/explore/69fd202500000000370365c9" target="_blank" rel="noopener">
+  <div class="case-cover"><img src="imgs/69fd202500000000370365c9.jpg" alt="" loading="lazy"></div>
+  <div class="case-body">
+    <div class="case-merchant">Patchi</div>
+    <div class="case-title">补货500盒🔥断货王法式薄脆～手慢无！！</div>
+    <div class="case-highlight">标题三个紧迫信号：「补货500盒」（库存量化）+「断货王」（社会证明）+「手慢无」（直接催单）。</div>
+    <div class="case-link">点击查看完整笔记 →</div>
+  </div>
+</a><a class="case-card" href="https://www.xiaohongshu.com/explore/6a02f0200000000007020d36" target="_blank" rel="noopener">
+  <div class="case-cover"><img src="imgs/6a02f0200000000007020d36.jpg" alt="" loading="lazy"></div>
+  <div class="case-body">
+    <div class="case-merchant">肥猫鲜森手工美食</div>
+    <div class="case-title">重大通知‼️"烤地瓜"现在活动价9.9/盒</div>
+    <div class="case-highlight">9.9 元低门槛+"活动价"明确时限性+"重大通知"提示紧急级别。</div>
+    <div class="case-link">点击查看完整笔记 →</div>
+  </div>
+</a></div>
+  
+</section><section class="advice" id="advice-6">
+  <div class="advice-head">
+    <span class="num-circle">6</span>
+    <div class="advice-titles">
+      <h2 class="advice-title">「先抑后扬」反向钩子</h2>
+      <div class="advice-sub">用负面/反差表达赢得信任</div>
+    </div>
+  </div>
+  <div class="advice-logic">反直觉但极其有效：<b>主动承认产品的"小缺点"或用"负面/质疑"做钩子，反而让"适合的人"下单更快</b>。本质是用"反向筛选"建立真实感+降低决策阻力。</div>
+  <div class="cases two-col"><a class="case-card" href="https://www.xiaohongshu.com/explore/6767fb59000000001300c576" target="_blank" rel="noopener">
+  <div class="case-cover"><img src="imgs/6767fb59000000001300c576.jpg" alt="" loading="lazy"></div>
+  <div class="case-body">
+    <div class="case-merchant">蓝辛巴糕团</div>
+    <div class="case-title">小红书，真的是手艺人的救赎</div>
+    <div class="case-highlight">标题用「手艺人的救赎」反向钩子——表面是商家自述生意难做，正文反转讲述如何通过小红书订单逆袭。<b>把"小生意人不容易"的共情转化为下单理由</b>，让用户觉得「买他家=支持手艺人」。</div>
+    <div class="case-link">点击查看完整笔记 →</div>
+  </div>
+</a><a class="case-card" href="https://www.xiaohongshu.com/explore/6a0aea200000000007021b43" target="_blank" rel="noopener">
+  <div class="case-cover"><img src="imgs/6a0aea200000000007021b43.jpg" alt="" loading="lazy"></div>
+  <div class="case-body">
+    <div class="case-merchant">米惦商店</div>
+    <div class="case-title">网友「你的牛舌饼凭啥卖这么贵」</div>
+    <div class="case-highlight">直接拿"你太贵"的反对声做标题，正文坦诚承认+解释贵的原因（进口原料）+主动让步。<b>把质疑变成转化点</b>，比起回避负面评论更能赢得信任。</div>
+    <div class="case-link">点击查看完整笔记 →</div>
+  </div>
+</a></div>
+  
+</section><section class="advice" id="advice-7">
+  <div class="advice-head">
+    <span class="num-circle">7</span>
+    <div class="advice-titles">
+      <h2 class="advice-title">给「具体使用场景」</h2>
+      <div class="advice-sub">拒绝通用形容词</div>
+    </div>
+  </div>
+  <div class="advice-logic">具体场景（早八带娃/办公室加班/下午茶）能让用户在脑海里预演"我什么时候会吃"。看完笔记脑中有画面，下单概率就比单纯讲口感高得多。</div>
+  <div class="cases two-col"><a class="case-card" href="https://www.xiaohongshu.com/explore/69f1c56b000000001a037e8e" target="_blank" rel="noopener">
+  <div class="case-cover"><img src="imgs/69f1c56b000000001a037e8e.jpg" alt="" loading="lazy"></div>
+  <div class="case-body">
+    <div class="case-merchant">七小七</div>
+    <div class="case-title">懒妈必备！早八带娃早餐直接躺平</div>
+    <div class="case-highlight">极具体场景："1 个汉堡胚+培根+生菜+热牛奶，蛋白质+碳水直接拉满，扛到中午都不饿"——精确到食材组合、目标人群（懒妈+带娃）、解决问题（早八时间紧）。</div>
+    <div class="case-link">点击查看完整笔记 →</div>
+  </div>
+</a><a class="case-card" href="https://www.xiaohongshu.com/explore/6761404b000000000800ee4e" target="_blank" rel="noopener">
+  <div class="case-cover"><img src="imgs/6761404b000000000800ee4e.jpg" alt="" loading="lazy"></div>
+  <div class="case-body">
+    <div class="case-merchant">卜奇脆食品</div>
+    <div class="case-title">上班困了怎么办··来一根芥末味鱿鱼条！！</div>
+    <div class="case-highlight">把场景锁定在"办公室加班犯困"——比泛泛说"提神零食"具体得多。<b>用户脑中立刻浮现「下午 3 点撑不住时撕开一根」的画面</b>，转化自然跟着上来。</div>
+    <div class="case-link">点击查看完整笔记 →</div>
+  </div>
+</a></div>
+  
+</section><section class="advice" id="advice-8">
+  <div class="advice-head">
+    <span class="num-circle">8</span>
+    <div class="advice-titles">
+      <h2 class="advice-title">视频走「短直播切片」，图文走「连环图叙事」</h2>
+      <div class="advice-sub">视频图文分头打法</div>
+    </div>
+  </div>
+  <div class="advice-logic"><b>📹 视频笔记</b>→走"直播间感"：商家自播切片，15-30s「产品近景+口播价格+一句行动指令」。<b>不做精致 vlog，做"商品介绍版直播切片"</b>。<br><br><b>🖼️ 图文笔记</b>→走"连环图深度种草"：8-9 张图连续讲述：客户证言→产品反常规设计→配料展示→工艺细节→适用场景→购买引导。</div>
+  <div class="cases two-col"><a class="case-card" href="https://www.xiaohongshu.com/explore/68cc29110000000012015d55" target="_blank" rel="noopener">
+  <div class="case-cover"><img src="imgs/68cc29110000000012015d55.jpg" alt="" loading="lazy"></div>
+  <div class="case-body">
+    <div class="case-merchant">和和堂夹心宇宙</div>
+    <div class="case-title">黄油脑袋狂喜！！！（视频典型）</div>
+    <div class="case-highlight">30s 短切片：商家正面出镜，<b>1 句极致情绪化标题钩子「黄油脑袋狂喜」</b>→ 产品近景特写（黄油融化在嘴里）→ 一句口播价值（"奶呼呼、糯叽叽，一点不甜腻"）→ 引导下单。<b>不靠低价，靠情绪+产品感染力</b>。</div>
+    <div class="case-link">点击查看完整笔记 →</div>
+  </div>
+</a><a class="case-card" href="https://www.xiaohongshu.com/explore/6579d3ae000000000503b643" target="_blank" rel="noopener">
+  <div class="case-cover"><img src="imgs/6579d3ae000000000503b643.jpg" alt="" loading="lazy"></div>
+  <div class="case-body">
+    <div class="case-merchant">雪柠食养堂</div>
+    <div class="case-title">为了喝他家的豆浆特意买了个破壁机👍🏻（图文典型）</div>
+    <div class="case-highlight">9 张图连环叙事：① 用户自述「为豆浆买破壁机」反常规钩子 ② 豆浆冲泡过程 ③ 配料展示（黑豆/黄豆/糙米） ④ 早餐场景图 ⑤ 用户晒单。<b>每张图承担明确叙事角色</b>，让用户在滑图过程中完成完整决策链路。</div>
+    <div class="case-link">点击查看完整笔记 →</div>
+  </div>
+</a></div>
+  
+</section>
+
+  <div class="footer">案例笔记可点击卡片跳转小红书查看 · 仅供创作参考</div>
+
+</main>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <img id="lightbox-img" src="" alt="">
+</div>
+
+<script>
+function openLightbox(src) {
+  document.getElementById('lightbox-img').src = src;
+  document.getElementById('lightbox').classList.add('show');
+}
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('show');
+}
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeLightbox();
+});
+
+// 侧边栏当前位置高亮（基于 scroll 位置）
+const sections = document.querySelectorAll('section.advice');
+const navItems = document.querySelectorAll('.sn-item');
+function updateActiveNav() {
+  let activeId = null;
+  const scrollTop = window.scrollY + 100;
+  sections.forEach(s => {
+    if (s.offsetTop <= scrollTop) activeId = s.id;
+  });
+  navItems.forEach(item => {
+    if (item.dataset.target === activeId) item.classList.add('active');
+    else item.classList.remove('active');
+  });
+}
+window.addEventListener('scroll', updateActiveNav, {passive: true});
+updateActiveNav();
+</script>
+
+</body>
+</html>
