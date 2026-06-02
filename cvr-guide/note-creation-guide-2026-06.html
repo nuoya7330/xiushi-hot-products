@@ -7,24 +7,32 @@
 <style>
   * { margin:0; padding:0; box-sizing:border-box; }
   body { font-family: -apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif; background:#f5f5f7; color:#1d1d1f; line-height:1.7; font-size:15px; }
-  .container { max-width:920px; margin:0 auto; padding:0 16px; }
+  .container { max-width:980px; margin:0 auto; padding:0 16px; }
+
+  /* Hero */
   .hero { background:linear-gradient(135deg,#FF2442 0%,#FF6B6B 100%); color:#fff; padding:56px 24px 48px; text-align:center; margin-bottom:32px; }
   .hero .badge { display:inline-block; background:rgba(255,255,255,0.2); padding:4px 14px; border-radius:999px; font-size:12px; margin-bottom:16px; backdrop-filter:blur(8px); }
   .hero h1 { font-size:32px; font-weight:700; line-height:1.3; margin-bottom:12px; letter-spacing:-0.5px; }
   .hero .subtitle { font-size:16px; opacity:0.95; max-width:720px; margin:0 auto 8px; }
   .hero .meta { font-size:13px; opacity:0.85; margin-top:16px; }
-  .logic-card { background:#fff; border-radius:16px; padding:24px 28px; margin:0 auto 32px; box-shadow:0 2px 12px rgba(0,0,0,0.04); border-left:4px solid #FF2442; }
+
+  /* 底层逻辑卡 */
+  .logic-card { background:#fff; border-radius:16px; padding:24px 28px; margin:0 auto 24px; box-shadow:0 2px 12px rgba(0,0,0,0.04); border-left:4px solid #FF2442; }
   .logic-card h3 { font-size:17px; color:#FF2442; margin-bottom:12px; font-weight:600; }
   .logic-card ol { padding-left:22px; color:#424245; }
   .logic-card ol li { margin:6px 0; }
+
+  /* 导航 */
   .nav { background:#fff; border-radius:16px; padding:20px; margin-bottom:32px; box-shadow:0 2px 12px rgba(0,0,0,0.04); }
   .nav-title { font-size:14px; color:#6e6e73; margin-bottom:14px; font-weight:500; }
-  .nav-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(190px,1fr)); gap:8px; }
+  .nav-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:8px; }
   .nav-pill { display:flex; align-items:center; gap:8px; padding:10px 14px; background:#f5f5f7; border-radius:10px; text-decoration:none; color:#1d1d1f; font-size:13.5px; transition:all 0.15s; }
   .nav-pill:hover { background:#FF2442; color:#fff; transform:translateY(-1px); }
   .nav-num { width:22px; height:22px; background:#FF2442; color:#fff; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; font-size:12px; font-weight:600; flex-shrink:0; }
   .nav-pill:hover .nav-num { background:#fff; color:#FF2442; }
   .nav-text { flex:1; }
+
+  /* 建议块 */
   .advice { background:#fff; border-radius:16px; padding:28px 28px 24px; margin-bottom:24px; box-shadow:0 2px 12px rgba(0,0,0,0.04); scroll-margin-top:16px; }
   .advice-header { display:flex; align-items:flex-start; gap:14px; margin-bottom:14px; }
   .num-circle { width:36px; height:36px; background:linear-gradient(135deg,#FF2442,#FF6B6B); color:#fff; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:17px; font-weight:700; flex-shrink:0; box-shadow:0 2px 8px rgba(255,36,66,0.3); }
@@ -32,36 +40,58 @@
   .advice-subtitle { font-size:13px; color:#86868b; }
   .advice-logic { background:#fef8f8; padding:14px 18px; border-radius:10px; color:#424245; font-size:14.5px; line-height:1.75; margin-bottom:20px; border-left:3px solid #FFB3BB; }
   .advice-logic b { color:#FF2442; font-weight:600; }
-  .cases { display:flex; flex-direction:column; gap:16px; }
+
+  /* 案例容器：二分栏 / 单栏 */
+  .cases { display:grid; gap:14px; }
+  .cases.two-col { grid-template-columns:1fr 1fr; }
+  .cases.one-col { grid-template-columns:1fr; }
+
+  /* 案例卡 - 默认（单栏宽屏）：左图右文 */
   .case-card { display:flex; gap:16px; padding:16px; background:#fafafa; border-radius:12px; border:1px solid #f0f0f0; }
-  .cover { flex-shrink:0; width:120px; height:160px; border-radius:10px; overflow:hidden; background:linear-gradient(135deg,#FFE5E8,#FFD0D5); display:flex; align-items:center; justify-content:center; }
-  .cover img { width:100%; height:100%; object-fit:cover; display:block; }
-  .cover.placeholder { color:#FF2442; font-size:13px; }
-  .case-body { flex:1; min-width:0; }
-  .case-merchant { display:inline-block; font-size:12px; color:#FF2442; background:#fff; padding:2px 10px; border-radius:999px; margin-bottom:8px; border:1px solid #FFD0D5; font-weight:500; }
-  .case-title { font-size:16px; font-weight:600; color:#1d1d1f; margin-bottom:8px; line-height:1.4; }
-  .case-highlight { font-size:14px; color:#424245; line-height:1.7; }
+  .case-card .cover { flex-shrink:0; width:110px; height:146px; border-radius:10px; overflow:hidden; background:linear-gradient(135deg,#FFE5E8,#FFD0D5); }
+  .case-card .cover img { width:100%; height:100%; object-fit:cover; display:block; }
+  .case-card .case-body { flex:1; min-width:0; }
+
+  /* compact：二分栏时上下布局，紧凑 */
+  .case-card.compact { flex-direction:column; gap:12px; padding:14px; }
+  .case-card.compact .cover { width:100%; height:140px; }
+
+  .case-merchant { display:inline-block; font-size:12px; color:#FF2442; background:#fff; padding:2px 10px; border-radius:999px; margin-bottom:6px; border:1px solid #FFD0D5; font-weight:500; }
+  .case-title { font-size:15.5px; font-weight:600; color:#1d1d1f; margin-bottom:8px; line-height:1.4; }
+  .case-highlight { font-size:13.5px; color:#424245; line-height:1.7; }
   .case-highlight b { color:#FF2442; font-weight:600; }
-  .screens { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:14px; }
+
+  /* 内容截图单独 row */
+  .screens { display:grid; gap:12px; margin-top:16px; }
+  .screens.two { grid-template-columns:1fr 1fr; }
+  .screens.one { grid-template-columns:1fr; max-width:340px; }
   .screens figure { background:#fff; border-radius:10px; overflow:hidden; border:1px solid #f0f0f0; }
   .screens img { width:100%; display:block; }
   .screens figcaption { padding:8px 12px; font-size:12px; color:#6e6e73; text-align:center; background:#fafafa; }
+
+  /* tip */
   .tip { margin-top:16px; padding:14px 18px; background:linear-gradient(135deg,#fffbe6,#fff5cc); border-radius:10px; border-left:3px solid #f0b400; font-size:14px; line-height:1.75; color:#595959; }
   .tip-label { display:block; color:#8a6d00; font-weight:600; margin-bottom:4px; font-size:13px; }
   .tip b { color:#c98c00; }
+
+  /* footer */
   .footer { text-align:center; padding:32px 16px; color:#86868b; font-size:13px; line-height:1.8; }
   .footer .sign { display:inline-block; margin-top:8px; padding:6px 14px; background:#fff; border-radius:999px; border:1px solid #e8e8ed; color:#FF2442; font-weight:500; }
-  @media (max-width:640px) {
+
+  /* 移动端：二分栏自动塌成单栏 */
+  @media (max-width:720px) {
     .hero { padding:40px 20px 36px; }
     .hero h1 { font-size:24px; }
     .hero .subtitle { font-size:14px; }
     .container { padding:0 12px; }
     .advice { padding:22px 18px 18px; }
     .advice-title { font-size:18px; }
+    .cases.two-col { grid-template-columns:1fr; }
     .case-card { flex-direction:column; }
-    .cover { width:100%; height:200px; }
+    .case-card .cover { width:100%; height:180px; }
+    .case-card.compact .cover { height:160px; }
     .nav-grid { grid-template-columns:1fr 1fr; }
-    .screens { grid-template-columns:1fr; }
+    .screens.two { grid-template-columns:1fr; }
     .logic-card { padding:18px 20px; }
   }
 </style>
@@ -101,17 +131,17 @@
           <div class="advice-subtitle">把"种草感"做到位</div>
         </div>
       </div>
-      <div class="advice-logic">直接引用买家原话能<b>绕过广告抗性</b>。客户用自己的语言形容产品（比如"像在嚼牛奶"），比商家自说自话更有说服力，让"想看真实评价"的用户秒下单。</div>
-      <div class="cases">
+      <div class="advice-logic">直接引用买家/家人/同事的原话，能<b>绕过广告抗性</b>。客户用自己的语言形容产品（比如"你这价格肯定能卖出去"），比商家自说自话更可信，让用户感觉"这是真人推荐"而非"营销文案"。</div>
+      <div class="cases one-col">
     <div class="case-card">
-      <div class="cover"><img src="https://nuoya7330.github.io/xiushi-hot-products/cvr-guide/imgs/6a089328000000000702901f.jpg" loading="lazy" alt=""></div>
+      <div class="cover"><img src="https://nuoya7330.github.io/xiushi-hot-products/cvr-guide/imgs/680c40a3000000001c01e73a.jpg" loading="lazy" alt=""></div>
       <div class="case-body">
-        <div class="case-merchant">米惦商店</div>
-        <div class="case-title">「客户"完全像在嚼固体牛奶，好香！！"」</div>
-        <div class="case-highlight">直接引用客户给产品取的别名"牛奶嚼嚼乐""像在嚼固体牛奶"，把口感具象化到用户可感知。</div>
-        
+        <div class="case-merchant">壹可手作</div>
+        <div class="case-title">「我爸：刚开店你就卖30r五个！肯定能卖出去！」</div>
+        <div class="case-highlight">把"老爸的真心话"做成标题，开篇即父女对话——「我：30R到手5个真的不会倒闭吗？老爸：你懂啥？薄利多销，到时候不怕没回头客！」自带剧情感和真实感，比单纯讲产品好吃强 10 倍。</div>
       </div>
     </div></div>
+      
       
     </section>
     <section class="advice" id="advice-2">
@@ -122,26 +152,25 @@
           <div class="advice-subtitle">做信任锚点</div>
         </div>
       </div>
-      <div class="advice-logic">具体到原料品牌（德亚/安佳/澳洲巴旦木/江苏省农科院）能瞬间建立专业可信度，比"无添加""干净"等空泛口号有效得多。配料明细让用户感觉商家"敢晒"="敢负责"。</div>
-      <div class="cases">
-    <div class="case-card">
-      <div class="cover"><img src="https://nuoya7330.github.io/xiushi-hot-products/cvr-guide/imgs/69fe058a0000000022024080.jpg" loading="lazy" alt=""></div>
+      <div class="advice-logic">具体到原料品牌（长白山 5 年红参/江苏省农科院/澳洲巴旦木）能瞬间建立专业可信度，比"无添加""干净"等空泛口号有效得多。配料明细让用户感觉商家"敢晒"="敢负责"。</div>
+      <div class="cases two-col">
+    <div class="case-card compact">
+      <div class="cover"><img src="https://nuoya7330.github.io/xiushi-hot-products/cvr-guide/imgs/677b8972000000000403ece4.jpg" loading="lazy" alt=""></div>
       <div class="case-body">
-        <div class="case-merchant">米惦商店</div>
-        <div class="case-title">「好像在嚼牛奶！明白我意思不」</div>
-        <div class="case-highlight">正文第二句即点出"德亚牛奶+安佳黄油+新西兰奶粉，奶香想不浓都不行"。</div>
-        
+        <div class="case-merchant">贞观</div>
+        <div class="case-title">「被公司销冠安利的红参片！真的绝了」</div>
+        <div class="case-highlight">正文用 ✅ 清单逐条点出原料背书：「长白山 5 年足龄红参主根厚切片，40mm 大片，每片皂苷约 22mg」「溯源宋代《济生方》+陈皮甘草等 10 味草本」「SGS 权威检测」——专业可信度直接拉满。</div>
       </div>
     </div>
-    <div class="case-card">
+    <div class="case-card compact">
       <div class="cover"><img src="https://nuoya7330.github.io/xiushi-hot-products/cvr-guide/imgs/6a059db80000000038037da7.jpg" loading="lazy" alt=""></div>
       <div class="case-body">
         <div class="case-merchant">苏农科JAAS</div>
         <div class="case-title">「25+姐妹建议多吃‼️」</div>
-        <div class="case-highlight">明确标注"江苏省农科院"+"配料表干净到没话说，就只有纯无花果干，不硫熏、也不加额外糖分"。</div>
-        
+        <div class="case-highlight">明确标注"江苏省农科院"+"配料表干净到没话说，就只有纯无花果干，不硫熏、也不加额外糖分"，权威背书+配料透明双信任锚。</div>
       </div>
     </div></div>
+      
       
     </section>
     <section class="advice" id="advice-3">
@@ -153,16 +182,16 @@
         </div>
       </div>
       <div class="advice-logic">正文不是越长越好——<b>用户在前 2 屏没找到商品链接，转化窗口就关上了</b>。优质笔记普遍做到：开头 1-2 句钩子 + 1 段产品价值 + 商品挂载在第 2 屏可见区域。</div>
-      <div class="cases">
+      <div class="cases one-col">
     <div class="case-card">
-      <div class="cover"><img src="https://nuoya7330.github.io/xiushi-hot-products/cvr-guide/imgs/69fe058a0000000022024080.jpg" loading="lazy" alt=""></div>
+      <div class="cover"><img src="https://nuoya7330.github.io/xiushi-hot-products/cvr-guide/imgs/6923f7c4000000000d03e299.jpg" loading="lazy" alt=""></div>
       <div class="case-body">
-        <div class="case-merchant">米惦商店</div>
-        <div class="case-title">「好像在嚼牛奶！明白我意思不」</div>
-        <div class="case-highlight">第 1 屏：封面突出产品 + 标题钩子 + 正文前 3 行直入主题。第 2 屏：客户原话引用 + 适用边界澄清 + #话题 + 商品挂载 + "购买同款" 按钮，<b>下单按钮就在 2 屏内</b>，无需用户继续往下翻。</div>
-        <div class="screens"><figure><img src="https://nuoya7330.github.io/xiushi-hot-products/cvr-guide/imgs/niunaijiao_1.jpg" loading="lazy" alt=""><figcaption>📱 笔记内容首屏</figcaption></figure><figure><img src="https://nuoya7330.github.io/xiushi-hot-products/cvr-guide/imgs/niunaijiao_2.jpg" loading="lazy" alt=""><figcaption>📱 笔记内容第2屏（含商品挂载入口）</figcaption></figure></div>
+        <div class="case-merchant">食验室</div>
+        <div class="case-title">「食验室×第五人格联名开启🎉」</div>
+        <div class="case-highlight">标题+首图一眼锁定"IP 联名"价值点，正文极短（不到 100 字）配联名套餐图，商品链接挂在第 1 屏即可点。<b>用户不需要翻第二屏就能直接下单</b>，转化路径压缩到极致。</div>
       </div>
     </div></div>
+      <div class="screens two"><figure><img src="https://nuoya7330.github.io/xiushi-hot-products/cvr-guide/imgs/niunaijiao_1.jpg" loading="lazy" alt=""><figcaption>📱 首屏：封面+标题+前 3 行钩子直入主题</figcaption></figure><figure><img src="https://nuoya7330.github.io/xiushi-hot-products/cvr-guide/imgs/niunaijiao_2.jpg" loading="lazy" alt=""><figcaption>📱 第 2 屏：客户证言 + 商品挂载入口</figcaption></figure></div>
       <div class="tip"><span class="tip-label">💡 实操要点</span>① 首屏：1 张高信噪比封面（产品+场景，避免大段文字堆砌） ② 第 2 屏：客户证言 + 商品挂载卡片（带价格/折扣） ③ 商品挂载位置高于"展开全文"按钮，<b>用户无需点开正文也能下单</b>。</div>
     </section>
     <section class="advice" id="advice-4">
@@ -174,25 +203,24 @@
         </div>
       </div>
       <div class="advice-logic"><b>"看评论区找别人怎么说"</b>是下单前的临门一脚。① 首条置顶商家评论挂商品链接 ② 在前几楼安排带"购后评价"标签的真实买家好评，形成"商家说→买家说→你也试试"的完整决策闭环。</div>
-      <div class="cases">
-    <div class="case-card">
-      <div class="cover placeholder">📷 笔记封面</div>
+      <div class="cases two-col">
+    <div class="case-card compact">
+      
       <div class="case-body">
         <div class="case-merchant">知食大爆炸</div>
-        <div class="case-title">「海盐香葱苏打饼干 — 首条挂链 + 购后评价高位呈现」</div>
+        <div class="case-title">「海盐香葱苏打饼干（首条挂链 + 购后评价）」</div>
         <div class="case-highlight">商家在置顶评论里直接挂"海盐香葱苏打饼干网红款"商品链接，同时第二楼是带"购后评价"标签的真实买家晒图好评，评论区直接形成完整决策闭环。</div>
-        <div class="screens"><figure><img src="https://nuoya7330.github.io/xiushi-hot-products/cvr-guide/imgs/comment_3.png" loading="lazy" alt=""><figcaption>💬 知食大爆炸 评论区</figcaption></figure></div>
       </div>
     </div>
-    <div class="case-card">
-      <div class="cover placeholder">📷 笔记封面</div>
+    <div class="case-card compact">
+      
       <div class="case-body">
         <div class="case-merchant">米惦商店</div>
-        <div class="case-title">「牛舌饼酥点 — 商家首条带"购买同款"挂链 + 高位购后评价」</div>
+        <div class="case-title">「牛舌饼酥点（首条带"购买同款"挂链）」</div>
         <div class="case-highlight">商家首条评论"微微甜，奶香浓，嚼着好满足~"末尾带"购买同款 >"商品挂载，第三楼是真实买家带 3 张实物图的"购后评价"晒单。<b>评论区 = 第二轮种草 + 第二个购买入口</b>。</div>
-        <div class="screens"><figure><img src="https://nuoya7330.github.io/xiushi-hot-products/cvr-guide/imgs/comment_4.png" loading="lazy" alt=""><figcaption>💬 米惦商店 评论区</figcaption></figure></div>
       </div>
     </div></div>
+      <div class="screens two"><figure><img src="https://nuoya7330.github.io/xiushi-hot-products/cvr-guide/imgs/comment_3.png" loading="lazy" alt=""><figcaption>💬 知食大爆炸 评论区</figcaption></figure><figure><img src="https://nuoya7330.github.io/xiushi-hot-products/cvr-guide/imgs/comment_4.png" loading="lazy" alt=""><figcaption>💬 米惦商店 评论区</figcaption></figure></div>
       <div class="tip"><span class="tip-label">💡 实操要点</span>① 笔记发布后 1 小时内商家用主账号发首条评论并挂链，确保置顶 ② 提前邀请 2-3 个真实老客户在评论区晒"购后评价"（带"购后评价"标签更可信） ③ 避免评论区出现"求链接""哪里买"等暴露"找不到入口"的体验问题。</div>
     </section>
     <section class="advice" id="advice-5">
@@ -204,16 +232,16 @@
         </div>
       </div>
       <div class="advice-logic">用户刷信息流的决策时间 < 1 秒——<b>能否在封面/标题里立刻让目标人群"对号入座"，决定了点进笔记的是不是"对的人"</b>。点的人对了，转化自然就上去。</div>
-      <div class="cases">
+      <div class="cases one-col">
     <div class="case-card">
       <div class="cover"><img src="https://nuoya7330.github.io/xiushi-hot-products/cvr-guide/imgs/6a059db80000000038037da7.jpg" loading="lazy" alt=""></div>
       <div class="case-body">
         <div class="case-merchant">苏农科JAAS</div>
         <div class="case-title">「25+姐妹建议多吃‼️」</div>
-        <div class="case-highlight">标题三个关键词全部锁定目标人群：① <b>"25+姐妹"</b>（明确年龄+性别人群） ② <b>"建议多吃"</b>（专家口吻，触发健康场景） ③ 配合封面"无花果干"产品+"江苏省农科院"权威背书。<b>看到封面的瞬间，25+ 关注健康的女性就知道"这是给我的"</b>。</div>
-        
+        <div class="case-highlight">标题三个关键词全部锁定目标人群：① <b>"25+姐妹"</b>（明确年龄+性别） ② <b>"建议多吃"</b>（专家口吻，触发健康场景） ③ 配合封面"无花果干"+「江苏省农科院」权威背书。<b>看到封面的瞬间，25+ 关注健康的女性就知道"这是给我的"</b>。</div>
       </div>
     </div></div>
+      
       <div class="tip"><span class="tip-label">💡 实操要点</span>标题/封面需要回答 3 个问题：① <b>给谁吃</b>（学生党/打工人/宝妈/25+姐妹/送礼） ② <b>什么场景</b>（早八/下午茶/追剧/办公室/带娃） ③ <b>解决什么问题</b>（健康/解馋/方便携带/性价比）。3 个问题里至少回答 2 个，转化才能跑出来。</div>
     </section>
     <section class="advice" id="advice-6">
@@ -225,25 +253,24 @@
         </div>
       </div>
       <div class="advice-logic">「具体价格 + 时间限制 + 库存压力」三件套大幅压缩用户决策时间。让用户感受到"现在不买就没了"，把"再想想"按死。</div>
-      <div class="cases">
-    <div class="case-card">
+      <div class="cases two-col">
+    <div class="case-card compact">
       <div class="cover"><img src="https://nuoya7330.github.io/xiushi-hot-products/cvr-guide/imgs/69fd202500000000370365c9.jpg" loading="lazy" alt=""></div>
       <div class="case-body">
         <div class="case-merchant">Patchi</div>
         <div class="case-title">「补货500盒🔥断货王法式薄脆～手慢无！！」</div>
         <div class="case-highlight">标题三个紧迫信号：「补货500盒」（库存量化）+「断货王」（社会证明）+「手慢无」（直接催单）。</div>
-        
       </div>
     </div>
-    <div class="case-card">
+    <div class="case-card compact">
       <div class="cover"><img src="https://nuoya7330.github.io/xiushi-hot-products/cvr-guide/imgs/6a02f0200000000007020d36.jpg" loading="lazy" alt=""></div>
       <div class="case-body">
         <div class="case-merchant">肥猫鲜森手工美食</div>
         <div class="case-title">「重大通知‼️"烤地瓜"现在活动价9.9/盒」</div>
         <div class="case-highlight">9.9 元低门槛+"活动价"明确时限性+"重大通知"提示紧急级别。</div>
-        
       </div>
     </div></div>
+      
       
     </section>
     <section class="advice" id="advice-7">
@@ -255,25 +282,24 @@
         </div>
       </div>
       <div class="advice-logic">反直觉但极其有效：<b>主动告诉用户"这款产品不适合谁/不是什么"，反而让"适合的人"下单更快</b>。本质是用"反向筛选"降低退货率+提升匹配度。</div>
-      <div class="cases">
-    <div class="case-card">
-      <div class="cover"><img src="https://nuoya7330.github.io/xiushi-hot-products/cvr-guide/imgs/69fe058a0000000022024080.jpg" loading="lazy" alt=""></div>
+      <div class="cases two-col">
+    <div class="case-card compact">
+      <div class="cover"><img src="https://nuoya7330.github.io/xiushi-hot-products/cvr-guide/imgs/67d42386000000001d0149ab.jpg" loading="lazy" alt=""></div>
       <div class="case-body">
-        <div class="case-merchant">米惦商店</div>
-        <div class="case-title">「好像在嚼牛奶（澄清"不是酥脆口"）」</div>
-        <div class="case-highlight">"很多朋友问我外壳是不是酥脆口。<b>不是哦，整体没有脆感</b>，属于柔韧细腻的口感"——主动澄清"不是酥脆口"，劝退追求脆感的用户。</div>
-        
+        <div class="case-merchant">知吃甄选</div>
+        <div class="case-title">「玉米减肥法真香警告」</div>
+        <div class="case-highlight">标题用"真香警告"反话钩子——表面调侃"减肥居然能吃玉米"，正文坦诚说明"一般糯玉米脂肪含量很高不适合减脂，这款只有 1.3g 脂肪标注在包装上，比国标还低 50% 以上"，<b>主动劝退"想吃普通糯玉米"的用户，把真正想减脂的人精准转化</b>。</div>
       </div>
     </div>
-    <div class="case-card">
+    <div class="case-card compact">
       <div class="cover"><img src="https://nuoya7330.github.io/xiushi-hot-products/cvr-guide/imgs/6a0aea200000000007021b43.jpg" loading="lazy" alt=""></div>
       <div class="case-body">
         <div class="case-merchant">米惦商店</div>
         <div class="case-title">「网友"你的牛舌饼凭啥卖这么贵"」</div>
-        <div class="case-highlight">直接拿"你太贵"的反对声做标题，正文坦诚承认+解释贵的原因（进口原料）+主动让步。<b>把质疑变成转化点。</b></div>
-        
+        <div class="case-highlight">直接拿"你太贵"的反对声做标题，正文坦诚承认+解释贵的原因（进口原料）+主动让步。<b>把质疑变成转化点</b>，比起回避负面评论更能赢得信任。</div>
       </div>
     </div></div>
+      
       
     </section>
     <section class="advice" id="advice-8">
@@ -285,16 +311,16 @@
         </div>
       </div>
       <div class="advice-logic">具体场景（早八带娃/办公室加班/下午茶）能让用户在脑海里预演"我什么时候会吃"。看完笔记脑中有画面，下单的概率就比单纯讲口感高得多。</div>
-      <div class="cases">
+      <div class="cases one-col">
     <div class="case-card">
       <div class="cover"><img src="https://nuoya7330.github.io/xiushi-hot-products/cvr-guide/imgs/69f1c56b000000001a037e8e.jpg" loading="lazy" alt=""></div>
       <div class="case-body">
         <div class="case-merchant">七小七</div>
         <div class="case-title">「懒妈必备！早八带娃早餐直接躺平」</div>
-        <div class="case-highlight">正文给出极具体场景："1个汉堡胚+培根+生菜+热牛奶，蛋白质+碳水直接拉满，扛到中午都不饿"——精确到食材组合、目标人群、解决问题。</div>
-        
+        <div class="case-highlight">正文给出极具体场景："1 个汉堡胚+培根+生菜+热牛奶，蛋白质+碳水直接拉满，扛到中午都不饿"——精确到食材组合、目标人群（懒妈+带娃）、解决问题（早八时间紧）。</div>
       </div>
     </div></div>
+      
       
     </section>
     <section class="advice" id="advice-9">
@@ -306,25 +332,24 @@
         </div>
       </div>
       <div class="advice-logic"><b>📹 视频笔记</b>→走"直播间感"：商家自播切片，15-30s "产品近景+口播价格+一句行动指令"。<b>不做精致 vlog，做"商品介绍版直播切片"</b>。<br><br><b>🖼️ 图文笔记</b>→走"连环图深度种草"：8-9 张图连续讲述：客户证言→产品反常规设计→配料展示→工艺细节→适用场景→购买引导。</div>
-      <div class="cases">
-    <div class="case-card">
+      <div class="cases two-col">
+    <div class="case-card compact">
       <div class="cover"><img src="https://nuoya7330.github.io/xiushi-hot-products/cvr-guide/imgs/69fc2a6f000000001f00234a.jpg" loading="lazy" alt=""></div>
       <div class="case-body">
         <div class="case-merchant">水一方零食</div>
         <div class="case-title">「全家爱吃！真的是吃一口就被惊艳到（视频典型）」</div>
         <div class="case-highlight">纯视频内容（文案只有 hashtag），靠视频里的"吃播+口播+商品挂载"完成种草→下单一条龙。</div>
-        
       </div>
     </div>
-    <div class="case-card">
-      <div class="cover"><img src="https://nuoya7330.github.io/xiushi-hot-products/cvr-guide/imgs/6a036e58000000000803e7c6.jpg" loading="lazy" alt=""></div>
+    <div class="case-card compact">
+      <div class="cover"><img src="https://nuoya7330.github.io/xiushi-hot-products/cvr-guide/imgs/69291d9c000000001e012c21.jpg" loading="lazy" alt=""></div>
       <div class="case-body">
-        <div class="case-merchant">米惦商店</div>
-        <div class="case-title">「有谁懂压扁后的小面包！（图文典型）」</div>
-        <div class="case-highlight">9 张图 + 长正文，从产品定义→消费者画像（"i绵软星人慎入"）→配料/工艺逐步展开。</div>
-        
+        <div class="case-merchant">冻干水果批发</div>
+        <div class="case-title">「姐妹们放心！火了我们也不会涨价的💗（图文典型）」</div>
+        <div class="case-highlight">8 张图连环叙事：① 草莓/香蕉/凤梨等全品类九宫格亮相 ② 单 SKU 高清特写 ③ 价格承诺 ④ 配料表 ⑤ 食用场景 ⑥ 用户晒单。<b>每张图承担明确叙事角色</b>，让用户在滑图过程中完成完整的种草链路。</div>
       </div>
     </div></div>
+      
       
     </section>
 
