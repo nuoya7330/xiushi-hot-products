@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>卤味赛道赛道趋势看板 · 近8周自然流</title>
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'PingFang SC','Microsoft YaHei',sans-serif;background:#f5f0e8;color:#4a3728;min-height:100vh}
+.potential-page{padding:28px 32px}
+.potential-intro{background:linear-gradient(135deg,#faf8f4,#f0ece4);border:1px solid #e8e0d4;border-radius:12px;padding:16px 22px;margin-bottom:22px;display:flex;align-items:flex-start;gap:18px}
+.potential-intro-icon{font-size:28px;margin-top:2px}
+.potential-intro-text h3{font-size:15px;font-weight:700;color:#4a3728;margin-bottom:6px}
+.potential-intro-text p{font-size:12px;color:#8a7a6a;line-height:1.7}
+.potential-intro-text .highlight{color:#b8864e;font-weight:600}
+.light-legend{background:#faf8f4;border:1px solid #e8e0d4;border-radius:12px;padding:16px 22px;margin-bottom:22px}
+.light-legend-title{font-size:13px;font-weight:600;color:#4a3728;margin-bottom:12px;display:flex;align-items:center;gap:6px}
+.legend-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.legend-item{background:#f0ece4;border-radius:8px;padding:10px 14px;display:flex;align-items:flex-start;gap:10px}
+.legend-dot{width:14px;height:14px;border-radius:50%;flex-shrink:0;margin-top:2px}
+.legend-dot.green{background:#7a9e8a}.legend-dot.yellow{background:#c4a87a}.legend-dot.red{background:#c47a7a}
+.legend-text{font-size:11px;color:#8a7a6a;line-height:1.6}
+.legend-text strong{color:#4a3728;font-size:12px}
+.potential-table-wrap{background:#faf8f4;border:1px solid #e8e0d4;border-radius:12px;overflow:hidden;margin-bottom:22px}
+.potential-table-header{padding:16px 22px;border-bottom:1px solid #e8e0d4;display:flex;align-items:center;justify-content:space-between}
+.potential-table-header h3{font-size:15px;font-weight:600;color:#4a3728}
+.potential-table-header span{font-size:12px;color:#8a7a6a}
+.pt-table{width:100%;border-collapse:collapse}
+.pt-table th{padding:10px 14px;font-size:12px;color:#8a7a6a;font-weight:500;border-bottom:1px solid #e8e0d4;white-space:nowrap;text-align:center}
+.pt-table th:first-child{text-align:left}
+.pt-table td{padding:11px 14px;font-size:13px;border-bottom:1px solid #ede8e0;text-align:center;vertical-align:middle}
+.pt-table td:first-child{text-align:left;font-weight:600;color:#b8864e}
+.pt-table tr:hover td{background:#f0ece4}
+.pt-table tr:last-child td{border-bottom:none}
+.lamp{display:inline-block;width:18px;height:18px;border-radius:50%;vertical-align:middle}
+.lamp.green{background:#7a9e8a;box-shadow:0 0 6px #7a9e8a66}
+.lamp.yellow{background:#c4a87a;box-shadow:0 0 6px #c4a87a66}
+.lamp.red{background:#c47a7a;box-shadow:0 0 6px #c47a7a66}
+.stars{display:inline-flex;gap:2px;align-items:center}
+.star{font-size:16px;line-height:1}
+.star.filled{color:#c4a87a}.star.empty{color:#d4c8b8}
+.pt-table .th-group{background:#f0ece4}
+.star-table-wrap{background:#faf8f4;border:1px solid #e8e0d4;border-radius:12px;overflow:hidden;margin-bottom:22px}
+.star-table-header{padding:16px 22px;border-bottom:1px solid #e8e0d4;display:flex;align-items:center;justify-content:space-between}
+.star-table-header h3{font-size:15px;font-weight:600;color:#4a3728}
+.star-table-header span{font-size:12px;color:#8a7a6a}
+.st-table{width:100%;border-collapse:collapse}
+.st-table th{padding:10px 16px;font-size:12px;color:#8a7a6a;font-weight:500;border-bottom:1px solid #e8e0d4;text-align:center;white-space:nowrap}
+.st-table th:first-child{text-align:left}
+.st-table td{padding:13px 16px;border-bottom:1px solid #ede8e0;text-align:center;vertical-align:middle}
+.st-table td:first-child{text-align:left;font-weight:600;color:#b8864e;font-size:14px}
+.st-table tr:last-child td{border-bottom:none}
+.st-table tr:hover td{background:#f0ece4}
+.merchant-placeholder{display:inline-block;background:#f0ece4;border:1px dashed #d4c8b8;border-radius:6px;color:#b8864e;font-size:12px;padding:6px 16px;margin:2px}
+.grade-tag{display:inline-block;padding:3px 12px;border-radius:20px;font-size:12px;font-weight:600}
+.grade-5{background:rgba(122,158,138,0.15);color:#5a8a72;border:1px solid #7a9e8a88}
+.grade-4{background:rgba(196,168,122,0.15);color:#a07840;border:1px solid #c4a87a88}
+.grade-3{background:rgba(160,140,120,0.12);color:#8a7a6a;border:1px solid #c8b8a8}
+.grade-2{background:rgba(196,122,122,0.15);color:#b05050;border:1px solid #c47a7a88}
+.header{background:linear-gradient(135deg,#faf8f4 0%,#f0ece4 100%);padding:24px 32px;border-bottom:1px solid #e8e0d4;display:flex;align-items:center;justify-content:space-between}
+.header h1{font-size:22px;font-weight:700;color:#4a3728;letter-spacing:1px}
+.header .meta{font-size:12px;color:#8a7a6a;margin-top:4px}
+.badge{background:#e8ddd0;color:#7a6050;font-size:11px;padding:2px 8px;border-radius:10px;margin-left:10px}
+.tabs{display:flex;background:#f0ece4;border-bottom:1px solid #e8e0d4;padding:0 32px}
+.tab{padding:14px 24px;cursor:pointer;font-size:14px;color:#8a7a6a;border-bottom:2px solid transparent;transition:.2s}
+.tab.active{color:#c4453a;border-bottom-color:#c4453a;font-weight:600}
+.tab:hover{color:#4a3728}
+.content{padding:24px 32px;display:none}
+.content.active{display:block}
+.kpi-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:16px;margin-bottom:24px}
+.kpi-card{background:#faf8f4;border:1px solid #e8e0d4;border-radius:12px;padding:18px 20px;position:relative;overflow:hidden}
+.kpi-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
+.kpi-card.red::before{background:#c47a7a}.kpi-card.orange::before{background:#c4a87a}
+.kpi-card.green::before{background:#7a9e8a}.kpi-card.blue::before{background:#8a9ec4}
+.kpi-card.purple::before{background:#b8864e}
+.kpi-label{font-size:12px;color:#8a7a6a;margin-bottom:8px}
+.kpi-value{font-size:26px;font-weight:700;color:#b8864e}
+.kpi-unit{font-size:13px;color:#8a7a6a;margin-left:4px}
+.kpi-sub{font-size:12px;color:#8a7a6a;margin-top:6px}
+.kpi-trend{font-size:12px;margin-top:4px}
+.up{color:#5a8a72}.down{color:#b05050}.flat{color:#8a7a6a}
+.section{background:#faf8f4;border:1px solid #e8e0d4;border-radius:12px;margin-bottom:20px;overflow:hidden}
+.section-header{padding:16px 20px;border-bottom:1px solid #e8e0d4;display:flex;align-items:center;justify-content:space-between}
+.section-title{font-size:15px;font-weight:600;color:#4a3728}
+.section-sub{font-size:12px;color:#8a7a6a}
+.chart-box{padding:16px;height:360px}
+.chart-box-lg{padding:16px;height:460px}
+.data-table{width:100%;border-collapse:collapse}
+.data-table th{padding:10px 14px;text-align:left;font-size:12px;color:#8a7a6a;font-weight:500;border-bottom:1px solid #e8e0d4;white-space:nowrap}
+.data-table td{padding:10px 14px;font-size:13px;color:#4a3728;border-bottom:1px solid #ede8e0}
+.data-table tr:hover td{background:#f0ece4}
+.data-table tr:last-child td{border-bottom:none}
+.lbl-tag{display:inline-block;padding:2px 10px;border-radius:20px;font-size:12px;font-weight:600;background:#e8ddd0;color:#7a6050}
+.rank-num{width:28px;height:28px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:12px;font-weight:700}
+.rank-1{background:#c4a87a;color:#fff}.rank-2{background:#a8b8b8;color:#fff}
+.rank-3{background:#c49060;color:#fff}.rank-n{background:#e8ddd0;color:#8a7a6a}
+.trend-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;padding:20px 0}
+.trend-card{background:#faf8f4;border:1px solid #e8e0d4;border-radius:10px;padding:14px 16px}
+.trend-card.hot{border-color:#c47a7a;border-left-width:3px}
+.trend-card.rising{border-color:#7a9e8a;border-left-width:3px}
+.trend-card.stable{border-color:#8a9ec4;border-left-width:3px}
+.trend-card.decline{border-color:#c4b8a8;border-left-width:3px}
+.tc-label{font-size:14px;font-weight:600;color:#b8864e;margin-bottom:8px}
+.tc-gmv{font-size:20px;font-weight:700;color:#4a3728}
+.tc-gmv span{font-size:12px;color:#8a7a6a;margin-left:3px}
+.tc-wow{font-size:13px;margin-top:4px}
+.tc-bar{height:3px;background:#e8e0d4;border-radius:2px;margin-top:10px;overflow:hidden}
+.tc-bar-fill{height:100%;border-radius:2px}
+.tc-mini{display:flex;gap:2px;margin-top:8px;align-items:flex-end;height:28px}
+.tc-mini-bar{flex:1;background:#d4c8b8;border-radius:1px}
+.status-dot{width:6px;height:6px;border-radius:50%;display:inline-block;margin-right:5px}
+.dot-hot{background:#c47a7a}.dot-rising{background:#7a9e8a}
+.dot-stable{background:#8a9ec4}.dot-decline{background:#c4b8a8}
+.heat-table{width:100%;border-collapse:collapse;font-size:12px}
+.heat-table th{padding:8px 10px;color:#8a7a6a;text-align:center;font-weight:500;white-space:nowrap;border-bottom:1px solid #e8e0d4}
+.heat-table th:first-child{text-align:left;width:90px}
+.heat-table td{padding:6px 8px;text-align:center;border-bottom:1px solid #f0ece4}
+.heat-table td:first-child{text-align:left;color:#b8864e;font-weight:600}
+.filter-bar{display:flex;gap:10px;margin-bottom:16px;flex-wrap:wrap;align-items:center}
+.filter-btn{padding:6px 14px;border-radius:20px;border:1px solid #e8e0d4;background:#faf8f4;color:#8a7a6a;font-size:12px;cursor:pointer;transition:.15s}
+.filter-btn.active,.filter-btn:hover{border-color:#b8864e;color:#b8864e}
+.search-input{padding:6px 14px;border-radius:20px;border:1px solid #e8e0d4;background:#ffffff;color:#4a3728;font-size:12px;outline:none;width:180px}
+.search-input::placeholder{color:#b8a898}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.gmv-bar{display:inline-block;height:8px;border-radius:4px;background:linear-gradient(90deg,#b8864e,#c47a7a);vertical-align:middle;margin-right:8px}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div>
+    <h1>🍡 卤味赛道赛道趋势看板 <span class="badge">自然流</span></h1>
+    <div class="meta">数据周期：2026年W15-W22（4月-5月，近8周） · 近8周 · 商品二级打标聚合 · 生成时间：2026-06-04 17:13</div>
+  </div>
+  <div style="font-size:12px;color:#75b6ab;text-align:right">筛选条件：自然流量<br>打标维度：SPU品类</div>
+</div>
+
+<div class="tabs">
+  <div class="tab active" onclick="switchTab('potential',this)">⭐ 潜力品类评估</div>
+  <div class="tab" onclick="switchTab('topspu',this)">🛒 热销商品榜</div>
+  <div class="tab" onclick="switchTab('overview',this)">📊 8周总览</div>
+  <div class="tab" onclick="switchTab('trend',this)">📈 品类趋势</div>
+  <div class="tab" onclick="switchTab('heatmap',this)">🔥 热力矩阵</div>
+  <div class="tab" onclick="switchTab('detail',this)">📋 商品明细</div>
+</div>
+
+<!-- TAB 1: 潜力品类评估 -->
+<div id="tab-potential" class="content active">
+<div class="potential-page">
+  <div class="potential-intro">
+    <div class="potential-intro-icon">🎯</div>
+    <div class="potential-intro-text">
+      <h3>潜力品类重点关注清单</h3>
+      <p>
+        选取逻辑：近8周自然流数据中，<span class="highlight">周环比增速超10%、累计出现≥3周</span>的品类，共筛出14个重点品类。<br>
+        对每个品类从 <span class="highlight">市场潜力（社区热度 + 搜索指数）</span>、<span class="highlight">生意潜力（站内GMV近14天 + 近30天环比）</span>、<span class="highlight">决策难度（月GMV10w+商家数）</span> 三个维度打红/黄/绿灯，综合评定星级。<br>
+        ⭐⭐⭐⭐⭐ 满分5星，红灯 −2星 / 黄灯 −1星。
+      </p>
+    </div>
+  </div>
+
+  <div class="light-legend">
+    <div class="light-legend-title">🚦 打灯规则说明</div>
+    <div class="legend-grid">
+      <div class="legend-item">
+        <div class="legend-dot green"></div>
+        <div class="legend-text"><strong>绿灯（好）</strong><br>市场潜力：社区热度&搜索指数均&gt;0，或一正一轻负(&gt;-20%)<br>生意潜力：GMV近14天&近30天均&gt;0，或一正一轻负<br>决策难度：月GMV10w+商家 &lt;10家</div>
+      </div>
+      <div class="legend-item">
+        <div class="legend-dot yellow"></div>
+        <div class="legend-text"><strong>黄灯（一般）</strong><br>市场潜力：两项均在-20%～0之间，或红+绿组合<br>生意潜力：两项均在-20%～0之间，或红+绿组合<br>决策难度：月GMV10w+商家 10–19家</div>
+      </div>
+      <div class="legend-item">
+        <div class="legend-dot red"></div>
+        <div class="legend-text"><strong>红灯（差）</strong><br>市场潜力：两项均&lt;-20%，或含一项&lt;-20%且另一项也&lt;0<br>生意潜力：两项均&lt;-20%，或含一项&lt;-20%且另一项也&lt;0<br>决策难度：月GMV10w+商家 20家+</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="potential-table-wrap">
+    <div class="potential-table-header">
+      <h3>🚦 各维度红黄绿灯评估</h3>
+      <span>数据来源：小红书灵犀平台 · 数据截至2026年W15-W22（4月-5月，近8周）</span>
+    </div>
+    <div style="overflow-x:auto">
+    <table class="pt-table">
+      <thead>
+        <tr class="th-group">
+          <th rowspan="2" style="text-align:left;min-width:80px">品类</th>
+          <th colspan="3" style="background:rgba(59,130,246,0.12);color:#7a96c4;border-bottom:none">市场潜力</th>
+          <th colspan="3" style="background:rgba(16,185,129,0.12);color:#7a9e8a;border-bottom:none">生意潜力</th>
+          <th colspan="2" style="background:rgba(139,92,246,0.12);color:#75b6ab;border-bottom:none">决策难度</th>
+        </tr>
+        <tr>
+          <th style="background:rgba(59,130,246,0.08)">社区内容热度<br><span style="font-size:10px;color:#d4b9ac">近90天/环比</span></th>
+          <th style="background:rgba(59,130,246,0.08)">搜索指数趋势<br><span style="font-size:10px;color:#d4b9ac">近30天/环比</span></th>
+          <th style="background:rgba(59,130,246,0.15);font-weight:700">市场综合</th>
+          <th style="background:rgba(16,185,129,0.08)">站内GMV<br><span style="font-size:10px;color:#d4b9ac">近14天/环比</span></th>
+          <th style="background:rgba(16,185,129,0.08)">站内GMV<br><span style="font-size:10px;color:#d4b9ac">近30天/环比</span></th>
+          <th style="background:rgba(16,185,129,0.15);font-weight:700">生意综合</th>
+          <th style="background:rgba(139,92,246,0.08)">月GMV10w+<br><span style="font-size:10px;color:#d4b9ac">商家数</span></th>
+          <th style="background:rgba(139,92,246,0.15);font-weight:700">难度综合</th>
+        </tr>
+      </thead>
+      <tbody id="pt-tbody"></tbody>
+    </table>
+    </div>
+  </div>
+
+  <div class="star-table-wrap">
+    <div class="star-table-header">
+      <h3>⭐ 综合星级评定（满分5星）</h3>
+      <span>红灯 −2星 · 黄灯 −1星 · 绿灯不扣分 | ⭐⭐⭐⭐+ 展示月GMV超10万商家</span>
+    </div>
+    <div style="overflow-x:auto">
+    <table class="st-table">
+      <thead>
+        <tr>
+          <th style="text-align:left">品类</th>
+          <th>综合星级</th>
+          <th>市场潜力</th>
+          <th>生意潜力</th>
+          <th>决策难度</th>
+          <th>月GMV10w+潜力商家<br><span style="font-size:10px;font-weight:400">(⭐⭐⭐⭐+)</span></th>
+        </tr>
+      </thead>
+      <tbody id="st-tbody"></tbody>
+    </table>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- TAB 2: 热销商品榜 -->
+<div id="tab-topspu" class="content">
+<div style="padding:28px 32px">
+  <div class="potential-intro" style="margin-bottom:22px;background:linear-gradient(135deg,#faf8f4,#f5f0e8);border:1px solid #e8e0d4;">
+    <div class="potential-intro-icon">🛒</div>
+    <div class="potential-intro-text">
+      <h3>14个潜力品类 · 热销商品榜</h3>
+      <p>基于近8周自然流筛出的潜力品类，展示各品类代表性热销商品与GMV表现。<br>数据来源：自然流 DGMV，单位：万元。</p>
+    </div>
+  </div>
+  <div id="topspu-container"></div>
+</div>
+</div>
+
+<!-- TAB 3: 8周总览 -->
+<div id="tab-overview" class="content">
+  <div class="kpi-grid">
+    <div class="kpi-card red">
+      <div class="kpi-label">W22周 总GMV</div>
+      <div class="kpi-value">280.2<span class="kpi-unit">万</span></div>
+      <div class="kpi-sub">较上周 273.5万</div>
+      <div class="kpi-trend up">↑ 2.4%</div>
+    </div>
+    <div class="kpi-card orange">
+      <div class="kpi-label">W22周 TOP品类</div>
+      <div class="kpi-value" style="font-size:20px">卤牛肉/酱牛肉</div>
+      <div class="kpi-sub">122.88万</div>
+      <div class="kpi-trend up">↑ 本周最高GMV</div>
+    </div>
+    <div class="kpi-card green">
+      <div class="kpi-label">潜力品类总数</div>
+      <div class="kpi-value">14</div>
+      <div class="kpi-sub">WoW&gt;10% 累计≥3次</div>
+      <div class="kpi-trend up">↑ 7 个4星以上</div>
+    </div>
+    <div class="kpi-card blue">
+      <div class="kpi-label">W22周 活跃品类数</div>
+      <div class="kpi-value">13</div>
+      <div class="kpi-sub">上周 13 个</div>
+      <div class="kpi-trend up">↑ 有GMV产出</div>
+    </div>
+    <div class="kpi-card purple">
+      <div class="kpi-label">高潜力品类（4-5星）</div>
+      <div class="kpi-value">7</div>
+      <div class="kpi-sub">全绿灯或单黄灯</div>
+      <div class="kpi-trend up">↑ 重点关注</div>
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <div class="section">
+      <div class="section-header">
+        <div class="section-title">W22周 TOP30品类 GMV排名</div>
+        <div class="section-sub">单位：万元，按本周GMV降序</div>
+      </div>
+      <div style="max-height:520px;overflow-y:auto">
+        <table class="data-table" id="rank-table"></table>
+      </div>
+    </div>
+    <div class="section">
+      <div class="section-header">
+        <div class="section-title">TOP15品类 GMV对比（前两周）</div>
+        <div class="section-sub">灰=上周，红=本周</div>
+      </div>
+      <div class="chart-box-lg" id="chart-compare"></div>
+    </div>
+  </div>
+</div>
+
+<!-- TAB 4: 品类趋势 -->
+<div id="tab-trend" class="content">
+  <div class="filter-bar">
+    <span style="font-size:12px;color:#d4b9ac">品类筛选：</span>
+    <button class="filter-btn active" onclick="filterTrend('all',this)">全部</button>
+    <button class="filter-btn" onclick="filterTrend('hot',this)">🔴 本周TOP10</button>
+    <button class="filter-btn" onclick="filterTrend('rising',this)">🟢 近4周上升</button>
+    <button class="filter-btn" onclick="filterTrend('new',this)">🟡 新出现</button>
+    <input class="search-input" id="trend-search" placeholder="搜索品类..." oninput="searchTrend(this.value)">
+  </div>
+  <div class="trend-grid" id="trend-cards"></div>
+</div>
+
+<!-- TAB 5: 热力矩阵 -->
+<div id="tab-heatmap" class="content">
+  <div class="section">
+    <div class="section-header">
+      <div class="section-title">品类 × 周次 GMV 热力矩阵</div>
+      <div class="section-sub">颜色深浅代表GMV量级，单位：万元</div>
+    </div>
+    <div style="padding:16px;overflow-x:auto">
+      <table class="heat-table" id="heatmap-table"></table>
+    </div>
+  </div>
+  <div class="section">
+    <div class="section-header">
+      <div class="section-title">8周 GMV走势（TOP15品类）</div>
+    </div>
+    <div class="chart-box-lg" id="chart-line"></div>
+  </div>
+</div>
+
+<!-- TAB 6: 商品明细 -->
+<div id="tab-detail" class="content">
+  <div class="filter-bar">
+    <input class="search-input" id="detail-search" placeholder="搜索品类/商品..." oninput="searchDetail(this.value)" style="width:240px">
+    <span style="font-size:12px;color:#d4b9ac;margin-left:10px">全量商品明细（按GMV降序）</span>
+  </div>
+  <div class="section">
+    <div style="max-height:600px;overflow-y:auto">
+      <table class="data-table" id="detail-table"></table>
+    </div>
+  </div>
+</div>
+
+<script>
+// ==================== 数据 ====================
+const WEEKS = ["W15", "W16", "W17", "W18", "W19", "W20", "W21", "W22"];
+const MATRIX = {"卤牛肉/酱牛肉": [127.65, 146.77, 131.48, 103.17, 105.22, 117.2, 144.78, 122.88], "鸡胸肉/鸡肉干": [16.75, 71.67, 32.93, 18.45, 18.97, 21.24, 19.22, 32.12], "猪肉脯/猪肉干": [26.34, 20.44, 18.3, 14.05, 15.36, 24.41, 27.47, 39.54], "沂蒙山炒鸡": [14.96, 20.22, 14.65, 16.29, 23.94, 23.86, 37.84, 32.51], "无骨鸡爪": [5.48, 9.52, 9.1, 9.05, 7.85, 7.15, 9.69, 11.88], "风干/烤制": [22.61, 18.91, 11.96, 22.74, 8.78, 19.88, 11.94, 10.55], "鸭肠/鸭胗": [3.34, 3.72, 4.8, 4.33, 4.65, 8.91, 8.65, 5.85], "鸭爪/鸭掌": [4.07, 4.52, 5.49, 2.92, 2.77, 3.25, 2.98, 11.56], "卤素菜/卤贡菜/卤凉皮/卤蘑菇/卤豆腐": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], "鸭舌": [3.93, 4.53, 3.75, 3.55, 2.77, 3.64, 3.53, 4.89], "卤内脏": [6.47, 6.86, 5.26, 4.15, 3.21, 3.63, 3.11, 4.17], "冷吃兔": [1.55, 0.96, 1.29, 1.39, 2.12, 2.68, 1.59, 1.4], "鸡翅": [1.55, 1.7, 2.39, 2.03, 2.22, 2.94, 1.01, 0.53], "卤蛋": [2.38, 2.33, 2.31, 0.97, 1.05, 2.08, 1.68, 2.31]};
+const TOP_SPUS = [{"spu": "即食牛肉健身代餐轻卤牛腱子肉饱腹高蛋白质主轻熟速食健康零食", "label": "卤牛肉/酱牛肉", "gmv": 64.64}, {"spu": "【哈尼牧场好物推荐】牛肉脆片牛脆脆牛肉薄脆风干牛脆片风干牛肉", "label": "卤牛肉/酱牛肉", "gmv": 38.44}, {"spu": "碳烤八风干纯瘦牛肉干（无添加、非油炸）", "label": "卤牛肉/酱牛肉", "gmv": 28.86}, {"spu": "九成风干牛肉干 追剧健身办公室解馋解饿必备休闲川西特产小零食", "label": "卤牛肉/酱牛肉", "gmv": 28.18}, {"spu": "【哈尼牧场好物分享】牛肉脆片牛脆脆牛肉薄脆风干牛脆片", "label": "卤牛肉/酱牛肉", "gmv": 28.04}, {"spu": "一点鸡超干小粒鸡，低温慢烤不加大豆蛋白磨牙追剧小零食s", "label": "鸡胸肉/鸡肉干", "gmv": 137.74}, {"spu": "鸡胸肉即食健身代餐减0开袋低脂熟食懒人学生解馋饱腹轻主速零食", "label": "鸡胸肉/鸡肉干", "gmv": 32.52}, {"spu": "【9.9元发2包】鸡胸肉干鸡肉条风干解减饿脂解馋小吃零食", "label": "鸡胸肉/鸡肉干", "gmv": 13.9}, {"spu": "薄脆鸡肉片鸡肉干0防腐色素鸡胸肉脆片健身追剧解馋减脂期小零食", "label": "鸡胸肉/鸡肉干", "gmv": 9.13}, {"spu": "<风干鸡肉干>  网红麻辣风干肉肉零食", "label": "鸡胸肉/鸡肉干", "gmv": 4.86}, {"spu": "九成风干猪肉干 减脂期减肥期解馋追剧手撕手工川西特产风干小零", "label": "猪肉脯/猪肉干", "gmv": 22.89}, {"spu": "【亏本冲量8.3包邮】必吃榜！水果肉脯干解馋低卡办公室追剧零食", "label": "猪肉脯/猪肉干", "gmv": 20.98}, {"spu": "潮汕手工原切猪肉脯宝宝学生零食炭烤巴掌大手撕猪肉干潮汕特产", "label": "猪肉脯/猪肉干", "gmv": 18.69}, {"spu": "九成风干猪肉干500g 川西特产原切香辣下饭追剧健身解馋办公零食", "label": "猪肉脯/猪肉干", "gmv": 14.58}, {"spu": "【亏本冲量9.6包邮】必吃榜！办公室零食果肉脯追剧解馋短保", "label": "猪肉脯/猪肉干", "gmv": 9.81}, {"spu": "山东临沂沂蒙山鸡师公炒鸡·顺丰包邮", "label": "沂蒙山炒鸡", "gmv": 62.5}, {"spu": "沂蒙山炒鸡·临沂非遗·山东特色炒鸡·散养跑山鸡·现做现发", "label": "沂蒙山炒鸡", "gmv": 40.45}, {"spu": "三餐爸爸·【原创食养炒鸡】150天土鸡·临沂炒鸡新鲜现做·即食肉菜", "label": "沂蒙山炒鸡", "gmv": 27.41}, {"spu": "正宗临沂炒鸡 沂蒙山炒鸡 现做现发 散养跑山鸡 顺丰包邮", "label": "沂蒙山炒鸡", "gmv": 18.21}, {"spu": "三餐爸爸·【原创食养炒鸡】150天散养土鸡·谷物喂养当日现做", "label": "沂蒙山炒鸡", "gmv": 18.03}, {"spu": "【厂家直发】柠檬酸辣无骨鸡爪大份量500g", "label": "无骨鸡爪", "gmv": 19.02}, {"spu": "佤味鸡爪云南佤族特产菜根鸡脚凤爪非酸辣无骨鸡爪深夜解馋零食", "label": "无骨鸡爪", "gmv": 13.41}, {"spu": "【主播推荐】多口味无骨鸡爪500g/1000g去骨凤爪解馋零食休闲小吃", "label": "无骨鸡爪", "gmv": 11.07}, {"spu": "【顺丰】佤味鸡爪云南佤族特产菜根鸡脚凤爪非无骨鸡爪深夜解馋", "label": "无骨鸡爪", "gmv": 4.56}, {"spu": "广东口味无骨鸡爪两斤双拼口味开袋即食鲜嫩秘制", "label": "无骨鸡爪", "gmv": 3.92}, {"spu": "【哈尼牧场好物分享】呼伦贝尔牛脆片牛脆脆牛排脆风干牛脆片", "label": "风干/烤制", "gmv": 41.54}, {"spu": "【猪脆脆】薄脆风干猪肉片/蛋白质高达75.4g【首发特惠】", "label": "风干/烤制", "gmv": 12.31}, {"spu": "【牛墩墩】内蒙古原切风干牛排新口味新形态嚼劲十足鲜香味美", "label": "风干/烤制", "gmv": 11.27}, {"spu": "【哈尼牧场好物分享】解馋零食和牛脆片超薄香脆风干和牛脆脆牛脆", "label": "风干/烤制", "gmv": 8.35}, {"spu": "内蒙古牛墩墩原切风干牛排新口味新形态嚼劲十足鲜香味美", "label": "风干/烤制", "gmv": 5.54}, {"spu": "《每天11点发货》韩国同款烤牛肠，免清洗免腌制", "label": "鸭肠/鸭胗", "gmv": 10.84}, {"spu": "南京风味卤制盐水鸭胗鸭货熟食低脂蛋白肉香浓郁即食下酒150g*2包", "label": "鸭肠/鸭胗", "gmv": 10.38}, {"spu": "皇鸭道南京风味卤制盐水鸭胗0脂0卡鸭货熟食肉香浓郁即食下酒", "label": "鸭肠/鸭胗", "gmv": 7.03}, {"spu": "南京风味卤制盐水鸭胗鸭货熟食低脂蛋白肉香浓郁即食下酒追剧解馋", "label": "鸭肠/鸭胗", "gmv": 3.96}, {"spu": "《正常发货》韩国同款烤牛肠，免清洗免腌制", "label": "鸭肠/鸭胗", "gmv": 3.64}, {"spu": "老卤鸭爪鸭掌凤爪鸭肫鸭舌独立包装卤味追剧露营休闲解馋小零食", "label": "鸭爪/鸭掌", "gmv": 8.98}, {"spu": "老卤鸭爪独立包装鸭掌卤味追剧露营休闲小零食鸭爪", "label": "鸭爪/鸭掌", "gmv": 5.42}, {"spu": "特色美食柳州酸笋炒鸭脚螺蛳鸭脚煲芋蒙酸炒鸭脚虎皮猪蹄卤鸭脚", "label": "鸭爪/鸭掌", "gmv": 5.2}, {"spu": "【贡菜去骨鸭掌】椒麻/香辣脆爽好吃 追剧露营下午茶【店长推荐】", "label": "鸭爪/鸭掌", "gmv": 4.38}, {"spu": "柳州特色美食酸笋炒鸭脚/螺蛳鸭脚煲/田螺鸭脚煲/虎皮猪脚", "label": "鸭爪/鸭掌", "gmv": 3.38}, {"spu": "【松口】川味嘶哈霹雳鸭舌下酒追剧零食买2盒更划算哟！", "label": "鸭舌", "gmv": 4.99}, {"spu": "【温州鸭舌】每日现做现发 开袋即食，4种口味", "label": "鸭舌", "gmv": 3.87}, {"spu": "【正宗温州风味鸭舌】四种风味/开袋即食，每日现做现发", "label": "鸭舌", "gmv": 3.34}, {"spu": "【温州鸭舌】每日现做现发 开袋即食，4种口味可选", "label": "鸭舌", "gmv": 2.79}, {"spu": "老卤鸭舌独立包装鸭舌头鸭货零食好吃卤味解馋追剧必备", "label": "鸭舌", "gmv": 2.56}, {"spu": "盐水猪肝 干爆猪心 开袋即食下酒菜真空包装新鲜猪肝", "label": "卤内脏", "gmv": 14.13}, {"spu": "【满99顺丰包邮】五香老卤 肥肠 大肠头 新鲜食材 真空包装", "label": "卤内脏", "gmv": 3.81}, {"spu": "猪肝开袋即食休闲解馋卤味追剧零食下酒菜健身食品猪肉熟食", "label": "卤内脏", "gmv": 3.69}, {"spu": "沈阳名吃玖福记熏拌鸡架.两大只包含小料手套.保质期五个月", "label": "卤内脏", "gmv": 3.04}, {"spu": "江油肥肠红烧小吃熟食非遗地标美食200克×3袋 赠100克米粉包×3袋", "label": "卤内脏", "gmv": 2.61}, {"spu": "【冷吃兔】自贡特色冷吃兔活兔现炒200g净重自贡盐帮菜", "label": "冷吃兔", "gmv": 3.19}, {"spu": "双流老妈兔头旗舰四川特产成都网红小吃零食麻辣兔腿冷吃熟食兔肉", "label": "冷吃兔", "gmv": 1.92}, {"spu": "老妈冷吃小铺 小锅现炒现发 冷吃兔 麻辣兔头 手撕兔 零添加短保", "label": "冷吃兔", "gmv": 1.64}, {"spu": "麻辣手撕兔肉四川特产整只全烤兔新鲜冷吃兔子肉兔腿自贡兔肉", "label": "冷吃兔", "gmv": 1.24}, {"spu": "自贡歪歪麻辣冷吃兔丁【半只装】四川特产零食小吃自贡美食伴手礼", "label": "冷吃兔", "gmv": 1.12}, {"spu": "云南特产佤族美食佤味大杂烩麻辣牛皮鸡爪鸡脚筋三角骨鸡翅苤菜根", "label": "鸡翅", "gmv": 8.04}, {"spu": "潮汕美食蜜汁甜肉蜜汁叉烧肉蜜汁鸡翅休闲零食小吃熟食新鲜现做", "label": "鸡翅", "gmv": 2.73}, {"spu": "思茅二中鸡脚糊辣子鸡脚鸡胗鸡翅鲜香麻辣凤爪零食", "label": "鸡翅", "gmv": 0.96}, {"spu": "广东梅州盐焗鸡翅客家特产盐局土鸡翅休闲小吃零食卤味熟食网红", "label": "鸡翅", "gmv": 0.63}, {"spu": "香辣鸡翅根小鸡腿200g追剧宿舍零食开袋即食追剧办公室解馋肉类", "label": "鸡翅", "gmv": 0.59}, {"spu": "【粉丝福利】卤味开袋即食组合鸭腿鸡腿翅根卤蛋解馋零食", "label": "卤蛋", "gmv": 9.79}, {"spu": "【新粉福利】卤蛋零食卤味五香卤鸡蛋真空包装零食", "label": "卤蛋", "gmv": 1.69}, {"spu": "【粉丝福利】卤味开袋即食组合鸭腿鸡腿翅根卤蛋烤脖解馋零食", "label": "卤蛋", "gmv": 1.39}, {"spu": "【总监价到】开袋即食组合鸭腿鸡腿翅根卤蛋解馋零食", "label": "卤蛋", "gmv": 1.04}, {"spu": "正宗卤味20件组合2个鸭腿2个香卤鸡腿3个翅根3个香辣鸭翅10个卤蛋", "label": "卤蛋", "gmv": 0.55}];
+const POTENTIAL_DATA = [{"name": "无骨鸡爪", "wow_count": 3, "stars": 5, "mkt_content_pct": -17.3, "mkt_search_pct": 2.7, "biz_gmv14_pct": -6.2, "biz_gmv30_pct": 15.1, "merchant_count": 5, "mkt_content_raw": "2.40亿 (-17.3%)", "mkt_search_raw": "13.8万 (+2.7%)", "biz_gmv14_raw": "53.9万 (-6.2%)", "biz_gmv30_raw": "117.9万 (+15.1%)", "merchant_raw": "5家", "merchants": ["【厂家直发】柠檬酸辣无骨鸡爪大份量500g", "佤味鸡爪云南佤族特产菜根鸡脚凤爪非酸辣无骨鸡爪深夜解馋零食", "【主播推荐】多口味无骨鸡爪500g/1000g去骨凤爪解馋零食休闲小吃", "【顺丰】佤味鸡爪云南佤族特产菜根鸡脚凤爪非无骨鸡爪深夜解馋", "广东口味无骨鸡爪两斤双拼口味开袋即食鲜嫩秘制"], "mkt_light": "green", "biz_light": "green", "dec_light": "green"}, {"name": "沂蒙山炒鸡", "wow_count": 3, "stars": 5, "mkt_content_pct": 137.9, "mkt_search_pct": 50.4, "biz_gmv14_pct": -18.4, "biz_gmv30_pct": 4.8, "merchant_count": 2, "mkt_content_raw": "3693.1万 (+137.9%)", "mkt_search_raw": "2992 (+50.4%)", "biz_gmv14_raw": "34.2万 (-18.4%)", "biz_gmv30_raw": "82.5万 (+4.8%)", "merchant_raw": "2家", "merchants": ["山东临沂沂蒙山鸡师公炒鸡·顺丰包邮", "沂蒙山炒鸡·临沂非遗·山东特色炒鸡·散养跑山鸡·现做现发", "三餐爸爸·【原创食养炒鸡】150天土鸡·临沂炒鸡新鲜现做·即食肉菜", "正宗临沂炒鸡 沂蒙山炒鸡 现做现发 散养跑山鸡 顺丰包邮", "三餐爸爸·【原创食养炒鸡】150天散养土鸡·谷物喂养当日现做"], "mkt_light": "green", "biz_light": "green", "dec_light": "green"}, {"name": "猪肉脯/猪肉干", "wow_count": 3, "stars": 4, "mkt_content_pct": -3.3, "mkt_search_pct": -15.0, "biz_gmv14_pct": -9.3, "biz_gmv30_pct": 50.6, "merchant_count": 8, "mkt_content_raw": "3.56亿 (-3.3%)", "mkt_search_raw": "8.0万 (-15.0%)", "biz_gmv14_raw": "118.3万 (-9.3%)", "biz_gmv30_raw": "259.3万 (+50.6%)", "merchant_raw": "8家", "merchants": ["九成风干猪肉干 减脂期减肥期解馋追剧手撕手工川西特产风干小零", "【亏本冲量8.3包邮】必吃榜！水果肉脯干解馋低卡办公室追剧零食", "潮汕手工原切猪肉脯宝宝学生零食炭烤巴掌大手撕猪肉干潮汕特产", "九成风干猪肉干500g 川西特产原切香辣下饭追剧健身解馋办公零食", "【亏本冲量9.6包邮】必吃榜！办公室零食果肉脯追剧解馋短保"], "mkt_light": "yellow", "biz_light": "green", "dec_light": "green"}, {"name": "鸡胸肉/鸡肉干", "wow_count": 3, "stars": 4, "mkt_content_pct": 23.9, "mkt_search_pct": -5.2, "biz_gmv14_pct": -5.9, "biz_gmv30_pct": -4.3, "merchant_count": 6, "mkt_content_raw": "22.83亿 (+23.9%)", "mkt_search_raw": "78.3万 (-5.2%)", "biz_gmv14_raw": "114.1万 (-5.9%)", "biz_gmv30_raw": "251.5万 (-4.3%)", "merchant_raw": "6家", "merchants": ["一点鸡超干小粒鸡，低温慢烤不加大豆蛋白磨牙追剧小零食s", "鸡胸肉即食健身代餐减0开袋低脂熟食懒人学生解馋饱腹轻主速零食", "【9.9元发2包】鸡胸肉干鸡肉条风干解减饿脂解馋小吃零食", "薄脆鸡肉片鸡肉干0防腐色素鸡胸肉脆片健身追剧解馋减脂期小零食", "<风干鸡肉干>  网红麻辣风干肉肉零食"], "mkt_light": "green", "biz_light": "yellow", "dec_light": "green"}, {"name": "卤牛肉/酱牛肉", "wow_count": 3, "stars": 4, "mkt_content_pct": -17.2, "mkt_search_pct": -4.9, "biz_gmv14_pct": 15.7, "biz_gmv30_pct": -9.3, "merchant_count": 3, "mkt_content_raw": "5.37亿 (-17.2%)", "mkt_search_raw": "80.2万 (-4.9%)", "biz_gmv14_raw": "59.1万 (+15.7%)", "biz_gmv30_raw": "118.3万 (-9.3%)", "merchant_raw": "3家", "merchants": ["即食牛肉健身代餐轻卤牛腱子肉饱腹高蛋白质主轻熟速食健康零食", "【哈尼牧场好物推荐】牛肉脆片牛脆脆牛肉薄脆风干牛脆片风干牛肉", "碳烤八风干纯瘦牛肉干（无添加、非油炸）", "九成风干牛肉干 追剧健身办公室解馋解饿必备休闲川西特产小零食", "【哈尼牧场好物分享】牛肉脆片牛脆脆牛肉薄脆风干牛脆片"], "mkt_light": "yellow", "biz_light": "green", "dec_light": "green"}, {"name": "鸭爪/鸭掌", "wow_count": 3, "stars": 4, "mkt_content_pct": -21.4, "mkt_search_pct": -6.5, "biz_gmv14_pct": 34.2, "biz_gmv30_pct": 17.8, "merchant_count": 2, "mkt_content_raw": "3.26亿 (-21.4%)", "mkt_search_raw": "4.2万 (-6.5%)", "biz_gmv14_raw": "40.2万 (+34.2%)", "biz_gmv30_raw": "74.6万 (+17.8%)", "merchant_raw": "2家", "merchants": ["老卤鸭爪鸭掌凤爪鸭肫鸭舌独立包装卤味追剧露营休闲解馋小零食", "老卤鸭爪独立包装鸭掌卤味追剧露营休闲小零食鸭爪", "特色美食柳州酸笋炒鸭脚螺蛳鸭脚煲芋蒙酸炒鸭脚虎皮猪蹄卤鸭脚", "【贡菜去骨鸭掌】椒麻/香辣脆爽好吃 追剧露营下午茶【店长推荐】", "柳州特色美食酸笋炒鸭脚/螺蛳鸭脚煲/田螺鸭脚煲/虎皮猪脚"], "mkt_light": "yellow", "biz_light": "green", "dec_light": "green"}, {"name": "鸭肠/鸭胗", "wow_count": 3, "stars": 4, "mkt_content_pct": -13.0, "mkt_search_pct": -7.0, "biz_gmv14_pct": -17.6, "biz_gmv30_pct": 57.0, "merchant_count": 1, "mkt_content_raw": "2.63亿 (-13.0%)", "mkt_search_raw": "6.8万 (-7.0%)", "biz_gmv14_raw": "19.6万 (-17.6%)", "biz_gmv30_raw": "46.1万 (+57.0%)", "merchant_raw": "1家", "merchants": ["《每天11点发货》韩国同款烤牛肠，免清洗免腌制", "南京风味卤制盐水鸭胗鸭货熟食低脂蛋白肉香浓郁即食下酒150g*2包", "皇鸭道南京风味卤制盐水鸭胗0脂0卡鸭货熟食肉香浓郁即食下酒", "南京风味卤制盐水鸭胗鸭货熟食低脂蛋白肉香浓郁即食下酒追剧解馋", "《正常发货》韩国同款烤牛肠，免清洗免腌制"], "mkt_light": "yellow", "biz_light": "green", "dec_light": "green"}, {"name": "鸡翅", "wow_count": 3, "stars": 3, "mkt_content_pct": -19.4, "mkt_search_pct": -6.0, "biz_gmv14_pct": -8.6, "biz_gmv30_pct": -2.8, "merchant_count": 2, "mkt_content_raw": "27.45亿 (-19.4%)", "mkt_search_raw": "58.5万 (-6.0%)", "biz_gmv14_raw": "71.1万 (-8.6%)", "biz_gmv30_raw": "159.6万 (-2.8%)", "merchant_raw": "2家", "merchants": ["云南特产佤族美食佤味大杂烩麻辣牛皮鸡爪鸡脚筋三角骨鸡翅苤菜根", "潮汕美食蜜汁甜肉蜜汁叉烧肉蜜汁鸡翅休闲零食小吃熟食新鲜现做", "思茅二中鸡脚糊辣子鸡脚鸡胗鸡翅鲜香麻辣凤爪零食", "广东梅州盐焗鸡翅客家特产盐局土鸡翅休闲小吃零食卤味熟食网红", "香辣鸡翅根小鸡腿200g追剧宿舍零食开袋即食追剧办公室解馋肉类"], "mkt_light": "yellow", "biz_light": "yellow", "dec_light": "green"}, {"name": "卤蛋", "wow_count": 3, "stars": 3, "mkt_content_pct": -9.0, "mkt_search_pct": -10.3, "biz_gmv14_pct": -27.8, "biz_gmv30_pct": 15.1, "merchant_count": 3, "mkt_content_raw": "4.56亿 (-9.0%)", "mkt_search_raw": "8.0万 (-10.3%)", "biz_gmv14_raw": "25.8万 (-27.8%)", "biz_gmv30_raw": "66.1万 (+15.1%)", "merchant_raw": "3家", "merchants": ["【粉丝福利】卤味开袋即食组合鸭腿鸡腿翅根卤蛋解馋零食", "【新粉福利】卤蛋零食卤味五香卤鸡蛋真空包装零食", "【粉丝福利】卤味开袋即食组合鸭腿鸡腿翅根卤蛋烤脖解馋零食", "【总监价到】开袋即食组合鸭腿鸡腿翅根卤蛋解馋零食", "正宗卤味20件组合2个鸭腿2个香卤鸡腿3个翅根3个香辣鸭翅10个卤蛋"], "mkt_light": "yellow", "biz_light": "yellow", "dec_light": "green"}, {"name": "冷吃兔", "wow_count": 3, "stars": 3, "mkt_content_pct": -36.0, "mkt_search_pct": -8.3, "biz_gmv14_pct": -15.9, "biz_gmv30_pct": -13.0, "merchant_count": 0, "mkt_content_raw": "3842.4万 (-36.0%)", "mkt_search_raw": "5.2万 (-8.3%)", "biz_gmv14_raw": "7.6万 (-15.9%)", "biz_gmv30_raw": "17.7万 (-13.0%)", "merchant_raw": "0家", "merchants": ["【冷吃兔】自贡特色冷吃兔活兔现炒200g净重自贡盐帮菜", "双流老妈兔头旗舰四川特产成都网红小吃零食麻辣兔腿冷吃熟食兔肉", "老妈冷吃小铺 小锅现炒现发 冷吃兔 麻辣兔头 手撕兔 零添加短保", "麻辣手撕兔肉四川特产整只全烤兔新鲜冷吃兔子肉兔腿自贡兔肉", "自贡歪歪麻辣冷吃兔丁【半只装】四川特产零食小吃自贡美食伴手礼"], "mkt_light": "yellow", "biz_light": "yellow", "dec_light": "green"}, {"name": "卤素菜/卤贡菜/卤凉皮/卤蘑菇/卤豆腐", "wow_count": 3, "stars": 2, "mkt_content_pct": -3.6, "mkt_search_pct": -12.7, "biz_gmv14_pct": -44.3, "biz_gmv30_pct": -60.9, "merchant_count": 0, "mkt_content_raw": "2890.2万 (-3.6%)", "mkt_search_raw": "5.7万 (-12.7%)", "biz_gmv14_raw": "3068 (-44.3%)", "biz_gmv30_raw": "9490 (-60.9%)", "merchant_raw": "0家", "merchants": [], "mkt_light": "yellow", "biz_light": "red", "dec_light": "green"}, {"name": "风干/烤制", "wow_count": 4, "stars": 2, "mkt_content_pct": -13.5, "mkt_search_pct": -72.9, "biz_gmv14_pct": -12.3, "biz_gmv30_pct": -5.5, "merchant_count": 19, "mkt_content_raw": "13.08亿 (-13.5%)", "mkt_search_raw": "1442 (-72.9%)", "biz_gmv14_raw": "325.1万 (-12.3%)", "biz_gmv30_raw": "763.2万 (-5.5%)", "merchant_raw": "19家", "merchants": ["【哈尼牧场好物分享】呼伦贝尔牛脆片牛脆脆牛排脆风干牛脆片", "【猪脆脆】薄脆风干猪肉片/蛋白质高达75.4g【首发特惠】", "【牛墩墩】内蒙古原切风干牛排新口味新形态嚼劲十足鲜香味美", "【哈尼牧场好物分享】解馋零食和牛脆片超薄香脆风干和牛脆脆牛脆", "内蒙古牛墩墩原切风干牛排新口味新形态嚼劲十足鲜香味美"], "mkt_light": "yellow", "biz_light": "yellow", "dec_light": "yellow"}, {"name": "卤内脏", "wow_count": 3, "stars": 2, "mkt_content_pct": -21.4, "mkt_search_pct": -19.1, "biz_gmv14_pct": -44.8, "biz_gmv30_pct": -43.3, "merchant_count": 1, "mkt_content_raw": "7613.5万 (-21.4%)", "mkt_search_raw": "11.8万 (-19.1%)", "biz_gmv14_raw": "6.3万 (-44.8%)", "biz_gmv30_raw": "19.6万 (-43.3%)", "merchant_raw": "1家", "merchants": ["盐水猪肝 干爆猪心 开袋即食下酒菜真空包装新鲜猪肝", "【满99顺丰包邮】五香老卤 肥肠 大肠头 新鲜食材 真空包装", "猪肝开袋即食休闲解馋卤味追剧零食下酒菜健身食品猪肉熟食", "沈阳名吃玖福记熏拌鸡架.两大只包含小料手套.保质期五个月", "江油肥肠红烧小吃熟食非遗地标美食200克×3袋 赠100克米粉包×3袋"], "mkt_light": "yellow", "biz_light": "red", "dec_light": "green"}, {"name": "鸭舌", "wow_count": 3, "stars": 1, "mkt_content_pct": 28.1, "mkt_search_pct": -4.3, "biz_gmv14_pct": -20.9, "biz_gmv30_pct": -30.9, "merchant_count": 50, "mkt_content_raw": "9.38亿 (+28.1%)", "mkt_search_raw": "4.4万 (-4.3%)", "biz_gmv14_raw": "1065.5万 (-20.9%)", "biz_gmv30_raw": "2556.0万 (-30.9%)", "merchant_raw": "50家", "merchants": ["【松口】川味嘶哈霹雳鸭舌下酒追剧零食买2盒更划算哟！", "【温州鸭舌】每日现做现发 开袋即食，4种口味", "【正宗温州风味鸭舌】四种风味/开袋即食，每日现做现发", "【温州鸭舌】每日现做现发 开袋即食，4种口味可选", "老卤鸭舌独立包装鸭舌头鸭货零食好吃卤味解馋追剧必备"], "mkt_light": "green", "biz_light": "red", "dec_light": "red"}];
+const RISING_DATA = [{"label": "卤牛肉/酱牛肉", "vals": [127.65, 146.77, 131.48, 103.17, 105.22, 117.2, 144.78, 122.88], "last": 122.88, "wow": -15.1, "pos4": 3, "max_gr": 23.5}, {"label": "猪肉脯/猪肉干", "vals": [26.34, 20.44, 18.3, 14.05, 15.36, 24.41, 27.47, 39.54], "last": 39.54, "wow": 43.9, "pos4": 4, "max_gr": 58.9}, {"label": "沂蒙山炒鸡", "vals": [14.96, 20.22, 14.65, 16.29, 23.94, 23.86, 37.84, 32.51], "last": 32.51, "wow": -14.1, "pos4": 2, "max_gr": 58.6}, {"label": "鸡胸肉/鸡肉干", "vals": [16.75, 71.67, 32.93, 18.45, 18.97, 21.24, 19.22, 32.12], "last": 32.12, "wow": 67.1, "pos4": 3, "max_gr": 327.9}, {"label": "无骨鸡爪", "vals": [5.48, 9.52, 9.1, 9.05, 7.85, 7.15, 9.69, 11.88], "last": 11.88, "wow": 22.6, "pos4": 2, "max_gr": 73.7}, {"label": "鸭爪/鸭掌", "vals": [4.07, 4.52, 5.49, 2.92, 2.77, 3.25, 2.98, 11.56], "last": 11.56, "wow": 287.9, "pos4": 2, "max_gr": 287.9}, {"label": "风干/烤制", "vals": [22.61, 18.91, 11.96, 22.74, 8.78, 19.88, 11.94, 10.55], "last": 10.55, "wow": -11.6, "pos4": 1, "max_gr": 126.4}, {"label": "鸭肠/鸭胗", "vals": [3.34, 3.72, 4.8, 4.33, 4.65, 8.91, 8.65, 5.85], "last": 5.85, "wow": -32.4, "pos4": 2, "max_gr": 91.6}, {"label": "鸭舌", "vals": [3.93, 4.53, 3.75, 3.55, 2.77, 3.64, 3.53, 4.89], "last": 4.89, "wow": 38.5, "pos4": 2, "max_gr": 38.5}, {"label": "卤内脏", "vals": [6.47, 6.86, 5.26, 4.15, 3.21, 3.63, 3.11, 4.17], "last": 4.17, "wow": 34.1, "pos4": 2, "max_gr": 34.1}, {"label": "卤蛋", "vals": [2.38, 2.33, 2.31, 0.97, 1.05, 2.08, 1.68, 2.31], "last": 2.31, "wow": 37.5, "pos4": 3, "max_gr": 98.1}, {"label": "冷吃兔", "vals": [1.55, 0.96, 1.29, 1.39, 2.12, 2.68, 1.59, 1.4], "last": 1.4, "wow": -11.9, "pos4": 2, "max_gr": 52.5}, {"label": "鸡翅", "vals": [1.55, 1.7, 2.39, 2.03, 2.22, 2.94, 1.01, 0.53], "last": 0.53, "wow": -47.5, "pos4": 2, "max_gr": 40.6}, {"label": "卤素菜/卤贡菜/卤凉皮/卤蘑菇/卤豆腐", "vals": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], "last": 0.0, "wow": 0, "pos4": 0, "max_gr": 0}];
+
+// ==================== 工具函数 ====================
+function heatColor(v,max){
+  if(!v||!max) return '#f0ece4';
+  const t=v/max;
+  if(t>0.8) return '#c47a7a';
+  if(t>0.5) return '#b8864e';
+  if(t>0.25) return '#c4a87a';
+  if(t>0.1) return '#d4c4a8';
+  return '#ede8e0';
+}
+function statusClass(r){
+  if(r.last>=15) return 'hot';
+  if(r.wow>30||r.pos4>=3) return 'rising';
+  if(r.wow>=-10) return 'stable';
+  return 'decline';
+}
+function lampHtml(color,tooltip=''){
+  return `<span class="lamp ${color}" title="${tooltip}"></span>`;
+}
+function starsHtml(n){
+  let s='<span class="stars">';
+  for(let i=0;i<5;i++) s+=`<span class="star ${i<n?'filled':'empty'}">${i<n?'★':'☆'}</span>`;
+  return s+'</span>';
+}
+function pctColor(pct){
+  if(pct>0) return '#5a8a72';
+  if(pct>-20) return '#a07840';
+  return '#b05050';
+}
+function calcSubLamp(pct){
+  if(pct>0) return 'green';
+  if(pct>-20) return 'yellow';
+  return 'red';
+}
+function calcMerchantLamp(n){
+  if(n<10) return 'green';
+  if(n<20) return 'yellow';
+  return 'red';
+}
+function calcCompositeLamp(l1,l2){
+  if(l1==='green'&&l2==='green') return 'green';
+  if((l1==='green'&&l2==='yellow')||(l1==='yellow'&&l2==='green')) return 'green';
+  if(l1==='red'&&l2==='red') return 'red';
+  if((l1==='yellow'&&l2==='red')||(l1==='red'&&l2==='yellow')) return 'red';
+  return 'yellow';
+}
+function calcStars(m,b,d){
+  const deduct={green:0,yellow:1,red:2};
+  return Math.max(1, 5-deduct[m]-deduct[b]-deduct[d]);
+}
+function gradeTag(n){
+  const cls=n>=5?'grade-5':n>=4?'grade-4':n>=3?'grade-3':'grade-2';
+  return `<span class="grade-tag ${cls}">${n}星</span>`;
+}
+
+// ==================== Tab 1: 潜力品类评估 ====================
+function renderPotential(){
+  const ptb=document.getElementById('pt-tbody');
+  const stb=document.getElementById('st-tbody');
+  let pt='',st='';
+  POTENTIAL_DATA.forEach(d=>{
+    const lc=calcSubLamp(d.mkt_content_pct), ls=calcSubLamp(d.mkt_search_pct);
+    const lm=d.mkt_light||calcCompositeLamp(lc,ls);
+    const l14=calcSubLamp(d.biz_gmv14_pct), l30=calcSubLamp(d.biz_gmv30_pct);
+    const lb=d.biz_light||calcCompositeLamp(l14,l30);
+    const ld=d.dec_light||calcMerchantLamp(d.merchant_count);
+    const stars=d.stars||calcStars(lm,lb,ld);
+    const gcls=stars>=5?'grade-5':stars>=4?'grade-4':stars>=3?'grade-3':'grade-2';
+
+    pt+=`<tr>
+      <td>${d.name}</td>
+      <td style="background:rgba(59,130,246,0.05)">${lampHtml(lc,d.mkt_content_raw)} <span style="font-size:11px;color:${pctColor(d.mkt_content_pct)};margin-left:4px">${d.mkt_content_raw}</span></td>
+      <td style="background:rgba(59,130,246,0.05)">${lampHtml(ls,d.mkt_search_raw)} <span style="font-size:11px;color:${pctColor(d.mkt_search_pct)};margin-left:4px">${d.mkt_search_raw}</span></td>
+      <td style="background:rgba(59,130,246,0.12)">${lampHtml(lm)}</td>
+      <td style="background:rgba(16,185,129,0.05)">${lampHtml(l14,d.biz_gmv14_raw)} <span style="font-size:11px;color:${pctColor(d.biz_gmv14_pct)};margin-left:4px">${d.biz_gmv14_raw}</span></td>
+      <td style="background:rgba(16,185,129,0.05)">${lampHtml(l30,d.biz_gmv30_raw)} <span style="font-size:11px;color:${pctColor(d.biz_gmv30_pct)};margin-left:4px">${d.biz_gmv30_raw}</span></td>
+      <td style="background:rgba(16,185,129,0.12)">${lampHtml(lb)}</td>
+      <td style="background:rgba(139,92,246,0.05)">${lampHtml(ld,d.merchant_raw)} <span style="font-size:11px;color:#a8c8c4;margin-left:4px">${d.merchant_raw}</span></td>
+      <td style="background:rgba(139,92,246,0.12)">${lampHtml(ld)}</td>
+    </tr>`;
+
+    const mTags = stars>=4 && d.merchants && d.merchants.length>0
+      ? d.merchants.map(m=>`<span style="display:inline-block;background:#2d4f4a;border:1px solid #316f6b;border-radius:6px;color:#ffffff;font-size:12px;padding:4px 10px;margin:2px">${m}</span>`).join('')
+      : stars>=4
+        ? '<span class="merchant-placeholder">待补充</span>'
+        : '<span style="font-size:12px;color:#75b6ab">—</span>';
+
+    st+=`<tr>
+      <td>${d.name}</td>
+      <td>${starsHtml(stars)} <span class="grade-tag ${gcls}" style="margin-left:8px">${stars}星</span></td>
+      <td>${lampHtml(lm)}</td>
+      <td>${lampHtml(lb)}</td>
+      <td>${lampHtml(ld)}</td>
+      <td style="text-align:left">${mTags}</td>
+    </tr>`;
+  });
+  ptb.innerHTML=pt; stb.innerHTML=st;
+}
+
+// ==================== Tab 2: 热销商品榜 ====================
+const CAT_COLORS={'曲奇':'#c4a87a','蛋糕':'#c47a7a','雪花酥':'#8aaa80','三明治':'#7a9e8a',
+  '牛肉脆片':'#b8864e','糖果':'#c47aa0','千层蛋糕':'#a8b8b8','贝果':'#8a9ec4',
+  '鲜花饼':'#8aaa70','恰巴塔':'#b8864e','糯米团':'#c4b8a8','碱水球':'#7a9e8a',
+  '饼干':'#b8864e','代餐':'#c4a87a','冻干奶酪':'#8aaa80','牛腱肉':'#c47aa0'};
+
+function renderTopSpu(){
+  const catNames=POTENTIAL_DATA.map(d=>d.name);
+  const container=document.getElementById('topspu-container');
+  let html='';
+  catNames.forEach(cat=>{
+    const spus=TOP_SPUS.filter(s=>s.label===cat&&s.gmv>0).sort((a,b)=>b.gmv-a.gmv);
+    const vals=MATRIX[cat]||[];
+    const total8w=vals.reduce((s,v)=>s+v,0);
+    const last1w=vals[vals.length-1]||0;
+    const color=CAT_COLORS[cat]||'#a8c8c4';
+    const maxGmv=spus.length>0?spus[0].gmv:1;
+    html+=`<div style="background:#faf8f4;border:1px solid #e8e0d4;border-radius:12px;margin-bottom:18px;overflow:hidden">
+      <div style="padding:14px 20px;border-bottom:1px solid #e8e0d4;display:flex;align-items:center;justify-content:space-between">
+        <div style="display:flex;align-items:center;gap:12px">
+          <div style="width:4px;height:36px;border-radius:2px;background:${color};flex-shrink:0"></div>
+          <div>
+            <div style="font-size:16px;font-weight:700;color:#b8864e">${cat}</div>
+            <div style="font-size:12px;color:#8a7a6a;margin-top:2px">8周累计 <span style="color:${color};font-weight:600">${total8w.toFixed(1)}万</span> · 最新周 <span style="color:#4a3728;font-weight:600">${last1w.toFixed(2)}万</span></div>
+          </div>
+        </div>
+        <div style="font-size:12px;color:#8a7a6a">自然流DGMV · 万元</div>
+      </div>
+      <div style="padding:12px 20px">`;
+    if(spus.length===0){
+      html+=`<div style="padding:16px 0;color:#b8a898;font-size:13px;text-align:center">暂无SPU明细数据</div>`;
+    }else{
+      html+=`<table style="width:100%;border-collapse:collapse">
+        <thead><tr>
+          <th style="padding:8px 10px;font-size:11px;color:#8a7a6a;font-weight:500;text-align:left;border-bottom:1px solid #e8e0d4">#</th>
+          <th style="padding:8px 10px;font-size:11px;color:#8a7a6a;font-weight:500;text-align:left;border-bottom:1px solid #e8e0d4">商品名称</th>
+          <th style="padding:8px 10px;font-size:11px;color:#8a7a6a;font-weight:500;text-align:right;border-bottom:1px solid #e8e0d4;white-space:nowrap">GMV(万)</th>
+          <th style="padding:8px 10px;font-size:11px;color:#8a7a6a;font-weight:500;text-align:left;border-bottom:1px solid #e8e0d4;min-width:100px">占比</th>
+        </tr></thead><tbody>`;
+      spus.forEach((s,i)=>{
+        const bw=Math.round(s.gmv/maxGmv*140);
+        const rs=i===0?'color:#c4a87a;font-weight:700':i===1?'color:#a8b8b8;font-weight:700':i===2?'color:#c49060;font-weight:700':'color:#b8864e';
+        html+=`<tr style="${i%2===1?'background:#f5f0e8':''}">
+          <td style="padding:9px 10px;font-size:13px;${rs}">${i+1}</td>
+          <td style="padding:9px 10px;font-size:13px;color:#4a3728;max-width:400px;word-break:break-all">${s.spu}</td>
+          <td style="padding:9px 10px;font-size:14px;color:#b8864e;font-weight:700;text-align:right;white-space:nowrap">${s.gmv.toFixed(2)}</td>
+          <td style="padding:9px 10px"><div style="display:flex;align-items:center;gap:6px">
+            <div style="width:${bw}px;height:6px;border-radius:3px;background:${color};opacity:0.8;min-width:2px"></div>
+            <span style="font-size:11px;color:#8a7a6a">${(s.gmv/maxGmv*100).toFixed(0)}%</span>
+          </div></td>
+        </tr>`;
+      });
+      html+=`</tbody></table>`;
+    }
+    html+=`</div></div>`;
+  });
+  container.innerHTML=html;
+}
+
+// ==================== Tab 3: 8周总览 ====================
+function renderOverview(){
+  const entries=Object.entries(MATRIX).map(([l,v])=>{
+    const last=v[v.length-1]||0, prev=v[v.length-2]||0;
+    return {label:l,vals:v,last,prev};
+  }).filter(x=>x.last>0).sort((a,b)=>b.last-a.last);
+  const top30=entries.slice(0,30);
+
+  const tb=document.getElementById('rank-table');
+  let html='<thead><tr><th>排名</th><th>品类</th><th>最新周GMV</th><th>上周GMV</th><th>环比</th><th>8周趋势</th></tr></thead><tbody>';
+  top30.forEach((r,i)=>{
+    const wow=r.prev>0?(r.last-r.prev)/r.prev*100:0;
+    const wowStr=r.prev>0?(wow>0?`<span class="up">↑${wow.toFixed(1)}%</span>`:`<span class="down">↓${Math.abs(wow).toFixed(1)}%</span>`):'<span class="flat">-</span>';
+    const max=Math.max(...r.vals)||1;
+    const spark=r.vals.map((v,idx)=>`<div style="width:5px;height:${Math.round(v/max*18)||1}px;background:${idx===r.vals.length-1?'#c47a7a':'#75b6ab'};border-radius:1px;display:inline-block;vertical-align:bottom;margin:0 1px"></div>`).join('');
+    const rcls=i===0?'rank-1':i===1?'rank-2':i===2?'rank-3':'rank-n';
+    html+=`<tr>
+      <td><span class="rank-num ${rcls}">${i+1}</span></td>
+      <td><span class="lbl-tag">${r.label}</span></td>
+      <td><strong style='color:#75b6ab'>${r.last.toFixed(2)}</strong><span style='color:#d4b9ac'>万</span></td>
+      <td style="color:#a8c8c4">${r.prev>0?r.prev.toFixed(2)+'万':'-'}</td>
+      <td>${wowStr}</td>
+      <td>${spark}</td>
+    </tr>`;
+  });
+  tb.innerHTML=html+'</tbody>';
+
+  const top15=top30.slice(0,15);
+  const chart=echarts.init(document.getElementById('chart-compare'));
+  chart.setOption({
+    backgroundColor:'transparent',
+    tooltip:{trigger:'axis',axisPointer:{type:'shadow'}},
+    legend:{data:['上周','本周'],textStyle:{color:'#8a7a6a'},top:4},
+    grid:{left:100,right:20,top:40,bottom:20},
+    xAxis:{type:'value',axisLabel:{color:'#8a7a6a',formatter:'{value}万'},splitLine:{lineStyle:{color:'#e8e0d4'}}},
+    yAxis:{type:'category',data:top15.map(r=>r.label).reverse(),axisLabel:{color:'#4a3728',fontSize:12}},
+    series:[
+      {name:'上周',type:'bar',data:top15.map(r=>r.prev).reverse(),barMaxWidth:10,
+        itemStyle:{color:'#d4c8b8'},label:{show:true,position:'right',color:'#8a7a6a',fontSize:10,formatter:p=>p.value?p.value.toFixed(1):''}},
+      {name:'本周',type:'bar',data:top15.map(r=>r.last).reverse(),barMaxWidth:10,
+        itemStyle:{color:{type:'linear',x:0,y:0,x2:1,y2:0,colorStops:[{offset:0,color:'#c47a7a'},{offset:1,color:'#b8864e'}]}},
+        label:{show:true,position:'right',color:'#4a3728',fontSize:11,formatter:p=>p.value?p.value.toFixed(1)+'万':''}}
+    ]
+  });
+}
+
+// ==================== Tab 4: 品类趋势 ====================
+let _trendFilter='all';
+function filterTrend(f,btn){
+  _trendFilter=f;
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  renderTrend(f);
+}
+function searchTrend(q){ renderTrend(_trendFilter,q); }
+function renderTrend(filter,search=''){
+  let data=[...RISING_DATA];
+  if(filter==='hot') data=data.filter(r=>r.last>=10);
+  else if(filter==='rising') data=data.filter(r=>r.pos4>=2&&r.wow>0);
+  else if(filter==='new') data=data.filter(r=>r.vals.slice(0,-2).every(v=>v===0)&&r.last>0);
+  if(search) data=data.filter(r=>r.label.includes(search));
+  const maxLast=Math.max(...RISING_DATA.map(x=>x.last))||1;
+  const container=document.getElementById('trend-cards');
+  container.innerHTML=data.slice(0,32).map(r=>{
+    const sc=statusClass(r);
+    const dotCls={'hot':'dot-hot','rising':'dot-rising','stable':'dot-stable','decline':'dot-decline'}[sc];
+    const wowStr=r.wow>0?`<span class="up">↑${r.wow}%</span>`:`<span class="down">↓${Math.abs(r.wow)}%</span>`;
+    const maxV=Math.max(...r.vals)||1;
+    const mini=r.vals.map((v,i)=>`<div class="tc-mini-bar" style="height:${Math.round(v/maxV*22)||1}px;background:${i===r.vals.length-1?'#c47a7a':'#d4c8b8'}"></div>`).join('');
+    const pct=r.last/maxLast*100;
+    const barColor=sc==='hot'?'#c47a7a':sc==='rising'?'#7a9e8a':'#c4b8a8';
+    return `<div class="trend-card ${sc}">
+      <div class="tc-label"><span class="status-dot ${dotCls}"></span>${r.label}</div>
+      <div class="tc-gmv">${r.last}<span>万元</span></div>
+      <div class="tc-wow">环比：${wowStr} | 近4周↑${r.pos4}次</div>
+      <div class="tc-bar"><div class="tc-bar-fill" style="width:${pct}%;background:${barColor}"></div></div>
+      <div class="tc-mini">${mini}</div>
+    </div>`;
+  }).join('');
+}
+
+// ==================== Tab 5: 热力矩阵 ====================
+function renderHeatmap(){
+  const labels=Object.keys(MATRIX);
+  const allVals=labels.flatMap(l=>MATRIX[l]);
+  const maxVal=Math.max(...allVals)||1;
+  const tb=document.getElementById('heatmap-table');
+  let html=`<thead><tr><th>品类</th>${WEEKS.map(w=>`<th>${w}</th>`).join('')}<th>合计</th></tr></thead><tbody>`;
+  const sorted=[...labels].sort((a,b)=>{
+    const sa=MATRIX[a],sb=MATRIX[b];
+    return (sb[sb.length-1]||0)-(sa[sa.length-1]||0);
+  });
+  sorted.forEach(lbl=>{
+    const row=MATRIX[lbl];
+    const total=row.reduce((s,v)=>s+v,0);
+    html+=`<tr><td>${lbl}</td>`;
+    row.forEach(v=>{
+      const bg=heatColor(v,maxVal);
+      html+=`<td style="background:${bg};color:${v>maxVal*0.3?'#ffffff':'#ffffff'}">${v>0?v.toFixed(1):''}</td>`;
+    });
+    html+=`<td style="color:#75b6ab;font-weight:600">${total.toFixed(1)}</td></tr>`;
+  });
+  tb.innerHTML=html+'</tbody>';
+
+  const top15=sorted.slice(0,15);
+  const colors=['#c47a7a','#b8864e','#c4a87a','#7a9e8a','#8aaa80','#8a9ec4','#c47aa0',
+    '#a8b8b8','#8aaa70','#b8864e','#c4b8a8','#7a9e8a','#c4a87a','#c47aa0','#a07840'];
+  const chart=echarts.init(document.getElementById('chart-line'));
+  chart.setOption({
+    backgroundColor:'transparent',
+    tooltip:{trigger:'axis'},
+    legend:{data:top15,textStyle:{color:'#8a7a6a',fontSize:11},top:4,type:'scroll'},
+    grid:{left:50,right:20,top:60,bottom:30},
+    xAxis:{type:'category',data:WEEKS,axisLabel:{color:'#8a7a6a'}},
+    yAxis:{type:'value',axisLabel:{color:'#8a7a6a',formatter:'{value}万'},splitLine:{lineStyle:{color:'#e8e0d4'}}},
+    series:top15.map((lbl,i)=>{
+      return {name:lbl,type:'line',data:MATRIX[lbl],smooth:true,
+        lineStyle:{width:2,color:colors[i]},itemStyle:{color:colors[i]},
+        areaStyle:{color:colors[i],opacity:0.05},symbol:'circle',symbolSize:5};
+    })
+  });
+}
+
+// ==================== Tab 6: 商品明细 ====================
+function renderDetail(search=''){
+  let data=[...TOP_SPUS].sort((a,b)=>b.gmv-a.gmv);
+  if(search) data=data.filter(r=>r.label.includes(search)||r.spu.includes(search));
+  const maxGmv=data.length>0?data[0].gmv:1;
+  const tb=document.getElementById('detail-table');
+  let html='<thead><tr><th>#</th><th>品类标签</th><th>商品名称</th><th>GMV(万)</th></tr></thead><tbody>';
+  data.forEach((r,i)=>{
+    const bw=Math.round(r.gmv/maxGmv*120);
+    html+=`<tr>
+      <td style="color:#75b6ab">${i+1}</td>
+      <td><span class="lbl-tag">${r.label}</span></td>
+      <td style="max-width:450px;word-break:break-all">${r.spu}</td>
+      <td><span class="gmv-bar" style="width:${bw}px"></span><strong>${r.gmv.toFixed(2)}</strong><span style='color:#d4b9ac'>万</span></td>
+    </tr>`;
+  });
+  tb.innerHTML=html+'</tbody>';
+}
+function searchDetail(q){ renderDetail(q); }
+
+// ==================== Tab 切换 ====================
+function switchTab(name,el){
+  document.querySelectorAll('.content').forEach(e=>e.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(e=>e.classList.remove('active'));
+  document.getElementById('tab-'+name).classList.add('active');
+  el.classList.add('active');
+  if(name==='potential') renderPotential();
+  if(name==='topspu') renderTopSpu();
+  if(name==='overview') renderOverview();
+  if(name==='trend') renderTrend('all');
+  if(name==='heatmap') renderHeatmap();
+  if(name==='detail') renderDetail();
+}
+
+// ==================== 初始化 ====================
+window.addEventListener('load',()=>{ renderPotential(); });
+window.addEventListener('resize',()=>{
+  ['chart-compare','chart-line'].forEach(id=>{
+    const el=document.getElementById(id);
+    if(el) echarts.getInstanceByDom(el)?.resize();
+  });
+});
+</script>
+</body>
+</html>
