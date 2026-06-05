@@ -126,6 +126,80 @@
   .logic-card li { margin-bottom: 5px; line-height: 1.7; }
   .logic-card li b { color: #C8553D; }
 
+  /* 4 幕动线卡 */
+  .scene-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 18px 20px;
+    margin-bottom: 22px;
+    box-shadow: 0 2px 8px rgba(120,85,60,.06);
+    border-left: 4px solid #E29578;
+  }
+  .scene-card h3 { margin: 0 0 6px; font-size: 15px; color: #C8553D; }
+  .scene-card .scene-sub { font-size: 12.5px; color: #9a7e6a; margin-bottom: 14px; }
+  .scene-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+  }
+  .scene-item {
+    background: #faf5ee;
+    border-radius: 8px;
+    padding: 12px 12px;
+    border: 1px solid #ead9c4;
+  }
+  .scene-num {
+    display: inline-block;
+    background: linear-gradient(135deg, #C8553D 0%, #E29578 100%);
+    color: #fff;
+    font-size: 11px; font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 10px;
+    margin-bottom: 6px;
+  }
+  .scene-title { font-size: 13.5px; font-weight: 700; color: #2d1f15; margin-bottom: 4px; line-height: 1.35; }
+  .scene-desc { font-size: 12px; color: #6b5644; line-height: 1.55; margin-bottom: 8px; }
+  .scene-methods { font-size: 12px; color: #C8553D; font-weight: 600; line-height: 1.5; }
+  @media (max-width: 768px) {
+    .scene-grid { grid-template-columns: 1fr 1fr; }
+  }
+
+  /* 幕分隔 */
+  .scene-divider {
+    margin: 24px 0 12px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .scene-divider .badge {
+    background: linear-gradient(135deg, #C8553D 0%, #E29578 100%);
+    color: #fff;
+    font-size: 12px; font-weight: 700;
+    padding: 5px 12px;
+    border-radius: 14px;
+    white-space: nowrap;
+  }
+  .scene-divider .line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, rgba(200,85,61,.4) 0%, rgba(200,85,61,0) 100%);
+  }
+  .scene-divider .label {
+    font-size: 12.5px;
+    color: #9a7e6a;
+    white-space: nowrap;
+  }
+
+  /* 侧栏分组标签 */
+  .sn-scene-label {
+    padding: 8px 20px 4px;
+    font-size: 10.5px;
+    color: #C8553D;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    margin-top: 6px;
+  }
+
   /* advice 块 */
   .advice {
     background: #fff;
@@ -336,7 +410,7 @@
     <div class="sn-meta">高转化 8 大方法 · 2026.06</div>
   </div>
   <div class="sn-label">📑 章节导航</div>
-  <a class="sn-item" href="#advice-1" data-target="advice-1"><span class="sn-num">1</span><span class="sn-text">标题封面有「人群 × 场景」指向</span></a><a class="sn-item" href="#advice-2" data-target="advice-2"><span class="sn-num">2</span><span class="sn-text">把「配料表/原料品牌」前置</span></a><a class="sn-item" href="#advice-3" data-target="advice-3"><span class="sn-num">3</span><span class="sn-text">价格锚点 + 紧迫感组合拳</span></a><a class="sn-item" href="#advice-4" data-target="advice-4"><span class="sn-num">4</span><span class="sn-text">控制篇幅，2 屏内出商品链接</span></a><a class="sn-item" href="#advice-5" data-target="advice-5"><span class="sn-num">5</span><span class="sn-text">评论区：首条挂链 + 高位「购后评价」</span></a><a class="sn-item" href="#advice-6" data-target="advice-6"><span class="sn-num">6</span><span class="sn-text">「先抑后扬」反向钩子</span></a><a class="sn-item" href="#advice-7" data-target="advice-7"><span class="sn-num">7</span><span class="sn-text">给「具体使用场景」</span></a><a class="sn-item" href="#advice-8" data-target="advice-8"><span class="sn-num">8</span><span class="sn-text">视频走「短直播切片」，图文走「连环图叙事」</span></a>
+  <div class="sn-scene-label">幕 1 · 进笔记前 1 秒</div><a class="sn-item" href="#advice-1" data-target="advice-1"><span class="sn-num">1</span><span class="sn-text">标题封面有「人群 × 场景」指向</span></a><div class="sn-scene-label">幕 2 · 进笔记看正文</div><a class="sn-item" href="#advice-2" data-target="advice-2"><span class="sn-num">2</span><span class="sn-text">把「配料表/原料品牌」前置</span></a><a class="sn-item" href="#advice-3" data-target="advice-3"><span class="sn-num">3</span><span class="sn-text">「先抑后扬」反向钩子</span></a><a class="sn-item" href="#advice-4" data-target="advice-4"><span class="sn-num">4</span><span class="sn-text">给「具体使用场景」</span></a><div class="sn-scene-label">幕 3 · 心动临下单</div><a class="sn-item" href="#advice-5" data-target="advice-5"><span class="sn-num">5</span><span class="sn-text">价格锚点 + 紧迫感组合拳</span></a><a class="sn-item" href="#advice-6" data-target="advice-6"><span class="sn-num">6</span><span class="sn-text">控制篇幅，2 屏内出商品链接</span></a><a class="sn-item" href="#advice-7" data-target="advice-7"><span class="sn-num">7</span><span class="sn-text">评论区：首条挂链 + 高位「购后评价」</span></a><div class="sn-scene-label">幕 4 · 内容形式</div><a class="sn-item" href="#advice-8" data-target="advice-8"><span class="sn-num">8</span><span class="sn-text">视频走「短直播切片」，图文走「连环图叙事」</span></a>
 </nav>
 
 <!-- 主内容 -->
@@ -357,7 +431,38 @@
     </ol>
   </div>
 
-  <section class="advice" id="advice-1">
+  <div class="scene-card">
+    <h3>🎬 8 大方法按「用户浏览动线」分 4 幕</h3>
+    <div class="scene-sub">商家自己刷小红书时的真实决策过程 → 对应商家该解决的问题 → 对应可用的方法</div>
+    <div class="scene-grid">
+      <div class="scene-item">
+        <div class="scene-num">幕 1</div>
+        <div class="scene-title">进笔记前 1 秒</div>
+        <div class="scene-desc">在 feed 流划，看封面 + 标题决定点不点</div>
+        <div class="scene-methods">→ 方法 1</div>
+      </div>
+      <div class="scene-item">
+        <div class="scene-num">幕 2</div>
+        <div class="scene-title">进笔记看正文</div>
+        <div class="scene-desc">判断「这是给我吃的吗、为啥是它不是替代品」</div>
+        <div class="scene-methods">→ 方法 2 / 3 / 4</div>
+      </div>
+      <div class="scene-item">
+        <div class="scene-num">幕 3</div>
+        <div class="scene-title">心动临下单</div>
+        <div class="scene-desc">找「现在为啥要买、链接在哪、别人说好不好」</div>
+        <div class="scene-methods">→ 方法 5 / 6 / 7</div>
+      </div>
+      <div class="scene-item">
+        <div class="scene-num">幕 4</div>
+        <div class="scene-title">收尾·内容形式</div>
+        <div class="scene-desc">视频和图文不要用同一个模板（元规则）</div>
+        <div class="scene-methods">→ 方法 8</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="scene-divider"><span class="badge">幕 1 · 进笔记前 1 秒</span><span class="line"></span><span class="label">让对的人对号入座</span></div><section class="advice" id="advice-1">
   <div class="advice-head">
     <span class="num-circle">1</span>
     <div class="advice-titles">
@@ -384,7 +489,7 @@
   </div>
 </a></div>
   <div class="tip-box"><div class="tip-label">💡 实操要点</div><div class="tip-body">标题/封面需要回答 3 个问题：① <b>给谁吃</b>（学生党/打工人/做饭族/送礼） ② <b>什么场景</b>（早八/下午茶/追剧/做饭/带娃） ③ <b>解决什么问题</b>（解馋/方便/性价比/送礼有面）。3 个问题里至少回答 2 个，转化才能跑出来。</div></div>
-</section><section class="advice" id="advice-2">
+</section><div class="scene-divider"><span class="badge">幕 2 · 进笔记看正文</span><span class="line"></span><span class="label">建信任 + 给画面感</span></div><section class="advice" id="advice-2">
   <div class="advice-head">
     <span class="num-circle">2</span>
     <div class="advice-titles">
@@ -415,85 +520,6 @@
   <div class="advice-head">
     <span class="num-circle">3</span>
     <div class="advice-titles">
-      <h2 class="advice-title">价格锚点 + 紧迫感组合拳</h2>
-      <div class="advice-sub">临门一脚拉单</div>
-    </div>
-  </div>
-  <div class="advice-logic">「具体价格 + 时间限制 + 库存压力」三件套大幅压缩用户决策时间。让用户感受到"现在不买就没了"，把"再想想"按死。</div>
-  <div class="cases two-col"><a class="case-card" href="https://www.xiaohongshu.com/explore/69fd202500000000370365c9" target="_blank" rel="noopener">
-  <div class="case-cover"><img src="imgs/69fd202500000000370365c9.jpg" alt="" loading="lazy"></div>
-  <div class="case-body">
-    <div class="case-merchant">Patchi</div>
-    <div class="case-title">补货500盒🔥断货王法式薄脆～手慢无！！</div>
-    <div class="case-highlight">标题三个紧迫信号：「补货500盒」（库存量化）+「断货王」（社会证明）+「手慢无」（直接催单）。</div>
-    <div class="case-link">点击查看完整笔记 →</div>
-  </div>
-</a><a class="case-card" href="https://www.xiaohongshu.com/explore/6a02f0200000000007020d36" target="_blank" rel="noopener">
-  <div class="case-cover"><img src="imgs/6a02f0200000000007020d36.jpg" alt="" loading="lazy"></div>
-  <div class="case-body">
-    <div class="case-merchant">肥猫鲜森手工美食</div>
-    <div class="case-title">重大通知‼️"烤地瓜"现在活动价9.9/盒</div>
-    <div class="case-highlight">9.9 元低门槛+"活动价"明确时限性+"重大通知"提示紧急级别。</div>
-    <div class="case-link">点击查看完整笔记 →</div>
-  </div>
-</a></div>
-  
-</section><section class="advice" id="advice-4">
-  <div class="advice-head">
-    <span class="num-circle">4</span>
-    <div class="advice-titles">
-      <h2 class="advice-title">控制篇幅，2 屏内出商品链接</h2>
-      <div class="advice-sub">下单按钮抢在用户失去耐心之前</div>
-    </div>
-  </div>
-  <div class="advice-logic">正文不是越长越好——<b>用户在前 2 屏没找到商品链接，转化窗口就关上了</b>。优质笔记普遍做到：开头 1-2 句钩子 + 1 段产品价值 + 商品挂载在第 2 屏可见区域，让用户无需翻第 2 屏即可下单。</div>
-  <div class="cases two-col"><a class="case-card" href="https://www.xiaohongshu.com/explore/66e851b7000000002503274c" target="_blank" rel="noopener">
-  <div class="case-cover"><img src="imgs/66e851b7000000002503274c.jpg" alt="" loading="lazy"></div>
-  <div class="case-body">
-    <div class="case-merchant">麦初 Bakery</div>
-    <div class="case-title">29元任选五个口味贝果包邮！</div>
-    <div class="case-highlight">标题极致简洁——「价格 + SKU 数量 + 包邮」一行说清楚卖什么、多少钱、为什么划算。正文极短，商品挂载直接出现在第 1 屏，<b>用户连"展开全文"都不需要点</b>。</div>
-    <div class="case-link">点击查看完整笔记 →</div>
-  </div>
-</a><a class="case-card" href="https://www.xiaohongshu.com/explore/67629335000000000b0210d2" target="_blank" rel="noopener">
-  <div class="case-cover"><img src="imgs/67629335000000000b0210d2.jpg" alt="" loading="lazy"></div>
-  <div class="case-body">
-    <div class="case-merchant">袋鼠先生</div>
-    <div class="case-title">太好了，是不咸的牛肉,自律期有救了</div>
-    <div class="case-highlight"><b>图文 5 张图，第 2 屏就出商品挂链</b>。标题先用 <b>「太好了」</b> 制造情绪，再用 <b>「不咸的牛肉」</b>+<b>「自律期有救了」</b> 双钩子直击轻盐人群和健身自律党。封面手持牛腱+笔记本电脑场景，画面信息密度高，不用滑长文就能下决策。</div>
-    <div class="case-link">点击查看完整笔记 →</div>
-  </div>
-</a></div>
-  <div class="tip-box"><div class="tip-label">💡 实操要点</div><div class="tip-body">① 首屏：高信噪比封面（产品+核心卖点，避免大段文字堆砌） ② 第 2 屏：客户证言 + 商品挂载卡片（带价格/折扣） ③ 商品挂载位置高于"展开全文"按钮，<b>用户无需点开正文也能下单</b>。</div></div>
-</section><section class="advice" id="advice-5">
-  <div class="advice-head">
-    <span class="num-circle">5</span>
-    <div class="advice-titles">
-      <h2 class="advice-title">评论区：首条挂链 + 高位「购后评价」</h2>
-      <div class="advice-sub">把评论区当"第二落地页"运营</div>
-    </div>
-  </div>
-  <div class="advice-logic"><b>"看评论区找别人怎么说"</b>是下单前的临门一脚。① 首条置顶商家评论挂商品链接 ② 在前几楼安排带"购后评价"标签的真实买家好评，形成"商家说→买家说→你也试试"的完整决策闭环。</div>
-  <div class="cases two-col"><div class="case-card case-card-screens">
-  <div class="case-body">
-    <div class="case-merchant">知食大爆炸</div>
-    <div class="case-title">海盐香葱苏打饼干（首条挂链 + 购后评价）</div>
-    <div class="case-highlight">商家在置顶评论里直接挂"海盐香葱苏打饼干网红款"商品链接，第二楼是带"购后评价"标签的真实买家晒图好评，评论区直接形成完整决策闭环。</div>
-  </div>
-  <div class="screens-grid"><figure class="screen-mini" onclick="openLightbox('imgs/comment_3.png')"><img src="imgs/comment_3.png" alt="" loading="lazy"><figcaption>💬 知食大爆炸 评论区示例 · 🔍 点击放大</figcaption></figure></div>
-</div><div class="case-card case-card-screens">
-  <div class="case-body">
-    <div class="case-merchant">米惦商店</div>
-    <div class="case-title">牛舌饼酥点（首条带"购买同款"挂链）</div>
-    <div class="case-highlight">商家首条评论"微微甜，奶香浓，嚼着好满足~"末尾带「购买同款 >」商品挂载，第三楼是真实买家带 3 张实物图的「购后评价」晒单。<b>评论区 = 第二轮种草 + 第二个购买入口</b>。</div>
-  </div>
-  <div class="screens-grid"><figure class="screen-mini" onclick="openLightbox('imgs/comment_4.png')"><img src="imgs/comment_4.png" alt="" loading="lazy"><figcaption>💬 米惦商店 评论区示例 · 🔍 点击放大</figcaption></figure></div>
-</div></div>
-  <div class="tip-box"><div class="tip-label">💡 实操要点</div><div class="tip-body">① 笔记发布后 1 小时内商家用主账号发首条评论并挂链，确保置顶 ② 提前邀请 2-3 个真实老客户在评论区晒"购后评价"（带"购后评价"标签更可信） ③ 避免评论区出现"求链接""哪里买"等暴露"找不到入口"的体验问题。</div></div>
-</section><section class="advice" id="advice-6">
-  <div class="advice-head">
-    <span class="num-circle">6</span>
-    <div class="advice-titles">
       <h2 class="advice-title">「先抑后扬」反向钩子</h2>
       <div class="advice-sub">用负面/反差表达赢得信任</div>
     </div>
@@ -517,9 +543,9 @@
   </div>
 </a></div>
   
-</section><section class="advice" id="advice-7">
+</section><section class="advice" id="advice-4">
   <div class="advice-head">
-    <span class="num-circle">7</span>
+    <span class="num-circle">4</span>
     <div class="advice-titles">
       <h2 class="advice-title">给「具体使用场景」</h2>
       <div class="advice-sub">拒绝通用形容词</div>
@@ -544,7 +570,86 @@
   </div>
 </a></div>
   
-</section><section class="advice" id="advice-8">
+</section><div class="scene-divider"><span class="badge">幕 3 · 心动临下单</span><span class="line"></span><span class="label">临门一脚拉单</span></div><section class="advice" id="advice-5">
+  <div class="advice-head">
+    <span class="num-circle">5</span>
+    <div class="advice-titles">
+      <h2 class="advice-title">价格锚点 + 紧迫感组合拳</h2>
+      <div class="advice-sub">临门一脚拉单</div>
+    </div>
+  </div>
+  <div class="advice-logic">「具体价格 + 时间限制 + 库存压力」三件套大幅压缩用户决策时间。让用户感受到"现在不买就没了"，把"再想想"按死。</div>
+  <div class="cases two-col"><a class="case-card" href="https://www.xiaohongshu.com/explore/69fd202500000000370365c9" target="_blank" rel="noopener">
+  <div class="case-cover"><img src="imgs/69fd202500000000370365c9.jpg" alt="" loading="lazy"></div>
+  <div class="case-body">
+    <div class="case-merchant">Patchi</div>
+    <div class="case-title">补货500盒🔥断货王法式薄脆～手慢无！！</div>
+    <div class="case-highlight">标题三个紧迫信号：「补货500盒」（库存量化）+「断货王」（社会证明）+「手慢无」（直接催单）。</div>
+    <div class="case-link">点击查看完整笔记 →</div>
+  </div>
+</a><a class="case-card" href="https://www.xiaohongshu.com/explore/6a02f0200000000007020d36" target="_blank" rel="noopener">
+  <div class="case-cover"><img src="imgs/6a02f0200000000007020d36.jpg" alt="" loading="lazy"></div>
+  <div class="case-body">
+    <div class="case-merchant">肥猫鲜森手工美食</div>
+    <div class="case-title">重大通知‼️"烤地瓜"现在活动价9.9/盒</div>
+    <div class="case-highlight">9.9 元低门槛+"活动价"明确时限性+"重大通知"提示紧急级别。</div>
+    <div class="case-link">点击查看完整笔记 →</div>
+  </div>
+</a></div>
+  
+</section><section class="advice" id="advice-6">
+  <div class="advice-head">
+    <span class="num-circle">6</span>
+    <div class="advice-titles">
+      <h2 class="advice-title">控制篇幅，2 屏内出商品链接</h2>
+      <div class="advice-sub">下单按钮抢在用户失去耐心之前</div>
+    </div>
+  </div>
+  <div class="advice-logic">正文不是越长越好——<b>用户在前 2 屏没找到商品链接，转化窗口就关上了</b>。优质笔记普遍做到：开头 1-2 句钩子 + 1 段产品价值 + 商品挂载在第 2 屏可见区域，让用户无需翻第 2 屏即可下单。</div>
+  <div class="cases two-col"><a class="case-card" href="https://www.xiaohongshu.com/explore/66e851b7000000002503274c" target="_blank" rel="noopener">
+  <div class="case-cover"><img src="imgs/66e851b7000000002503274c.jpg" alt="" loading="lazy"></div>
+  <div class="case-body">
+    <div class="case-merchant">麦初 Bakery</div>
+    <div class="case-title">29元任选五个口味贝果包邮！</div>
+    <div class="case-highlight">标题极致简洁——「价格 + SKU 数量 + 包邮」一行说清楚卖什么、多少钱、为什么划算。正文极短，商品挂载直接出现在第 1 屏，<b>用户连"展开全文"都不需要点</b>。</div>
+    <div class="case-link">点击查看完整笔记 →</div>
+  </div>
+</a><a class="case-card" href="https://www.xiaohongshu.com/explore/67629335000000000b0210d2" target="_blank" rel="noopener">
+  <div class="case-cover"><img src="imgs/67629335000000000b0210d2.jpg" alt="" loading="lazy"></div>
+  <div class="case-body">
+    <div class="case-merchant">袋鼠先生</div>
+    <div class="case-title">太好了，是不咸的牛肉,自律期有救了</div>
+    <div class="case-highlight"><b>图文 5 张图，第 2 屏就出商品挂链</b>。标题先用 <b>「太好了」</b> 制造情绪，再用 <b>「不咸的牛肉」</b>+<b>「自律期有救了」</b> 双钩子直击轻盐人群和健身自律党。封面手持牛腱+笔记本电脑场景，画面信息密度高，不用滑长文就能下决策。</div>
+    <div class="case-link">点击查看完整笔记 →</div>
+  </div>
+</a></div>
+  <div class="tip-box"><div class="tip-label">💡 实操要点</div><div class="tip-body">① 首屏：高信噪比封面（产品+核心卖点，避免大段文字堆砌） ② 第 2 屏：客户证言 + 商品挂载卡片（带价格/折扣） ③ 商品挂载位置高于"展开全文"按钮，<b>用户无需点开正文也能下单</b>。</div></div>
+</section><section class="advice" id="advice-7">
+  <div class="advice-head">
+    <span class="num-circle">7</span>
+    <div class="advice-titles">
+      <h2 class="advice-title">评论区：首条挂链 + 高位「购后评价」</h2>
+      <div class="advice-sub">把评论区当"第二落地页"运营</div>
+    </div>
+  </div>
+  <div class="advice-logic"><b>"看评论区找别人怎么说"</b>是下单前的临门一脚。① 首条置顶商家评论挂商品链接 ② 在前几楼安排带"购后评价"标签的真实买家好评，形成"商家说→买家说→你也试试"的完整决策闭环。</div>
+  <div class="cases two-col"><div class="case-card case-card-screens">
+  <div class="case-body">
+    <div class="case-merchant">知食大爆炸</div>
+    <div class="case-title">海盐香葱苏打饼干（首条挂链 + 购后评价）</div>
+    <div class="case-highlight">商家在置顶评论里直接挂"海盐香葱苏打饼干网红款"商品链接，第二楼是带"购后评价"标签的真实买家晒图好评，评论区直接形成完整决策闭环。</div>
+  </div>
+  <div class="screens-grid"><figure class="screen-mini" onclick="openLightbox('imgs/comment_3.png')"><img src="imgs/comment_3.png" alt="" loading="lazy"><figcaption>💬 知食大爆炸 评论区示例 · 🔍 点击放大</figcaption></figure></div>
+</div><div class="case-card case-card-screens">
+  <div class="case-body">
+    <div class="case-merchant">米惦商店</div>
+    <div class="case-title">牛舌饼酥点（首条带"购买同款"挂链）</div>
+    <div class="case-highlight">商家首条评论"微微甜，奶香浓，嚼着好满足~"末尾带「购买同款 >」商品挂载，第三楼是真实买家带 3 张实物图的「购后评价」晒单。<b>评论区 = 第二轮种草 + 第二个购买入口</b>。</div>
+  </div>
+  <div class="screens-grid"><figure class="screen-mini" onclick="openLightbox('imgs/comment_4.png')"><img src="imgs/comment_4.png" alt="" loading="lazy"><figcaption>💬 米惦商店 评论区示例 · 🔍 点击放大</figcaption></figure></div>
+</div></div>
+  <div class="tip-box"><div class="tip-label">💡 实操要点</div><div class="tip-body">① 笔记发布后 1 小时内商家用主账号发首条评论并挂链，确保置顶 ② 提前邀请 2-3 个真实老客户在评论区晒"购后评价"（带"购后评价"标签更可信） ③ 避免评论区出现"求链接""哪里买"等暴露"找不到入口"的体验问题。</div></div>
+</section><div class="scene-divider"><span class="badge">幕 4 · 内容形式</span><span class="line"></span><span class="label">视频/图文分头打法</span></div><section class="advice" id="advice-8">
   <div class="advice-head">
     <span class="num-circle">8</span>
     <div class="advice-titles">
@@ -611,14 +716,6 @@ function updateActiveNav() {
 window.addEventListener('scroll', updateActiveNav, {passive: true});
 updateActiveNav();
 </script>
-
-<!-- 阅读次数统计：不蒜子 busuanzi -->
-<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-<footer style="max-width:980px;margin:40px auto 24px;padding:24px 24px 32px;border-top:1px solid #e8d9c4;text-align:center;color:#9a7e6a;font-size:13px;line-height:1.8;font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei',sans-serif">
-  📖 本页累计阅读 <span id="busuanzi_value_page_pv" style="color:#C8553D;font-weight:600">--</span> 次
-  <span style="opacity:.4;margin:0 8px">·</span>
-  访客 <span id="busuanzi_value_page_uv" style="color:#C8553D;font-weight:600">--</span> 人
-</footer>
 
 </body>
 </html>
