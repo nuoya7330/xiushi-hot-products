@@ -13,344 +13,247 @@ body {
     line-height: 1.6;
 }
 
-/* Header */
 .hero {
     background: linear-gradient(135deg, #ff2442 0%, #ff6b8a 100%);
     color: #fff;
     padding: 48px 24px 40px;
     text-align: center;
 }
-.hero h1 {
-    font-size: 36px;
-    font-weight: 700;
-    margin-bottom: 12px;
-    letter-spacing: 1px;
-}
-.hero .subtitle {
-    font-size: 16px;
-    opacity: 0.95;
-    max-width: 680px;
-    margin: 0 auto 20px;
-}
-.hero-badges {
-    display: inline-flex;
-    gap: 12px;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin-top: 12px;
-}
+.hero h1 { font-size: 36px; font-weight: 700; margin-bottom: 12px; letter-spacing: 1px; }
+.hero .subtitle { font-size: 16px; opacity: 0.95; max-width: 680px; margin: 0 auto 20px; }
+.hero-badges { display: inline-flex; gap: 12px; flex-wrap: wrap; justify-content: center; margin-top: 12px; }
 .hero-badges span {
-    background: rgba(255,255,255,0.22);
-    backdrop-filter: blur(6px);
-    padding: 6px 14px;
-    border-radius: 20px;
-    font-size: 13px;
-    font-weight: 500;
+    background: rgba(255,255,255,0.22); backdrop-filter: blur(6px);
+    padding: 6px 14px; border-radius: 20px; font-size: 13px; font-weight: 500;
+}
+.hero .tip {
+    display: inline-block; margin-top: 16px; padding: 8px 18px;
+    background: rgba(255,255,255,0.15); border: 1px dashed rgba(255,255,255,0.5);
+    border-radius: 20px; font-size: 13px; font-weight: 500;
 }
 
-/* Nav */
 .nav-anchor {
-    background: #fff;
-    border-bottom: 1px solid #f0f0f0;
-    padding: 16px 0;
-    position: sticky;
-    top: 0;
-    z-index: 10;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+    background: #fff; border-bottom: 1px solid #f0f0f0; padding: 16px 0;
+    position: sticky; top: 0; z-index: 10; box-shadow: 0 2px 8px rgba(0,0,0,0.03);
 }
 .nav-inner {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 24px;
-    display: flex;
-    gap: 8px;
-    overflow-x: auto;
-    scrollbar-width: none;
+    max-width: 1200px; margin: 0 auto; padding: 0 24px;
+    display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none;
 }
 .nav-inner::-webkit-scrollbar { display: none; }
 .nav-inner a {
-    color: #595959;
-    text-decoration: none;
-    font-size: 14px;
-    padding: 8px 16px;
-    border-radius: 20px;
-    background: #f5f5f5;
-    white-space: nowrap;
-    font-weight: 500;
-    transition: all 0.2s;
-    flex-shrink: 0;
+    color: #595959; text-decoration: none; font-size: 14px;
+    padding: 8px 16px; border-radius: 20px; background: #f5f5f5;
+    white-space: nowrap; font-weight: 500; transition: all 0.2s; flex-shrink: 0;
 }
-.nav-inner a:hover {
-    background: #ff2442;
-    color: #fff;
-}
+.nav-inner a:hover { background: #ff2442; color: #fff; }
 
-/* Main container */
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 32px 24px 80px;
-}
-
-/* Section */
+.container { max-width: 1200px; margin: 0 auto; padding: 32px 24px 80px; }
 .section {
-    background: #fff;
-    border-radius: 16px;
-    padding: 32px;
-    margin-bottom: 24px;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+    background: #fff; border-radius: 16px; padding: 32px;
+    margin-bottom: 24px; box-shadow: 0 2px 12px rgba(0,0,0,0.04);
 }
-.section h2 {
-    font-size: 22px;
-    font-weight: 700;
-    margin-bottom: 8px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-.section .desc {
-    font-size: 13px;
-    color: #8c8c8c;
-    margin-bottom: 24px;
+.section h2 { font-size: 22px; font-weight: 700; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+.section .desc { font-size: 13px; color: #8c8c8c; margin-bottom: 24px; }
+.section .click-tip {
+    display: inline-block; background: #fff2e8; color: #d4380d;
+    font-size: 12px; padding: 3px 10px; border-radius: 10px; margin-left: 8px; font-weight: 500;
 }
 
-/* 8 Scene Cards Grid */
-.scenes-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-    gap: 16px;
+/* 场景卡（可点击） */
+.scenes-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; }
+.scene-card, .track-card {
+    position: relative; cursor: pointer;
+    transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s;
 }
 .scene-card {
     background: linear-gradient(135deg, #fffef7 0%, #fff9e6 100%);
-    border: 2px solid #ffe58f;
-    border-radius: 14px;
-    padding: 20px;
-    transition: transform 0.15s;
+    border: 2px solid #ffe58f; border-radius: 14px; padding: 20px 20px 44px;
 }
-.scene-card:hover { transform: translateY(-3px); }
+.scene-card:hover, .track-card:hover {
+    transform: translateY(-4px); box-shadow: 0 8px 20px rgba(255,36,66,0.12);
+    border-color: #ff2442;
+}
 .scene-card.hot {
     border-color: #ffa940;
     background: linear-gradient(135deg, #fff7e6 0%, #ffe7ba 100%);
 }
 .scene-emoji { font-size: 32px; margin-bottom: 8px; }
-.scene-title {
-    font-size: 17px;
-    font-weight: 700;
-    margin-bottom: 6px;
-    color: #262626;
-}
+.scene-title { font-size: 17px; font-weight: 700; margin-bottom: 6px; color: #262626; }
 .scene-title .hot-mark {
-    background: #fa541c;
-    color: #fff;
-    font-size: 11px;
-    padding: 2px 6px;
-    border-radius: 4px;
-    margin-left: 6px;
-    font-weight: 500;
+    background: #fa541c; color: #fff; font-size: 11px;
+    padding: 2px 6px; border-radius: 4px; margin-left: 6px; font-weight: 500;
 }
-.scene-desc {
-    font-size: 12px;
-    color: #8c8c8c;
-    line-height: 1.5;
+.scene-desc { font-size: 12px; color: #8c8c8c; line-height: 1.5; }
+.card-cta {
+    position: absolute; bottom: 12px; right: 14px;
+    font-size: 12px; color: #ff2442; font-weight: 600;
+    display: flex; align-items: center; gap: 4px;
+    background: rgba(255,36,66,0.08); padding: 3px 10px; border-radius: 12px;
 }
+.card-cta.dim { color: #bfbfbf; background: rgba(0,0,0,0.03); font-weight: 500; }
 
-/* Search KW Grid */
-.kw-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 16px;
-}
-.kw-card {
-    background: #fafafa;
-    border-radius: 12px;
-    padding: 18px 20px;
-    border-left: 4px solid #ff2442;
-}
-.kw-cat {
-    font-size: 14px;
-    font-weight: 600;
-    margin-bottom: 12px;
-    color: #262626;
-}
-.kw-tags {
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-}
-.kw-tag {
-    background: #fff;
-    color: #ff2442;
-    padding: 4px 12px;
-    border-radius: 14px;
-    font-size: 13px;
-    border: 1px solid #ffccc7;
-    font-weight: 500;
-}
-
-/* 6 Track Cards */
-.tracks-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 16px;
-}
+/* 6 大赛道 */
+.tracks-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
 .track-card {
     background: linear-gradient(135deg, #f6ffed 0%, #d9f7be 100%);
-    border-radius: 14px;
-    padding: 20px;
+    border-radius: 14px; padding: 20px 20px 44px;
     border: 2px solid #b7eb8f;
 }
 .track-emoji { font-size: 30px; margin-bottom: 8px; }
-.track-name {
-    font-size: 16px;
-    font-weight: 700;
-    margin-bottom: 6px;
+.track-name { font-size: 16px; font-weight: 700; margin-bottom: 6px; }
+.track-desc { font-size: 12px; color: #595959; }
+
+/* 热搜词 */
+.kw-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; }
+.kw-card {
+    background: #fafafa; border-radius: 12px; padding: 18px 20px;
+    border-left: 4px solid #ff2442;
 }
-.track-desc {
-    font-size: 12px;
-    color: #595959;
+.kw-cat { font-size: 14px; font-weight: 600; margin-bottom: 12px; color: #262626; }
+.kw-tags { display: flex; gap: 8px; flex-wrap: wrap; }
+.kw-tag {
+    background: #fff; color: #ff2442; padding: 4px 12px; border-radius: 14px;
+    font-size: 13px; border: 1px solid #ffccc7; font-weight: 500;
+    cursor: pointer; transition: all 0.15s; display: inline-flex; align-items: center; gap: 4px;
 }
+.kw-tag:hover { background: #ff2442; color: #fff; transform: translateY(-1px); }
+.kw-tag .cnt {
+    background: rgba(255,36,66,0.1); color: #ff2442;
+    font-size: 10px; padding: 1px 6px; border-radius: 8px; font-weight: 600;
+}
+.kw-tag:hover .cnt { background: rgba(255,255,255,0.3); color: #fff; }
+.kw-tag.zero { color: #8c8c8c; border-color: #d9d9d9; background: #fafafa; }
+.kw-tag.zero .cnt { background: #f0f0f0; color: #8c8c8c; }
+.kw-tag.zero:hover { background: #595959; color: #fff; }
 
 /* Tabs */
-.tabs {
-    display: flex;
-    gap: 4px;
-    border-bottom: 2px solid #f0f0f0;
-    margin-bottom: 20px;
-    overflow-x: auto;
-    scrollbar-width: none;
-}
+.tabs { display: flex; gap: 4px; border-bottom: 2px solid #f0f0f0; margin-bottom: 20px; overflow-x: auto; scrollbar-width: none; }
 .tabs::-webkit-scrollbar { display: none; }
 .tab-btn {
-    background: none;
-    border: none;
-    padding: 10px 18px;
-    font-size: 14px;
-    font-weight: 500;
-    color: #8c8c8c;
-    cursor: pointer;
-    border-bottom: 3px solid transparent;
-    white-space: nowrap;
-    transition: all 0.2s;
-    font-family: inherit;
+    background: none; border: none; padding: 10px 18px; font-size: 14px; font-weight: 500;
+    color: #8c8c8c; cursor: pointer; border-bottom: 3px solid transparent;
+    white-space: nowrap; transition: all 0.2s; font-family: inherit;
 }
-.tab-btn.active {
-    color: #ff2442;
-    border-bottom-color: #ff2442;
-}
+.tab-btn.active { color: #ff2442; border-bottom-color: #ff2442; }
 .tab-btn:hover { color: #ff2442; }
 .tab-panel { display: none; }
 .tab-panel.active { display: block; animation: fadeIn 0.25s; }
 @keyframes fadeIn { from{opacity:0} to{opacity:1} }
 
 .tab-meta {
-    font-size: 13px;
-    color: #8c8c8c;
-    margin-bottom: 16px;
-    padding: 10px 14px;
-    background: #fafafa;
-    border-radius: 8px;
-    border-left: 3px solid #ff2442;
+    font-size: 13px; color: #8c8c8c; margin-bottom: 16px;
+    padding: 10px 14px; background: #fafafa; border-radius: 8px; border-left: 3px solid #ff2442;
 }
 
-/* Table */
-.table-wrap {
-    overflow-x: auto;
-    border-radius: 10px;
-    border: 1px solid #f0f0f0;
-}
-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 13px;
-    min-width: 720px;
-}
-thead {
-    background: #fafafa;
-}
-th {
-    text-align: left;
-    padding: 12px 16px;
-    font-weight: 600;
-    color: #595959;
-    border-bottom: 2px solid #f0f0f0;
-}
-td {
-    padding: 12px 16px;
-    border-bottom: 1px solid #f5f5f5;
-    vertical-align: middle;
-}
+.table-wrap { overflow-x: auto; border-radius: 10px; border: 1px solid #f0f0f0; }
+table { width: 100%; border-collapse: collapse; font-size: 13px; min-width: 720px; }
+thead { background: #fafafa; }
+th { text-align: left; padding: 12px 16px; font-weight: 600; color: #595959; border-bottom: 2px solid #f0f0f0; }
+td { padding: 12px 16px; border-bottom: 1px solid #f5f5f5; vertical-align: middle; }
 tbody tr:hover { background: #fffbfb; }
-
 .col-rank { width: 60px; }
 .rank-badge {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 28px;
-    height: 28px;
-    border-radius: 50%;
-    font-weight: 700;
-    font-size: 13px;
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 28px; height: 28px; border-radius: 50%; font-weight: 700; font-size: 13px;
 }
 .rank-1 { background: linear-gradient(135deg,#ff2442,#ff6b8a); color:#fff; }
 .rank-2 { background: #fff1f0; color: #ff2442; border: 1px solid #ffccc7; }
 .rank-3 { background: #fafafa; color: #595959; }
-
 .col-name { font-weight: 500; color: #262626; }
 .col-shop { color: #595959; white-space: nowrap; }
 .col-cat, .col-scene { white-space: nowrap; }
-
 .cat-badge, .scene-badge {
-    display: inline-block;
-    padding: 3px 10px;
-    border-radius: 12px;
-    font-size: 12px;
-    background: #f5f5f5;
-    color: #595959;
-    font-weight: 500;
+    display: inline-block; padding: 3px 10px; border-radius: 12px;
+    font-size: 12px; background: #f5f5f5; color: #595959; font-weight: 500;
 }
-.scene-badge {
-    background: #fff2e8;
-    color: #d4380d;
-}
+.scene-badge { background: #fff2e8; color: #d4380d; }
 
-/* CTA / Footer */
 .cta {
     background: linear-gradient(135deg, #262626 0%, #434343 100%);
-    color: #fff;
-    padding: 40px 32px;
-    border-radius: 16px;
-    text-align: center;
-    margin-top: 32px;
+    color: #fff; padding: 40px 32px; border-radius: 16px;
+    text-align: center; margin-top: 32px;
 }
-.cta h3 {
-    font-size: 22px;
-    margin-bottom: 10px;
-}
-.cta p {
-    opacity: 0.85;
-    font-size: 14px;
-    margin-bottom: 20px;
-}
+.cta h3 { font-size: 22px; margin-bottom: 10px; }
+.cta p { opacity: 0.85; font-size: 14px; margin-bottom: 20px; }
 .cta-btn {
-    display: inline-block;
-    background: #ff2442;
-    color: #fff;
-    padding: 12px 32px;
-    border-radius: 24px;
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 14px;
+    display: inline-block; background: #ff2442; color: #fff;
+    padding: 12px 32px; border-radius: 24px; text-decoration: none;
+    font-weight: 600; font-size: 14px;
 }
 footer {
-    text-align: center;
-    color: #bfbfbf;
-    font-size: 12px;
-    padding: 24px 20px;
-    line-height: 1.8;
+    text-align: center; color: #bfbfbf; font-size: 12px;
+    padding: 24px 20px; line-height: 1.8;
 }
 
-/* Mobile */
+/* Modal */
+.modal-mask {
+    display: none; position: fixed; inset: 0; z-index: 100;
+    background: rgba(0,0,0,0.5); backdrop-filter: blur(3px);
+    align-items: flex-start; justify-content: center;
+    padding: 40px 16px; overflow-y: auto;
+}
+.modal-mask.show { display: flex; animation: fadeIn 0.2s; }
+.modal {
+    background: #fff; border-radius: 16px; max-width: 900px; width: 100%;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    overflow: hidden; display: flex; flex-direction: column;
+    max-height: calc(100vh - 80px);
+}
+.modal-header {
+    padding: 24px 28px 16px; border-bottom: 1px solid #f0f0f0;
+    background: linear-gradient(135deg, #fff5f5 0%, #fff 100%);
+    display: flex; align-items: flex-start; justify-content: space-between; gap: 16px;
+}
+.modal-header .title { font-size: 20px; font-weight: 700; color: #262626; margin-bottom: 6px; }
+.modal-header .meta { font-size: 13px; color: #8c8c8c; }
+.modal-close {
+    background: none; border: none; font-size: 24px; color: #8c8c8c;
+    cursor: pointer; padding: 4px 10px; border-radius: 6px; line-height: 1;
+    font-family: inherit;
+}
+.modal-close:hover { background: #f5f5f5; color: #262626; }
+.modal-body { padding: 20px 28px 28px; overflow-y: auto; flex: 1; }
+.modal-body .sub-title {
+    font-size: 14px; font-weight: 600; color: #262626;
+    margin: 16px 0 10px; padding-bottom: 8px; border-bottom: 1px solid #f0f0f0;
+    display: flex; align-items: center; gap: 8px;
+}
+.modal-body .sub-title:first-child { margin-top: 0; }
+.modal-body .sub-title .count {
+    background: #ff2442; color: #fff; font-size: 11px;
+    padding: 2px 8px; border-radius: 10px; font-weight: 500;
+}
+.modal-empty {
+    text-align: center; padding: 40px 20px; color: #8c8c8c; font-size: 14px;
+    background: #fafafa; border-radius: 10px;
+}
+.modal-empty .emoji { font-size: 40px; margin-bottom: 12px; display: block; }
+
+.p-item {
+    padding: 12px 14px; border-radius: 10px; background: #fafafa;
+    margin-bottom: 8px; display: flex; flex-direction: column; gap: 6px;
+}
+.p-item .p-name { font-size: 13px; color: #262626; font-weight: 500; line-height: 1.5; }
+.p-item .p-shop { font-size: 12px; color: #595959; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+.p-item .p-tag {
+    background: #fff; padding: 2px 8px; border-radius: 8px; font-size: 11px;
+    color: #8c8c8c; border: 1px solid #f0f0f0;
+}
+.p-item .p-tag.hot { background: #fff2e8; color: #d4380d; border-color: #ffbb96; }
+.p-item .p-tag.src { background: #f0f5ff; color: #1d39c4; border-color: #adc6ff; }
+
+.s-item {
+    padding: 10px 14px; border-radius: 10px; background: #fafafa;
+    margin-bottom: 6px; display: flex; align-items: center; justify-content: space-between; gap: 10px;
+}
+.s-item .s-name { font-size: 13px; color: #262626; font-weight: 500; }
+.s-item .s-meta { font-size: 11px; color: #8c8c8c; }
+.s-item .s-pool {
+    background: #fff; padding: 2px 8px; border-radius: 8px; font-size: 11px;
+    color: #ff2442; border: 1px solid #ffccc7; margin-left: 4px;
+}
+
 @media (max-width: 768px) {
     .hero { padding: 32px 20px 28px; }
     .hero h1 { font-size: 26px; }
@@ -358,11 +261,8 @@ footer {
     .container { padding: 20px 12px 60px; }
     .section { padding: 20px 16px; border-radius: 12px; }
     .section h2 { font-size: 18px; }
-    .scenes-grid, .kw-grid, .tracks-grid {
-        grid-template-columns: 1fr 1fr;
-        gap: 10px;
-    }
-    .scene-card, .kw-card, .track-card { padding: 14px; }
+    .scenes-grid, .kw-grid, .tracks-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+    .scene-card, .kw-card, .track-card { padding: 14px 14px 40px; }
     .scene-emoji, .track-emoji { font-size: 24px; }
     .scene-title, .track-name { font-size: 14px; }
     .scene-desc, .track-desc { font-size: 11px; }
@@ -371,6 +271,10 @@ footer {
     th, td { padding: 10px 12px; font-size: 12px; }
     .cta h3 { font-size: 18px; }
     .cta p { font-size: 13px; }
+    .modal-mask { padding: 20px 10px; }
+    .modal-header { padding: 18px 20px 14px; }
+    .modal-header .title { font-size: 16px; }
+    .modal-body { padding: 14px 20px 20px; }
 }
 </style>
 </head>
@@ -385,6 +289,7 @@ footer {
         <span>🔥 近30天热销</span>
         <span>📅 更新至 2026-06-30</span>
     </div>
+    <div class="tip">💡 点击场景卡 / 赛道卡 / 热搜词，查看对应商品与合作品牌</div>
 </header>
 
 <nav class="nav-anchor">
@@ -402,28 +307,28 @@ footer {
 
 <!-- 8 大场景 -->
 <section class="section" id="scenes">
-    <h2>🔥 8 大美食场景</h2>
+    <h2>🔥 8 大美食场景 <span class="click-tip">点击卡片查看商品</span></h2>
     <p class="desc">围绕小红书用户的真实生活场景，K 播主播主推的 8 大高转化选题方向</p>
     <div class="scenes-grid">
-        <div class="scene-card hot"><div class="scene-emoji">🍹</div><div class="scene-title">夏日解暑<span class="hot-mark">HOT</span></div><div class="scene-desc">清凉解暑的饮品、冰品、水果冻干等夏日刚需品</div></div><div class="scene-card hot"><div class="scene-emoji">🗺️</div><div class="scene-title">地域溯源<span class="hot-mark">HOT</span></div><div class="scene-desc">各地非遗、地标、原产地直供的特色好物</div></div><div class="scene-card "><div class="scene-emoji">🏃</div><div class="scene-title">减脂健身</div><div class="scene-desc">低卡低糖、高蛋白、代餐等健康身材类食品</div></div><div class="scene-card "><div class="scene-emoji">🌅</div><div class="scene-title">快手早餐</div><div class="scene-desc">面包、燕麦、酸奶、饭团等 5 分钟搞定早餐</div></div><div class="scene-card "><div class="scene-emoji">🍷</div><div class="scene-title">微醺小甜水</div><div class="scene-desc">果酒、精酿、预调酒、气泡饮等悦己微醺场景</div></div><div class="scene-card "><div class="scene-emoji">🍰</div><div class="scene-title">甜品脑袋</div><div class="scene-desc">巧克力、糕点、慕斯、鲜奶油等甜味治愈系</div></div><div class="scene-card "><div class="scene-emoji">🍿</div><div class="scene-title">咸味零食</div><div class="scene-desc">肉脯、坚果、薯片、卤味等下饭下酒硬货</div></div><div class="scene-card "><div class="scene-emoji">🍵</div><div class="scene-title">中式食养</div><div class="scene-desc">燕窝、花胶、黄精、石斛等东方养生滋补</div></div>
+        <div class="scene-card hot" data-scene="夏日解暑"><div class="scene-emoji">🍹</div><div class="scene-title">夏日解暑<span class="hot-mark">HOT</span></div><div class="scene-desc">清凉解暑的饮品、冰品、水果冻干等夏日刚需品</div><div class="card-cta ">查看 8 件商品 →</div></div><div class="scene-card hot" data-scene="地域溯源"><div class="scene-emoji">🗺️</div><div class="scene-title">地域溯源<span class="hot-mark">HOT</span></div><div class="scene-desc">各地非遗、地标、原产地直供的特色好物</div><div class="card-cta ">查看 15 件商品 →</div></div><div class="scene-card " data-scene="减脂健身"><div class="scene-emoji">🏃</div><div class="scene-title">减脂健身</div><div class="scene-desc">低卡低糖、高蛋白、代餐等健康身材类食品</div><div class="card-cta ">查看 15 件商品 →</div></div><div class="scene-card " data-scene="快手早餐"><div class="scene-emoji">🌅</div><div class="scene-title">快手早餐</div><div class="scene-desc">面包、燕麦、酸奶、饭团等 5 分钟搞定早餐</div><div class="card-cta ">查看 32 件商品 →</div></div><div class="scene-card " data-scene="微醺小甜水"><div class="scene-emoji">🍷</div><div class="scene-title">微醺小甜水</div><div class="scene-desc">果酒、精酿、预调酒、气泡饮等悦己微醺场景</div><div class="card-cta ">查看 3 件商品 →</div></div><div class="scene-card " data-scene="甜品脑袋"><div class="scene-emoji">🍰</div><div class="scene-title">甜品脑袋</div><div class="scene-desc">巧克力、糕点、慕斯、鲜奶油等甜味治愈系</div><div class="card-cta ">查看 3 件商品 →</div></div><div class="scene-card " data-scene="咸味零食"><div class="scene-emoji">🍿</div><div class="scene-title">咸味零食</div><div class="scene-desc">肉脯、坚果、薯片、卤味等下饭下酒硬货</div><div class="card-cta ">查看 15 件商品 →</div></div><div class="scene-card " data-scene="中式食养"><div class="scene-emoji">🍵</div><div class="scene-title">中式食养</div><div class="scene-desc">燕窝、花胶、黄精、石斛等东方养生滋补</div><div class="card-cta ">查看 95 件商品 →</div></div>
     </div>
 </section>
 
 <!-- 6 大赛道 -->
 <section class="section" id="tracks">
-    <h2>🎯 6 大赛道</h2>
+    <h2>🎯 6 大赛道 <span class="click-tip">点击卡片查看商品+品牌</span></h2>
     <p class="desc">休食&滋补合并大盘下的 6 大一级品类，商家可对号入座找到自己的赛道</p>
     <div class="tracks-grid">
-        <div class="track-card"><div class="track-emoji">☕</div><div class="track-name">咖啡/麦片/冲饮</div><div class="track-desc">咖啡、奶制品、燕麦、代餐冲饮</div></div><div class="track-card"><div class="track-emoji">💊</div><div class="track-name">传统滋补营养品</div><div class="track-desc">燕窝、花胶、黄精、蜂蜜、阿胶</div></div><div class="track-card"><div class="track-emoji">🍜</div><div class="track-name">粮油调味/速食/干货/烘焙</div><div class="track-desc">速食、粮油、干货、烘焙原料</div></div><div class="track-card"><div class="track-emoji">🍪</div><div class="track-name">零食/坚果/特产</div><div class="track-desc">肉脯、坚果、糕点、巧克力、糖果</div></div><div class="track-card"><div class="track-emoji">🍃</div><div class="track-name">茶</div><div class="track-desc">红茶、绿茶、乌龙、普洱、花草茶</div></div><div class="track-card"><div class="track-emoji">🥂</div><div class="track-name">酒</div><div class="track-desc">果酒、露酒、葡萄酒、精酿、洋酒</div></div>
+        <div class="track-card" data-cat="咖啡/麦片/冲饮"><div class="track-emoji">☕</div><div class="track-name">咖啡/麦片/冲饮</div><div class="track-desc">咖啡、奶制品、燕麦、代餐冲饮</div><div class="card-cta ">38 品 · 71 家 →</div></div><div class="track-card" data-cat="传统滋补营养品"><div class="track-emoji">💊</div><div class="track-name">传统滋补营养品</div><div class="track-desc">燕窝、花胶、黄精、蜂蜜、阿胶</div><div class="card-cta ">91 品 · 45 家 →</div></div><div class="track-card" data-cat="粮油调味/速食/干货/烘焙"><div class="track-emoji">🍜</div><div class="track-name">粮油调味/速食/干货/烘焙</div><div class="track-desc">速食、粮油、干货、烘焙原料</div><div class="card-cta ">25 品 · 40 家 →</div></div><div class="track-card" data-cat="零食/坚果/特产"><div class="track-emoji">🍪</div><div class="track-name">零食/坚果/特产</div><div class="track-desc">肉脯、坚果、糕点、巧克力、糖果</div><div class="card-cta ">24 品 · 64 家 →</div></div><div class="track-card" data-cat="茶"><div class="track-emoji">🍃</div><div class="track-name">茶</div><div class="track-desc">红茶、绿茶、乌龙、普洱、花草茶</div><div class="card-cta ">8 品 · 10 家 →</div></div><div class="track-card" data-cat="酒"><div class="track-emoji">🥂</div><div class="track-name">酒</div><div class="track-desc">果酒、露酒、葡萄酒、精酿、洋酒</div><div class="card-cta ">查看 3 家品牌 →</div></div>
     </div>
 </section>
 
 <!-- 品类热搜词 -->
 <section class="section" id="keywords">
-    <h2>🔍 品类热搜词</h2>
+    <h2>🔍 品类热搜词 <span class="click-tip">点击热搜词查看命中商品</span></h2>
     <p class="desc">小红书站内搜索热度飙升的品类关键词，是内容种草与选品的重要风向标</p>
     <div class="kw-grid">
-        <div class="kw-card"><div class="kw-cat">☕ 咖啡/麦片/冲饮</div><div class="kw-tags"><span class="kw-tag">咖啡</span><span class="kw-tag">奶粉</span><span class="kw-tag">希腊酸奶</span><span class="kw-tag">速溶咖啡</span><span class="kw-tag">麦片</span></div></div><div class="kw-card"><div class="kw-cat">💊 传统滋补营养品</div><div class="kw-tags"><span class="kw-tag">黄精</span><span class="kw-tag">阿胶糕</span><span class="kw-tag">花胶</span><span class="kw-tag">石斛</span><span class="kw-tag">燕窝</span></div></div><div class="kw-card"><div class="kw-cat">🍜 粮油调味/速食/干货/烘焙</div><div class="kw-tags"><span class="kw-tag">饭团</span><span class="kw-tag">意面</span><span class="kw-tag">火鸡面</span><span class="kw-tag">橄榄油</span><span class="kw-tag">杂粮馒头</span></div></div><div class="kw-card"><div class="kw-cat">🍪 零食/坚果/特产</div><div class="kw-tags"><span class="kw-tag">牛脆片</span><span class="kw-tag">迪拜软曲奇</span><span class="kw-tag">坚果</span><span class="kw-tag">冻干果干</span><span class="kw-tag">巧克力</span></div></div><div class="kw-card"><div class="kw-cat">🍃 茶</div><div class="kw-tags"><span class="kw-tag">冷泡茶</span><span class="kw-tag">茉莉花茶</span><span class="kw-tag">抹茶</span><span class="kw-tag">康普茶</span><span class="kw-tag">祛湿茶</span></div></div><div class="kw-card"><div class="kw-cat">🥂 酒</div><div class="kw-tags"><span class="kw-tag">精酿啤酒</span><span class="kw-tag">果酒</span><span class="kw-tag">梅酒</span><span class="kw-tag">起泡酒</span><span class="kw-tag">米酒</span></div></div>
+        <div class="kw-card"><div class="kw-cat">☕ 咖啡/麦片/冲饮</div><div class="kw-tags"><span class="kw-tag " data-kw="咖啡" data-cat="☕ 咖啡/麦片/冲饮">咖啡 <span class="cnt">7</span></span><span class="kw-tag " data-kw="奶粉" data-cat="☕ 咖啡/麦片/冲饮">奶粉 <span class="cnt">4</span></span><span class="kw-tag " data-kw="希腊酸奶" data-cat="☕ 咖啡/麦片/冲饮">希腊酸奶 <span class="cnt">2</span></span><span class="kw-tag " data-kw="速溶咖啡" data-cat="☕ 咖啡/麦片/冲饮">速溶咖啡 <span class="cnt">1</span></span><span class="kw-tag " data-kw="麦片" data-cat="☕ 咖啡/麦片/冲饮">麦片 <span class="cnt">2</span></span></div></div><div class="kw-card"><div class="kw-cat">💊 传统滋补营养品</div><div class="kw-tags"><span class="kw-tag " data-kw="黄精" data-cat="💊 传统滋补营养品">黄精 <span class="cnt">11</span></span><span class="kw-tag " data-kw="阿胶糕" data-cat="💊 传统滋补营养品">阿胶糕 <span class="cnt">1</span></span><span class="kw-tag " data-kw="花胶" data-cat="💊 传统滋补营养品">花胶 <span class="cnt">4</span></span><span class="kw-tag " data-kw="石斛" data-cat="💊 传统滋补营养品">石斛 <span class="cnt">11</span></span><span class="kw-tag " data-kw="燕窝" data-cat="💊 传统滋补营养品">燕窝 <span class="cnt">14</span></span></div></div><div class="kw-card"><div class="kw-cat">🍜 粮油调味/速食/干货/烘焙</div><div class="kw-tags"><span class="kw-tag " data-kw="饭团" data-cat="🍜 粮油调味/速食/干货/烘焙">饭团 <span class="cnt">2</span></span><span class="kw-tag " data-kw="意面" data-cat="🍜 粮油调味/速食/干货/烘焙">意面 <span class="cnt">1</span></span><span class="kw-tag zero" data-kw="火鸡面" data-cat="🍜 粮油调味/速食/干货/烘焙">火鸡面 <span class="cnt">0</span></span><span class="kw-tag " data-kw="橄榄油" data-cat="🍜 粮油调味/速食/干货/烘焙">橄榄油 <span class="cnt">6</span></span><span class="kw-tag zero" data-kw="杂粮馒头" data-cat="🍜 粮油调味/速食/干货/烘焙">杂粮馒头 <span class="cnt">0</span></span></div></div><div class="kw-card"><div class="kw-cat">🍪 零食/坚果/特产</div><div class="kw-tags"><span class="kw-tag zero" data-kw="牛脆片" data-cat="🍪 零食/坚果/特产">牛脆片 <span class="cnt">0</span></span><span class="kw-tag zero" data-kw="迪拜软曲奇" data-cat="🍪 零食/坚果/特产">迪拜软曲奇 <span class="cnt">0</span></span><span class="kw-tag " data-kw="坚果" data-cat="🍪 零食/坚果/特产">坚果 <span class="cnt">5</span></span><span class="kw-tag zero" data-kw="冻干果干" data-cat="🍪 零食/坚果/特产">冻干果干 <span class="cnt">0</span></span><span class="kw-tag " data-kw="巧克力" data-cat="🍪 零食/坚果/特产">巧克力 <span class="cnt">5</span></span></div></div><div class="kw-card"><div class="kw-cat">🍃 茶</div><div class="kw-tags"><span class="kw-tag zero" data-kw="冷泡茶" data-cat="🍃 茶">冷泡茶 <span class="cnt">0</span></span><span class="kw-tag " data-kw="茉莉花茶" data-cat="🍃 茶">茉莉花茶 <span class="cnt">1</span></span><span class="kw-tag zero" data-kw="抹茶" data-cat="🍃 茶">抹茶 <span class="cnt">0</span></span><span class="kw-tag " data-kw="康普茶" data-cat="🍃 茶">康普茶 <span class="cnt">1</span></span><span class="kw-tag zero" data-kw="祛湿茶" data-cat="🍃 茶">祛湿茶 <span class="cnt">0</span></span></div></div><div class="kw-card"><div class="kw-cat">🥂 酒</div><div class="kw-tags"><span class="kw-tag zero" data-kw="精酿啤酒" data-cat="🥂 酒">精酿啤酒 <span class="cnt">0</span></span><span class="kw-tag zero" data-kw="果酒" data-cat="🥂 酒">果酒 <span class="cnt">0</span></span><span class="kw-tag zero" data-kw="梅酒" data-cat="🥂 酒">梅酒 <span class="cnt">0</span></span><span class="kw-tag zero" data-kw="起泡酒" data-cat="🥂 酒">起泡酒 <span class="cnt">0</span></span><span class="kw-tag zero" data-kw="米酒" data-cat="🥂 酒">米酒 <span class="cnt">0</span></span></div></div>
     </div>
 </section>
 
@@ -2167,199 +2072,199 @@ footer {
         <tr>
             <td class="col-rank"><span class="rank-badge rank-1">1</span></td>
             <td class="col-shop">🏪 OH MyFood 哦唛福旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ ☕ 咖啡/麦片/冲饮</span></td>
+            <td class="col-cat"><span class="cat-badge">☕ 咖啡/麦片/冲饮</span></td>
             <td class="col-cat">冲饮品/食补粉粉</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-1">2</span></td>
             <td class="col-shop">🏪 南食召食品旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ 🍜 粮油调味/速食/干货/烘焙</span></td>
+            <td class="col-cat"><span class="cat-badge">🍜 粮油调味/速食/干货/烘焙</span></td>
             <td class="col-cat">调味品/果酱/沙拉/干副食</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-1">3</span></td>
             <td class="col-shop">🏪 榴芒一刻旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ 🍪 零食/坚果/特产</span></td>
+            <td class="col-cat"><span class="cat-badge">🍪 零食/坚果/特产</span></td>
             <td class="col-cat">月饼</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-2">4</span></td>
             <td class="col-shop">🏪 呼伦贝尔哈尼牧场的店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ 🍪 零食/坚果/特产</span></td>
+            <td class="col-cat"><span class="cat-badge">🍪 零食/坚果/特产</span></td>
             <td class="col-cat">牛肉干/猪肉脯/卤味零食</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-2">5</span></td>
             <td class="col-shop">🏪 So Acai旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ ☕ 咖啡/麦片/冲饮</span></td>
+            <td class="col-cat"><span class="cat-badge">☕ 咖啡/麦片/冲饮</span></td>
             <td class="col-cat">冲饮品/食补粉粉</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-2">6</span></td>
             <td class="col-shop">🏪 ELECTRO X 粒刻旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ ☕ 咖啡/麦片/冲饮</span></td>
+            <td class="col-cat"><span class="cat-badge">☕ 咖啡/麦片/冲饮</span></td>
             <td class="col-cat">饮料</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-2">7</span></td>
             <td class="col-shop">🏪 满滋屋食品旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ 🍪 零食/坚果/特产</span></td>
+            <td class="col-cat"><span class="cat-badge">🍪 零食/坚果/特产</span></td>
             <td class="col-cat">糕点/点心</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-2">8</span></td>
             <td class="col-shop">🏪 观今普洱茶的店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ 🍃 茶</span></td>
+            <td class="col-cat"><span class="cat-badge">🍃 茶</span></td>
             <td class="col-cat">普洱</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-2">9</span></td>
             <td class="col-shop">🏪 南旗的店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ 🍃 茶</span></td>
+            <td class="col-cat"><span class="cat-badge">🍃 茶</span></td>
             <td class="col-cat">红茶</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-2">10</span></td>
             <td class="col-shop">🏪 隐谷野旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ 🍪 零食/坚果/特产</span></td>
+            <td class="col-cat"><span class="cat-badge">🍪 零食/坚果/特产</span></td>
             <td class="col-cat">牛肉干/猪肉脯/卤味零食</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">11</span></td>
             <td class="col-shop">🏪 宿咕的铁皮盒旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ 🍪 零食/坚果/特产</span></td>
+            <td class="col-cat"><span class="cat-badge">🍪 零食/坚果/特产</span></td>
             <td class="col-cat">饼干/膨化</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">12</span></td>
             <td class="col-shop">🏪 Oarmilk吾岛旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ ☕ 咖啡/麦片/冲饮</span></td>
+            <td class="col-cat"><span class="cat-badge">☕ 咖啡/麦片/冲饮</span></td>
             <td class="col-cat">低温乳制品</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">13</span></td>
             <td class="col-shop">🏪 丰草牧场旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ ☕ 咖啡/麦片/冲饮</span></td>
+            <td class="col-cat"><span class="cat-badge">☕ 咖啡/麦片/冲饮</span></td>
             <td class="col-cat">奶粉</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">14</span></td>
             <td class="col-shop">🏪 脱骨侠旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ 🍪 零食/坚果/特产</span></td>
+            <td class="col-cat"><span class="cat-badge">🍪 零食/坚果/特产</span></td>
             <td class="col-cat">牛肉干/猪肉脯/卤味零食</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">15</span></td>
             <td class="col-shop">🏪 BASAO旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ ☕ 咖啡/麦片/冲饮</span></td>
+            <td class="col-cat"><span class="cat-badge">☕ 咖啡/麦片/冲饮</span></td>
             <td class="col-cat">饮料</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">16</span></td>
             <td class="col-shop">🏪 三关六码头旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ 🍪 零食/坚果/特产</span></td>
+            <td class="col-cat"><span class="cat-badge">🍪 零食/坚果/特产</span></td>
             <td class="col-cat">牛肉干/猪肉脯/卤味零食</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">17</span></td>
             <td class="col-shop">🏪 Fortnum&amp;Mason福南梅森海外旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ 🍃 茶</span></td>
+            <td class="col-cat"><span class="cat-badge">🍃 茶</span></td>
             <td class="col-cat">红茶</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">18</span></td>
             <td class="col-shop">🏪 食草生活的店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ 🍜 粮油调味/速食/干货/烘焙</span></td>
+            <td class="col-cat"><span class="cat-badge">🍜 粮油调味/速食/干货/烘焙</span></td>
             <td class="col-cat">其他食品</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">19</span></td>
             <td class="col-shop">🏪 爸爸说旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ 🍪 零食/坚果/特产</span></td>
+            <td class="col-cat"><span class="cat-badge">🍪 零食/坚果/特产</span></td>
             <td class="col-cat">糕点/点心</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">20</span></td>
             <td class="col-shop">🏪 Ms.SU苏味的店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ 🍜 粮油调味/速食/干货/烘焙</span></td>
+            <td class="col-cat"><span class="cat-badge">🍜 粮油调味/速食/干货/烘焙</span></td>
             <td class="col-cat">方便粉丝/米线/粥汤速食</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">21</span></td>
             <td class="col-shop">🏪 青川农特产的店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ 🍜 粮油调味/速食/干货/烘焙</span></td>
+            <td class="col-cat"><span class="cat-badge">🍜 粮油调味/速食/干货/烘焙</span></td>
             <td class="col-cat">南北干货/肉类干货</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">22</span></td>
             <td class="col-shop">🏪 果子熟了旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ ☕ 咖啡/麦片/冲饮</span></td>
+            <td class="col-cat"><span class="cat-badge">☕ 咖啡/麦片/冲饮</span></td>
             <td class="col-cat">饮料</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">23</span></td>
             <td class="col-shop">🏪 荣锦本味旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ 🍪 零食/坚果/特产</span></td>
+            <td class="col-cat"><span class="cat-badge">🍪 零食/坚果/特产</span></td>
             <td class="col-cat">糕点/点心</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">24</span></td>
             <td class="col-shop">🏪 奥莱奥原生旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ 🍜 粮油调味/速食/干货/烘焙</span></td>
+            <td class="col-cat"><span class="cat-badge">🍜 粮油调味/速食/干货/烘焙</span></td>
             <td class="col-cat">食用油/调味油</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">25</span></td>
             <td class="col-shop">🏪 乐荷旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ ☕ 咖啡/麦片/冲饮</span></td>
+            <td class="col-cat"><span class="cat-badge">☕ 咖啡/麦片/冲饮</span></td>
             <td class="col-cat">液态奶/常温乳制品</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">26</span></td>
             <td class="col-shop">🏪 米曰MIYUE旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ 🍜 粮油调味/速食/干货/烘焙</span></td>
+            <td class="col-cat"><span class="cat-badge">🍜 粮油调味/速食/干货/烘焙</span></td>
             <td class="col-cat">火锅/肉类/米饭类速食</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">27</span></td>
             <td class="col-shop">🏪 little apple treats海外旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ ☕ 咖啡/麦片/冲饮</span></td>
+            <td class="col-cat"><span class="cat-badge">☕ 咖啡/麦片/冲饮</span></td>
             <td class="col-cat">冲饮品/食补粉粉</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">28</span></td>
             <td class="col-shop">🏪 食味的初相旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ 🍪 零食/坚果/特产</span></td>
+            <td class="col-cat"><span class="cat-badge">🍪 零食/坚果/特产</span></td>
             <td class="col-cat">蜜饯/枣类/梅/果干/冻干</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">29</span></td>
             <td class="col-shop">🏪 锋味派旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ 🍜 粮油调味/速食/干货/烘焙</span></td>
+            <td class="col-cat"><span class="cat-badge">🍜 粮油调味/速食/干货/烘焙</span></td>
             <td class="col-cat">南北干货/肉类干货</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">30</span></td>
             <td class="col-shop">🏪 必品阁 BIBIGO旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ 🍜 粮油调味/速食/干货/烘焙</span></td>
+            <td class="col-cat"><span class="cat-badge">🍜 粮油调味/速食/干货/烘焙</span></td>
             <td class="col-cat">方便面/拉面/挂面/轻食面速食</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">31</span></td>
             <td class="col-shop">🏪 查宇宙旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ ☕ 咖啡/麦片/冲饮</span></td>
+            <td class="col-cat"><span class="cat-badge">☕ 咖啡/麦片/冲饮</span></td>
             <td class="col-cat">咖啡</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">32</span></td>
             <td class="col-shop">🏪 袋鼠先生旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ 🍪 零食/坚果/特产</span></td>
+            <td class="col-cat"><span class="cat-badge">🍪 零食/坚果/特产</span></td>
             <td class="col-cat">牛肉干/猪肉脯/卤味零食</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">33</span></td>
             <td class="col-shop">🏪 PIERRE MARCOLINI旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ 🍪 零食/坚果/特产</span></td>
+            <td class="col-cat"><span class="cat-badge">🍪 零食/坚果/特产</span></td>
             <td class="col-cat">巧克力</td>
         </tr>
         <tr>
@@ -2371,7 +2276,7 @@ footer {
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">35</span></td>
             <td class="col-shop">🏪 永璞咖啡旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ ☕ 咖啡/麦片/冲饮</span></td>
+            <td class="col-cat"><span class="cat-badge">☕ 咖啡/麦片/冲饮</span></td>
             <td class="col-cat">咖啡</td>
         </tr>
         <tr>
@@ -2383,13 +2288,13 @@ footer {
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">37</span></td>
             <td class="col-shop">🏪 DailySeeds&amp;Co种子世界的店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ ☕ 咖啡/麦片/冲饮</span></td>
+            <td class="col-cat"><span class="cat-badge">☕ 咖啡/麦片/冲饮</span></td>
             <td class="col-cat">冲饮谷物/麦片</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">38</span></td>
             <td class="col-shop">🏪 小黄象旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ 🍜 粮油调味/速食/干货/烘焙</span></td>
+            <td class="col-cat"><span class="cat-badge">🍜 粮油调味/速食/干货/烘焙</span></td>
             <td class="col-cat">面点/西式速食</td>
         </tr>
         <tr>
@@ -2401,289 +2306,289 @@ footer {
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">40</span></td>
             <td class="col-shop">🏪 乐纯旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ ☕ 咖啡/麦片/冲饮</span></td>
+            <td class="col-cat"><span class="cat-badge">☕ 咖啡/麦片/冲饮</span></td>
             <td class="col-cat">低温乳制品</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">41</span></td>
             <td class="col-shop">🏪 金燕耳旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ 🍜 粮油调味/速食/干货/烘焙</span></td>
+            <td class="col-cat"><span class="cat-badge">🍜 粮油调味/速食/干货/烘焙</span></td>
             <td class="col-cat">南北干货/肉类干货</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">42</span></td>
             <td class="col-shop">🏪 YO！FINE DIARY每日鲜酪旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ ☕ 咖啡/麦片/冲饮</span></td>
+            <td class="col-cat"><span class="cat-badge">☕ 咖啡/麦片/冲饮</span></td>
             <td class="col-cat">液态奶/常温乳制品</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">43</span></td>
             <td class="col-shop">🏪 小陈请客的店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ 🍪 零食/坚果/特产</span></td>
+            <td class="col-cat"><span class="cat-badge">🍪 零食/坚果/特产</span></td>
             <td class="col-cat">糕点/点心</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">44</span></td>
             <td class="col-shop">🏪 空刻旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ 🍜 粮油调味/速食/干货/烘焙</span></td>
+            <td class="col-cat"><span class="cat-badge">🍜 粮油调味/速食/干货/烘焙</span></td>
             <td class="col-cat">方便面/拉面/挂面/轻食面速食</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">45</span></td>
             <td class="col-shop">🏪 核桃鲜风旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ 🍪 零食/坚果/特产</span></td>
+            <td class="col-cat"><span class="cat-badge">🍪 零食/坚果/特产</span></td>
             <td class="col-cat">山核桃/坚果/炒货</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">46</span></td>
             <td class="col-shop">🏪 米惦商店旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ 🍪 零食/坚果/特产</span></td>
+            <td class="col-cat"><span class="cat-badge">🍪 零食/坚果/特产</span></td>
             <td class="col-cat">糕点/点心</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">47</span></td>
             <td class="col-shop">🏪 laderach莱德拉旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ 🍪 零食/坚果/特产</span></td>
+            <td class="col-cat"><span class="cat-badge">🍪 零食/坚果/特产</span></td>
             <td class="col-cat">巧克力</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">48</span></td>
             <td class="col-shop">🏪 追肉记旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ 🍜 粮油调味/速食/干货/烘焙</span></td>
+            <td class="col-cat"><span class="cat-badge">🍜 粮油调味/速食/干货/烘焙</span></td>
             <td class="col-cat">南北干货/肉类干货</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">49</span></td>
             <td class="col-shop">🏪 ffit8旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ 🍪 零食/坚果/特产</span></td>
+            <td class="col-cat"><span class="cat-badge">🍪 零食/坚果/特产</span></td>
             <td class="col-cat">饼干/膨化</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">50</span></td>
             <td class="col-shop">🏪 元养东方旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ ☕ 咖啡/麦片/冲饮</span></td>
+            <td class="col-cat"><span class="cat-badge">☕ 咖啡/麦片/冲饮</span></td>
             <td class="col-cat">鲜食饮品</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">51</span></td>
             <td class="col-shop">🏪 真零乳品旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ ☕ 咖啡/麦片/冲饮</span></td>
+            <td class="col-cat"><span class="cat-badge">☕ 咖啡/麦片/冲饮</span></td>
             <td class="col-cat">液态奶/常温乳制品</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">52</span></td>
             <td class="col-shop">🏪 Soileta旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ ☕ 咖啡/麦片/冲饮</span></td>
+            <td class="col-cat"><span class="cat-badge">☕ 咖啡/麦片/冲饮</span></td>
             <td class="col-cat">冲饮品/食补粉粉</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">53</span></td>
             <td class="col-shop">🏪 遂香记的店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ 🍜 粮油调味/速食/干货/烘焙</span></td>
+            <td class="col-cat"><span class="cat-badge">🍜 粮油调味/速食/干货/烘焙</span></td>
             <td class="col-cat">粽子</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">54</span></td>
             <td class="col-shop">🏪 佰味良田旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ 🍪 零食/坚果/特产</span></td>
+            <td class="col-cat"><span class="cat-badge">🍪 零食/坚果/特产</span></td>
             <td class="col-cat">糕点/点心</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">55</span></td>
             <td class="col-shop">🏪 滇乡阿东的店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ 🍪 零食/坚果/特产</span></td>
+            <td class="col-cat"><span class="cat-badge">🍪 零食/坚果/特产</span></td>
             <td class="col-cat">牛肉干/猪肉脯/卤味零食</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">56</span></td>
             <td class="col-shop">🏪 Mamiya旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ 🍜 粮油调味/速食/干货/烘焙</span></td>
+            <td class="col-cat"><span class="cat-badge">🍜 粮油调味/速食/干货/烘焙</span></td>
             <td class="col-cat">火锅/肉类/米饭类速食</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">57</span></td>
             <td class="col-shop">🏪 华丰方便面旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ 🍜 粮油调味/速食/干货/烘焙</span></td>
+            <td class="col-cat"><span class="cat-badge">🍜 粮油调味/速食/干货/烘焙</span></td>
             <td class="col-cat">方便面/拉面/挂面/轻食面速食</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">58</span></td>
             <td class="col-shop">🏪 SlabTownCoffee的店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ ☕ 咖啡/麦片/冲饮</span></td>
+            <td class="col-cat"><span class="cat-badge">☕ 咖啡/麦片/冲饮</span></td>
             <td class="col-cat">咖啡</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">59</span></td>
             <td class="col-shop">🏪 一块小宇宙旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ 🍪 零食/坚果/特产</span></td>
+            <td class="col-cat"><span class="cat-badge">🍪 零食/坚果/特产</span></td>
             <td class="col-cat">巧克力</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">60</span></td>
             <td class="col-shop">🏪 植物燃料旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ ☕ 咖啡/麦片/冲饮</span></td>
+            <td class="col-cat"><span class="cat-badge">☕ 咖啡/麦片/冲饮</span></td>
             <td class="col-cat">鲜食饮品</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">61</span></td>
             <td class="col-shop">🏪 海伶山珍旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ 🍜 粮油调味/速食/干货/烘焙</span></td>
+            <td class="col-cat"><span class="cat-badge">🍜 粮油调味/速食/干货/烘焙</span></td>
             <td class="col-cat">南北干货/肉类干货</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">62</span></td>
             <td class="col-shop">🏪 蔡澜花花世界旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ 🍪 零食/坚果/特产</span></td>
+            <td class="col-cat"><span class="cat-badge">🍪 零食/坚果/特产</span></td>
             <td class="col-cat">牛肉干/猪肉脯/卤味零食</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">63</span></td>
             <td class="col-shop">🏪 莲花旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ 🍜 粮油调味/速食/干货/烘焙</span></td>
+            <td class="col-cat"><span class="cat-badge">🍜 粮油调味/速食/干货/烘焙</span></td>
             <td class="col-cat">调味品/果酱/沙拉/干副食</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">64</span></td>
             <td class="col-shop">🏪 认养吃甘蔗的水牛旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ ☕ 咖啡/麦片/冲饮</span></td>
+            <td class="col-cat"><span class="cat-badge">☕ 咖啡/麦片/冲饮</span></td>
             <td class="col-cat">液态奶/常温乳制品</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">65</span></td>
             <td class="col-shop">🏪 So Acai健康食品海外旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ ☕ 咖啡/麦片/冲饮</span></td>
+            <td class="col-cat"><span class="cat-badge">☕ 咖啡/麦片/冲饮</span></td>
             <td class="col-cat">冲饮品/食补粉粉</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">66</span></td>
             <td class="col-shop">🏪 觅菓旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ 🍪 零食/坚果/特产</span></td>
+            <td class="col-cat"><span class="cat-badge">🍪 零食/坚果/特产</span></td>
             <td class="col-cat">山核桃/坚果/炒货</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">67</span></td>
             <td class="col-shop">🏪 蓝猫小可乐美食研究所的店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ 🍜 粮油调味/速食/干货/烘焙</span></td>
+            <td class="col-cat"><span class="cat-badge">🍜 粮油调味/速食/干货/烘焙</span></td>
             <td class="col-cat">低温乳类烘焙原料</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">68</span></td>
             <td class="col-shop">🏪 煦春录花草集的店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ 🍃 茶</span></td>
+            <td class="col-cat"><span class="cat-badge">🍃 茶</span></td>
             <td class="col-cat">代用/花草/水果/再加工茶</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">69</span></td>
             <td class="col-shop">🏪 赐多利旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ ☕ 咖啡/麦片/冲饮</span></td>
+            <td class="col-cat"><span class="cat-badge">☕ 咖啡/麦片/冲饮</span></td>
             <td class="col-cat">奶粉</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">70</span></td>
             <td class="col-shop">🏪 老徐的自然补给店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ 🍪 零食/坚果/特产</span></td>
+            <td class="col-cat"><span class="cat-badge">🍪 零食/坚果/特产</span></td>
             <td class="col-cat">山核桃/坚果/炒货</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">71</span></td>
             <td class="col-shop">🏪 九峰牧场旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ ☕ 咖啡/麦片/冲饮</span></td>
+            <td class="col-cat"><span class="cat-badge">☕ 咖啡/麦片/冲饮</span></td>
             <td class="col-cat">低温乳制品</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">72</span></td>
             <td class="col-shop">🏪 春江月旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ 🍪 零食/坚果/特产</span></td>
+            <td class="col-cat"><span class="cat-badge">🍪 零食/坚果/特产</span></td>
             <td class="col-cat">蜜饯/枣类/梅/果干/冻干</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">73</span></td>
             <td class="col-shop">🏪 花尾渡旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ 🍪 零食/坚果/特产</span></td>
+            <td class="col-cat"><span class="cat-badge">🍪 零食/坚果/特产</span></td>
             <td class="col-cat">糕点/点心</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">74</span></td>
             <td class="col-shop">🏪 乔尔卢布松旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ 🍪 零食/坚果/特产</span></td>
+            <td class="col-cat"><span class="cat-badge">🍪 零食/坚果/特产</span></td>
             <td class="col-cat">月饼</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">75</span></td>
             <td class="col-shop">🏪 认养一头牛旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ ☕ 咖啡/麦片/冲饮</span></td>
+            <td class="col-cat"><span class="cat-badge">☕ 咖啡/麦片/冲饮</span></td>
             <td class="col-cat">液态奶/常温乳制品</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">76</span></td>
             <td class="col-shop">🏪 认养一头牛低温奶旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ ☕ 咖啡/麦片/冲饮</span></td>
+            <td class="col-cat"><span class="cat-badge">☕ 咖啡/麦片/冲饮</span></td>
             <td class="col-cat">低温乳制品</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">77</span></td>
             <td class="col-shop">🏪 恬栗手作的店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ 🍪 零食/坚果/特产</span></td>
+            <td class="col-cat"><span class="cat-badge">🍪 零食/坚果/特产</span></td>
             <td class="col-cat">糕点/点心</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">78</span></td>
             <td class="col-shop">🏪 Chobani旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ ☕ 咖啡/麦片/冲饮</span></td>
+            <td class="col-cat"><span class="cat-badge">☕ 咖啡/麦片/冲饮</span></td>
             <td class="col-cat">低温乳制品</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">79</span></td>
             <td class="col-shop">🏪 吾岛牛奶旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ ☕ 咖啡/麦片/冲饮</span></td>
+            <td class="col-cat"><span class="cat-badge">☕ 咖啡/麦片/冲饮</span></td>
             <td class="col-cat">低温乳制品</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">80</span></td>
             <td class="col-shop">🏪 VEpiaopiao旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ 🍜 粮油调味/速食/干货/烘焙</span></td>
+            <td class="col-cat"><span class="cat-badge">🍜 粮油调味/速食/干货/烘焙</span></td>
             <td class="col-cat">调味品/果酱/沙拉/干副食</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">81</span></td>
             <td class="col-shop">🏪 GRETHER&#x27;S旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ 🍪 零食/坚果/特产</span></td>
+            <td class="col-cat"><span class="cat-badge">🍪 零食/坚果/特产</span></td>
             <td class="col-cat">糖果零食</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">82</span></td>
             <td class="col-shop">🏪 NOFUNSHOP无趣的店旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ 🍪 零食/坚果/特产</span></td>
+            <td class="col-cat"><span class="cat-badge">🍪 零食/坚果/特产</span></td>
             <td class="col-cat">蜜饯/枣类/梅/果干/冻干</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">83</span></td>
             <td class="col-shop">🏪 Oro Bailen的店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ 🍜 粮油调味/速食/干货/烘焙</span></td>
+            <td class="col-cat"><span class="cat-badge">🍜 粮油调味/速食/干货/烘焙</span></td>
             <td class="col-cat">食用油/调味油</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">84</span></td>
             <td class="col-shop">🏪 AvoPCOS旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ ☕ 咖啡/麦片/冲饮</span></td>
+            <td class="col-cat"><span class="cat-badge">☕ 咖啡/麦片/冲饮</span></td>
             <td class="col-cat">冲饮品/食补粉粉</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">85</span></td>
             <td class="col-shop">🏪 paldo食品旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ 🍜 粮油调味/速食/干货/烘焙</span></td>
+            <td class="col-cat"><span class="cat-badge">🍜 粮油调味/速食/干货/烘焙</span></td>
             <td class="col-cat">方便面/拉面/挂面/轻食面速食</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">86</span></td>
             <td class="col-shop">🏪 熟道旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ 🍪 零食/坚果/特产</span></td>
+            <td class="col-cat"><span class="cat-badge">🍪 零食/坚果/特产</span></td>
             <td class="col-cat">饼干/膨化</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">87</span></td>
             <td class="col-shop">🏪 晟麦旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ 🍜 粮油调味/速食/干货/烘焙</span></td>
+            <td class="col-cat"><span class="cat-badge">🍜 粮油调味/速食/干货/烘焙</span></td>
             <td class="col-cat">食用油/调味油</td>
         </tr>
         <tr>
@@ -2695,247 +2600,247 @@ footer {
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">89</span></td>
             <td class="col-shop">🏪 朝日唯品旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ ☕ 咖啡/麦片/冲饮</span></td>
+            <td class="col-cat"><span class="cat-badge">☕ 咖啡/麦片/冲饮</span></td>
             <td class="col-cat">低温乳制品</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">90</span></td>
             <td class="col-shop">🏪 一鸣食品旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ 🍪 零食/坚果/特产</span></td>
+            <td class="col-cat"><span class="cat-badge">🍪 零食/坚果/特产</span></td>
             <td class="col-cat">糕点/点心</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">91</span></td>
             <td class="col-shop">🏪 平阴玫瑰企业店的店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ 🍃 茶</span></td>
+            <td class="col-cat"><span class="cat-badge">🍃 茶</span></td>
             <td class="col-cat">代用/花草/水果/再加工茶</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">92</span></td>
             <td class="col-shop">🏪 乍甸乳业旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ ☕ 咖啡/麦片/冲饮</span></td>
+            <td class="col-cat"><span class="cat-badge">☕ 咖啡/麦片/冲饮</span></td>
             <td class="col-cat">液态奶/常温乳制品</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">93</span></td>
             <td class="col-shop">🏪 嘉华鲜花饼旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ 🍪 零食/坚果/特产</span></td>
+            <td class="col-cat"><span class="cat-badge">🍪 零食/坚果/特产</span></td>
             <td class="col-cat">糕点/点心</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">94</span></td>
             <td class="col-shop">🏪 CaptainGeorge乔治队长旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ ☕ 咖啡/麦片/冲饮</span></td>
+            <td class="col-cat"><span class="cat-badge">☕ 咖啡/麦片/冲饮</span></td>
             <td class="col-cat">咖啡</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">95</span></td>
             <td class="col-shop">🏪 碧翠园BCPARK旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ 🍪 零食/坚果/特产</span></td>
+            <td class="col-cat"><span class="cat-badge">🍪 零食/坚果/特产</span></td>
             <td class="col-cat">糕点/点心</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">96</span></td>
             <td class="col-shop">🏪 SixSeeds旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ 🍪 零食/坚果/特产</span></td>
+            <td class="col-cat"><span class="cat-badge">🍪 零食/坚果/特产</span></td>
             <td class="col-cat">糕点/点心</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">97</span></td>
             <td class="col-shop">🏪 欧丽薇兰旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ 🍜 粮油调味/速食/干货/烘焙</span></td>
+            <td class="col-cat"><span class="cat-badge">🍜 粮油调味/速食/干货/烘焙</span></td>
             <td class="col-cat">食用油/调味油</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">98</span></td>
             <td class="col-shop">🏪 Wmix点心商店的店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ 🍪 零食/坚果/特产</span></td>
+            <td class="col-cat"><span class="cat-badge">🍪 零食/坚果/特产</span></td>
             <td class="col-cat">糕点/点心</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">99</span></td>
             <td class="col-shop">🏪 荷美尔 Hormel 1891旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ 🍪 零食/坚果/特产</span></td>
+            <td class="col-cat"><span class="cat-badge">🍪 零食/坚果/特产</span></td>
             <td class="col-cat">牛肉干/猪肉脯/卤味零食</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">100</span></td>
             <td class="col-shop">🏪 超级植觉 SUPER PLANT旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ ☕ 咖啡/麦片/冲饮</span></td>
+            <td class="col-cat"><span class="cat-badge">☕ 咖啡/麦片/冲饮</span></td>
             <td class="col-cat">鲜食饮品</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">101</span></td>
             <td class="col-shop">🏪 摩可纳旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ ☕ 咖啡/麦片/冲饮</span></td>
+            <td class="col-cat"><span class="cat-badge">☕ 咖啡/麦片/冲饮</span></td>
             <td class="col-cat">咖啡</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">102</span></td>
             <td class="col-shop">🏪 毖谦集的店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ 🍃 茶</span></td>
+            <td class="col-cat"><span class="cat-badge">🍃 茶</span></td>
             <td class="col-cat">代用/花草/水果/再加工茶</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">103</span></td>
             <td class="col-shop">🏪 甘露禅茶的店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ 🍃 茶</span></td>
+            <td class="col-cat"><span class="cat-badge">🍃 茶</span></td>
             <td class="col-cat">乌龙茶</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">104</span></td>
             <td class="col-shop">🏪 蔡生宝品的店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ 🍪 零食/坚果/特产</span></td>
+            <td class="col-cat"><span class="cat-badge">🍪 零食/坚果/特产</span></td>
             <td class="col-cat">牛肉干/猪肉脯/卤味零食</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">105</span></td>
             <td class="col-shop">🏪 旺家福旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ 🍪 零食/坚果/特产</span></td>
+            <td class="col-cat"><span class="cat-badge">🍪 零食/坚果/特产</span></td>
             <td class="col-cat">牛肉干/猪肉脯/卤味零食</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">106</span></td>
             <td class="col-shop">🏪 辻利茶铺的店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ 🍪 零食/坚果/特产</span></td>
+            <td class="col-cat"><span class="cat-badge">🍪 零食/坚果/特产</span></td>
             <td class="col-cat">饼干/膨化</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">107</span></td>
             <td class="col-shop">🏪 onlytree旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ ☕ 咖啡/麦片/冲饮</span></td>
+            <td class="col-cat"><span class="cat-badge">☕ 咖啡/麦片/冲饮</span></td>
             <td class="col-cat">冲饮品/食补粉粉</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">108</span></td>
             <td class="col-shop">🏪 初透抹茶旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ 🍪 零食/坚果/特产</span></td>
+            <td class="col-cat"><span class="cat-badge">🍪 零食/坚果/特产</span></td>
             <td class="col-cat">糕点/点心</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">109</span></td>
             <td class="col-shop">🏪 谷本日记食品旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ ☕ 咖啡/麦片/冲饮</span></td>
+            <td class="col-cat"><span class="cat-badge">☕ 咖啡/麦片/冲饮</span></td>
             <td class="col-cat">冲饮谷物/麦片</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">110</span></td>
             <td class="col-shop">🏪 熊猫猪猪庄园旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ 🍜 粮油调味/速食/干货/烘焙</span></td>
+            <td class="col-cat"><span class="cat-badge">🍜 粮油调味/速食/干货/烘焙</span></td>
             <td class="col-cat">面点/西式速食</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">111</span></td>
             <td class="col-shop">🏪 卡卡业旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ 🍪 零食/坚果/特产</span></td>
+            <td class="col-cat"><span class="cat-badge">🍪 零食/坚果/特产</span></td>
             <td class="col-cat">糕点/点心</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">112</span></td>
             <td class="col-shop">🏪 韩要强现烤坚果的店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ 🍪 零食/坚果/特产</span></td>
+            <td class="col-cat"><span class="cat-badge">🍪 零食/坚果/特产</span></td>
             <td class="col-cat">山核桃/坚果/炒货</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">113</span></td>
             <td class="col-shop">🏪 tuttifutti旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ ☕ 咖啡/麦片/冲饮</span></td>
+            <td class="col-cat"><span class="cat-badge">☕ 咖啡/麦片/冲饮</span></td>
             <td class="col-cat">鲜食饮品</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">114</span></td>
             <td class="col-shop">🏪 almanor旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ ☕ 咖啡/麦片/冲饮</span></td>
+            <td class="col-cat"><span class="cat-badge">☕ 咖啡/麦片/冲饮</span></td>
             <td class="col-cat">饮料</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">115</span></td>
             <td class="col-shop">🏪 向往一杯的店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ 🍃 茶</span></td>
+            <td class="col-cat"><span class="cat-badge">🍃 茶</span></td>
             <td class="col-cat">代用/花草/水果/再加工茶</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">116</span></td>
             <td class="col-shop">🏪 玄小食旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ 🍪 零食/坚果/特产</span></td>
+            <td class="col-cat"><span class="cat-badge">🍪 零食/坚果/特产</span></td>
             <td class="col-cat">蜜饯/枣类/梅/果干/冻干</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">117</span></td>
             <td class="col-shop">🏪 奶酪猴子Cheese Monkey的店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ ☕ 咖啡/麦片/冲饮</span></td>
+            <td class="col-cat"><span class="cat-badge">☕ 咖啡/麦片/冲饮</span></td>
             <td class="col-cat">奶酪/奶制品</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">118</span></td>
             <td class="col-shop">🏪 初酪有机的店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ ☕ 咖啡/麦片/冲饮</span></td>
+            <td class="col-cat"><span class="cat-badge">☕ 咖啡/麦片/冲饮</span></td>
             <td class="col-cat">低温乳制品</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">119</span></td>
             <td class="col-shop">🏪 邹三和旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ 🍪 零食/坚果/特产</span></td>
+            <td class="col-cat"><span class="cat-badge">🍪 零食/坚果/特产</span></td>
             <td class="col-cat">牛肉干/猪肉脯/卤味零食</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">120</span></td>
             <td class="col-shop">🏪 蒸笼头旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ 🍜 粮油调味/速食/干货/烘焙</span></td>
+            <td class="col-cat"><span class="cat-badge">🍜 粮油调味/速食/干货/烘焙</span></td>
             <td class="col-cat">面点/西式速食</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">121</span></td>
             <td class="col-shop">🏪 田园猎手旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ 🍪 零食/坚果/特产</span></td>
+            <td class="col-cat"><span class="cat-badge">🍪 零食/坚果/特产</span></td>
             <td class="col-cat">牛肉干/猪肉脯/卤味零食</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">122</span></td>
             <td class="col-shop">🏪 燕麦行游山珍的店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ 🍜 粮油调味/速食/干货/烘焙</span></td>
+            <td class="col-cat"><span class="cat-badge">🍜 粮油调味/速食/干货/烘焙</span></td>
             <td class="col-cat">南北干货/肉类干货</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">123</span></td>
             <td class="col-shop">🏪 玩铁猩猩旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ 🍪 零食/坚果/特产</span></td>
+            <td class="col-cat"><span class="cat-badge">🍪 零食/坚果/特产</span></td>
             <td class="col-cat">牛肉干/猪肉脯/卤味零食</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">124</span></td>
             <td class="col-shop">🏪 直觉之食科技的店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ ☕ 咖啡/麦片/冲饮</span></td>
+            <td class="col-cat"><span class="cat-badge">☕ 咖啡/麦片/冲饮</span></td>
             <td class="col-cat">冲饮品/食补粉粉</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">125</span></td>
             <td class="col-shop">🏪 札萨旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ 🍪 零食/坚果/特产</span></td>
+            <td class="col-cat"><span class="cat-badge">🍪 零食/坚果/特产</span></td>
             <td class="col-cat">牛肉干/猪肉脯/卤味零食</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">126</span></td>
             <td class="col-shop">🏪 古树盟的店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ 🍃 茶</span></td>
+            <td class="col-cat"><span class="cat-badge">🍃 茶</span></td>
             <td class="col-cat">其他茶叶</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">127</span></td>
             <td class="col-shop">🏪 陈阿炳食品旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ 🍪 零食/坚果/特产</span></td>
+            <td class="col-cat"><span class="cat-badge">🍪 零食/坚果/特产</span></td>
             <td class="col-cat">牛肉干/猪肉脯/卤味零食</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">128</span></td>
             <td class="col-shop">🏪 迈胜旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ ☕ 咖啡/麦片/冲饮</span></td>
+            <td class="col-cat"><span class="cat-badge">☕ 咖啡/麦片/冲饮</span></td>
             <td class="col-cat">饮料</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">129</span></td>
             <td class="col-shop">🏪 带你回趟咱老家重口吧的店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ 🍜 粮油调味/速食/干货/烘焙</span></td>
+            <td class="col-cat"><span class="cat-badge">🍜 粮油调味/速食/干货/烘焙</span></td>
             <td class="col-cat">方便粉丝/米线/粥汤速食</td>
         </tr>
         <tr>
@@ -2953,67 +2858,67 @@ footer {
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">132</span></td>
             <td class="col-shop">🏪 mooouho哞来了旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ ☕ 咖啡/麦片/冲饮</span></td>
+            <td class="col-cat"><span class="cat-badge">☕ 咖啡/麦片/冲饮</span></td>
             <td class="col-cat">低温乳制品</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">133</span></td>
             <td class="col-shop">🏪 红姐爱养生的店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ 🍜 粮油调味/速食/干货/烘焙</span></td>
+            <td class="col-cat"><span class="cat-badge">🍜 粮油调味/速食/干货/烘焙</span></td>
             <td class="col-cat">方便粉丝/米线/粥汤速食</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">134</span></td>
             <td class="col-shop">🏪 天上天山旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ ☕ 咖啡/麦片/冲饮</span></td>
+            <td class="col-cat"><span class="cat-badge">☕ 咖啡/麦片/冲饮</span></td>
             <td class="col-cat">液态奶/常温乳制品</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">135</span></td>
             <td class="col-shop">🏪 体飞适旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ 🍜 粮油调味/速食/干货/烘焙</span></td>
+            <td class="col-cat"><span class="cat-badge">🍜 粮油调味/速食/干货/烘焙</span></td>
             <td class="col-cat">调味品/果酱/沙拉/干副食</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">136</span></td>
             <td class="col-shop">🏪 yololand有乐岛旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ ☕ 咖啡/麦片/冲饮</span></td>
+            <td class="col-cat"><span class="cat-badge">☕ 咖啡/麦片/冲饮</span></td>
             <td class="col-cat">冲饮品/食补粉粉</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">137</span></td>
             <td class="col-shop">🏪 红谷林旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ 🍪 零食/坚果/特产</span></td>
+            <td class="col-cat"><span class="cat-badge">🍪 零食/坚果/特产</span></td>
             <td class="col-cat">饼干/膨化</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">138</span></td>
             <td class="col-shop">🏪 小罐茶 高香无糖茶旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ ☕ 咖啡/麦片/冲饮</span></td>
+            <td class="col-cat"><span class="cat-badge">☕ 咖啡/麦片/冲饮</span></td>
             <td class="col-cat">饮料</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">139</span></td>
             <td class="col-shop">🏪 Aaaaapple嗝唔儿果的店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ 🍪 零食/坚果/特产</span></td>
+            <td class="col-cat"><span class="cat-badge">🍪 零食/坚果/特产</span></td>
             <td class="col-cat">蜜饯/枣类/梅/果干/冻干</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">140</span></td>
             <td class="col-shop">🏪 维果清VCLEANSE旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ ☕ 咖啡/麦片/冲饮</span></td>
+            <td class="col-cat"><span class="cat-badge">☕ 咖啡/麦片/冲饮</span></td>
             <td class="col-cat">鲜食饮品</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">141</span></td>
             <td class="col-shop">🏪 起司邦 Cheese Bond的店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ ☕ 咖啡/麦片/冲饮</span></td>
+            <td class="col-cat"><span class="cat-badge">☕ 咖啡/麦片/冲饮</span></td>
             <td class="col-cat">奶酪/奶制品</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">142</span></td>
             <td class="col-shop">🏪 西域美农旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ ☕ 咖啡/麦片/冲饮</span></td>
+            <td class="col-cat"><span class="cat-badge">☕ 咖啡/麦片/冲饮</span></td>
             <td class="col-cat">奶酪/奶制品</td>
         </tr>
         <tr>
@@ -3025,7 +2930,7 @@ footer {
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">144</span></td>
             <td class="col-shop">🏪 a2乳制品旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ ☕ 咖啡/麦片/冲饮</span></td>
+            <td class="col-cat"><span class="cat-badge">☕ 咖啡/麦片/冲饮</span></td>
             <td class="col-cat">低温乳制品</td>
         </tr>
         <tr>
@@ -3037,19 +2942,19 @@ footer {
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">146</span></td>
             <td class="col-shop">🏪 明玥皇廷食品旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ 🍪 零食/坚果/特产</span></td>
+            <td class="col-cat"><span class="cat-badge">🍪 零食/坚果/特产</span></td>
             <td class="col-cat">月饼</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">147</span></td>
             <td class="col-shop">🏪 啡舍FISHERCOFFEE旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ ☕ 咖啡/麦片/冲饮</span></td>
+            <td class="col-cat"><span class="cat-badge">☕ 咖啡/麦片/冲饮</span></td>
             <td class="col-cat">咖啡</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">148</span></td>
             <td class="col-shop">🏪 小熊早安旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ 🍜 粮油调味/速食/干货/烘焙</span></td>
+            <td class="col-cat"><span class="cat-badge">🍜 粮油调味/速食/干货/烘焙</span></td>
             <td class="col-cat">其他食品</td>
         </tr>
         <tr>
@@ -3061,61 +2966,61 @@ footer {
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">150</span></td>
             <td class="col-shop">🏪 果鲜集电子商务的店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ 🍪 零食/坚果/特产</span></td>
+            <td class="col-cat"><span class="cat-badge">🍪 零食/坚果/特产</span></td>
             <td class="col-cat">蜜饯/枣类/梅/果干/冻干</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">151</span></td>
             <td class="col-shop">🏪 四洲食品旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ 🍪 零食/坚果/特产</span></td>
+            <td class="col-cat"><span class="cat-badge">🍪 零食/坚果/特产</span></td>
             <td class="col-cat">鱿鱼丝/鱼干/海味即食</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">152</span></td>
             <td class="col-shop">🏪 老鹿的朋友的店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ ☕ 咖啡/麦片/冲饮</span></td>
+            <td class="col-cat"><span class="cat-badge">☕ 咖啡/麦片/冲饮</span></td>
             <td class="col-cat">咖啡</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">153</span></td>
             <td class="col-shop">🏪 FAVORSOM旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ ☕ 咖啡/麦片/冲饮</span></td>
+            <td class="col-cat"><span class="cat-badge">☕ 咖啡/麦片/冲饮</span></td>
             <td class="col-cat">饮料</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">154</span></td>
             <td class="col-shop">🏪 小红村拾翠山谷合集的店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ 🍃 茶</span></td>
+            <td class="col-cat"><span class="cat-badge">🍃 茶</span></td>
             <td class="col-cat">代用/花草/水果/再加工茶</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">155</span></td>
             <td class="col-shop">🏪 原豆复兴Peasup旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ 🍪 零食/坚果/特产</span></td>
+            <td class="col-cat"><span class="cat-badge">🍪 零食/坚果/特产</span></td>
             <td class="col-cat">饼干/膨化</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">156</span></td>
             <td class="col-shop">🏪 跳角旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ 🍜 粮油调味/速食/干货/烘焙</span></td>
+            <td class="col-cat"><span class="cat-badge">🍜 粮油调味/速食/干货/烘焙</span></td>
             <td class="col-cat">玉米</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">157</span></td>
             <td class="col-shop">🏪 头厨旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ 🍜 粮油调味/速食/干货/烘焙</span></td>
+            <td class="col-cat"><span class="cat-badge">🍜 粮油调味/速食/干货/烘焙</span></td>
             <td class="col-cat">面点/西式速食</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">158</span></td>
             <td class="col-shop">🏪 极盏旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ 🍜 粮油调味/速食/干货/烘焙</span></td>
+            <td class="col-cat"><span class="cat-badge">🍜 粮油调味/速食/干货/烘焙</span></td>
             <td class="col-cat">方便粉丝/米线/粥汤速食</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">159</span></td>
             <td class="col-shop">🏪 悦鲜活鲜奶旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ ☕ 咖啡/麦片/冲饮</span></td>
+            <td class="col-cat"><span class="cat-badge">☕ 咖啡/麦片/冲饮</span></td>
             <td class="col-cat">低温乳制品</td>
         </tr>
         <tr>
@@ -3127,13 +3032,13 @@ footer {
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">161</span></td>
             <td class="col-shop">🏪 小野轻煮旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ 🍜 粮油调味/速食/干货/烘焙</span></td>
+            <td class="col-cat"><span class="cat-badge">🍜 粮油调味/速食/干货/烘焙</span></td>
             <td class="col-cat">调味品/果酱/沙拉/干副食</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">162</span></td>
             <td class="col-shop">🏪 瑞慕旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ ☕ 咖啡/麦片/冲饮</span></td>
+            <td class="col-cat"><span class="cat-badge">☕ 咖啡/麦片/冲饮</span></td>
             <td class="col-cat">奶酪/奶制品</td>
         </tr></tbody>
         </table></div>
@@ -3147,230 +3052,229 @@ footer {
         <tr>
             <td class="col-rank"><span class="rank-badge rank-1">1</span></td>
             <td class="col-shop">🏪 小仙炖旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ 💊 传统滋补营养品</span></td>
+            <td class="col-cat"><span class="cat-badge">💊 传统滋补营养品</span></td>
             <td class="col-cat">燕窝滋补品</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-1">2</span></td>
             <td class="col-shop">🏪 特伦格雅肉苁蓉旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ 💊 传统滋补营养品</span></td>
+            <td class="col-cat"><span class="cat-badge">💊 传统滋补营养品</span></td>
             <td class="col-cat">药食同源食品</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-1">3</span></td>
             <td class="col-shop">🏪 人森慢慢旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ 💊 传统滋补营养品</span></td>
+            <td class="col-cat"><span class="cat-badge">💊 传统滋补营养品</span></td>
             <td class="col-cat">参类滋补品</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-2">4</span></td>
             <td class="col-shop">🏪 每日乔安旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ 💊 传统滋补营养品</span></td>
+            <td class="col-cat"><span class="cat-badge">💊 传统滋补营养品</span></td>
             <td class="col-cat">药食同源食品</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-2">5</span></td>
             <td class="col-shop">🏪 目谷家 养生好食材的店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ 💊 传统滋补营养品</span></td>
+            <td class="col-cat"><span class="cat-badge">💊 传统滋补营养品</span></td>
             <td class="col-cat">燕窝滋补品</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-2">6</span></td>
             <td class="col-shop">🏪 和胜堂新中式养生的店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ 💊 传统滋补营养品</span></td>
+            <td class="col-cat"><span class="cat-badge">💊 传统滋补营养品</span></td>
             <td class="col-cat">药食同源食品</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-2">7</span></td>
             <td class="col-shop">🏪 李良济旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ 💊 传统滋补营养品</span></td>
+            <td class="col-cat"><span class="cat-badge">💊 传统滋补营养品</span></td>
             <td class="col-cat">滋补养生原料</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-2">8</span></td>
             <td class="col-shop">🏪 燕之屋旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ 💊 传统滋补营养品</span></td>
+            <td class="col-cat"><span class="cat-badge">💊 传统滋补营养品</span></td>
             <td class="col-cat">燕窝滋补品</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-2">9</span></td>
             <td class="col-shop">🏪 医线明医养生滋补旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ 💊 传统滋补营养品</span></td>
+            <td class="col-cat"><span class="cat-badge">💊 传统滋补营养品</span></td>
             <td class="col-cat">药食同源食品</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-2">10</span></td>
             <td class="col-shop">🏪 元斛旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ 💊 传统滋补营养品</span></td>
+            <td class="col-cat"><span class="cat-badge">💊 传统滋补营养品</span></td>
             <td class="col-cat">药食同源食品</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">11</span></td>
             <td class="col-shop">🏪 阿梓山甄1店的店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ 💊 传统滋补营养品</span></td>
+            <td class="col-cat"><span class="cat-badge">💊 传统滋补营养品</span></td>
             <td class="col-cat">药食同源食品</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">12</span></td>
             <td class="col-shop">🏪 合为养旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ 💊 传统滋补营养品</span></td>
+            <td class="col-cat"><span class="cat-badge">💊 传统滋补营养品</span></td>
             <td class="col-cat">药食同源食品</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">13</span></td>
             <td class="col-shop">🏪 小羊森林旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ 💊 传统滋补营养品</span></td>
+            <td class="col-cat"><span class="cat-badge">💊 传统滋补营养品</span></td>
             <td class="col-cat">滋补养生原料</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">14</span></td>
             <td class="col-shop">🏪 官栈旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ 💊 传统滋补营养品</span></td>
+            <td class="col-cat"><span class="cat-badge">💊 传统滋补营养品</span></td>
             <td class="col-cat">花胶/鱼胶及其制品</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">15</span></td>
             <td class="col-shop">🏪 暖琪嫩量小方盒pro的店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ 💊 传统滋补营养品</span></td>
+            <td class="col-cat"><span class="cat-badge">💊 传统滋补营养品</span></td>
             <td class="col-cat">药食同源食品</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">16</span></td>
             <td class="col-shop">🏪 医线明医的店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ 💊 传统滋补营养品</span></td>
+            <td class="col-cat"><span class="cat-badge">💊 传统滋补营养品</span></td>
             <td class="col-cat">药食同源食品</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">17</span></td>
             <td class="col-shop">🏪 伊阳蜂蜜旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ 💊 传统滋补营养品</span></td>
+            <td class="col-cat"><span class="cat-badge">💊 传统滋补营养品</span></td>
             <td class="col-cat">蜂蜜及其制品</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">18</span></td>
             <td class="col-shop">🏪 The True Honey Co.海外旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ 💊 传统滋补营养品</span></td>
+            <td class="col-cat"><span class="cat-badge">💊 传统滋补营养品</span></td>
             <td class="col-cat">蜂蜜及其制品</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">19</span></td>
             <td class="col-shop">🏪 广禾堂旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ 💊 传统滋补营养品</span></td>
+            <td class="col-cat"><span class="cat-badge">💊 传统滋补营养品</span></td>
             <td class="col-cat">食疗滋补营养</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">20</span></td>
             <td class="col-shop">🏪 汕城肥怡爱零食的店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ 💊 传统滋补营养品</span></td>
+            <td class="col-cat"><span class="cat-badge">💊 传统滋补营养品</span></td>
             <td class="col-cat">药食同源食品</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">21</span></td>
             <td class="col-shop">🏪 九窝颜食社旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ 💊 传统滋补营养品</span></td>
+            <td class="col-cat"><span class="cat-badge">💊 传统滋补营养品</span></td>
             <td class="col-cat">食疗滋补营养</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">22</span></td>
             <td class="col-shop">🏪 福东海旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ 💊 传统滋补营养品</span></td>
+            <td class="col-cat"><span class="cat-badge">💊 传统滋补营养品</span></td>
             <td class="col-cat">药食同源食品</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">23</span></td>
             <td class="col-shop">🏪 正安国旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ 💊 传统滋补营养品</span></td>
+            <td class="col-cat"><span class="cat-badge">💊 传统滋补营养品</span></td>
             <td class="col-cat">滋补养生原料</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">24</span></td>
             <td class="col-shop">🏪 老谷头旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ 💊 传统滋补营养品</span></td>
+            <td class="col-cat"><span class="cat-badge">💊 传统滋补营养品</span></td>
             <td class="col-cat">养生茶</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">25</span></td>
             <td class="col-shop">🏪 童涵春堂滋补旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ 💊 传统滋补营养品</span></td>
+            <td class="col-cat"><span class="cat-badge">💊 传统滋补营养品</span></td>
             <td class="col-cat">参类滋补品</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">26</span></td>
             <td class="col-shop">🏪 杜江南旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ 💊 传统滋补营养品</span></td>
+            <td class="col-cat"><span class="cat-badge">💊 传统滋补营养品</span></td>
             <td class="col-cat">滋补养生原料</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">27</span></td>
             <td class="col-shop">🏪 斛妈妈旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ 💊 传统滋补营养品</span></td>
+            <td class="col-cat"><span class="cat-badge">💊 传统滋补营养品</span></td>
             <td class="col-cat">滋补养生原料</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">28</span></td>
             <td class="col-shop">🏪 食愈肌活双护社的店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ 💊 传统滋补营养品</span></td>
+            <td class="col-cat"><span class="cat-badge">💊 传统滋补营养品</span></td>
             <td class="col-cat">养生茶</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">29</span></td>
             <td class="col-shop">🏪 如是心旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ 💊 传统滋补营养品</span></td>
+            <td class="col-cat"><span class="cat-badge">💊 传统滋补营养品</span></td>
             <td class="col-cat">食疗滋补营养</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">30</span></td>
             <td class="col-shop">🏪 芬姐精选的店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ 💊 传统滋补营养品</span></td>
+            <td class="col-cat"><span class="cat-badge">💊 传统滋补营养品</span></td>
             <td class="col-cat">滋补养生原料</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">31</span></td>
             <td class="col-shop">🏪 至言良食的店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ 💊 传统滋补营养品</span></td>
+            <td class="col-cat"><span class="cat-badge">💊 传统滋补营养品</span></td>
             <td class="col-cat">药食同源食品</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">32</span></td>
             <td class="col-shop">🏪 瑞琪奥兰旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ 💊 传统滋补营养品</span></td>
+            <td class="col-cat"><span class="cat-badge">💊 传统滋补营养品</span></td>
             <td class="col-cat">蜂蜜及其制品</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">33</span></td>
             <td class="col-shop">🏪 楚山萃食补的店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ 💊 传统滋补营养品</span></td>
+            <td class="col-cat"><span class="cat-badge">💊 传统滋补营养品</span></td>
             <td class="col-cat">花胶/鱼胶及其制品</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">34</span></td>
             <td class="col-shop">🏪 福胶滋补品旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ 💊 传统滋补营养品</span></td>
+            <td class="col-cat"><span class="cat-badge">💊 传统滋补营养品</span></td>
             <td class="col-cat">阿胶膏方</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">35</span></td>
             <td class="col-shop">🏪 山斟旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ 💊 传统滋补营养品</span></td>
+            <td class="col-cat"><span class="cat-badge">💊 传统滋补营养品</span></td>
             <td class="col-cat">药食同源食品</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">36</span></td>
             <td class="col-shop">🏪 卡若零 CALO-0旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ 💊 传统滋补营养品</span></td>
+            <td class="col-cat"><span class="cat-badge">💊 传统滋补营养品</span></td>
             <td class="col-cat">功能性饮料</td>
         </tr>
         <tr>
             <td class="col-rank"><span class="rank-badge rank-3">37</span></td>
             <td class="col-shop">🏪 福胶旗舰店</td>
-            <td class="col-cat"><span class="cat-badge">🏷️ 💊 传统滋补营养品</span></td>
+            <td class="col-cat"><span class="cat-badge">💊 传统滋补营养品</span></td>
             <td class="col-cat">阿胶膏方</td>
         </tr></tbody>
         </table></div>
     </div>
 </section>
 
-<!-- CTA -->
 <section class="cta" id="cta">
     <h3>👋 想让你的商品出现在 K 播主播的选品单里？</h3>
     <p>联系你的商家运营（AM），了解 K 播合作机会与选品要求</p>
@@ -3384,7 +3288,22 @@ footer {
 
 </div>
 
+<!-- Modal -->
+<div class="modal-mask" id="modal">
+    <div class="modal">
+        <div class="modal-header">
+            <div>
+                <div class="title" id="m-title"></div>
+                <div class="meta" id="m-meta"></div>
+            </div>
+            <button class="modal-close" id="m-close">✕</button>
+        </div>
+        <div class="modal-body" id="m-body"></div>
+    </div>
+</div>
+
 <script>
+// Tab 切换
 document.querySelectorAll('.section').forEach(function(section){
     var btns = section.querySelectorAll('.tab-btn');
     var panels = section.querySelectorAll('.tab-panel');
@@ -3397,6 +3316,121 @@ document.querySelectorAll('.section').forEach(function(section){
             var panel = section.querySelector('#tab-' + tab);
             if(panel) panel.classList.add('active');
         });
+    });
+});
+
+// 数据集
+var DATA = {"products": [{"name": "百草味 【专享】罐装坚果零食礼盒D1-1330g（坚果有礼-椭开窗）锦云如意", "shop": "百草味旗舰店", "cat": "零食/坚果/特产", "scene": "咸味零食", "sources": ["年度·休食"], "rank": 1}, {"name": "【鹏友专享】云南普洱茶厂【1999年九九圆宝】生茶 380g 380g*1饼", "shop": "云南普洱茶厂有限公司的店", "cat": "茶", "scene": "地域溯源", "sources": ["年度·休食"], "rank": 2}, {"name": "OH MyFood 哦唛福 【芭比4.23独家新品机制】油甘小绿妖绿咖啡液EGCG香柚NFC绿原酸 【数量改2改4再下单】油甘小绿妖*8盒（56袋）", "shop": "OH MyFood 哦唛福旗舰店", "cat": "咖啡/麦片/冲饮", "scene": "减脂健身", "sources": ["年度·休食"], "rank": 3}, {"name": "益生菌固体饮料增强肠道菌群补充营养固体饮品 6盒", "shop": "鑫润达健康管理的店", "cat": "咖啡/麦片/冲饮", "scene": "快手早餐", "sources": ["年度·休食"], "rank": 4}, {"name": "海伶山珍 羊肚菌/一年一季非大棚种植朵朵甄选 5-8cm50g", "shop": "海伶山珍旗舰店", "cat": "粮油调味/速食/干货/烘焙", "scene": "中式食养", "sources": ["年度·休食"], "rank": 5}, {"name": "【鹏友专享】云南普洱茶厂【2025年77014普洱熟茶】散茶 200g*3盒（拍2发3）", "shop": "云南普洱茶厂有限公司的店", "cat": "茶", "scene": "地域溯源", "sources": ["年度·休食"], "rank": 6}, {"name": "红糖古法红糖大火熬制清香甘甜 原味500g*2罐", "shop": "君源古法红糖的店", "cat": "粮油调味/速食/干货/烘焙", "scene": "中式食养", "sources": ["年度·休食"], "rank": 7}, {"name": "水一方 大连经典老味新年礼盒烤虾鲜虾仁安康鱼片现烤鱿鱼丝即食海味零食", "shop": "水一方零食旗舰店", "cat": "零食/坚果/特产", "scene": "咸味零食", "sources": ["年度·休食"], "rank": 8}, {"name": "OH MyFood 哦唛福 【芭比全网新品首发预售7-10天】4盒加赠腰围卷尺 【预售7-10天】油甘绿咖*4盒", "shop": "OH MyFood 哦唛福旗舰店", "cat": "咖啡/麦片/冲饮", "scene": "减脂健身", "sources": ["年度·休食"], "rank": 9}, {"name": "心之 【董生活】年货礼盒巧克力组合心意坚果巧纯可可脂丝滑零食送礼 五福临门礼盒", "shop": "心之senz旗舰店", "cat": "零食/坚果/特产", "scene": "咸味零食", "sources": ["年度·休食"], "rank": 10}, {"name": "诗乡 江油肥肠红烧小吃熟食非遗地标美食200克×3袋 赠100克米粉包×3袋", "shop": "翔风食品专营店", "cat": "零食/坚果/特产", "scene": "快手早餐", "sources": ["年度·休食"], "rank": 11}, {"name": "丰草牧场 100%三有机纯驼奶粉新疆正宗2罐装 300g×2罐", "shop": "丰草牧场旗舰店", "cat": "咖啡/麦片/冲饮", "scene": "中式食养", "sources": ["年度·休食"], "rank": 12}, {"name": "（阿梓代卖）四川农家原味牛肉干九成干度零食特产散装可口美味 500g", "shop": "阿梓山甄1店的店", "cat": "粮油调味/速食/干货/烘焙", "scene": "咸味零食", "sources": ["年度·休食"], "rank": 13}, {"name": "甘孜红茶高山红茶100克/罐", "shop": "树叶纪元茶叶的店", "cat": "茶", "scene": "地域溯源", "sources": ["年度·休食"], "rank": 14}, {"name": "海伶山珍 青川地标长裙竹荪50G 助农好货", "shop": "海伶山珍旗舰店", "cat": "粮油调味/速食/干货/烘焙", "scene": "中式食养", "sources": ["年度·休食"], "rank": 15}, {"name": "锋味派 【刘雨鑫专属】爆汁猪肉烤肠台式地道芝士脆皮肠270g*5", "shop": "锋味派旗舰店", "cat": "粮油调味/速食/干货/烘焙", "scene": "咸味零食", "sources": ["年度·休食"], "rank": 16}, {"name": "有机无花果干118g——四川阆中金鼓村乡村黄金供货", "shop": "福瑞熙有机无花果的店", "cat": "零食/坚果/特产", "scene": "中式食养", "sources": ["年度·休食"], "rank": 17}, {"name": "四川黑茶藏茶砖茶500克", "shop": "稷业商贸的店", "cat": "茶", "scene": "地域溯源", "sources": ["年度·休食"], "rank": 18}, {"name": "青川无添加麻辣味排骨香肠500g 地道川味", "shop": "青川农乡食品的店", "cat": "粮油调味/速食/干货/烘焙", "scene": "咸味零食", "sources": ["年度·休食"], "rank": 19}, {"name": "青川无添加麻辣香肠500g 地道川味", "shop": "青川农乡食品的店", "cat": "粮油调味/速食/干货/烘焙", "scene": "咸味零食", "sources": ["年度·休食"], "rank": 20}, {"name": "四川雅安茉莉花茶250克/袋", "shop": "树叶纪元茶叶的店", "cat": "茶", "scene": "地域溯源", "sources": ["年度·休食"], "rank": 21}, {"name": "闪博士 【安吉专属】蓝美1号蓝莓花色苷纯粉", "shop": "闪博士的店", "cat": "咖啡/麦片/冲饮", "scene": "快手早餐", "sources": ["年度·休食"], "rank": 22}, {"name": "米曰MIYUE 三角饭团加热即食早餐代餐芝士泡菜黑松露和牛鳗鱼", "shop": "米曰MIYUE旗舰店", "cat": "粮油调味/速食/干货/烘焙", "scene": "减脂健身", "sources": ["年度·休食"], "rank": 23}, {"name": "蜀西奇胜 九成风干猪肉干500g 川西特产原切香辣下饭", "shop": "蜀西奇胜旗舰店", "cat": "零食/坚果/特产", "scene": "减脂健身", "sources": ["年度·休食"], "rank": 24}, {"name": "乐荷 【番茄专属】荷兰有机草饲A2β酪蛋白100%有机纯牛奶（含oemga3）", "shop": "乐荷旗舰店", "cat": "咖啡/麦片/冲饮", "scene": "减脂健身", "sources": ["年度·休食"], "rank": 25}, {"name": "ELECTROX 粒刻天然苏打水1L*9瓶-72箱", "shop": "ELECTRO X 粒刻旗舰店", "cat": "咖啡/麦片/冲饮", "scene": "减脂健身", "sources": ["年度·休食"], "rank": 26}, {"name": "密奇奇 牦牛奶桃酥甘孜高原营养糕点香甜酥松", "shop": "密奇奇食品的店", "cat": "零食/坚果/特产", "scene": "快手早餐", "sources": ["年度·休食"], "rank": 27}, {"name": "赐多利 免疫乳奶粉900克盒装 4盒整箱囤货装", "shop": "赐多利旗舰店", "cat": "咖啡/麦片/冲饮", "scene": "中式食养", "sources": ["年度·休食", "30天·休食"], "rank": 28}, {"name": "丰草牧场 【王小骞专属】100%三有机纯驼奶粉新疆正宗300g*4袋装", "shop": "丰草牧场旗舰店", "cat": "咖啡/麦片/冲饮", "scene": "中式食养", "sources": ["年度·休食", "30天·休食"], "rank": 29}, {"name": "ÖarmiLk 【董生活】芭乐酸奶0乳糖六种有益菌低温酸奶420g*4桶+120g*2杯", "shop": "Oarmilk吾岛旗舰店", "cat": "咖啡/麦片/冲饮", "scene": "快手早餐", "sources": ["年度·休食"], "rank": 30}, {"name": "觅菓 【Lingling 专属】（全家福组合）", "shop": "觅菓旗舰店", "cat": "零食/坚果/特产", "scene": "咸味零食", "sources": ["年度·休食"], "rank": 31}, {"name": "臭宝 【小贝专属】柳州螺蛳粉爆爆大腐竹广西螺蛳粉方便速食醇爽8袋", "shop": "臭宝旗舰店", "cat": "粮油调味/速食/干货/烘焙", "scene": "快手早餐", "sources": ["年度·休食"], "rank": 32}, {"name": "莲花 酱油1L*2瓶 零添加特级黄豆酱油", "shop": "莲花旗舰店", "cat": "粮油调味/速食/干货/烘焙", "scene": "快手早餐", "sources": ["年度·休食"], "rank": 33}, {"name": "雅克 红原牦牛奶粉300g纯牦牛奶粉A2高钙蛋白", "shop": "雅克乳业旗舰店", "cat": "咖啡/麦片/冲饮", "scene": "减脂健身", "sources": ["年度·休食"], "rank": 34}, {"name": "奥莱奥原生 【巴黎】白叶系列单一果种PDO特级初榨橄榄油750ml*2瓶", "shop": "奥莱奥原生旗舰店", "cat": "粮油调味/速食/干货/烘焙", "scene": "快手早餐", "sources": ["年度·休食"], "rank": 35}, {"name": "奥莱奥原生 季卡-单一果种PDO特级初榨橄榄油750ml*2+白叶2.5L", "shop": "奥莱奥原生旗舰店", "cat": "粮油调味/速食/干货/烘焙", "scene": "快手早餐", "sources": ["年度·休食", "30天·休食"], "rank": 36}, {"name": "榴芒一刻 【刘雨鑫专属】金枕榴莲冰粽10枚装开袋即食粽子DBY", "shop": "榴芒一刻旗舰店", "cat": "零食/坚果/特产", "scene": "夏日解暑", "sources": ["年度·休食", "30天·休食"], "rank": 37}, {"name": "三关六码头 “董”生活马上开心新年礼盒糕点蜜饯卤味零食过节送礼", "shop": "三关六码头旗舰店", "cat": "零食/坚果/特产", "scene": "快手早餐", "sources": ["年度·休食"], "rank": 38}, {"name": "梨越 金川高原雪梨膏3瓶装 140g*3瓶", "shop": "金雪梨梨膏冲饮的店", "cat": "咖啡/麦片/冲饮", "scene": "夏日解暑", "sources": ["年度·休食"], "rank": 39}, {"name": "陇象 一级亚麻籽油5L高亚麻酸中老年人甘肃高原胡麻油食用油桶装", "shop": "陇象领宸优选的店", "cat": "粮油调味/速食/干货/烘焙", "scene": "地域溯源", "sources": ["年度·休食"], "rank": 40}, {"name": "YO！FINE DIARY 【董生活】每日鲜酪原味100g*6杯+牛油果100g*3杯+蓝莓100g*3杯", "shop": "YO！FINE DIARY每日鲜酪旗舰店", "cat": "咖啡/麦片/冲饮", "scene": "快手早餐", "sources": ["年度·休食"], "rank": 41}, {"name": "三胖蛋 【年货】大瓜子原味葵花籽高端臻枣罐袋混合7件礼盒", "shop": "三胖蛋 一嗑二赞三胖蛋旗舰店", "cat": "零食/坚果/特产", "scene": "咸味零食", "sources": ["年度·休食"], "rank": 42}, {"name": "ffit8 【秒杀】每日果蔬汁液体沙拉轻断食液断膳食纤维维生素矿物质", "shop": "ffit8旗舰店", "cat": "咖啡/麦片/冲饮", "scene": "减脂健身", "sources": ["年度·休食"], "rank": 43}, {"name": "ELECTROX 粒刻【Ling专属】天然苏打水24瓶*380mL*12箱-季度套餐", "shop": "ELECTRO X 粒刻旗舰店", "cat": "咖啡/麦片/冲饮", "scene": "微醺小甜水", "sources": ["年度·休食"], "rank": 44}, {"name": "满滋屋 日式手工三明治配料干净现做早餐烘焙夹心多口味套餐-生吐司", "shop": "满滋屋食品旗舰店", "cat": "零食/坚果/特产", "scene": "夏日解暑", "sources": ["年度·休食"], "rank": 45}, {"name": "laderach 混合坚果巧克力小帆船瑞士进口高端零食伴手礼", "shop": "laderach莱德拉旗舰店", "cat": "零食/坚果/特产", "scene": "咸味零食", "sources": ["年度·休食"], "rank": 46}, {"name": "三胖蛋 内蒙无须甜糯香糯玉米饱满真空锁鲜", "shop": "三胖蛋 一嗑二赞三胖蛋旗舰店", "cat": "粮油调味/速食/干货/烘焙", "scene": "地域溯源", "sources": ["年度·休食"], "rank": 47}, {"name": "满滋屋 日式手工三明治【现做现发】香草冰淇淋早餐代餐夹心面包-生吐司", "shop": "满滋屋食品旗舰店", "cat": "零食/坚果/特产", "scene": "减脂健身", "sources": ["年度·休食"], "rank": 48}, {"name": "观今【2023年 紫僧衣】普洱熟茶 60克", "shop": "观今普洱茶的店", "cat": "茶", "scene": "地域溯源", "sources": ["年度·休食", "30天·休食"], "rank": 49}, {"name": "香菇干 原味香菇农家土货滋补食材200g", "shop": "山客山珍的店", "cat": "粮油调味/速食/干货/烘焙", "scene": "中式食养", "sources": ["年度·休食"], "rank": 50}, {"name": "燕窝礼盒燕窝送礼礼盒/目谷家 6", "shop": "目谷家 养生好食材的店", "cat": "传统滋补营养品", "scene": "中式食养", "sources": ["年度·滋补", "30天·滋补"], "rank": 1}, {"name": "人森慢慢 X 左佳霓 联名20年+野山参粉42g 源自野山参之乡 超微参粉 易吸收", "shop": "人森慢慢旗舰店", "cat": "传统滋补营养品", "scene": "中式食养", "sources": ["年度·滋补"], "rank": 2}, {"name": "海伶山珍 青川深山老巢蜂蜜500g传统优质细腻采集百花蜜", "shop": "海伶山珍旗舰店", "cat": "传统滋补营养品", "scene": "中式食养", "sources": ["年度·滋补", "30天·滋补"], "rank": 3}, {"name": "小仙炖 【李若彤专属】鲜炖燕窝70g*3系列 半年套餐（70g*72瓶）冰糖款", "shop": "小仙炖旗舰店", "cat": "传统滋补营养品", "scene": "中式食养", "sources": ["年度·滋补"], "rank": 4}, {"name": "燕之屋 【刘雨鑫专享】鲜炖燕窝50g 高营养即食营养女生滋补孕妇送礼 季套餐-无糖款", "shop": "燕之屋旗舰店", "cat": "传统滋补营养品", "scene": "中式食养", "sources": ["年度·滋补"], "rank": 5}, {"name": "燕之屋 【亚亚专属】季套餐  鲜炖50g*84瓶 季套餐-冰糖款", "shop": "燕之屋旗舰店", "cat": "传统滋补营养品", "scene": "中式食养", "sources": ["年度·滋补"], "rank": 6}, {"name": "小仙炖 【李若彤专属】鲜炖燕窝70g*3系列 半年套餐（70g*72瓶）无糖款", "shop": "小仙炖旗舰店", "cat": "传统滋补营养品", "scene": "中式食养", "sources": ["年度·滋补"], "rank": 7}, {"name": "燕窝礼盒燕窝送礼礼盒/目谷家 4", "shop": "目谷家 养生好食材的店", "cat": "传统滋补营养品", "scene": "中式食养", "sources": ["年度·滋补"], "rank": 8}, {"name": "【鹏友专属】参养道大连深海底播鲜食海参500g*3礼盒装", "shop": "小海生鲜的店", "cat": "传统滋补营养品", "scene": "中式食养", "sources": ["年度·滋补"], "rank": 9}, {"name": "人森慢慢 【左佳霓专属】野山参粉14g 20年+长白山野山参之乡", "shop": "人森慢慢旗舰店", "cat": "传统滋补营养品", "scene": "中式食养", "sources": ["年度·滋补"], "rank": 10}, {"name": "每日乔安 苹果黄芪茶 0熏硫0添加养生茶健康滋补元气血茶饮 3袋 额外加赠3包同款试喝", "shop": "每日乔安旗舰店", "cat": "传统滋补营养品", "scene": "中式食养", "sources": ["年度·滋补"], "rank": 11}, {"name": "特伦格雅 X左佳霓 溯源专场   肉苁蓉酸枣仁乌梅饮 安睡智慧 三盒", "shop": "特伦格雅肉苁蓉旗舰店", "cat": "传统滋补营养品", "scene": "中式食养", "sources": ["年度·滋补", "30天·滋补"], "rank": 12}, {"name": "【鹏友专属】参养道大连深海底播鲜食海参500g", "shop": "小海生鲜的店", "cat": "传统滋补营养品", "scene": "中式食养", "sources": ["年度·滋补"], "rank": 13}, {"name": "植然方适 【左佳霓】铁皮石斛素颜饮原浆新鲜石斛鲜条饮", "shop": "植然方适旗舰店", "cat": "传统滋补营养品", "scene": "中式食养", "sources": ["年度·滋补"], "rank": 14}, {"name": "兰肌茵 2玫好紫皮石斛原浆饮 30条/4袋", "shop": "遇见玫好METROSIER二店的店", "cat": "传统滋补营养品", "scene": "中式食养", "sources": ["年度·滋补", "30天·滋补"], "rank": 15}, {"name": "特伦格雅 X 作家左佳霓 肉苁蓉酸枣仁乌梅饮 安睡智慧 一盒", "shop": "特伦格雅肉苁蓉旗舰店", "cat": "传统滋补营养品", "scene": "中式食养", "sources": ["年度·滋补"], "rank": 16}, {"name": "海伶山珍 农家自产蜂巢蜜350g 野花蜜源深山百花蜜送木勺", "shop": "海伶山珍旗舰店", "cat": "传统滋补营养品", "scene": "地域溯源", "sources": ["年度·滋补"], "rank": 17}, {"name": "福东海 山药百合银耳燕窝粥168克x8碗/箱", "shop": "福东海旗舰店", "cat": "传统滋补营养品", "scene": "中式食养", "sources": ["年度·滋补"], "rank": 18}, {"name": "官栈 【亚亚专属】即食金蝶胶原花胶滋补63g*48瓶", "shop": "官栈旗舰店", "cat": "传统滋补营养品", "scene": "中式食养", "sources": ["年度·滋补"], "rank": 19}, {"name": "单向树 丁香决明净甘茶净甘火疏郁气 30罐/盒", "shop": "单向树旗舰店", "cat": "传统滋补营养品", "scene": "中式食养", "sources": ["年度·滋补"], "rank": 20}, {"name": "元斛 【左佳霓】季卡套餐 紫皮石斛原浆饮家庭装", "shop": "元斛旗舰店", "cat": "传统滋补营养品", "scene": "中式食养", "sources": ["年度·滋补", "30天·滋补"], "rank": 21}, {"name": "官栈 【亚亚专属】深海金鳕胶鱼皇鲜炖凝粹 养宫鱼胶胶原蛋白80g", "shop": "官栈旗舰店", "cat": "传统滋补营养品", "scene": "中式食养", "sources": ["年度·滋补"], "rank": 22}, {"name": "每日乔安 苹果黄芪茶0熏硫0添加养生健康滋补漂亮元气血茶*3袋", "shop": "每日乔安旗舰店", "cat": "传统滋补营养品", "scene": "中式食养", "sources": ["年度·滋补"], "rank": 23}, {"name": "SKIGIN 【吴昕专属】元气阿胶肽红参饮 限定礼盒", "shop": "SKIGIN旗舰店", "cat": "传统滋补营养品", "scene": "中式食养", "sources": ["年度·滋补"], "rank": 24}, {"name": "广禾堂 正装四物汤10g*14条天然草本萃取女性调理饮", "shop": "广禾堂旗舰店", "cat": "传统滋补营养品", "scene": "中式食养", "sources": ["年度·滋补"], "rank": 25}, {"name": "李良济 九蒸九晒有机黄精150g送礼袋独立包装九华山", "shop": "李良济旗舰店", "cat": "传统滋补营养品", "scene": "中式食养", "sources": ["年度·滋补"], "rank": 26}, {"name": "元斛 半年卡套餐紫皮石斛原浆饮秋季润养燥", "shop": "元斛旗舰店", "cat": "传统滋补营养品", "scene": "中式食养", "sources": ["年度·滋补"], "rank": 27}, {"name": "广裕号 半年卡=180瓶 小黑瓶黑参提取液 稀有皂苷", "shop": "廣裕號旗舰店", "cat": "传统滋补营养品", "scene": "中式食养", "sources": ["年度·滋补"], "rank": 28}, {"name": "医线明医 【李若彤专属】九蒸九制黄精12年九华山九晒", "shop": "医线明医养生滋补旗舰店", "cat": "传统滋补营养品", "scene": "中式食养", "sources": ["年度·滋补"], "rank": 29}, {"name": "杜江南 梨果仙人掌薏苡仁膏 五指毛桃玉米须 赤小豆茯苓", "shop": "杜江南旗舰店", "cat": "传统滋补营养品", "scene": "中式食养", "sources": ["年度·滋补", "30天·滋补"], "rank": 30}, {"name": "肥怡甄选｜通用链接1（SP）", "shop": "汕城肥怡爱零食的店", "cat": "传统滋补营养品", "scene": "中式食养", "sources": ["年度·滋补"], "rank": 31}, {"name": "单向树 四花茶 15罐/盒  四花女神养芯茶", "shop": "单向树旗舰店", "cat": "传统滋补营养品", "scene": "夏日解暑", "sources": ["年度·滋补"], "rank": 32}, {"name": "伊阳 新疆伊犁黑蜂指数蜂蜜380g/罐POE8+ 双瓶", "shop": "伊阳蜂蜜旗舰店", "cat": "传统滋补营养品", "scene": "中式食养", "sources": ["年度·滋补"], "rank": 33}, {"name": "肥姨宠粉贺年｜鱼胶通用链接（SP）", "shop": "楚山萃食补的店", "cat": "传统滋补营养品", "scene": "中式食养", "sources": ["年度·滋补", "年度·滋补"], "rank": 34}, {"name": "2025年新货正宗枸杞子特级500g大颗粒老村长红枸杞", "shop": "阿梓山甄1店的店", "cat": "传统滋补营养品", "scene": "中式食养", "sources": ["年度·滋补"], "rank": 35}, {"name": "医线明医 送礼送长辈高端明医黄精茶九蒸九制九晒黄精礼盒装", "shop": "医线明医养生滋补旗舰店", "cat": "传统滋补营养品", "scene": "中式食养", "sources": ["年度·滋补"], "rank": 36}, {"name": "老谷头 【果干礼盒】无花果干黑杏干桑椹干礼盒装新疆零食", "shop": "老谷头旗舰店", "cat": "传统滋补营养品", "scene": "甜品脑袋", "sources": ["年度·滋补"], "rank": 37}, {"name": "AvoPCOS 爱沃健康南瓜茶南瓜红豆玉米须茶养生茶包", "shop": "AvoPCOS旗舰店", "cat": "传统滋补营养品", "scene": "中式食养", "sources": ["年度·滋补", "30天·滋补"], "rank": 38}, {"name": "合为养 九蒸九晒黄精果 精选10-15年多花黄精 半年卡", "shop": "合为养旗舰店", "cat": "传统滋补营养品", "scene": "中式食养", "sources": ["年度·滋补"], "rank": 39}, {"name": "合为养 九制黄精家庭囤货装5袋玉灵膏组合", "shop": "合为养旗舰店", "cat": "传统滋补营养品", "scene": "中式食养", "sources": ["年度·滋补"], "rank": 41}, {"name": "沁源兴·鱼胶散称链接", "shop": "沁源兴烘焙滋补的店", "cat": "传统滋补营养品", "scene": "中式食养", "sources": ["年度·滋补"], "rank": 42}, {"name": "广禾堂 【生理期呵护组合】如期1盒+四物2盒+玫瑰元气茶1袋", "shop": "广禾堂旗舰店", "cat": "传统滋补营养品", "scene": "中式食养", "sources": ["年度·滋补"], "rank": 43}, {"name": "福东海 灵芝加拿大西洋参铁皮石斛鱼翅鲍鱼320g/五拼礼盒", "shop": "福东海旗舰店", "cat": "传统滋补营养品", "scene": "中式食养", "sources": ["年度·滋补"], "rank": 44}, {"name": "童涵春堂 涵春再造人参膏黑金款215g/罐*2罐", "shop": "童涵春堂滋补旗舰店", "cat": "传统滋补营养品", "scene": "中式食养", "sources": ["年度·滋补"], "rank": 45}, {"name": "伊阳 【特色蜜礼盒】新疆天然滋养6种特色蜜送长辈伴手礼", "shop": "伊阳蜂蜜旗舰店", "cat": "传统滋补营养品", "scene": "地域溯源", "sources": ["年度·滋补"], "rank": 46}, {"name": "肥怡母亲节专场｜燕窝（YW）", "shop": "汕城肥怡爱零食的店", "cat": "传统滋补营养品", "scene": "中式食养", "sources": ["年度·滋补"], "rank": 47}, {"name": "童涵春堂 化芥膏药食同源3盒装", "shop": "童涵春堂滋补旗舰店", "cat": "传统滋补营养品", "scene": "中式食养", "sources": ["年度·滋补", "30天·滋补"], "rank": 48}, {"name": "藏红花补血养颜美容高海拔特产女性", "shop": "藏乡滋补的店", "cat": "传统滋补营养品", "scene": "中式食养", "sources": ["年度·滋补"], "rank": 49}, {"name": "纯正天然380g新疆伊犁黑蜂蜜POE30+高活性酶多矿物质", "shop": "新疆馕选的店", "cat": "传统滋补营养品", "scene": "中式食养", "sources": ["年度·滋补"], "rank": 50}, {"name": "OH MyFood 哦唛福 绿咖啡液EGCG油甘香柚味NFC原浆油柑 【芭比66限时囤货】油甘爆燃小绿妖*32盒", "shop": "OH MyFood 哦唛福旗舰店", "cat": "咖啡/麦片/冲饮", "scene": "减脂健身", "sources": ["30天·休食"], "rank": 1}, {"name": "OH MyFood 哦唛福 余甘子肉桂苹果醋2.0PRO升级版原浆鲜酿", "shop": "OH MyFood 哦唛福旗舰店", "cat": "咖啡/麦片/冲饮", "scene": "快手早餐", "sources": ["30天·休食"], "rank": 4}, {"name": "必品阁 明星同款紫菜包饭卷饭团泡菜烤肉石锅拌饭风味5包", "shop": "必品阁 BIBIGO旗舰店", "cat": "粮油调味/速食/干货/烘焙", "scene": "快手早餐", "sources": ["30天·休食"], "rank": 5}, {"name": "满滋屋 日式手工三明治【现做现发】香草冰淇淋早餐代餐夹心面包", "shop": "满滋屋食品旗舰店", "cat": "零食/坚果/特产", "scene": "减脂健身", "sources": ["30天·休食"], "rank": 6}, {"name": "So Acai 纯巴西莓粉进口花青素果蔬纤维粉冲饮莓果粉超级粉粉", "shop": "So Acai旗舰店", "cat": "咖啡/麦片/冲饮", "scene": "快手早餐", "sources": ["30天·休食"], "rank": 7}, {"name": "散装-羊肚菌4-6CM 特产干货 50克", "shop": "青川农特产的店", "cat": "粮油调味/速食/干货/烘焙", "scene": "中式食养", "sources": ["30天·休食"], "rank": 8}, {"name": "YO！FINE DIARY 每日鲜酪原味100g*6杯+牛油果100g*3杯+蓝莓100g*3杯", "shop": "YO！FINE DIARY每日鲜酪旗舰店", "cat": "咖啡/麦片/冲饮", "scene": "快手早餐", "sources": ["30天·休食"], "rank": 11}, {"name": "PIERRE MARCOLINI 比利时小金罐黑骑士橙丝巧克力高端休闲零食送礼", "shop": "PIERRE MARCOLINI旗舰店", "cat": "零食/坚果/特产", "scene": "甜品脑袋", "sources": ["30天·休食"], "rank": 12}, {"name": "laderach 半岛铁盒混合坚果巧克力礼盒办公室进口零食生日礼物", "shop": "laderach莱德拉旗舰店", "cat": "零食/坚果/特产", "scene": "咸味零食", "sources": ["30天·休食"], "rank": 13}, {"name": "果子熟了 白桃观音苹果茉莉西柚黄金芽香柚0糖果茶900ml12瓶", "shop": "果子熟了旗舰店", "cat": "咖啡/麦片/冲饮", "scene": "夏日解暑", "sources": ["30天·休食"], "rank": 14}, {"name": "CALLIPO橄榄油浸金枪鱼罐头 【囤货推荐】橄榄油浸原味80g*40罐", "shop": "食草生活的店", "cat": "粮油调味/速食/干货/烘焙", "scene": "快手早餐", "sources": ["30天·休食"], "rank": 15}, {"name": "核桃鲜风 鲜剥生核桃仁去壳无苦衣 新疆阿克苏温#185核桃", "shop": "核桃鲜风旗舰店", "cat": "零食/坚果/特产", "scene": "地域溯源", "sources": ["30天·休食"], "rank": 16}, {"name": "Callipo 意大利进口橄榄油浸金枪鱼肉罐头", "shop": "食草生活的店", "cat": "粮油调味/速食/干货/烘焙", "scene": "减脂健身", "sources": ["30天·休食"], "rank": 17}, {"name": "脱骨侠 多口味无骨鸡爪500g/1000g去骨凤爪解馋零食休闲小吃", "shop": "脱骨侠旗舰店", "cat": "零食/坚果/特产", "scene": "咸味零食", "sources": ["30天·休食"], "rank": 18}, {"name": "little apple treats 苹果醋夏日减脂助消化 原味百香果柑橘草莓黑莓", "shop": "little apple treats海外旗舰店", "cat": "咖啡/麦片/冲饮", "scene": "减脂健身", "sources": ["30天·休食"], "rank": 19}, {"name": "西班牙原瓶原装进口特级初榨橄榄油500ml瓶装jaén庄园油2瓶装", "shop": "Oro Bailen的店", "cat": "粮油调味/速食/干货/烘焙", "scene": "地域溯源", "sources": ["30天·休食"], "rank": 20}, {"name": "满滋屋 日式手工三明治配料干净现做早餐烘焙夹心多口味套餐", "shop": "满滋屋食品旗舰店", "cat": "零食/坚果/特产", "scene": "夏日解暑", "sources": ["30天·休食"], "rank": 21}, {"name": "SLAB TOWN 山脉之光冻干咖啡粉 即溶红酒香气橙花风味速溶黑咖啡2.8g*30颗", "shop": "SlabTownCoffee的店", "cat": "咖啡/麦片/冲饮", "scene": "快手早餐", "sources": ["30天·休食"], "rank": 22}, {"name": "永璞 5D锁香SOE即溶4种风味0糖0脂咖啡冻干块2g/颗 28颗装", "shop": "永璞咖啡旗舰店", "cat": "咖啡/麦片/冲饮", "scene": "快手早餐", "sources": ["30天·休食"], "rank": 23}, {"name": "Fortnum&Mason 散叶茶全家桶：伯爵*2+玫瑰红茶+茉莉绿茶+赠滤茶器", "shop": "Fortnum&Mason福南梅森海外旗舰店", "cat": "茶", "scene": "地域溯源", "sources": ["30天·休食"], "rank": 24}, {"name": "ELECTROX 粒刻 天然苏打水24瓶*380mL*12箱-季度套餐", "shop": "ELECTRO X 粒刻旗舰店", "cat": "咖啡/麦片/冲饮", "scene": "微醺小甜水", "sources": ["30天·休食"], "rank": 25}, {"name": "（阿梓代卖）四川农家原味牛肉干九成干度零食特产", "shop": "阿梓山甄1店的店", "cat": "粮油调味/速食/干货/烘焙", "scene": "咸味零食", "sources": ["30天·休食"], "rank": 26}, {"name": "Daily Seeds&Co烘焙燕麦片 夏日限定「柠檬香草巴斯克」", "shop": "DailySeeds&Co种子世界的店", "cat": "咖啡/麦片/冲饮", "scene": "夏日解暑", "sources": ["30天·休食"], "rank": 27}, {"name": "ELECTROX 粒刻 天然苏打水1L*9瓶*12箱-季度套餐", "shop": "ELECTRO X 粒刻旗舰店", "cat": "咖啡/麦片/冲饮", "scene": "微醺小甜水", "sources": ["30天·休食"], "rank": 28}, {"name": "认养 散牧水牛奶7.9g优质乳蛋白营养早餐牛奶200ml*10盒", "shop": "认养吃甘蔗的水牛旗舰店", "cat": "咖啡/麦片/冲饮", "scene": "减脂健身", "sources": ["30天·休食"], "rank": 29}, {"name": "米曰MIYUE 风味满贯紫菜卷紫菜包饭寿司加热即食方便速食早餐", "shop": "米曰MIYUE旗舰店", "cat": "粮油调味/速食/干货/烘焙", "scene": "快手早餐", "sources": ["30天·休食"], "rank": 30}, {"name": "ffit8 肉桂可可黑咖速溶咖啡 防暴自律 未碱化生可可粉便携冲饮", "shop": "ffit8旗舰店", "cat": "咖啡/麦片/冲饮", "scene": "快手早餐", "sources": ["30天·休食"], "rank": 31}, {"name": "YO！FINE DIARY 每日鲜酪希腊酸奶蓝莓*6+原味*3+牛油果*3+0蔗糖400g*2", "shop": "YO！FINE DIARY每日鲜酪旗舰店", "cat": "咖啡/麦片/冲饮", "scene": "快手早餐", "sources": ["30天·休食"], "rank": 32}, {"name": "一块小宇宙 冻干咖啡 意式浓缩阿拉比卡中深烘 独立包装便携速溶", "shop": "一块小宇宙旗舰店", "cat": "咖啡/麦片/冲饮", "scene": "快手早餐", "sources": ["30天·休食"], "rank": 34}, {"name": "2025年中国红高端拼配露沁天香大师手作红茶 100克", "shop": "南旗的店", "cat": "茶", "scene": "地域溯源", "sources": ["30天·休食"], "rank": 35}, {"name": "米曰MIYUE 风味满贯紫菜包饭紫菜卷寿司加热方便速食早餐宵夜", "shop": "米曰MIYUE旗舰店", "cat": "粮油调味/速食/干货/烘焙", "scene": "快手早餐", "sources": ["30天·休食"], "rank": 36}, {"name": "元养东方 紫皮石斛+玫瑰+小黄姜姜枣精粹饮【三伏天套组】", "shop": "元养东方旗舰店", "cat": "咖啡/麦片/冲饮", "scene": "中式食养", "sources": ["30天·休食"], "rank": 37}, {"name": "查宇宙 Ely手冲/查老师意式两款系列咖啡豆", "shop": "查宇宙旗舰店", "cat": "咖啡/麦片/冲饮", "scene": "快手早餐", "sources": ["30天·休食"], "rank": 38}, {"name": "ÖarmiLk 希腊酸奶无蔗糖0乳糖生牛乳发酵早餐低温网红款酸奶20杯组合", "shop": "Oarmilk吾岛旗舰店", "cat": "咖啡/麦片/冲饮", "scene": "快手早餐", "sources": ["30天·休食"], "rank": 39}, {"name": "SOILETA 不老莓纯粉 花青素暴表非浓縮 护眼0糖", "shop": "Soileta旗舰店", "cat": "咖啡/麦片/冲饮", "scene": "快手早餐", "sources": ["30天·休食"], "rank": 40}, {"name": "BASAO 红/黑乌龙康普茶气泡饮饮料310ml*12罐", "shop": "BASAO旗舰店", "cat": "咖啡/麦片/冲饮", "scene": "快手早餐", "sources": ["30天·休食"], "rank": 41}, {"name": "榴芒一刻 泰国金枕榴莲千层蛋糕400g/盒纯动物奶油DBY", "shop": "榴芒一刻旗舰店", "cat": "零食/坚果/特产", "scene": "甜品脑袋", "sources": ["30天·休食"], "rank": 42}, {"name": "【蔡生宝品】澳门风味猪肉脯碳烤厚切大片猪肉干即食零食", "shop": "蔡生宝品臻选食品的店", "cat": "零食/坚果/特产", "scene": "咸味零食", "sources": ["30天·休食"], "rank": 43}, {"name": "AIRMETER空刻 鹰嘴豆上新！空刻经典意面爆款口味8盒常温速食", "shop": "空刻旗舰店", "cat": "粮油调味/速食/干货/烘焙", "scene": "快手早餐", "sources": ["30天·休食"], "rank": 44}, {"name": "SOILETA 冻干不老莓果粉野樱莓Aronia 黑果花楸", "shop": "Soileta旗舰店", "cat": "咖啡/麦片/冲饮", "scene": "快手早餐", "sources": ["30天·休食"], "rank": 45}, {"name": "爸爸说 空气丑脆脆 低温烘培 脆到上头 非油炸解馋零食", "shop": "爸爸说旗舰店", "cat": "零食/坚果/特产", "scene": "咸味零食", "sources": ["30天·休食"], "rank": 46}, {"name": "So Acai 格兰诺拉坚果燕麦片早餐即食麦片拌酸奶做燕麦粥", "shop": "So Acai旗舰店", "cat": "咖啡/麦片/冲饮", "scene": "快手早餐", "sources": ["30天·休食"], "rank": 47}, {"name": "真零 经典款酸奶135g*12杯 0蔗糖0代糖0乳糖", "shop": "真零乳品旗舰店", "cat": "咖啡/麦片/冲饮", "scene": "快手早餐", "sources": ["30天·休食"], "rank": 48}, {"name": "Fortnum&Mason 英国进口精选饼干套组 巧克力夏威夷果饼干", "shop": "Fortnum&Mason福南梅森海外旗舰店", "cat": "零食/坚果/特产", "scene": "夏日解暑", "sources": ["30天·休食"], "rank": 49}, {"name": "欧丽薇兰 特级初榨橄榄油红标500ml*2礼盒官方正品食用油", "shop": "欧丽薇兰旗舰店", "cat": "粮油调味/速食/干货/烘焙", "scene": "快手早餐", "sources": ["30天·休食"], "rank": 50}, {"name": "小仙炖 鲜炖燕窝70g*3系列 季套餐（70g*36瓶）冰糖款", "shop": "小仙炖旗舰店", "cat": "传统滋补营养品", "scene": "中式食养", "sources": ["30天·滋补"], "rank": 1}, {"name": "人森慢慢 X 左佳霓 联名20年+野山参粉42g 源自野山参之乡", "shop": "人森慢慢旗舰店", "cat": "传统滋补营养品", "scene": "中式食养", "sources": ["30天·滋补"], "rank": 2}, {"name": "小仙炖 鲜炖燕窝70g*3系列 季套餐（70g*36瓶）无糖款", "shop": "小仙炖旗舰店", "cat": "传统滋补营养品", "scene": "中式食养", "sources": ["30天·滋补"], "rank": 4}, {"name": "官栈 即食金蝶胶原花胶滋补63g*48瓶", "shop": "官栈旗舰店", "cat": "传统滋补营养品", "scene": "中式食养", "sources": ["30天·滋补"], "rank": 6}, {"name": "特伦格雅 X左佳霓  溯源专场 肉苁蓉枸杞原浆 送梭梭树", "shop": "特伦格雅肉苁蓉旗舰店", "cat": "传统滋补营养品", "scene": "中式食养", "sources": ["30天·滋补"], "rank": 7}, {"name": "人森慢慢 切片·有机人参 5年足龄 生晒参 原支参 家庭囤货装 520g", "shop": "人森慢慢旗舰店", "cat": "传统滋补营养品", "scene": "中式食养", "sources": ["30天·滋补"], "rank": 8}, {"name": "李良济 九蒸九晒有机黄精150g送礼袋独立包装九华山绿色", "shop": "李良济旗舰店", "cat": "传统滋补营养品", "scene": "中式食养", "sources": ["30天·滋补"], "rank": 9}, {"name": "伊阳 新疆伊犁黑蜂指数蜂蜜380g/罐POE8+双瓶", "shop": "伊阳蜂蜜旗舰店", "cat": "传统滋补营养品", "scene": "中式食养", "sources": ["30天·滋补"], "rank": 10}, {"name": "李良济 岭南五指毛桃茯湿膏赤小豆茯苓桑椹非遗技艺膏方160g", "shop": "李良济旗舰店", "cat": "传统滋补营养品", "scene": "中式食养", "sources": ["30天·滋补"], "rank": 12}, {"name": "燕之屋 鲜炖燕窝50g 高营养好吸收即食营养女生滋补孕妇送礼 季套餐-冰糖款", "shop": "燕之屋旗舰店", "cat": "传统滋补营养品", "scene": "中式食养", "sources": ["30天·滋补"], "rank": 13}, {"name": "福东海 鲜炖牛奶燕窝银耳桃胶羹168克/盒 滋补免煮代餐", "shop": "福东海旗舰店", "cat": "传统滋补营养品", "scene": "中式食养", "sources": ["30天·滋补"], "rank": 14}, {"name": "伊阳 新疆伊犁黑蜂指数蜂蜜380g/罐POE8+单瓶", "shop": "伊阳蜂蜜旗舰店", "cat": "传统滋补营养品", "scene": "中式食养", "sources": ["30天·滋补"], "rank": 15}, {"name": "燕之屋 鲜炖燕窝50g 高营养即食营养女生滋补孕妇送礼 季套餐-无糖款", "shop": "燕之屋旗舰店", "cat": "传统滋补营养品", "scene": "中式食养", "sources": ["30天·滋补"], "rank": 16}, {"name": "斛妈妈 霍山铁皮石斛原浆饮汁有机认证直接喝方便非枫斗", "shop": "斛妈妈旗舰店", "cat": "传统滋补营养品", "scene": "中式食养", "sources": ["30天·滋补"], "rank": 17}, {"name": "鲜泡燕窝（1g*15瓶）", "shop": "和胜堂新中式养生的店", "cat": "传统滋补营养品", "scene": "中式食养", "sources": ["30天·滋补"], "rank": 18}, {"name": "夏季重磅新品 瓜瓜茶（5g*20袋）一泡轻盈 4盒", "shop": "和胜堂新中式养生的店", "cat": "传统滋补营养品", "scene": "中式食养", "sources": ["30天·滋补"], "rank": 19}, {"name": "每日乔安 有机九蒸九晒黄精（囤货量贩装）九华山九制黄精", "shop": "每日乔安旗舰店", "cat": "传统滋补营养品", "scene": "中式食养", "sources": ["30天·滋补"], "rank": 21}, {"name": "医线明医 九蒸九制黄精12年九华山九晒", "shop": "医线明医养生滋补旗舰店", "cat": "传统滋补营养品", "scene": "中式食养", "sources": ["30天·滋补"], "rank": 22}, {"name": "每日乔安 有机黄精囤货装3袋", "shop": "每日乔安旗舰店", "cat": "传统滋补营养品", "scene": "中式食养", "sources": ["30天·滋补"], "rank": 23}, {"name": "元斛 紫皮石斛原浆饮 噗噗常轻松 夏季补津液 家庭装", "shop": "元斛旗舰店", "cat": "传统滋补营养品", "scene": "中式食养", "sources": ["30天·滋补"], "rank": 24}, {"name": "广禾堂 正装四物汤10g*14条天然草本萃取女性调理饮 9盒", "shop": "广禾堂旗舰店", "cat": "传统滋补营养品", "scene": "中式食养", "sources": ["30天·滋补"], "rank": 26}, {"name": "正安国 麦冬 四川绵阳颗颗有芯个大肉厚 口感清香无熏硫180g", "shop": "正安国旗舰店", "cat": "传统滋补营养品", "scene": "中式食养", "sources": ["30天·滋补"], "rank": 28}, {"name": "童涵春堂 滋补再造小红膏*6瓶润肺养颜滋补佳品", "shop": "童涵春堂滋补旗舰店", "cat": "传统滋补营养品", "scene": "中式食养", "sources": ["30天·滋补"], "rank": 29}, {"name": "国坤堂 那曲冬虫夏草10克礼盒装西藏那曲虫草送礼滋补养生", "shop": "国坤堂旗舰店", "cat": "传统滋补营养品", "scene": "中式食养", "sources": ["30天·滋补"], "rank": 30}, {"name": "福胶 即食阿胶糕 减糖80%配方 养颜红润 18%阿胶添加量 200g/盒*2", "shop": "福胶滋补品旗舰店", "cat": "传统滋补营养品", "scene": "中式食养", "sources": ["30天·滋补"], "rank": 31}, {"name": "医线明医 12年以上黄精九蒸九晒即食九华山九制黄精 12年黄精果3盒", "shop": "医线明医养生滋补旗舰店", "cat": "传统滋补营养品", "scene": "中式食养", "sources": ["30天·滋补"], "rank": 32}, {"name": "【芬姐精选】印尼半干挑大盏燕窝50-500g 250克（30-35盏）", "shop": "芬姐精选的店", "cat": "传统滋补营养品", "scene": "中式食养", "sources": ["30天·滋补"], "rank": 34}, {"name": "Magic Note 五行五色食养全家福套装农科院升级食养早餐营养冲饮", "shop": "Magic Note旗舰店", "cat": "传统滋补营养品", "scene": "中式食养", "sources": ["30天·滋补"], "rank": 35}, {"name": "土牛精选 • 雨季干挑大燕盏 8A大盏300克", "shop": "土牛家的店", "cat": "传统滋补营养品", "scene": "中式食养", "sources": ["30天·滋补"], "rank": 36}, {"name": "【芬姐精选】60-70头黄花胶高蛋白低脂肪胶身深海食品花胶 500g", "shop": "芬姐精选的店", "cat": "传统滋补营养品", "scene": "中式食养", "sources": ["30天·滋补"], "rank": 37}, {"name": "遇见玫好 2玫好九蒸九晒秘制黄精 1000g/2罐", "shop": "遇见玫好METROSIER二店的店", "cat": "传统滋补营养品", "scene": "中式食养", "sources": ["30天·滋补"], "rank": 38}, {"name": "植然方适 铁皮石斛素颜饮原浆新鲜石斛鲜条饮30ml*30条/盒", "shop": "植然方适旗舰店", "cat": "传统滋补营养品", "scene": "中式食养", "sources": ["30天·滋补"], "rank": 39}, {"name": "金燕耳 银耳多糖精华饮 高山鲜银耳萃取 开盖即享", "shop": "金燕耳旗舰店", "cat": "传统滋补营养品", "scene": "中式食养", "sources": ["30天·滋补"], "rank": 41}, {"name": "肥怡甄选｜湛江公花胶通用直播称重 湛江公胶250克", "shop": "汕城肥怡爱零食的店", "cat": "传统滋补营养品", "scene": "中式食养", "sources": ["30天·滋补"], "rank": 42}, {"name": "健康新宠天然皂角米，无硫无杂润身心 1000g", "shop": "暖琪嫩量小方盒pro的店", "cat": "传统滋补营养品", "scene": "中式食养", "sources": ["30天·滋补"], "rank": 43}, {"name": "CALO-0 卡若零三抗一燃复合直饮粉 9盒【季度装】", "shop": "卡若零 CALO-0旗舰店", "cat": "传统滋补营养品", "scene": "减脂健身", "sources": ["30天·滋补"], "rank": 44}, {"name": "斛妈妈 霍山鲜铁皮石斛冻干纯粉原浆汁非枫斗非中药材", "shop": "斛妈妈旗舰店", "cat": "传统滋补营养品", "scene": "中式食养", "sources": ["30天·滋补"], "rank": 45}, {"name": "小羊森林 【古方四神饮】1岁+健脾四神汤改良 山药陈皮饮10倍萃取", "shop": "小羊森林旗舰店", "cat": "传统滋补营养品", "scene": "中式食养", "sources": ["30天·滋补"], "rank": 46}, {"name": "哲库林 德国进口无糖蜂胶润喉糖喉咙不适护嗓咽炎好物", "shop": "zirkulin哲库林海外旗舰店", "cat": "传统滋补营养品", "scene": "地域溯源", "sources": ["30天·滋补"], "rank": 47}, {"name": "特级铁皮石斛枫斗，正宗产地，珍稀馈赠 300g", "shop": "暖琪嫩量小方盒pro的店", "cat": "传统滋补营养品", "scene": "中式食养", "sources": ["30天·滋补"], "rank": 48}, {"name": "官栈 正宗大连辽参9S鲜炖海参营养滋补佳品180g/盒", "shop": "官栈旗舰店", "cat": "传统滋补营养品", "scene": "中式食养", "sources": ["30天·滋补"], "rank": 49}, {"name": "老谷头 小罐熟茶赤小豆薏米芡实茯苓茶黑苦荞薏苡仁养生茶", "shop": "老谷头旗舰店", "cat": "传统滋补营养品", "scene": "中式食养", "sources": ["30天·滋补"], "rank": 50}], "shops": [{"name": "AUOK旗舰店", "cat": "零食/坚果/特产", "pool": "专场"}, {"name": "爸爸说旗舰店", "cat": "零食/坚果/特产", "pool": "专场"}, {"name": "维果清VCLEANSE旗舰店", "cat": "咖啡/麦片/冲饮", "pool": "专场"}, {"name": "ELECTRO X 粒刻旗舰店", "cat": "咖啡/麦片/冲饮", "pool": "专场"}, {"name": "悦鲜活鲜奶旗舰店", "cat": "咖啡/麦片/冲饮", "pool": "专场"}, {"name": "纯享酸奶旗舰店", "cat": "咖啡/麦片/冲饮", "pool": "专场"}, {"name": "一鸣食品旗舰店", "cat": "零食/坚果/特产", "pool": "专场"}, {"name": "认养一头牛低温奶旗舰店", "cat": "咖啡/麦片/冲饮", "pool": "专场"}, {"name": "老谷头旗舰店", "cat": "传统滋补营养品", "pool": "专场"}, {"name": "瑞琪奥兰旗舰店", "cat": "传统滋补营养品", "pool": "专场"}, {"name": "薇戈娜旗舰店", "cat": "粮油调味/速食/干货/烘焙", "pool": "专场"}, {"name": "老杨T.KFOOD旗舰店", "cat": "零食/坚果/特产", "pool": "专场"}, {"name": "医线明医养生滋补旗舰店", "cat": "传统滋补营养品", "pool": "专场"}, {"name": "福胶旗舰店", "cat": "传统滋补营养品", "pool": "专场"}, {"name": "AvoPCOS旗舰店", "cat": "咖啡/麦片/冲饮", "pool": "专场"}, {"name": "yololand有乐岛旗舰店", "cat": "咖啡/麦片/冲饮", "pool": "专场"}, {"name": "四只猫咖啡旗舰店", "cat": "咖啡/麦片/冲饮", "pool": "专场"}, {"name": "呼伦贝尔哈尼牧场的店", "cat": "零食/坚果/特产", "pool": "专场"}, {"name": "NOFUNSHOP无趣的店旗舰店", "cat": "零食/坚果/特产", "pool": "专场"}, {"name": "陈阿炳食品旗舰店", "cat": "零食/坚果/特产", "pool": "专场"}, {"name": "永璞咖啡旗舰店", "cat": "咖啡/麦片/冲饮", "pool": "专场"}, {"name": "天上天山旗舰店", "cat": "咖啡/麦片/冲饮", "pool": "专场"}, {"name": "杰捷凯特-随心喝的店", "cat": "酒", "pool": "专场"}, {"name": "美好食品旗舰店", "cat": "其他", "pool": "专场"}, {"name": "蒸笼头旗舰店", "cat": "粮油调味/速食/干货/烘焙", "pool": "专场"}, {"name": "辻利茶铺的店", "cat": "零食/坚果/特产", "pool": "专场"}, {"name": "Mamiya旗舰店", "cat": "粮油调味/速食/干货/烘焙", "pool": "专场"}, {"name": "宿咕的铁皮盒旗舰店", "cat": "零食/坚果/特产", "pool": "专场"}, {"name": "活力李子园的店", "cat": "咖啡/麦片/冲饮", "pool": "专场"}, {"name": "小黄象旗舰店", "cat": "粮油调味/速食/干货/烘焙", "pool": "专场"}, {"name": "一杯之间BetweenGlasses的店", "cat": "酒", "pool": "专场"}, {"name": "每日乔安旗舰店", "cat": "传统滋补营养品", "pool": "专场"}, {"name": "ffit8旗舰店", "cat": "零食/坚果/特产", "pool": "专场"}, {"name": "李良济旗舰店", "cat": "传统滋补营养品", "pool": "专场"}, {"name": "特伦格雅肉苁蓉旗舰店", "cat": "传统滋补营养品", "pool": "专场"}, {"name": "奥莱奥原生旗舰店", "cat": "粮油调味/速食/干货/烘焙", "pool": "专场"}, {"name": "黑骑仕鲜蒸海参旗舰店", "cat": "传统滋补营养品", "pool": "专场"}, {"name": "食草生活的店", "cat": "粮油调味/速食/干货/烘焙", "pool": "专场"}, {"name": "瑞慕旗舰店", "cat": "咖啡/麦片/冲饮", "pool": "专场"}, {"name": "起司邦 Cheese Bond的店", "cat": "咖啡/麦片/冲饮", "pool": "专场"}, {"name": "Kiri凯芮旗舰店", "cat": "咖啡/麦片/冲饮", "pool": "专场"}, {"name": "百菲酪水牛奶旗舰店", "cat": "咖啡/麦片/冲饮", "pool": "专场"}, {"name": "乐荷旗舰店", "cat": "咖啡/麦片/冲饮", "pool": "专场"}, {"name": "特仑苏旗舰店", "cat": "咖啡/麦片/冲饮", "pool": "专场"}, {"name": "制乐厂旗舰店", "cat": "酒", "pool": "专场"}, {"name": "OH MyFood 哦唛福旗舰店", "cat": "咖啡/麦片/冲饮", "sec": "冲饮品/食补粉粉", "pool": "休食全量"}, {"name": "南食召食品旗舰店", "cat": "粮油调味/速食/干货/烘焙", "sec": "调味品/果酱/沙拉/干副食", "pool": "休食全量"}, {"name": "榴芒一刻旗舰店", "cat": "零食/坚果/特产", "sec": "月饼", "pool": "休食全量"}, {"name": "呼伦贝尔哈尼牧场的店", "cat": "零食/坚果/特产", "sec": "牛肉干/猪肉脯/卤味零食", "pool": "休食全量"}, {"name": "So Acai旗舰店", "cat": "咖啡/麦片/冲饮", "sec": "冲饮品/食补粉粉", "pool": "休食全量"}, {"name": "ELECTRO X 粒刻旗舰店", "cat": "咖啡/麦片/冲饮", "sec": "饮料", "pool": "休食全量"}, {"name": "满滋屋食品旗舰店", "cat": "零食/坚果/特产", "sec": "糕点/点心", "pool": "休食全量"}, {"name": "观今普洱茶的店", "cat": "茶", "sec": "普洱", "pool": "休食全量"}, {"name": "南旗的店", "cat": "茶", "sec": "红茶", "pool": "休食全量"}, {"name": "隐谷野旗舰店", "cat": "零食/坚果/特产", "sec": "牛肉干/猪肉脯/卤味零食", "pool": "休食全量"}, {"name": "宿咕的铁皮盒旗舰店", "cat": "零食/坚果/特产", "sec": "饼干/膨化", "pool": "休食全量"}, {"name": "Oarmilk吾岛旗舰店", "cat": "咖啡/麦片/冲饮", "sec": "低温乳制品", "pool": "休食全量"}, {"name": "丰草牧场旗舰店", "cat": "咖啡/麦片/冲饮", "sec": "奶粉", "pool": "休食全量"}, {"name": "脱骨侠旗舰店", "cat": "零食/坚果/特产", "sec": "牛肉干/猪肉脯/卤味零食", "pool": "休食全量"}, {"name": "BASAO旗舰店", "cat": "咖啡/麦片/冲饮", "sec": "饮料", "pool": "休食全量"}, {"name": "三关六码头旗舰店", "cat": "零食/坚果/特产", "sec": "牛肉干/猪肉脯/卤味零食", "pool": "休食全量"}, {"name": "Fortnum&Mason福南梅森海外旗舰店", "cat": "茶", "sec": "红茶", "pool": "休食全量"}, {"name": "食草生活的店", "cat": "粮油调味/速食/干货/烘焙", "sec": "其他食品", "pool": "休食全量"}, {"name": "爸爸说旗舰店", "cat": "零食/坚果/特产", "sec": "糕点/点心", "pool": "休食全量"}, {"name": "Ms.SU苏味的店", "cat": "粮油调味/速食/干货/烘焙", "sec": "方便粉丝/米线/粥汤速食", "pool": "休食全量"}, {"name": "青川农特产的店", "cat": "粮油调味/速食/干货/烘焙", "sec": "南北干货/肉类干货", "pool": "休食全量"}, {"name": "果子熟了旗舰店", "cat": "咖啡/麦片/冲饮", "sec": "饮料", "pool": "休食全量"}, {"name": "荣锦本味旗舰店", "cat": "零食/坚果/特产", "sec": "糕点/点心", "pool": "休食全量"}, {"name": "奥莱奥原生旗舰店", "cat": "粮油调味/速食/干货/烘焙", "sec": "食用油/调味油", "pool": "休食全量"}, {"name": "乐荷旗舰店", "cat": "咖啡/麦片/冲饮", "sec": "液态奶/常温乳制品", "pool": "休食全量"}, {"name": "米曰MIYUE旗舰店", "cat": "粮油调味/速食/干货/烘焙", "sec": "火锅/肉类/米饭类速食", "pool": "休食全量"}, {"name": "little apple treats海外旗舰店", "cat": "咖啡/麦片/冲饮", "sec": "冲饮品/食补粉粉", "pool": "休食全量"}, {"name": "食味的初相旗舰店", "cat": "零食/坚果/特产", "sec": "蜜饯/枣类/梅/果干/冻干", "pool": "休食全量"}, {"name": "锋味派旗舰店", "cat": "粮油调味/速食/干货/烘焙", "sec": "南北干货/肉类干货", "pool": "休食全量"}, {"name": "必品阁 BIBIGO旗舰店", "cat": "粮油调味/速食/干货/烘焙", "sec": "方便面/拉面/挂面/轻食面速食", "pool": "休食全量"}, {"name": "查宇宙旗舰店", "cat": "咖啡/麦片/冲饮", "sec": "咖啡", "pool": "休食全量"}, {"name": "袋鼠先生旗舰店", "cat": "零食/坚果/特产", "sec": "牛肉干/猪肉脯/卤味零食", "pool": "休食全量"}, {"name": "PIERRE MARCOLINI旗舰店", "cat": "零食/坚果/特产", "sec": "巧克力", "pool": "休食全量"}, {"name": "刘伟锋养生露酒旗舰店", "cat": "酒类", "sec": "其他酒类", "pool": "休食全量"}, {"name": "永璞咖啡旗舰店", "cat": "咖啡/麦片/冲饮", "sec": "咖啡", "pool": "休食全量"}, {"name": "酒梦富的店", "cat": "酒类", "sec": "葡萄酒", "pool": "休食全量"}, {"name": "DailySeeds&Co种子世界的店", "cat": "咖啡/麦片/冲饮", "sec": "冲饮谷物/麦片", "pool": "休食全量"}, {"name": "小黄象旗舰店", "cat": "粮油调味/速食/干货/烘焙", "sec": "面点/西式速食", "pool": "休食全量"}, {"name": "遇见玫好METROSIER二店的店", "cat": "其他", "sec": "其他", "pool": "休食全量"}, {"name": "乐纯旗舰店", "cat": "咖啡/麦片/冲饮", "sec": "低温乳制品", "pool": "休食全量"}, {"name": "金燕耳旗舰店", "cat": "粮油调味/速食/干货/烘焙", "sec": "南北干货/肉类干货", "pool": "休食全量"}, {"name": "YO！FINE DIARY每日鲜酪旗舰店", "cat": "咖啡/麦片/冲饮", "sec": "液态奶/常温乳制品", "pool": "休食全量"}, {"name": "小陈请客的店", "cat": "零食/坚果/特产", "sec": "糕点/点心", "pool": "休食全量"}, {"name": "空刻旗舰店", "cat": "粮油调味/速食/干货/烘焙", "sec": "方便面/拉面/挂面/轻食面速食", "pool": "休食全量"}, {"name": "核桃鲜风旗舰店", "cat": "零食/坚果/特产", "sec": "山核桃/坚果/炒货", "pool": "休食全量"}, {"name": "米惦商店旗舰店", "cat": "零食/坚果/特产", "sec": "糕点/点心", "pool": "休食全量"}, {"name": "laderach莱德拉旗舰店", "cat": "零食/坚果/特产", "sec": "巧克力", "pool": "休食全量"}, {"name": "追肉记旗舰店", "cat": "粮油调味/速食/干货/烘焙", "sec": "南北干货/肉类干货", "pool": "休食全量"}, {"name": "ffit8旗舰店", "cat": "零食/坚果/特产", "sec": "饼干/膨化", "pool": "休食全量"}, {"name": "元养东方旗舰店", "cat": "咖啡/麦片/冲饮", "sec": "鲜食饮品", "pool": "休食全量"}, {"name": "真零乳品旗舰店", "cat": "咖啡/麦片/冲饮", "sec": "液态奶/常温乳制品", "pool": "休食全量"}, {"name": "Soileta旗舰店", "cat": "咖啡/麦片/冲饮", "sec": "冲饮品/食补粉粉", "pool": "休食全量"}, {"name": "遂香记的店", "cat": "粮油调味/速食/干货/烘焙", "sec": "粽子", "pool": "休食全量"}, {"name": "佰味良田旗舰店", "cat": "零食/坚果/特产", "sec": "糕点/点心", "pool": "休食全量"}, {"name": "滇乡阿东的店", "cat": "零食/坚果/特产", "sec": "牛肉干/猪肉脯/卤味零食", "pool": "休食全量"}, {"name": "Mamiya旗舰店", "cat": "粮油调味/速食/干货/烘焙", "sec": "火锅/肉类/米饭类速食", "pool": "休食全量"}, {"name": "华丰方便面旗舰店", "cat": "粮油调味/速食/干货/烘焙", "sec": "方便面/拉面/挂面/轻食面速食", "pool": "休食全量"}, {"name": "SlabTownCoffee的店", "cat": "咖啡/麦片/冲饮", "sec": "咖啡", "pool": "休食全量"}, {"name": "一块小宇宙旗舰店", "cat": "零食/坚果/特产", "sec": "巧克力", "pool": "休食全量"}, {"name": "植物燃料旗舰店", "cat": "咖啡/麦片/冲饮", "sec": "鲜食饮品", "pool": "休食全量"}, {"name": "海伶山珍旗舰店", "cat": "粮油调味/速食/干货/烘焙", "sec": "南北干货/肉类干货", "pool": "休食全量"}, {"name": "蔡澜花花世界旗舰店", "cat": "零食/坚果/特产", "sec": "牛肉干/猪肉脯/卤味零食", "pool": "休食全量"}, {"name": "莲花旗舰店", "cat": "粮油调味/速食/干货/烘焙", "sec": "调味品/果酱/沙拉/干副食", "pool": "休食全量"}, {"name": "认养吃甘蔗的水牛旗舰店", "cat": "咖啡/麦片/冲饮", "sec": "液态奶/常温乳制品", "pool": "休食全量"}, {"name": "So Acai健康食品海外旗舰店", "cat": "咖啡/麦片/冲饮", "sec": "冲饮品/食补粉粉", "pool": "休食全量"}, {"name": "觅菓旗舰店", "cat": "零食/坚果/特产", "sec": "山核桃/坚果/炒货", "pool": "休食全量"}, {"name": "蓝猫小可乐美食研究所的店", "cat": "粮油调味/速食/干货/烘焙", "sec": "低温乳类烘焙原料", "pool": "休食全量"}, {"name": "煦春录花草集的店", "cat": "茶", "sec": "代用/花草/水果/再加工茶", "pool": "休食全量"}, {"name": "赐多利旗舰店", "cat": "咖啡/麦片/冲饮", "sec": "奶粉", "pool": "休食全量"}, {"name": "老徐的自然补给店", "cat": "零食/坚果/特产", "sec": "山核桃/坚果/炒货", "pool": "休食全量"}, {"name": "九峰牧场旗舰店", "cat": "咖啡/麦片/冲饮", "sec": "低温乳制品", "pool": "休食全量"}, {"name": "春江月旗舰店", "cat": "零食/坚果/特产", "sec": "蜜饯/枣类/梅/果干/冻干", "pool": "休食全量"}, {"name": "花尾渡旗舰店", "cat": "零食/坚果/特产", "sec": "糕点/点心", "pool": "休食全量"}, {"name": "乔尔卢布松旗舰店", "cat": "零食/坚果/特产", "sec": "月饼", "pool": "休食全量"}, {"name": "认养一头牛旗舰店", "cat": "咖啡/麦片/冲饮", "sec": "液态奶/常温乳制品", "pool": "休食全量"}, {"name": "认养一头牛低温奶旗舰店", "cat": "咖啡/麦片/冲饮", "sec": "低温乳制品", "pool": "休食全量"}, {"name": "恬栗手作的店", "cat": "零食/坚果/特产", "sec": "糕点/点心", "pool": "休食全量"}, {"name": "Chobani旗舰店", "cat": "咖啡/麦片/冲饮", "sec": "低温乳制品", "pool": "休食全量"}, {"name": "吾岛牛奶旗舰店", "cat": "咖啡/麦片/冲饮", "sec": "低温乳制品", "pool": "休食全量"}, {"name": "VEpiaopiao旗舰店", "cat": "粮油调味/速食/干货/烘焙", "sec": "调味品/果酱/沙拉/干副食", "pool": "休食全量"}, {"name": "GRETHER'S旗舰店", "cat": "零食/坚果/特产", "sec": "糖果零食", "pool": "休食全量"}, {"name": "NOFUNSHOP无趣的店旗舰店", "cat": "零食/坚果/特产", "sec": "蜜饯/枣类/梅/果干/冻干", "pool": "休食全量"}, {"name": "Oro Bailen的店", "cat": "粮油调味/速食/干货/烘焙", "sec": "食用油/调味油", "pool": "休食全量"}, {"name": "AvoPCOS旗舰店", "cat": "咖啡/麦片/冲饮", "sec": "冲饮品/食补粉粉", "pool": "休食全量"}, {"name": "paldo食品旗舰店", "cat": "粮油调味/速食/干货/烘焙", "sec": "方便面/拉面/挂面/轻食面速食", "pool": "休食全量"}, {"name": "熟道旗舰店", "cat": "零食/坚果/特产", "sec": "饼干/膨化", "pool": "休食全量"}, {"name": "晟麦旗舰店", "cat": "粮油调味/速食/干货/烘焙", "sec": "食用油/调味油", "pool": "休食全量"}, {"name": "一杯之间BetweenGlasses的店", "cat": "酒类", "sec": "露酒/果酒", "pool": "休食全量"}, {"name": "朝日唯品旗舰店", "cat": "咖啡/麦片/冲饮", "sec": "低温乳制品", "pool": "休食全量"}, {"name": "一鸣食品旗舰店", "cat": "零食/坚果/特产", "sec": "糕点/点心", "pool": "休食全量"}, {"name": "平阴玫瑰企业店的店", "cat": "茶", "sec": "代用/花草/水果/再加工茶", "pool": "休食全量"}, {"name": "乍甸乳业旗舰店", "cat": "咖啡/麦片/冲饮", "sec": "液态奶/常温乳制品", "pool": "休食全量"}, {"name": "嘉华鲜花饼旗舰店", "cat": "零食/坚果/特产", "sec": "糕点/点心", "pool": "休食全量"}, {"name": "CaptainGeorge乔治队长旗舰店", "cat": "咖啡/麦片/冲饮", "sec": "咖啡", "pool": "休食全量"}, {"name": "碧翠园BCPARK旗舰店", "cat": "零食/坚果/特产", "sec": "糕点/点心", "pool": "休食全量"}, {"name": "SixSeeds旗舰店", "cat": "零食/坚果/特产", "sec": "糕点/点心", "pool": "休食全量"}, {"name": "欧丽薇兰旗舰店", "cat": "粮油调味/速食/干货/烘焙", "sec": "食用油/调味油", "pool": "休食全量"}, {"name": "Wmix点心商店的店", "cat": "零食/坚果/特产", "sec": "糕点/点心", "pool": "休食全量"}, {"name": "荷美尔 Hormel 1891旗舰店", "cat": "零食/坚果/特产", "sec": "牛肉干/猪肉脯/卤味零食", "pool": "休食全量"}, {"name": "超级植觉 SUPER PLANT旗舰店", "cat": "咖啡/麦片/冲饮", "sec": "鲜食饮品", "pool": "休食全量"}, {"name": "摩可纳旗舰店", "cat": "咖啡/麦片/冲饮", "sec": "咖啡", "pool": "休食全量"}, {"name": "毖谦集的店", "cat": "茶", "sec": "代用/花草/水果/再加工茶", "pool": "休食全量"}, {"name": "甘露禅茶的店", "cat": "茶", "sec": "乌龙茶", "pool": "休食全量"}, {"name": "蔡生宝品的店", "cat": "零食/坚果/特产", "sec": "牛肉干/猪肉脯/卤味零食", "pool": "休食全量"}, {"name": "旺家福旗舰店", "cat": "零食/坚果/特产", "sec": "牛肉干/猪肉脯/卤味零食", "pool": "休食全量"}, {"name": "辻利茶铺的店", "cat": "零食/坚果/特产", "sec": "饼干/膨化", "pool": "休食全量"}, {"name": "onlytree旗舰店", "cat": "咖啡/麦片/冲饮", "sec": "冲饮品/食补粉粉", "pool": "休食全量"}, {"name": "初透抹茶旗舰店", "cat": "零食/坚果/特产", "sec": "糕点/点心", "pool": "休食全量"}, {"name": "谷本日记食品旗舰店", "cat": "咖啡/麦片/冲饮", "sec": "冲饮谷物/麦片", "pool": "休食全量"}, {"name": "熊猫猪猪庄园旗舰店", "cat": "粮油调味/速食/干货/烘焙", "sec": "面点/西式速食", "pool": "休食全量"}, {"name": "卡卡业旗舰店", "cat": "零食/坚果/特产", "sec": "糕点/点心", "pool": "休食全量"}, {"name": "韩要强现烤坚果的店", "cat": "零食/坚果/特产", "sec": "山核桃/坚果/炒货", "pool": "休食全量"}, {"name": "tuttifutti旗舰店", "cat": "咖啡/麦片/冲饮", "sec": "鲜食饮品", "pool": "休食全量"}, {"name": "almanor旗舰店", "cat": "咖啡/麦片/冲饮", "sec": "饮料", "pool": "休食全量"}, {"name": "向往一杯的店", "cat": "茶", "sec": "代用/花草/水果/再加工茶", "pool": "休食全量"}, {"name": "玄小食旗舰店", "cat": "零食/坚果/特产", "sec": "蜜饯/枣类/梅/果干/冻干", "pool": "休食全量"}, {"name": "奶酪猴子Cheese Monkey的店", "cat": "咖啡/麦片/冲饮", "sec": "奶酪/奶制品", "pool": "休食全量"}, {"name": "初酪有机的店", "cat": "咖啡/麦片/冲饮", "sec": "低温乳制品", "pool": "休食全量"}, {"name": "邹三和旗舰店", "cat": "零食/坚果/特产", "sec": "牛肉干/猪肉脯/卤味零食", "pool": "休食全量"}, {"name": "蒸笼头旗舰店", "cat": "粮油调味/速食/干货/烘焙", "sec": "面点/西式速食", "pool": "休食全量"}, {"name": "田园猎手旗舰店", "cat": "零食/坚果/特产", "sec": "牛肉干/猪肉脯/卤味零食", "pool": "休食全量"}, {"name": "燕麦行游山珍的店", "cat": "粮油调味/速食/干货/烘焙", "sec": "南北干货/肉类干货", "pool": "休食全量"}, {"name": "玩铁猩猩旗舰店", "cat": "零食/坚果/特产", "sec": "牛肉干/猪肉脯/卤味零食", "pool": "休食全量"}, {"name": "直觉之食科技的店", "cat": "咖啡/麦片/冲饮", "sec": "冲饮品/食补粉粉", "pool": "休食全量"}, {"name": "札萨旗舰店", "cat": "零食/坚果/特产", "sec": "牛肉干/猪肉脯/卤味零食", "pool": "休食全量"}, {"name": "古树盟的店", "cat": "茶", "sec": "其他茶叶", "pool": "休食全量"}, {"name": "陈阿炳食品旗舰店", "cat": "零食/坚果/特产", "sec": "牛肉干/猪肉脯/卤味零食", "pool": "休食全量"}, {"name": "迈胜旗舰店", "cat": "咖啡/麦片/冲饮", "sec": "饮料", "pool": "休食全量"}, {"name": "带你回趟咱老家重口吧的店", "cat": "粮油调味/速食/干货/烘焙", "sec": "方便粉丝/米线/粥汤速食", "pool": "休食全量"}, {"name": "杰捷凯特-随心喝的店", "cat": "酒类", "sec": "葡萄酒", "pool": "休食全量"}, {"name": "Nut Wine的店", "cat": "酒类", "sec": "葡萄酒", "pool": "休食全量"}, {"name": "mooouho哞来了旗舰店", "cat": "咖啡/麦片/冲饮", "sec": "低温乳制品", "pool": "休食全量"}, {"name": "红姐爱养生的店", "cat": "粮油调味/速食/干货/烘焙", "sec": "方便粉丝/米线/粥汤速食", "pool": "休食全量"}, {"name": "天上天山旗舰店", "cat": "咖啡/麦片/冲饮", "sec": "液态奶/常温乳制品", "pool": "休食全量"}, {"name": "体飞适旗舰店", "cat": "粮油调味/速食/干货/烘焙", "sec": "调味品/果酱/沙拉/干副食", "pool": "休食全量"}, {"name": "yololand有乐岛旗舰店", "cat": "咖啡/麦片/冲饮", "sec": "冲饮品/食补粉粉", "pool": "休食全量"}, {"name": "红谷林旗舰店", "cat": "零食/坚果/特产", "sec": "饼干/膨化", "pool": "休食全量"}, {"name": "小罐茶 高香无糖茶旗舰店", "cat": "咖啡/麦片/冲饮", "sec": "饮料", "pool": "休食全量"}, {"name": "Aaaaapple嗝唔儿果的店", "cat": "零食/坚果/特产", "sec": "蜜饯/枣类/梅/果干/冻干", "pool": "休食全量"}, {"name": "维果清VCLEANSE旗舰店", "cat": "咖啡/麦片/冲饮", "sec": "鲜食饮品", "pool": "休食全量"}, {"name": "起司邦 Cheese Bond的店", "cat": "咖啡/麦片/冲饮", "sec": "奶酪/奶制品", "pool": "休食全量"}, {"name": "西域美农旗舰店", "cat": "咖啡/麦片/冲饮", "sec": "奶酪/奶制品", "pool": "休食全量"}, {"name": "HolidayWine假日酒馆的店", "cat": "酒类", "sec": "葡萄酒", "pool": "休食全量"}, {"name": "a2乳制品旗舰店", "cat": "咖啡/麦片/冲饮", "sec": "低温乳制品", "pool": "休食全量"}, {"name": "美好食品旗舰店", "cat": "其他", "sec": "其他", "pool": "休食全量"}, {"name": "明玥皇廷食品旗舰店", "cat": "零食/坚果/特产", "sec": "月饼", "pool": "休食全量"}, {"name": "啡舍FISHERCOFFEE旗舰店", "cat": "咖啡/麦片/冲饮", "sec": "咖啡", "pool": "休食全量"}, {"name": "小熊早安旗舰店", "cat": "粮油调味/速食/干货/烘焙", "sec": "其他食品", "pool": "休食全量"}, {"name": "sake吃喝实验室的店", "cat": "酒类", "sec": "洋酒", "pool": "休食全量"}, {"name": "果鲜集电子商务的店", "cat": "零食/坚果/特产", "sec": "蜜饯/枣类/梅/果干/冻干", "pool": "休食全量"}, {"name": "四洲食品旗舰店", "cat": "零食/坚果/特产", "sec": "鱿鱼丝/鱼干/海味即食", "pool": "休食全量"}, {"name": "老鹿的朋友的店", "cat": "咖啡/麦片/冲饮", "sec": "咖啡", "pool": "休食全量"}, {"name": "FAVORSOM旗舰店", "cat": "咖啡/麦片/冲饮", "sec": "饮料", "pool": "休食全量"}, {"name": "小红村拾翠山谷合集的店", "cat": "茶", "sec": "代用/花草/水果/再加工茶", "pool": "休食全量"}, {"name": "原豆复兴Peasup旗舰店", "cat": "零食/坚果/特产", "sec": "饼干/膨化", "pool": "休食全量"}, {"name": "跳角旗舰店", "cat": "粮油调味/速食/干货/烘焙", "sec": "玉米", "pool": "休食全量"}, {"name": "头厨旗舰店", "cat": "粮油调味/速食/干货/烘焙", "sec": "面点/西式速食", "pool": "休食全量"}, {"name": "极盏旗舰店", "cat": "粮油调味/速食/干货/烘焙", "sec": "方便粉丝/米线/粥汤速食", "pool": "休食全量"}, {"name": "悦鲜活鲜奶旗舰店", "cat": "咖啡/麦片/冲饮", "sec": "低温乳制品", "pool": "休食全量"}, {"name": "酒類美術館Wine Gallery的店", "cat": "酒类", "sec": "葡萄酒", "pool": "休食全量"}, {"name": "小野轻煮旗舰店", "cat": "粮油调味/速食/干货/烘焙", "sec": "调味品/果酱/沙拉/干副食", "pool": "休食全量"}, {"name": "瑞慕旗舰店", "cat": "咖啡/麦片/冲饮", "sec": "奶酪/奶制品", "pool": "休食全量"}, {"name": "小仙炖旗舰店", "cat": "传统滋补营养品", "sec": "燕窝滋补品", "pool": "滋补全量"}, {"name": "特伦格雅肉苁蓉旗舰店", "cat": "传统滋补营养品", "sec": "药食同源食品", "pool": "滋补全量"}, {"name": "人森慢慢旗舰店", "cat": "传统滋补营养品", "sec": "参类滋补品", "pool": "滋补全量"}, {"name": "每日乔安旗舰店", "cat": "传统滋补营养品", "sec": "药食同源食品", "pool": "滋补全量"}, {"name": "目谷家 养生好食材的店", "cat": "传统滋补营养品", "sec": "燕窝滋补品", "pool": "滋补全量"}, {"name": "和胜堂新中式养生的店", "cat": "传统滋补营养品", "sec": "药食同源食品", "pool": "滋补全量"}, {"name": "李良济旗舰店", "cat": "传统滋补营养品", "sec": "滋补养生原料", "pool": "滋补全量"}, {"name": "燕之屋旗舰店", "cat": "传统滋补营养品", "sec": "燕窝滋补品", "pool": "滋补全量"}, {"name": "医线明医养生滋补旗舰店", "cat": "传统滋补营养品", "sec": "药食同源食品", "pool": "滋补全量"}, {"name": "元斛旗舰店", "cat": "传统滋补营养品", "sec": "药食同源食品", "pool": "滋补全量"}, {"name": "阿梓山甄1店的店", "cat": "传统滋补营养品", "sec": "药食同源食品", "pool": "滋补全量"}, {"name": "合为养旗舰店", "cat": "传统滋补营养品", "sec": "药食同源食品", "pool": "滋补全量"}, {"name": "小羊森林旗舰店", "cat": "传统滋补营养品", "sec": "滋补养生原料", "pool": "滋补全量"}, {"name": "官栈旗舰店", "cat": "传统滋补营养品", "sec": "花胶/鱼胶及其制品", "pool": "滋补全量"}, {"name": "暖琪嫩量小方盒pro的店", "cat": "传统滋补营养品", "sec": "药食同源食品", "pool": "滋补全量"}, {"name": "医线明医的店", "cat": "传统滋补营养品", "sec": "药食同源食品", "pool": "滋补全量"}, {"name": "伊阳蜂蜜旗舰店", "cat": "传统滋补营养品", "sec": "蜂蜜及其制品", "pool": "滋补全量"}, {"name": "The True Honey Co.海外旗舰店", "cat": "传统滋补营养品", "sec": "蜂蜜及其制品", "pool": "滋补全量"}, {"name": "广禾堂旗舰店", "cat": "传统滋补营养品", "sec": "食疗滋补营养", "pool": "滋补全量"}, {"name": "汕城肥怡爱零食的店", "cat": "传统滋补营养品", "sec": "药食同源食品", "pool": "滋补全量"}, {"name": "九窝颜食社旗舰店", "cat": "传统滋补营养品", "sec": "食疗滋补营养", "pool": "滋补全量"}, {"name": "福东海旗舰店", "cat": "传统滋补营养品", "sec": "药食同源食品", "pool": "滋补全量"}, {"name": "正安国旗舰店", "cat": "传统滋补营养品", "sec": "滋补养生原料", "pool": "滋补全量"}, {"name": "老谷头旗舰店", "cat": "传统滋补营养品", "sec": "养生茶", "pool": "滋补全量"}, {"name": "童涵春堂滋补旗舰店", "cat": "传统滋补营养品", "sec": "参类滋补品", "pool": "滋补全量"}, {"name": "杜江南旗舰店", "cat": "传统滋补营养品", "sec": "滋补养生原料", "pool": "滋补全量"}, {"name": "斛妈妈旗舰店", "cat": "传统滋补营养品", "sec": "滋补养生原料", "pool": "滋补全量"}, {"name": "食愈肌活双护社的店", "cat": "传统滋补营养品", "sec": "养生茶", "pool": "滋补全量"}, {"name": "如是心旗舰店", "cat": "传统滋补营养品", "sec": "食疗滋补营养", "pool": "滋补全量"}, {"name": "芬姐精选的店", "cat": "传统滋补营养品", "sec": "滋补养生原料", "pool": "滋补全量"}, {"name": "至言良食的店", "cat": "传统滋补营养品", "sec": "药食同源食品", "pool": "滋补全量"}, {"name": "瑞琪奥兰旗舰店", "cat": "传统滋补营养品", "sec": "蜂蜜及其制品", "pool": "滋补全量"}, {"name": "楚山萃食补的店", "cat": "传统滋补营养品", "sec": "花胶/鱼胶及其制品", "pool": "滋补全量"}, {"name": "福胶滋补品旗舰店", "cat": "传统滋补营养品", "sec": "阿胶膏方", "pool": "滋补全量"}, {"name": "山斟旗舰店", "cat": "传统滋补营养品", "sec": "药食同源食品", "pool": "滋补全量"}, {"name": "卡若零 CALO-0旗舰店", "cat": "传统滋补营养品", "sec": "功能性饮料", "pool": "滋补全量"}, {"name": "福胶旗舰店", "cat": "传统滋补营养品", "sec": "阿胶膏方", "pool": "滋补全量"}]};
+
+// Modal 控制
+var modal = document.getElementById('modal');
+var mTitle = document.getElementById('m-title');
+var mMeta = document.getElementById('m-meta');
+var mBody = document.getElementById('m-body');
+document.getElementById('m-close').addEventListener('click', closeModal);
+modal.addEventListener('click', function(e){ if(e.target === modal) closeModal(); });
+document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeModal(); });
+
+function closeModal(){ modal.classList.remove('show'); document.body.style.overflow=''; }
+function openModal(){ modal.classList.add('show'); document.body.style.overflow='hidden'; }
+
+function esc(s){
+    if(s==null) return '';
+    return String(s).replace(/[&<>"']/g, function(c){
+        return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
+    });
+}
+
+var CAT_EMOJI = {'咖啡/麦片/冲饮':'☕','传统滋补营养品':'💊','粮油调味/速食/干货/烘焙':'🍜','零食/坚果/特产':'🍪','茶':'🍃','酒':'🥂','酒类':'🥂'};
+function catEmo(c){ c=(c||'').replace(/^[^\u4e00-\u9fa5a-zA-Z]+\s*/,''); return CAT_EMOJI[c]||'🏷️'; }
+
+function renderProducts(list){
+    if(!list.length) return '';
+    return list.map(function(p){
+        var srcTags = (p.sources||[]).map(function(s){return '<span class="p-tag src">'+esc(s)+'</span>';}).join('');
+        var sceneTag = p.scene ? '<span class="p-tag hot">🏷️ '+esc(p.scene)+'</span>' : '';
+        var catTag = '<span class="p-tag">'+catEmo(p.cat)+' '+esc(p.cat)+'</span>';
+        return '<div class="p-item">'
+            +'<div class="p-name">'+esc(p.name)+'</div>'
+            +'<div class="p-shop">🏪 '+esc(p.shop)+' '+catTag+' '+sceneTag+' '+srcTags+'</div>'
+            +'</div>';
+    }).join('');
+}
+
+function renderShops(list){
+    if(!list.length) return '';
+    return list.map(function(s){
+        var sec = s.sec ? ' · '+esc(s.sec) : '';
+        return '<div class="s-item">'
+            +'<div><span class="s-name">🏪 '+esc(s.name)+'</span>'
+            +' <span class="s-pool">'+esc(s.pool)+'</span></div>'
+            +'<div class="s-meta">'+catEmo(s.cat)+' '+esc(s.cat)+sec+'</div>'
+            +'</div>';
+    }).join('');
+}
+
+function showScene(scene){
+    var hits = DATA.products.filter(function(p){ return p.scene===scene; });
+    mTitle.textContent = '🍹 场景 · ' + scene;
+    mMeta.textContent = '命中 ' + hits.length + ' 件精选商品';
+    if(hits.length){
+        mBody.innerHTML = '<div class="sub-title">📦 相关商品 <span class="count">'+hits.length+'</span></div>' + renderProducts(hits);
+    } else {
+        mBody.innerHTML = '<div class="modal-empty"><span class="emoji">🔍</span>本场景暂无入榜商品，欢迎商家提报新品参与下期榜单</div>';
+    }
+    openModal();
+}
+
+function showTrack(cat){
+    var pHits = DATA.products.filter(function(p){ return p.cat===cat; });
+    var sHits = DATA.shops.filter(function(s){ return s.cat===cat; });
+    mTitle.textContent = catEmo(cat) + ' 赛道 · ' + cat;
+    mMeta.textContent = '命中 ' + pHits.length + ' 件商品 · ' + sHits.length + ' 家品牌';
+    var html = '';
+    if(pHits.length){
+        html += '<div class="sub-title">📦 入榜商品 <span class="count">'+pHits.length+'</span></div>' + renderProducts(pHits);
+    }
+    if(sHits.length){
+        html += '<div class="sub-title">🏬 合作品牌 <span class="count">'+sHits.length+'</span></div>' + renderShops(sHits);
+    }
+    if(!html){
+        html = '<div class="modal-empty"><span class="emoji">🔍</span>本赛道暂无数据</div>';
+    }
+    mBody.innerHTML = html;
+    openModal();
+}
+
+function showKeyword(kw, cat){
+    var pHits = DATA.products.filter(function(p){ return p.name.indexOf(kw)>-1; });
+    mTitle.textContent = '🔍 热搜词 · ' + kw;
+    var html = '';
+    if(pHits.length){
+        mMeta.textContent = '命中 ' + pHits.length + ' 件相关商品';
+        html = '<div class="sub-title">📦 关键词命中商品 <span class="count">'+pHits.length+'</span></div>' + renderProducts(pHits);
+    } else {
+        var cleanCat = (cat||'').replace(/^[^\u4e00-\u9fa5a-zA-Z]+\s*/,'');
+        var catShops = DATA.shops.filter(function(s){ return s.cat===cleanCat; });
+        mMeta.textContent = '本关键词暂无入榜商品，为你推荐同赛道合作品牌';
+        html = '<div class="modal-empty" style="margin-bottom:16px;"><span class="emoji">💡</span>'
+             + '「'+esc(kw)+'」是本品类高热搜索方向，目前榜单尚无对应精选品，欢迎商家提报新品参与下期。<br>以下是「'+esc(cleanCat)+'」赛道的合作品牌，可作选品参考：</div>';
+        if(catShops.length){
+            html += '<div class="sub-title">🏬 同赛道合作品牌 <span class="count">'+catShops.length+'</span></div>' + renderShops(catShops);
+        }
+    }
+    mBody.innerHTML = html;
+    openModal();
+}
+
+// 绑定点击
+document.querySelectorAll('.scene-card').forEach(function(el){
+    el.addEventListener('click', function(){ showScene(el.getAttribute('data-scene')); });
+});
+document.querySelectorAll('.track-card').forEach(function(el){
+    el.addEventListener('click', function(){ showTrack(el.getAttribute('data-cat')); });
+});
+document.querySelectorAll('.kw-tag').forEach(function(el){
+    el.addEventListener('click', function(){
+        showKeyword(el.getAttribute('data-kw'), el.getAttribute('data-cat'));
     });
 });
 </script>
