@@ -906,7 +906,7 @@ function toggleFhancard(btn) {
   w.style.display = open?'none':'block';
   btn.textContent = open?'📋 查看完整手卡（含直播价/佣金）':'📋 收起手卡';
   if(!open && !w.dataset.loaded){
-    w.querySelectorAll('img[data-src]').forEach(im=>{im.src=im.dataset.src; delete im.dataset.loaded});
+    w.querySelectorAll('img[data-src]').forEach(im=>{im.src=im.dataset.src; im.removeAttribute('loading'); delete im.dataset.loaded});
     w.dataset.loaded='1';
   }
 }
