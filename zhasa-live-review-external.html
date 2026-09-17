@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>店播大场复盘案例：预约杠杆打法拆解</title>
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+<style>
+:root{
+  --bg:#f7f7f5; --card:#ffffff; --ink:#1f2329; --sub:#6b7280; --line:#e8e6e0;
+  --red:#cc3030; --red-bg:#fdf1f0; --green:#0a7d4f; --green-bg:#edf7f1; --amber:#b45309;
+}
+@media (prefers-color-scheme: dark){
+  :root{ --bg:#17181c; --card:#1f2127; --ink:#e8e8ea; --sub:#9aa0aa; --line:#2d3038;
+    --red:#ff7b72; --red-bg:#2a1c1c; --green:#4ade80; --green-bg:#12241a; --amber:#fbbf24; }
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;line-height:1.7;padding:16px 14px 60px;max-width:680px;margin:0 auto}
+h1{font-size:22px;margin:18px 0 6px;letter-spacing:.5px}
+.sub{color:var(--sub);font-size:13px;margin-bottom:22px}
+h2{font-size:17px;margin:34px 0 14px;padding-left:10px;border-left:4px solid var(--red)}
+h3{font-size:15px;margin:20px 0 10px}
+p{margin:8px 0;font-size:14px}
+.hero{background:linear-gradient(135deg,var(--red-bg),var(--card));border:1px solid var(--line);border-radius:14px;padding:20px 18px;margin-bottom:8px}
+.hero .big{font-size:26px;font-weight:700;color:var(--red)}
+.hero .cap{font-size:13px;color:var(--sub)}
+.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:16px 0}
+.kpi{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 10px;text-align:center}
+.kpi b{display:block;font-size:19px;color:var(--red)}
+.kpi span{font-size:12px;color:var(--sub)}
+.note{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin:12px 0;font-size:14px}
+.note b{color:var(--red)}
+.tip{background:var(--green-bg);border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin:12px 0;font-size:14px}
+.tip b{color:var(--green)}
+table{width:100%;border-collapse:collapse;background:var(--card);border-radius:12px;overflow:hidden;font-size:13px;margin:12px 0}
+th{background:var(--red-bg);padding:9px 8px;text-align:left;font-weight:600;white-space:nowrap}
+td{padding:8px;border-top:1px solid var(--line)}
+td em{font-style:normal;color:var(--red);font-weight:600}
+.chart{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px;height:300px;margin:12px 0}
+.chart.tall{height:340px}
+ol,ul{padding-left:22px;margin:8px 0;font-size:14px}
+li{margin:6px 0}
+.foot{margin-top:34px;padding-top:14px;border-top:1px solid var(--line);color:var(--sub);font-size:12px}
+.badge{display:inline-block;font-size:11px;color:var(--sub);border:1px solid var(--line);border-radius:20px;padding:1px 10px;margin:0 4px 4px 0}
+</style>
+</head>
+<body>
+
+<h1>店播大场复盘案例<br>「预约杠杆」打法拆解</h1>
+<div class="sub">某零食旗舰店 · 2026 年 9 月生日主题大场 · 店播 normal 场</div>
+
+<div class="hero">
+  <div class="big">店播大场成交创该店铺历史新高</div>
+  <div class="cap">较上一场百万级大场 <b>+60%+</b>，是日常店播的 <b>20 倍+</b>——增长核心引擎只有一个：<b style="color:var(--red)">预约池规模翻倍</b></div>
+</div>
+
+<div class="kpis">
+  <div class="kpi"><b>百万级+</b><span>单场成交规模</span></div>
+  <div class="kpi"><b>1 万+</b><span>直播预约人数</span></div>
+  <div class="kpi"><b>58%</b><span>成交来自预约用户</span></div>
+</div>
+
+<div class="note">📌 <b>为什么值得看：</b>这家店两场大场间隔 3 个月，链路效率（进房率）完全一致，唯一大变量是预约池从 4 千级翻到 1 万级——本场成交 +60%+。<b>预约池每多 1,000 人 ≈ 多 12 万+ 成交</b>，是大场开播前唯一能提前锁定的确定性先行指标。</div>
+
+<h2>一、这场大场做对了什么</h2>
+
+<div class="chart" id="c1"></div>
+<p style="font-size:13px;color:var(--sub)">预约漏斗：池子规模翻 2.6 倍，进房率两场持平（≈87%，远超行业 30-50% 水位）。</p>
+
+<table>
+  <tr><th>核心指标</th><th>本场 vs 上一场大场</th></tr>
+  <tr><td>单场成交</td><td><em>+60%+，历史新高</em></td></tr>
+  <tr><td>件单比（件/单）</td><td>1.8 → <em>2.5 附近</em>（凑单结构改善）</td></tr>
+  <tr><td>客单价</td><td><em>提升 25% 左右</em></td></tr>
+  <tr><td>购买转化率</td><td><em>&gt;30%</em>，行业头部水位（行业常见 1-3%）</td></tr>
+  <tr><td>人均观看时长</td><td><em>8 分钟+</em>，较上场再提升</td></tr>
+  <tr><td>涨粉</td><td><em>近 3,000</em>，大场涨粉黄金窗口</td></tr>
+</table>
+
+<h2>二、三个可复制的动作</h2>
+
+<h3>动作 1：把预约池当「预售盘」经营</h3>
+<p>大场前 <b>2-3 周</b>发 <b>40+ 篇</b>预告笔记蓄水，头部单条新品预告带来 <b>1,500+ 预约</b>。本场预约用户成交占总成交 <b>58%</b>，客单是非预约用户的 <b>1.5 倍</b>。</p>
+<div class="tip">✅ <b>商家动作：</b>预告笔记从 T-14 启动做系列化；预约数是开播前唯一能提前锁定的先行指标——池子做多大，大场天花板就有多高。</div>
+
+<h3>动作 2：新品首发绑着大场打</h3>
+<p>本场绑 <b>2 款新品首发</b>，合计贡献成交 <b>约 21%</b>，且新品预告笔记包揽预约 Top1——<b>新品给大场供钩子，大场给新品供流量</b>，一条链路同时解决上新冷启动与大场货盘新鲜度。</p>
+<div class="tip">✅ <b>商家动作：</b>每次大场固定绑 1-2 款新品首发；小包装 + 多口味的新品形态退款率全场最低（&lt;5%），值得固定复制。</div>
+
+<h3>动作 3：把新增关注当第二份资产来收</h3>
+<p>本场涨粉近 3,000，新粉客单价已接近老粉的 <b>9 成</b>。涨粉不是大场的自然溢出，是三个动作叠加的结果：</p>
+<div class="note">
+  ① <b>秒杀单品</b>——定时开抢的稀缺节奏，把「蹲直播」变成「关注 + 蹲直播」<br>
+  ② <b>定时发送吸引关注</b>——按节奏推关注提醒触点<br>
+  ③ <b>口播话术穿插引导</b>——讲解间隙自然带出关注引导
+</div>
+<div class="tip">✅ <b>商家动作：</b>秒杀节点排进货盘表，关注引导写进话术脚本，场后 3 天发「新粉专属返场」承接留存——大场的成交当天结束，涨粉的价值才刚开始。</div>
+
+<h2>三、货盘与渠道结构</h2>
+<div class="chart" id="c2"></div>
+<p style="font-size:13px;color:var(--sub)">成交渠道结构（占比）：发现频道与关注渠道合计近一半，笔记（预告蓄水）15%。</p>
+
+<div class="note">📌 <b>值得注意：</b>「消息推送」渠道成交占比 <b>近 18%</b>——开播提醒/加购召回不能手动触发，规模完全由上游预约数和加购数决定：预约池翻 2.6 倍后，该渠道成交<b>自动翻倍</b>，零额外做工。把精力投在「让更多人预约 + 加购」这个上游动作上，推送渠道自己长大。</div>
+
+<h3>货盘分层（可复制框架）</h3>
+<table>
+  <tr><th>角色</th><th>价格带</th><th>作用</th></tr>
+  <tr><td>尝鲜引流款</td><td>20 元级</td><td>降低新客门槛，件数王</td></tr>
+  <tr><td>新品首发</td><td>40-80 元</td><td>大场钩子 + 货盘新鲜度</td></tr>
+  <tr><td>囤货扛把子</td><td>高客单大袋装</td><td>拉老客客单与件数</td></tr>
+</table>
+
+<h2>四、下一场最确定的改进空间</h2>
+<div class="chart tall" id="c3"></div>
+<p style="font-size:13px;color:var(--sub)">分小时成交节奏（相对值，全天峰值=100）：10 点开场雷暴、14 点全天峰值、21 点晚间冲刺三个尖峰干净利落。</p>
+
+<div class="note">⚠️ <b>最大失分点：「下午塌腰」</b>——15:00-20:00 连续 6 小时出单效率仅为峰值的 <b>1/5 左右</b>。这是普遍规律：日不落时长只是容器，中段才是大多数商家大场最确定的增量空间。<b>秒杀节点、主播轮换、整点抽奖往中段放，比拉长总时长更有效。</b></div>
+
+<div>
+  <span class="badge">纯自然流大场</span>
+  <span class="badge">零付费投放</span>
+  <span class="badge">17 小时日不落</span>
+  <span class="badge">预约进房率 ≈87%</span>
+</div>
+
+<h2>五、给商家的复盘要点清单</h2>
+<ol>
+  <li><b>预约池规模 = 大场成交上限的先行指标</b>，开播前就能锁定，每多 1,000 预约 ≈ 多 12 万+ 成交</li>
+  <li><b>消息推送是预约池的自动复利</b>——不用追投放，把预算和精力投在上游「预约 + 加购」</li>
+  <li><b>新品首发绑大场</b>，T-14 起系列化预告</li>
+  <li><b>涨粉当动作项设计</b>：秒杀单品 + 定时触达 + 口播引导，三件套缺一不可</li>
+  <li><b>治「下午塌腰」</b>是下一场最确定的增量：中段六小时拉起来，全场直接上台阶</li>
+</ol>
+
+<div class="foot">案例数据已做脱敏（数值取区间/倍数，隐去店铺与商品信息），实际效果因商家经营情况而异。<br>复盘口径：运营侧成交，渠道/客群占比读数不受口径影响。</div>
+
+<script>
+var theme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+var INK = theme ? '#e8e8ea' : '#1f2329', SUB = theme ? '#9aa0aa' : '#6b7280', LINE = theme ? '#2d3038' : '#e8e6e0';
+var RED = '#cc3030', REDL = '#e8928e';
+function mk(id, opt){ var c = echarts.init(document.getElementById(id), null, {renderer:'canvas'}); c.setOption(opt); return c; }
+
+mk('c1', {
+  title:{text:'预约漏斗：两场大场对照', left:'center', top:6, textStyle:{color:INK,fontSize:14}},
+  tooltip:{trigger:'axis'},
+  legend:{bottom:0, textStyle:{color:SUB,fontSize:11}},
+  grid:{left:50,right:30,top:50,bottom:56},
+  xAxis:{type:'category', data:['预约人数','进房人数','支付人数'], axisLabel:{color:INK,fontSize:11}},
+  yAxis:{type:'value', name:'相对值（上一场预约=100）', nameTextStyle:{color:SUB,fontSize:10}, axisLabel:{color:SUB,fontSize:10}, splitLine:{lineStyle:{color:LINE}}},
+  series:[
+    {name:'上一场大场', type:'bar', barWidth:26, itemStyle:{color:REDL}, data:[100, 87, 53]},
+    {name:'本场大场', type:'bar', barWidth:26, itemStyle:{color:RED}, data:[259, 224, 118]}
+  ]
+});
+
+mk('c2', {
+  title:{text:'成交渠道结构（占比）', left:'center', top:6, textStyle:{color:INK,fontSize:14}},
+  tooltip:{trigger:'item', formatter:'{b}: {c}%'},
+  legend:{bottom:0, textStyle:{color:SUB,fontSize:10}, itemWidth:10, itemHeight:10},
+  series:[{type:'pie', radius:['38%','62%'], center:['50%','48%'],
+    label:{color:INK,fontSize:10,formatter:'{b}\n{c}%'},
+    data:[
+      {value:25, name:'发现频道'},
+      {value:21, name:'关注（老粉进房）'},
+      {value:18, name:'消息推送（自动召回）'},
+      {value:15, name:'笔记（预告蓄水）'},
+      {value:21, name:'其他（搜索/视频卡等）'}
+    ]}]
+});
+
+mk('c3', {
+  title:{text:'分小时成交节奏（峰值=100）', left:'center', top:6, textStyle:{color:INK,fontSize:14}},
+  tooltip:{trigger:'axis'},
+  grid:{left:42,right:20,top:44,bottom:30},
+  xAxis:{type:'category', data:['9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','0-2'], axisLabel:{color:SUB,fontSize:10}},
+  yAxis:{type:'value', axisLabel:{color:SUB,fontSize:10}, splitLine:{lineStyle:{color:LINE}}},
+  series:[{type:'bar', barWidth:'62%',
+    itemStyle:{color:function(p){ return p.dataIndex>=6&&p.dataIndex<=11 ? REDL : RED; }},
+    data:[45,100,22,46,20,112,26,21,20,42,16,15,65,28,28,26]}]
+});
+</script>
+</body>
+</html>
