@@ -76,5 +76,5 @@ t.innerHTML=`<thead><tr><th>#</th>${amCol}<th>店铺</th><th class="n">有效话
 document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{if(cur().summary.scope==='all'&&(b.dataset.f==='all'||b.dataset.f==='none'))return;F=b.dataset.f;document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('on',x===b));renderTable()});
 if(cur().summary.scope==='all'){document.querySelectorAll('.tab').forEach(x=>{if(x.dataset.f!=='pub')x.style.display='none'})};
 document.getElementById('q').oninput=e=>{Q=e.target.value.trim();renderTable()};
-fetch(DATA_URL+'?t='+Date.now(),{cache:'no-store'}).then(r=>r.json()).then(d=>{DATA=d;render()}).catch(e=>{document.getElementById('sub').textContent='数据加载失败：'+e.message});
+try{DATA=EMBEDDED_DATA;render()}catch(e){document.getElementById('sub').textContent='数据渲染失败：'+e.message};
 </script></body></html>
