@@ -28,11 +28,11 @@ tr.has td:first-child{font-weight:650}.zero{color:#c4c6cc}
 .empty{padding:28px;text-align:center;color:var(--muted)}
 .foot{font-size:12px;color:var(--muted);margin-top:12px;line-height:1.7}
 svg text{font-family:inherit}
-@media(max-width:720px){.kpis{grid-template-columns:repeat(2,1fr)}.hide-m{display:none}}
+@media(max-width:720px){.kpis,#ovk{grid-template-columns:repeat(2,1fr)}.hide-m{display:none}}
 </style></head><body><main class="wrap">
 <header class="hero"><h1>「新鲜零食市集」话题发文看板</h1><p id="sub">加载中…</p>
 <div class="scopebar" id="scopebar"></div></header>
-<section class="kpis" id="ovk" style="margin-top:12px"></section>
+<section class="kpis" id="ovk" style="margin-top:12px;grid-template-columns:repeat(5,1fr)"></section>
 <section class="kpis" id="kpis"></section>
 <section class="card"><h2>活动期每日发文<span>11/3 起按笔记发布日统计</span></h2><div id="trend"></div></section>
 <section class="card" id="amcard" style="display:none"><h2>AM 维度汇总<span>按笔记作者所属商家 AM</span></h2><div style="overflow:auto"><table id="amtbl"></table></div></section>
@@ -51,12 +51,11 @@ function render(){const S=cur().summary;
 document.getElementById('sub').textContent=`数据截至 ${S.dtm.slice(0,4)}-${S.dtm.slice(4,6)}-${S.dtm.slice(6)} · 刷新于 ${S.refreshed}`;
 const OV=DATA.overview||{};
 document.getElementById('ovk').innerHTML=`
-<div class="kpi"><div class="l">活动池累计曝光</div><div class="v red">${OV.exposure_w||'-'}</div><div class="h">活动后台口径</div></div>
-<div class="kpi"><div class="l">总阅读数</div><div class="v red">${OV.reads_w||'-'}</div><div class="h">活动后台口径</div></div>
+<div class="kpi"><div class="l">活动池累计曝光</div><div class="v">${OV.exposure_w||'-'}</div><div class="h">活动后台口径</div></div>
+<div class="kpi"><div class="l">总阅读数</div><div class="v">${OV.reads_w||'-'}</div><div class="h">活动后台口径</div></div>
 <div class="kpi"><div class="l">累计 DGMV</div><div class="v">${OV.dgmv_w||'-'}</div><div class="h">活动后台口径</div></div>
 <div class="kpi"><div class="l">总笔记 GPM</div><div class="v">${OV.gpm||'-'}</div><div class="h">活动后台口径</div></div>
-<div class="kpi"><div class="l">话题浏览</div><div class="v">${OV.topic_views_w||'-'}</div><div class="h">#新鲜零食市集</div></div>
-<div class="kpi"><div class="l">已发文商家</div><div class="v">${fmt(S.pub_sellers)}</div><div class="h">占全站商家池 ${(DATA.scopes[2].summary.pool?DATA.scopes[2].summary.pub_sellers/DATA.scopes[2].summary.pool*100:0).toFixed(1)}%</div></div>`;
+<div class="kpi"><div class="l">话题浏览</div><div class="v">${OV.topic_views_w||'-'}</div><div class="h">#新鲜零食市集</div></div>`;
 document.getElementById('scopebar').innerHTML=DATA.scopes.map((s,i)=>`<button class="${i===SCOPE?'on':''}" data-i="${i}">${esc(s.summary.scope_name)}（${fmt(s.summary.pool)} 家）</button>`).join('');
 document.querySelectorAll('#scopebar button').forEach(b=>b.onclick=()=>{SCOPE=+b.dataset.i;F='pub';Q='';document.getElementById('q').value='';render()});
 const isG=S.scope==='group5';
