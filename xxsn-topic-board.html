@@ -1,0 +1,80 @@
+<!DOCTYPE html><html lang="zh-CN"><head>
+<meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>新鲜零食市集 · 话题发文看板</title>
+<style>
+:root{--red:#ff2442;--ink:#292a2e;--sub:#737780;--muted:#9a9da5;--line:#eceef1;--bg:#f5f6f8;--green:#0aa779}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.55 -apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif}
+.wrap{max-width:1080px;margin:auto;padding:20px 16px 48px}
+.hero{padding:20px 24px;border-radius:16px;background:linear-gradient(118deg,#ff2646,#ff6b83);color:#fff}
+.hero h1{margin:0;font-size:20px}.hero p{margin:6px 0 0;font-size:12.5px;opacity:.92}
+.scopebar{display:flex;gap:8px;margin-top:14px}
+.scopebar button{border:1px solid rgba(255,255,255,.55);background:rgba(255,255,255,.14);color:#fff;border-radius:999px;padding:6px 16px;font-size:13px;cursor:pointer}
+.scopebar button.on{background:#fff;color:var(--red);border-color:#fff;font-weight:650}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:14px}
+.kpi{background:#fff;border-radius:14px;padding:15px 18px;box-shadow:0 4px 16px rgba(30,40,60,.05)}
+.kpi .l{font-size:12.5px;color:var(--sub)}.kpi .v{font-size:28px;font-weight:800;margin:2px 0}.kpi .v.red{color:var(--red)}.kpi .h{font-size:12px;color:var(--muted)}
+.card{background:#fff;border-radius:14px;margin-top:14px;padding:16px 18px;box-shadow:0 4px 16px rgba(30,40,60,.05)}
+.card h2{font-size:15px;margin:0 0 10px;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.card h2 span{font-size:12px;color:var(--muted);font-weight:400}
+.tools{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}
+.tools input{flex:1;min-width:160px;padding:7px 12px;border:1px solid var(--line);border-radius:999px;font-size:13px;outline:none}
+.tab{border:1px solid var(--line);background:#fff;border-radius:999px;padding:6px 13px;font-size:12.5px;cursor:pointer;color:var(--sub)}
+.tab.on{background:var(--red);border-color:var(--red);color:#fff}
+table{width:100%;border-collapse:collapse;font-size:13px}th,td{padding:9px 8px;border-bottom:1px solid var(--line);text-align:left}
+th{color:var(--sub);font-weight:600;font-size:12px;background:#fafbfc}td.n{text-align:right;font-variant-numeric:tabular-nums}th.n{text-align:right}
+tr.has td:first-child{font-weight:650}.zero{color:#c4c6cc}
+.badge{display:inline-block;background:#fff0f2;color:var(--red);border-radius:6px;padding:0 6px;font-size:11.5px;margin-left:6px}
+.notes{font-size:12px;color:var(--sub);padding-top:4px}.notes a{color:#4778e6;text-decoration:none}
+.empty{padding:28px;text-align:center;color:var(--muted)}
+.foot{font-size:12px;color:var(--muted);margin-top:12px;line-height:1.7}
+svg text{font-family:inherit}
+@media(max-width:720px){.kpis{grid-template-columns:repeat(2,1fr)}.hide-m{display:none}}
+</style></head><body><main class="wrap">
+<header class="hero"><h1>「新鲜零食市集」话题发文看板</h1><p id="sub">加载中…</p>
+<div class="scopebar" id="scopebar"></div></header>
+<section class="kpis" id="kpis"></section>
+<section class="card"><h2>活动期每日发文<span>11/3 起按笔记发布日统计</span></h2><div id="trend"></div></section>
+<section class="card" id="amcard" style="display:none"><h2>AM 维度汇总<span>按笔记作者所属商家 AM</span></h2><div style="overflow:auto"><table id="amtbl"></table></div></section>
+<section class="card"><h2>商家明细<span id="cnt"></span></h2>
+<div class="tools"><input id="q" placeholder="搜索店铺名"/><button class="tab on" data-f="pub">已发文</button><button class="tab" data-f="all">全部商家</button><button class="tab" data-f="none">未发文</button></div>
+<div style="overflow:auto"><table id="tbl"></table></div></section>
+<div class="foot" id="foot"></div>
+</main>
+<script>
+const DATA_URL='https://picasso-private-1251524319.cos.ap-shanghai.myqcloud.com/formula-static/dibp/nuoya-xxsn-topic-board/data.json';let DATA=null,SCOPE=0;
+const fmt=n=>Number(n||0).toLocaleString('zh-CN');
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+let F='pub',Q='';
+function cur(){return DATA.scopes[SCOPE]}
+function render(){const S=cur().summary;
+document.getElementById('sub').textContent=`数据截至 ${S.dtm.slice(0,4)}-${S.dtm.slice(4,6)}-${S.dtm.slice(6)} · 刷新于 ${S.refreshed}`;
+document.getElementById('scopebar').innerHTML=DATA.scopes.map((s,i)=>`<button class="${i===SCOPE?'on':''}" data-i="${i}">${esc(s.summary.scope_name)}（${fmt(s.summary.pool)} 家）</button>`).join('');
+document.querySelectorAll('#scopebar button').forEach(b=>b.onclick=()=>{SCOPE=+b.dataset.i;F='pub';Q='';document.getElementById('q').value='';render()});
+const isG=S.scope==='group5';
+document.getElementById('amcard').style.display=isG?'':'none';
+document.getElementById('kpis').innerHTML=`
+<div class="kpi"><div class="l">已发文商家</div><div class="v red">${fmt(S.pub_sellers)}</div><div class="h">占商家池 ${(S.pool?S.pub_sellers/S.pool*100:0).toFixed(1)}%</div></div>
+<div class="kpi"><div class="l">有效话题笔记</div><div class="v red">${fmt(S.notes)}</div><div class="h">累计 · 含活动前发布后补话题</div></div>
+<div class="kpi"><div class="l">活动期新发笔记</div><div class="v">${fmt(S.act_notes)}</div><div class="h">11/3 起发布 · ${fmt(S.act_sellers)} 家商家</div></div>
+<div class="kpi"><div class="l">最新日新增</div><div class="v">${fmt(S.day_new)}</div><div class="h">${S.dtm.slice(4,6)}/${S.dtm.slice(6)} 当天发布</div></div>`;
+renderTrend();if(isG)renderAM();renderTable();
+document.getElementById('foot').innerHTML=`口径：统计绑定官方话题「新鲜零食市集」（活动ID 1350，2026-11-03~12-01）的有效笔记（未删除、话题绑定有效）；商家池：诺亚商家=AM 诺亚(单恩浩) 名下商家，五组全量=行业运营三部五组（休食）全部商家，全站全量=平台全部商家（明细仅展示已发文商家）；按商家主账号匹配笔记作者，员工号/矩阵号发文不计入。每天 10:00 自动刷新（T-1 数据）。`}
+function renderTrend(){const D=cur().daily||[];const el=document.getElementById('trend');
+if(D.length<2){el.innerHTML=`<div class="empty">数据不足</div>`;return}
+const W=900,Ht=230,L=44,R=20,T=44,B=30,mx=Math.max(1,...D.map(h=>Math.max(h.cum,h.add)));
+const x=i=>L+i*(W-L-R)/(D.length-1),y=v=>Ht-B-v/mx*(Ht-T-B);
+const line=(k,c)=>`<path d="${D.map((h,i)=>(i?'L':'M')+x(i)+' '+y(h[k])).join(' ')}" fill="none" stroke="${c}" stroke-width="2.4"/>`+D.map((h,i)=>`<circle cx="${x(i)}" cy="${y(h[k])}" r="3.5" fill="#fff" stroke="${c}" stroke-width="2"/><text x="${x(i)}" y="${y(h[k])-8}" text-anchor="middle" font-size="11" fill="${c}">${h[k]}</text>`).join('');
+el.innerHTML=`<svg viewBox="0 0 ${W} ${Ht}" width="100%">${D.map((h,i)=>`<text x="${x(i)}" y="${Ht-8}" text-anchor="middle" font-size="10" fill="#92969f">${h.d.slice(5).replace('-','/')}</text>`).join('')}${line('cum','#ff2442')}${line('add','#0aa779')}<text x="${L}" y="12" font-size="11" fill="#ff2442">■ 累计笔记</text><text x="${L+90}" y="12" font-size="11" fill="#0aa779">■ 当日新增</text></svg>`}
+function renderAM(){const rows=cur().ams||[];const t=document.getElementById('amtbl');
+t.innerHTML=`<thead><tr><th>AM</th><th class="n">商家池</th><th class="n">已发文商家</th><th class="n">有效笔记</th><th class="n">活动期新发</th><th class="n">活动期发文商家</th></tr></thead><tbody>`+rows.map(a=>`<tr class="${a.notes?'has':''}"><td>${esc(a.am)}</td><td class="n">${fmt(a.pool)}</td><td class="n ${a.pub?'':'zero'}">${fmt(a.pub)}</td><td class="n ${a.notes?'':'zero'}">${fmt(a.notes)}</td><td class="n ${a.act_notes?'':'zero'}">${fmt(a.act_notes)}</td><td class="n ${a.act_sellers?'':'zero'}">${fmt(a.act_sellers)}</td></tr>`).join('')+'</tbody>'}
+function renderTable(){const S=cur().summary;let rows=cur().sellers.filter(s=>F==='all'||(F==='pub'?s.notes>0:s.notes===0)).filter(s=>!Q||s.shopname.includes(Q));
+document.getElementById('cnt').textContent=`${rows.length} 家`;
+const t=document.getElementById('tbl');
+if(!rows.length){t.innerHTML=`<tr><td class="empty">${F==='pub'?'暂未发布话题笔记':'无匹配商家'}</td></tr>`;return}
+const amCol=S.scope==='group5'?`<th class="hide-m">AM</th>`:'';
+t.innerHTML=`<thead><tr><th>#</th>${amCol}<th>店铺</th><th class="n">有效话题笔记</th><th class="n">活动期新发</th><th class="hide-m">最近发布</th></tr></thead><tbody>`+rows.map((s,i)=>`<tr class="${s.notes?'has':''}"><td>${i+1}</td>${S.scope==='group5'?`<td class="hide-m">${esc(s.am)}</td>`:''}<td>${esc(s.shopname)}${s.last&&s.last.replace(/-/g,'')===S.dtm?'<span class="badge">今日新发</span>':''}${s.titles.length?`<div class="notes">${s.titles.slice(0,3).map(n=>`<a target="_blank" href="https://www.xiaohongshu.com/explore/${n.id}">${esc(n.t.slice(0,22))}</a> · ${n.d.slice(5)}`).join('<br>')}${s.titles.length>3?`<br>…另 ${s.titles.length-3} 篇`:''}</div>`:''}</td><td class="n ${s.notes?'':'zero'}">${s.notes}</td><td class="n ${s.act_notes?'':'zero'}">${s.act_notes}</td><td class="hide-m ${s.last?'':'zero'}">${s.last||'—'}</td></tr>`).join('')+'</tbody>'}
+document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{if(cur().summary.scope==='all'&&(b.dataset.f==='all'||b.dataset.f==='none'))return;F=b.dataset.f;document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('on',x===b));renderTable()});
+if(cur().summary.scope==='all'){document.querySelectorAll('.tab').forEach(x=>{if(x.dataset.f!=='pub')x.style.display='none'})};
+document.getElementById('q').oninput=e=>{Q=e.target.value.trim();renderTable()};
+fetch(DATA_URL+'?t='+Date.now(),{cache:'no-store'}).then(r=>r.json()).then(d=>{DATA=d;render()}).catch(e=>{document.getElementById('sub').textContent='数据加载失败：'+e.message});
+</script></body></html>
