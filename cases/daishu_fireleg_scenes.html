@@ -356,11 +356,11 @@ tr:hover td { background:#f3f4f6; cursor:pointer; }
 
 <main class="main">
 <style>
-.ev{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;margin-bottom:18px}
+.ev{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:18px}
 .ev-c{background:#fff;border-radius:12px;padding:10px 14px;box-shadow:0 2px 12px rgba(30,50,120,.06)}
 .ev-n{font-size:20px;line-height:1.2;font-weight:800;color:#4D7EFF}.ev-l{font-size:13px;font-weight:700;color:#1d2540;margin:2px 0}
 .ev-s{font-size:12px;color:#8a94b0;line-height:1.5}
-.ans{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px;margin-bottom:18px}
+.ans{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:18px}
 .ans-c{background:#fff;border-radius:14px;padding:14px 16px;box-shadow:0 2px 12px rgba(30,50,120,.06);border-left:4px solid #4D7EFF}
 .ans-q{font-size:13px;color:#8a94b0}.ans-a{font-size:14px;color:#1d2540;font-weight:700;margin-top:4px;line-height:1.5}
 .pg{background:#fff;border-radius:16px;padding:18px 20px;box-shadow:0 2px 12px rgba(30,50,120,.06);margin-bottom:16px}
@@ -368,7 +368,7 @@ tr:hover td { background:#f3f4f6; cursor:pointer; }
 .pg-tag{font-size:12px;font-weight:700;color:#fff;border-radius:8px;padding:3px 10px}
 .pg-t{font-size:16px;font-weight:800;color:#1d2540}
 .pg-why{font-size:12px;color:#8a94b0;margin-bottom:12px}
-.nc{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px}
+.nc{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
 .note{border:1px solid #eef1f7;border-radius:12px;padding:12px;background:#fbfcff}
 .note-sc{font-size:12px;color:#4D7EFF;font-weight:700}
 .note-t{font-size:14px;font-weight:700;color:#1d2540;margin:6px 0;line-height:1.45}
@@ -379,7 +379,8 @@ tr:hover td { background:#f3f4f6; cursor:pointer; }
 .kwr{display:flex;gap:12px;padding:10px 0;border-bottom:1px solid #eef1f7;align-items:flex-start}
 .kwr:last-child{border-bottom:none}
 .kwr-l{flex:0 0 110px}.kwr-l b{display:block;font-size:14px;color:#1d2540}.kwr-l span{font-size:12px;color:#8a94b0}
-@media(max-width:520px){.ev{grid-template-columns:1fr 1fr}.ev-s{display:none}.ans{grid-template-columns:1fr}}
+@media(max-width:760px){.ev{grid-template-columns:1fr 1fr}.nc,.ans{grid-template-columns:1fr}}
+@media(max-width:480px){.ev-s{display:none}}
 
 </style>
 
