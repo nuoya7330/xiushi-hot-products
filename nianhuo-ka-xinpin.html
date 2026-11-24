@@ -122,12 +122,17 @@ body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans G
 
 /* ===== 主推专场 ===== */
 .featured-band{background:linear-gradient(135deg,#fffbe8,#fff3d6);padding:6px 0}
-.fullstock-card{background:#fff;border:1.5px solid #ffd591;border-radius:16px;padding:22px 24px;display:flex;align-items:center;gap:18px;flex-wrap:wrap;box-shadow:0 2px 10px rgba(212,145,20,.08)}
-.fullstock-ico{font-size:34px}
+.fullstock-section{background:linear-gradient(135deg,#fff8e5,#ffedbd);padding:28px 0!important;border-top:2px solid #f2b233;border-bottom:2px solid #f2b233;position:relative}
+.fullstock-heading{display:flex;align-items:center;gap:12px;margin:0 0 12px;color:#754b00}
+.fullstock-heading span{display:inline-flex;align-items:center;gap:6px;background:#f5a900;color:#fff;font-size:13px;font-weight:800;padding:6px 12px;border-radius:18px;white-space:nowrap;letter-spacing:.3px}
+.fullstock-heading strong{font-size:18px;font-weight:800;letter-spacing:.2px}
+.fullstock-card{background:#fffdf6;border:2px solid #f0a800;border-radius:18px;padding:24px 26px;display:flex;align-items:center;gap:18px;flex-wrap:wrap;box-shadow:0 8px 24px rgba(180,112,0,.18);transition:transform .2s,box-shadow .2s}
+.fullstock-card:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(180,112,0,.24)}
+.fullstock-ico{width:58px;height:58px;display:grid;place-items:center;flex-shrink:0;font-size:32px;background:#fff0c2;border:1px solid #f3d47e;border-radius:16px}
 .fullstock-info{flex:1;min-width:220px}
-.fullstock-name{font-size:17px;font-weight:700;color:#333}
-.fullstock-desc{font-size:13px;color:#888;margin-top:4px;line-height:1.5}
-.fullstock-btn{display:inline-block;background:linear-gradient(135deg,#ffb300,#ff8f00);color:#fff;font-size:14px;font-weight:600;padding:10px 22px;border-radius:22px;text-decoration:none;white-space:nowrap}
+.fullstock-name{font-size:21px;font-weight:800;color:#563900;letter-spacing:.2px}
+.fullstock-desc{font-size:14px;color:#715b36;margin-top:5px;line-height:1.55}
+.fullstock-btn{display:inline-block;background:linear-gradient(135deg,#ffb000,#f08200);color:#fff;font-size:15px;font-weight:800;padding:13px 24px;border-radius:24px;text-decoration:none;white-space:nowrap;box-shadow:0 4px 12px rgba(240,130,0,.25)}
 .featured-card{background:#fff;border:2px solid #ffd54f;border-radius:16px;padding:22px 22px 18px;margin-bottom:26px;box-shadow:0 4px 18px rgba(255,193,7,.12);position:relative;overflow:hidden}
 .featured-card::before{content:"★ 主推专场";position:absolute;top:12px;right:-34px;transform:rotate(38deg);background:linear-gradient(135deg,#ffb300,#ff8f00);color:#fff;font-size:11px;font-weight:800;padding:4px 40px;letter-spacing:2px}
 .fbrand-hdr{display:flex;align-items:center;gap:14px;margin-bottom:14px;padding-right:70px}
@@ -175,6 +180,15 @@ body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans G
   .shop-group{padding:16px}
 }
 @media(max-width:480px){
+  .fullstock-section{padding:20px 0!important}
+  .fullstock-heading{gap:8px;align-items:flex-start;flex-direction:column}
+  .fullstock-heading strong{font-size:17px}
+  .fullstock-card{padding:16px;gap:12px}
+  .fullstock-ico{width:46px;height:46px;font-size:26px}
+  .fullstock-info{min-width:0;flex-basis:calc(100% - 62px)}
+  .fullstock-name{font-size:17px}
+  .fullstock-desc{font-size:12.5px}
+  .fullstock-btn{width:100%;text-align:center;font-size:14px;padding:11px}
   .hero{padding:0 16px;min-height:120px}
   .hero-title{font-size:19px;letter-spacing:1px}
   .metrics{gap:14px}
@@ -642,8 +656,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans G
 </div>
 </div>
 
-<div class="section featured-band">
+<div class="section featured-band fullstock-section">
 <div class="sec-inner">
+  <div class="fullstock-heading"><span>📌 完整货盘入口</span><strong>卤味果干品类完整货盘</strong></div>
   <a class="fullstock-card" href="https://docs.qq.com/sheet/DSFRmbFdsY0pCYXVL?tab=BB08J2" target="_blank" rel="noopener">
     <div class="fullstock-ico">📋</div>
     <div class="fullstock-info">
